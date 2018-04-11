@@ -1,0 +1,210 @@
+[23:44:26] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_admin/c_logic_model.php];界面框架:[backstage];界面模板:[con_admin];类名称:[c_logic_model];方法:[make_logic_model]}}}--begin'
+[23:44:26] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+    \'table_name\' => \'em_global_error\',
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[23:44:28] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_admin/c_logic_model.php];界面框架:[backstage];界面模板:[con_admin];类名称:[c_logic_model];方法:[make_logic_model]}}}--begin'
+[23:44:28] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+    \'table_name\' => \'em_global_error\',
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[23:44:57] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_admin/c_logic_model.php];界面框架:[backstage];界面模板:[con_admin];类名称:[c_logic_model];方法:[make_logic_model]}}}--begin'
+[23:44:57] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+    \'table_name\' => \'em_global_error\',
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[23:44:58] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_admin/c_logic_model.php];界面框架:[backstage];界面模板:[con_admin];类名称:[c_logic_model];方法:[make_logic_model]}}}--begin'
+[23:44:58] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+    \'table_name\' => \'em_global_error\',
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[23:45:31] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_admin/c_logic_model.php];界面框架:[backstage];界面模板:[con_admin];类名称:[c_logic_model];方法:[make_logic_model]}}}--begin'
+[23:45:31] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+    \'table_name\' => \'em_global_error\',
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[23:45:32] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_admin/c_logic_model.php];界面框架:[backstage];界面模板:[con_admin];类名称:[c_logic_model];方法:[make_logic_model]}}}--begin'
+[23:45:32] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+    \'table_name\' => \'em_global_error\',
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[23:45:32] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_admin/c_logic_model.php];界面框架:[backstage];界面模板:[con_admin];类名称:[c_logic_model];方法:[make_logic_model]}}}--begin'
+[23:45:32] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+    \'table_name\' => \'em_global_error\',
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[23:45:39] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_admin/c_logic_model.php];界面框架:[backstage];界面模板:[con_admin];类名称:[c_logic_model];方法:[make_logic_model]}}}--begin'
+[23:45:39] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+    \'table_name\' => \'em_global_error\',
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[23:45:39] [info] [message] 'begin---{{{公共-数据库公共操作类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_logic.class.php]}}}---begin'
+[23:45:39] [info] [message] 'begin---{{{公共-数据库公共操作类结束}}}---begin'
+[23:45:39] [info] [message] 'begin---{{{公共-开发文件搭建类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_model_bulid.class.php]}}}---begin'
+[23:45:39] [info] [message] 'end---{{{公共-开发文件搭建类结束}}}---end'
+[23:45:39] [info] [message] 'begin---{{{公共-文件处理类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_file.class.php]}}}---begin'
+[23:45:39] [info] [message] 'end---{{{控制器-接口控制器请求结束template_view界面展示正确模板}}}---end'
+[23:45:39] [info] [message] 'end---{{{公共-文件处理类结束}}}---end'
+[23:46:50] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_admin/c_logic_model.php];界面框架:[backstage];界面模板:[con_admin];类名称:[c_logic_model];方法:[make_logic_model]}}}--begin'
+[23:46:50] [error] [sql] '请求参数:[array (
+  \'get\' => 
+  array (
+    \'table_name\' => \'em_global_error\',
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[23:46:50] [info] [message] 'begin---{{{公共-数据库公共操作类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_logic.class.php]}}}---begin'
+[23:46:50] [info] [message] 'begin---{{{公共-数据库公共操作类结束}}}---begin'
+[23:46:50] [info] [message] 'begin---{{{公共-开发文件搭建类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_model_bulid.class.php]}}}---begin'
+[23:46:50] [info] [message] 'end---{{{公共-开发文件搭建类结束}}}---end'
+[23:46:50] [info] [message] 'begin---{{{公共-文件处理类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_file.class.php]}}}---begin'
+[23:46:50] [info] [message] 'end---{{{控制器-接口控制器请求结束template_view界面展示正确模板}}}---end'
+[23:46:50] [info] [message] 'begin---{{{公共-数据库公共操作类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_logic.class.php]}}}---begin'
+[23:46:50] [info] [sql] '行号:[115]:数据库基本表:[em_global_error]字段验证开始'
+[23:46:50] [info] [sql] '行号:[219]:数据库基本表:[em_global_error]字段验证结束'
+[23:46:50] [info] [message] 'begin---{{{公共-数据库公共操作类结束}}}---begin'
+[23:46:50] [info] [message] 'end---{{{公共-文件处理类结束}}}---end'
+[23:47:59] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_admin/c_logic_model.php];界面框架:[backstage];界面模板:[con_admin];类名称:[c_logic_model];方法:[make_logic_model]}}}--begin'
+[23:47:59] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+    \'table_name\' => \'em_global_params\',
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[23:47:59] [info] [message] 'begin---{{{公共-数据库公共操作类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_logic.class.php]}}}---begin'
+[23:47:59] [info] [message] 'begin---{{{公共-数据库公共操作类结束}}}---begin'
+[23:47:59] [info] [message] 'begin---{{{公共-开发文件搭建类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_model_bulid.class.php]}}}---begin'
+[23:47:59] [info] [message] 'end---{{{公共-开发文件搭建类结束}}}---end'
+[23:47:59] [info] [message] 'begin---{{{公共-文件处理类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_file.class.php]}}}---begin'
+[23:47:59] [info] [message] 'end---{{{控制器-接口控制器请求结束template_view界面展示正确模板}}}---end'
+[23:47:59] [info] [message] 'end---{{{公共-文件处理类结束}}}---end'
+[23:48:18] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_admin/c_logic_model.php];界面框架:[backstage];界面模板:[con_admin];类名称:[c_logic_model];方法:[make_logic_model]}}}--begin'
+[23:48:18] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+    \'table_name\' => \'em_global_system_params\',
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[23:48:18] [info] [message] 'begin---{{{公共-数据库公共操作类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_logic.class.php]}}}---begin'
+[23:48:18] [info] [message] 'begin---{{{公共-数据库公共操作类结束}}}---begin'
+[23:48:18] [info] [message] 'begin---{{{公共-开发文件搭建类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_model_bulid.class.php]}}}---begin'
+[23:48:18] [info] [message] 'end---{{{公共-开发文件搭建类结束}}}---end'
+[23:48:18] [info] [message] 'begin---{{{公共-文件处理类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_file.class.php]}}}---begin'
+[23:48:18] [info] [message] 'end---{{{控制器-接口控制器请求结束template_view界面展示正确模板}}}---end'
+[23:48:18] [info] [message] 'end---{{{公共-文件处理类结束}}}---end'
+[23:48:26] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_admin/c_logic_model.php];界面框架:[backstage];界面模板:[con_admin];类名称:[c_logic_model];方法:[make_logic_model]}}}--begin'
+[23:48:26] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+    \'table_name\' => \'em_global_system_params\',
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[23:48:26] [info] [message] 'begin---{{{公共-数据库公共操作类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_logic.class.php]}}}---begin'
+[23:48:26] [info] [message] 'begin---{{{公共-数据库公共操作类结束}}}---begin'
+[23:48:26] [info] [message] 'begin---{{{公共-开发文件搭建类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_model_bulid.class.php]}}}---begin'
+[23:48:26] [info] [message] 'end---{{{公共-开发文件搭建类结束}}}---end'
+[23:48:26] [info] [message] 'begin---{{{公共-文件处理类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_file.class.php]}}}---begin'
+[23:48:26] [info] [message] 'end---{{{控制器-接口控制器请求结束template_view界面展示正确模板}}}---end'
+[23:48:26] [info] [message] 'end---{{{公共-文件处理类结束}}}---end'
+[23:48:32] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_admin/c_logic_model.php];界面框架:[backstage];界面模板:[con_admin];类名称:[c_logic_model];方法:[make_logic_model]}}}--begin'
+[23:48:32] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+    \'table_name\' => \'em_manager\',
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[23:48:32] [info] [message] 'begin---{{{公共-数据库公共操作类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_logic.class.php]}}}---begin'
+[23:48:32] [info] [message] 'begin---{{{公共-数据库公共操作类结束}}}---begin'
+[23:48:32] [info] [message] 'begin---{{{公共-开发文件搭建类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_model_bulid.class.php]}}}---begin'
+[23:48:32] [info] [message] 'end---{{{公共-开发文件搭建类结束}}}---end'
+[23:48:32] [info] [message] 'begin---{{{公共-文件处理类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_file.class.php]}}}---begin'
+[23:48:32] [info] [message] 'end---{{{控制器-接口控制器请求结束template_view界面展示正确模板}}}---end'
+[23:48:32] [info] [message] 'end---{{{公共-文件处理类结束}}}---end'
+[23:48:39] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_admin/c_logic_model.php];界面框架:[backstage];界面模板:[con_admin];类名称:[c_logic_model];方法:[make_logic_model]}}}--begin'
+[23:48:39] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+    \'table_name\' => \'em_project_model\',
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[23:48:39] [info] [message] 'begin---{{{公共-数据库公共操作类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_logic.class.php]}}}---begin'
+[23:48:39] [info] [message] 'begin---{{{公共-数据库公共操作类结束}}}---begin'
+[23:48:39] [info] [message] 'begin---{{{公共-开发文件搭建类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_model_bulid.class.php]}}}---begin'
+[23:48:39] [info] [message] 'end---{{{公共-开发文件搭建类结束}}}---end'
+[23:48:39] [info] [message] 'begin---{{{公共-文件处理类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_file.class.php]}}}---begin'
+[23:48:39] [info] [message] 'end---{{{控制器-接口控制器请求结束template_view界面展示正确模板}}}---end'
+[23:48:39] [info] [message] 'end---{{{公共-文件处理类结束}}}---end'
+[23:48:45] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_admin/c_logic_model.php];界面框架:[backstage];界面模板:[con_admin];类名称:[c_logic_model];方法:[make_logic_model]}}}--begin'
+[23:48:45] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+    \'table_name\' => \'em_role\',
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[23:48:45] [info] [message] 'begin---{{{公共-数据库公共操作类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_logic.class.php]}}}---begin'
+[23:48:45] [info] [message] 'begin---{{{公共-数据库公共操作类结束}}}---begin'
+[23:48:45] [info] [message] 'begin---{{{公共-开发文件搭建类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_model_bulid.class.php]}}}---begin'
+[23:48:45] [info] [message] 'end---{{{公共-开发文件搭建类结束}}}---end'
+[23:48:45] [info] [message] 'begin---{{{公共-文件处理类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_file.class.php]}}}---begin'
+[23:48:45] [info] [message] 'end---{{{控制器-接口控制器请求结束template_view界面展示正确模板}}}---end'
+[23:48:45] [info] [message] 'end---{{{公共-文件处理类结束}}}---end'
