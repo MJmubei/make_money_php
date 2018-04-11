@@ -1,0 +1,4 @@
+[10:48:42] [info] [message] '参数组装开始'
+[10:48:42] [info] [message] '参数组装结束'
+[10:48:42] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[login]}}}--begin'
+[10:48:42] [info] [message] 'end---{{{控制器-接口控制器请求结束template_view界面展示正确模板}}}---end'

@@ -1,0 +1,651 @@
+[12:30:50] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:30:50] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:30:50] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:30:50] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:30:51] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:30:51] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:30:51] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:30:51] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:30:51] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:30:51] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:30:51] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:30:51] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:30:52] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:30:52] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:30:52] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:30:52] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:30:52] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:30:52] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:30:52] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:30:52] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:30:52] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:30:52] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:30:52] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:30:52] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:31:59] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:31:59] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:31:59] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:31:59] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:32:00] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:32:00] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:32:00] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:32:00] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:32:00] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:32:00] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:32:00] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:32:00] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:32:01] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:32:01] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:32:01] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:32:01] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:32:01] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:32:01] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:32:01] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:32:01] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:32:02] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:32:02] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:32:02] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:32:02] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:32:02] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:32:02] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:32:02] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:32:02] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:32:02] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:32:02] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:32:02] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:32:02] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:32:28] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:32:28] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:32:28] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:32:28] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:32:28] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:32:28] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:32:28] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:32:28] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:32:34] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:32:34] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:32:34] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:32:34] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:32:35] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:32:35] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:32:35] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:32:35] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:32:35] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:32:35] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:32:35] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:32:35] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:32:35] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:32:35] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:32:35] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:32:35] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:32:35] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:32:35] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:32:35] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:32:35] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:32:36] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:32:36] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:32:36] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:32:36] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:32:36] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:32:36] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:32:36] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:32:36] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:33:06] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:33:06] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:33:06] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:33:06] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:33:07] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:33:07] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:33:07] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:33:07] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:33:07] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:33:07] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:33:07] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:33:07] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:33:08] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:33:08] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:33:08] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:33:08] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:33:08] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:33:08] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:33:08] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:33:08] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:33:08] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:33:08] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:33:08] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:33:08] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:33:35] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:33:35] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:33:35] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:33:35] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:33:35] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:33:35] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:33:35] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:33:35] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:33:36] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:33:36] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:33:36] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:33:36] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:33:36] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:33:36] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:33:36] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:33:36] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:33:36] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:33:36] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:33:36] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:33:36] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:33:47] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:33:47] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:33:47] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:33:47] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:33:48] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:33:48] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:33:48] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:33:48] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:33:48] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:33:48] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:33:48] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:33:48] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:33:48] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:33:48] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:33:48] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:33:48] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:33:48] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:33:48] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:33:48] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:33:48] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:33:49] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:33:49] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:33:49] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:33:49] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:33:49] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:33:49] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:33:49] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:33:49] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:34:34] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:34:34] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:34:34] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:34:34] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:34:34] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:34:34] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:34:36] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:34:36] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:34:36] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:34:36] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:34:37] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:34:37] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:34:37] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:34:37] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:34:37] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:34:37] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:34:37] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:34:37] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:34:37] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:34:37] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:34:37] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:34:37] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:34:38] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:34:38] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:34:38] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:34:38] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:34:38] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:34:38] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:34:38] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:34:38] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:34:38] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:34:38] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:34:38] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:34:38] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:34:49] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:34:49] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:34:49] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:34:49] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:34:49] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:34:49] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:34:49] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:34:49] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:34:50] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:34:50] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:34:50] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:34:50] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:35:33] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:35:33] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:35:33] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:35:33] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:35:34] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:35:34] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:35:34] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:35:34] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:35:35] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:35:35] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:35:35] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:35:35] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:36:29] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:36:29] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:36:29] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:36:29] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:36:30] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:36:30] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:36:30] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:36:30] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:36:40] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:36:40] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:36:40] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:36:40] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
+[12:39:18] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_main/c_main.php];界面框架:[backstage];界面模板:[con_main];类名称:[c_main];方法:[index]}}}--begin'
+[12:39:18] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[12:39:18] [info] [message] 'begin---{{{公共-加解密类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_encrypt.class.php]}}}---begin'
+[12:39:22] [info] [message] 'begin---{{{公共-加解密操作类结束}}}---begin'
