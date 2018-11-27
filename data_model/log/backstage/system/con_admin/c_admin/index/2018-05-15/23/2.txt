@@ -1,0 +1,71 @@
+[23:10:00] [info] [message] '参数组装开始'
+[23:10:00] [info] [message] 'POST参数:[array (
+  \'cms_page_num\' => \'1\',
+  \'cms_page_size\' => \'10\',
+  \'TABLE_NAME\' => \'system_global_error\',
+)]'
+[23:10:00] [info] [message] '参数组装结束'
+[23:10:00] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/system/con_admin/c_admin.php];界面框架:[backstage];项目:[system];界面模板:[con_admin];类名称:[c_admin];方法:[index]}}}--begin'
+[23:10:00] [info] [message] 'begin---{{{公共-数据库公共操作类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_logic.class.php]}}}---begin'
+[23:10:00] [info] [message] 'begin---{{{公共-数据库公共操作类结束}}}---begin'
+[23:10:18] [info] [message] '参数组装开始'
+[23:10:18] [info] [message] 'POST参数:[array (
+  \'cms_page_num\' => \'1\',
+  \'cms_page_size\' => \'10\',
+  \'TABLE_NAME\' => \'system_global_error\',
+)]'
+[23:10:18] [info] [message] '参数组装结束'
+[23:10:18] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/system/con_admin/c_admin.php];界面框架:[backstage];项目:[system];界面模板:[con_admin];类名称:[c_admin];方法:[index]}}}--begin'
+[23:10:18] [info] [message] 'begin---{{{公共-数据库公共操作类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_logic.class.php]}}}---begin'
+[23:10:18] [info] [message] 'begin---{{{公共-数据库公共操作类结束}}}---begin'
+[23:10:18] [info] [message] 'end---{{{控制器-接口控制器请求结束template_view界面展示正确模板}}}---end'
+[23:10:23] [info] [message] '参数组装开始'
+[23:10:23] [info] [message] 'POST参数:[array (
+  \'cms_page_num\' => \'1\',
+  \'cms_page_size\' => \'10\',
+  \'TABLE_NAME\' => \'system_global_error\',
+)]'
+[23:10:23] [info] [message] '参数组装结束'
+[23:10:23] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/system/con_admin/c_admin.php];界面框架:[backstage];项目:[system];界面模板:[con_admin];类名称:[c_admin];方法:[index]}}}--begin'
+[23:10:23] [info] [message] 'begin---{{{公共-数据库公共操作类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_logic.class.php]}}}---begin'
+[23:10:23] [info] [message] 'begin---{{{公共-数据库公共操作类结束}}}---begin'
+[23:10:23] [info] [message] 'end---{{{控制器-接口控制器请求结束template_view界面展示正确模板}}}---end'
+[23:10:26] [info] [message] '参数组装开始'
+[23:10:26] [info] [message] 'GET参数:[array (
+  \'cms_page_num\' => \'1\',
+  \'cms_page_size\' => \'10\',
+)]'
+[23:10:26] [info] [message] '参数组装结束'
+[23:10:26] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/system/con_admin/c_admin.php];界面框架:[backstage];项目:[system];界面模板:[con_admin];类名称:[c_admin];方法:[index]}}}--begin'
+[23:10:26] [info] [message] 'begin---{{{公共-数据库公共操作类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_logic.class.php]}}}---begin'
+[23:10:26] [info] [message] 'begin---{{{公共-数据库公共操作类结束}}}---begin'
+[23:10:26] [info] [message] 'end---{{{控制器-接口控制器请求结束template_view界面展示正确模板}}}---end'
+[23:19:20] [info] [message] '参数组装开始'
+[23:19:20] [info] [message] 'GET参数:[array (
+  \'cms_page_num\' => \'1\',
+  \'cms_page_size\' => \'10\',
+)]'
+[23:19:20] [info] [message] '参数组装结束'
+[23:19:20] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/system/con_admin/c_admin.php];界面框架:[backstage];项目:[system];界面模板:[con_admin];类名称:[c_admin];方法:[index]}}}--begin'
+[23:19:20] [info] [message] 'begin---{{{公共-数据库公共操作类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_logic.class.php]}}}---begin'
+[23:19:20] [info] [message] 'begin---{{{公共-数据库公共操作类结束}}}---begin'
+[23:19:20] [info] [message] 'end---{{{控制器-接口控制器请求结束template_view界面展示正确模板}}}---end'
+[23:19:33] [info] [message] '参数组装开始'
+[23:19:33] [info] [message] 'POST参数:[array (
+  \'cms_page_num\' => \'1\',
+  \'cms_page_size\' => \'25\',
+  \'TABLE_NAME\' => \'\',
+)]'
+[23:19:33] [info] [message] '参数组装结束'
+[23:19:33] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/system/con_admin/c_admin.php];界面框架:[backstage];项目:[system];界面模板:[con_admin];类名称:[c_admin];方法:[index]}}}--begin'
+[23:19:33] [info] [message] 'begin---{{{公共-数据库公共操作类开始;加载文件:[D:\\starcordemo\\CodeIgniter\\app_model\\libraries\\em_logic.class.php]}}}---begin'
+[23:19:33] [info] [message] 'begin---{{{公共-数据库公共操作类结束}}}---begin'
+[23:19:33] [info] [message] 'end---{{{控制器-接口控制器请求结束template_view界面展示正确模板}}}---end'
+[23:19:59] [info] [message] '参数组装开始'
+[23:19:59] [info] [message] 'POST参数:[array (
+  \'cms_page_num\' => \'1\',
+  \'cms_page_size\' => \'25\',
+  \'TABLE_NAME\' => \'\',
+)]'
+[23:19:59] [info] [message] '参数组装结束'
+[23:19:59] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/system/con_admin/c_admin.php];界面框架:[backstage];项目:[system];界面模板:[con_admin];类名称:[c_admin];方法:[index]}}}--begin'

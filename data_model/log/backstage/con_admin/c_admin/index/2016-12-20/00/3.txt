@@ -1,0 +1,50 @@
+[00:20:15] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_admin/c_admin.php];界面框架:[backstage];界面模板:[con_admin];类名称:[c_admin];方法:[index]}}}--begin'
+[00:20:15] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[00:20:15] [info] [message] 'end---{{{控制器-接口控制器请求结束template_view界面展示正确模板}}}---end'
+[00:20:17] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_admin/c_admin.php];界面框架:[backstage];界面模板:[con_admin];类名称:[c_admin];方法:[index]}}}--begin'
+[00:20:17] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[00:20:17] [info] [message] 'end---{{{控制器-接口控制器请求结束template_view界面展示正确模板}}}---end'
+[00:20:22] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_admin/c_admin.php];界面框架:[backstage];界面模板:[con_admin];类名称:[c_admin];方法:[index]}}}--begin'
+[00:20:22] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[00:20:22] [info] [message] 'end---{{{控制器-接口控制器请求结束template_view界面展示正确模板}}}---end'
+[00:20:27] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_admin/c_admin.php];界面框架:[backstage];界面模板:[con_admin];类名称:[c_admin];方法:[index]}}}--begin'
+[00:20:27] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[00:20:27] [info] [message] 'end---{{{控制器-接口控制器请求结束template_view界面展示正确模板}}}---end'
+[00:20:38] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\CodeIgniter\\app_model\\controllers/backstage/con_admin/c_admin.php];界面框架:[backstage];界面模板:[con_admin];类名称:[c_admin];方法:[index]}}}--begin'
+[00:20:38] [info] [message] '请求参数:[array (
+  \'get\' => 
+  array (
+  ),
+  \'post\' => 
+  array (
+  ),
+)]'
+[00:20:38] [info] [message] 'end---{{{控制器-接口控制器请求结束template_view界面展示正确模板}}}---end'
