@@ -33,7 +33,7 @@
     {
         if(count($arr_left)>0)
         {
-            array_unshift($arr_pages, array_pop($arr_left));
+            array_unshift($arr_pages, array_shift($arr_left));
         }
         if(count($arr_right)>0)
         {
