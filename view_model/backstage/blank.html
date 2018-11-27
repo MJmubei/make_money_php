@@ -1,335 +1,403 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
 <head>
-    <!--
-        ===
-        This comment should NOT be removed.
-
-        Charisma v2.0.0
-
-        Copyright 2012-2014 Muhammad Usman
-        Licensed under the Apache License v2.0
-        http://www.apache.org/licenses/LICENSE-2.0
-
-        http://usman.it
-        http://twitter.com/halalit_usman
-        ===
-    -->
-    <meta charset="utf-8">
-    <title>Free HTML5 Bootstrap Admin Template</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
-    <meta name="author" content="Muhammad Usman">
-
-    <!-- The styles -->
-    <link id="bs-css" href="css/bootstrap-cerulean.min.css" rel="stylesheet">
-
-    <link href="css/charisma-app.css" rel="stylesheet">
-    <link href='bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet'>
-    <link href='bower_components/fullcalendar/dist/fullcalendar.print.css' rel='stylesheet' media='print'>
-    <link href='bower_components/chosen/chosen.min.css' rel='stylesheet'>
-    <link href='bower_components/colorbox/example3/colorbox.css' rel='stylesheet'>
-    <link href='bower_components/responsive-tables/responsive-tables.css' rel='stylesheet'>
-    <link href='bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css' rel='stylesheet'>
-    <link href='css/jquery.noty.css' rel='stylesheet'>
-    <link href='css/noty_theme_default.css' rel='stylesheet'>
-    <link href='css/elfinder.min.css' rel='stylesheet'>
-    <link href='css/elfinder.theme.css' rel='stylesheet'>
-    <link href='css/jquery.iphone.toggle.css' rel='stylesheet'>
-    <link href='css/uploadify.css' rel='stylesheet'>
-    <link href='css/animate.min.css' rel='stylesheet'>
-
-    <!-- jQuery -->
-    <script src="bower_components/jquery/jquery.min.js"></script>
-
-    <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <!-- The fav icon -->
-    <link rel="shortcut icon" href="img/favicon.ico">
-
-</head>
-
+<title>Blank Page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+ <!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+	<!-- Custom CSS -->
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+	<!-- Graph CSS -->
+<link href="css/font-awesome.css" rel="stylesheet"> 
+	<!-- jQuery -->
+<link href='https://fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'>
+	<!-- lined-icons -->
+<link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
+	<!-- /js -->
+<script src="js/jquery-1.10.2.min.js"></script>
+<!-- //js-->
+</head> 
 <body>
-    <!-- topbar starts -->
-    <div class="navbar navbar-default" role="navigation">
+   <div class="page-container">
+   <!--/content-inner-->
+	<div class="left-content">
+	   <div class="inner-content">
+		<!-- header-starts -->
+			<div class="header-section">
+						<!--menu-right-->
+						<div class="top_menu">
+						        <div class="main-search">
+											<form action="search.html">
+											   <input type="text" value="Search" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Search';}" class="text"/>
+												<input type="submit" value=""/>
+											</form>
+									<div class="close"><img src="images/cross.png" /></div>
+								</div>
+									<div class="srch"><button></button></div>
+									<script type="text/javascript">
+										 $('.main-search').hide();
+										$('button').click(function (){
+											$('.main-search').show();
+											$('.main-search text').focus();
+										}
+										);
+										$('.close').click(function(){
+											$('.main-search').hide();
+										});
+									</script>
+							<!--/profile_details-->
+								<div class="profile_details_left">
+									<ul class="nofitications-dropdown">
+											<li class="dropdown note dra-down">
+											  <div id="dd" class="wrapper-dropdown-3" tabindex="1">
+																			<span>Italy</span>
+																			<ul class="dropdown">
+																				<li><a class="deutsch">France</a></li>
+																				<li><a class="english"> Italy</a></li>
+																				<li><a class="espana">Brazil</a></li>
+																				<li><a class="russian">Usa</a></li>
 
-        <div class="navbar-inner">
-            <button type="button" class="navbar-toggle pull-left animated flip">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="index.html"> <img alt="Charisma Logo" src="img/logo20.png" class="hidden-xs"/>
-                <span>Charisma</span></a>
+																			</ul>
+																		</div>
+																		<script type="text/javascript">
+			
+																	function DropDown(el) {
+																		this.dd = el;
+																		this.placeholder = this.dd.children('span');
+																		this.opts = this.dd.find('ul.dropdown > li');
+																		this.val = '';
+																		this.index = -1;
+																		this.initEvents();
+																	}
+																	DropDown.prototype = {
+																		initEvents : function() {
+																			var obj = this;
 
-            <!-- user dropdown starts -->
-            <div class="btn-group pull-right">
-                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> admin</span>
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Profile</a></li>
-                    <li class="divider"></li>
-                    <li><a href="login.html">Logout</a></li>
-                </ul>
-            </div>
-            <!-- user dropdown ends -->
+																			obj.dd.on('click', function(event){
+																				$(this).toggleClass('active');
+																				return false;
+																			});
 
-            <!-- theme selector starts -->
-            <div class="btn-group pull-right theme-container animated tada">
-                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <i class="glyphicon glyphicon-tint"></i><span
-                        class="hidden-sm hidden-xs"> Change Theme / Skin</span>
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" id="themes">
-                    <li><a data-value="classic" href="#"><i class="whitespace"></i> Classic</a></li>
-                    <li><a data-value="cerulean" href="#"><i class="whitespace"></i> Cerulean</a></li>
-                    <li><a data-value="cyborg" href="#"><i class="whitespace"></i> Cyborg</a></li>
-                    <li><a data-value="simplex" href="#"><i class="whitespace"></i> Simplex</a></li>
-                    <li><a data-value="darkly" href="#"><i class="whitespace"></i> Darkly</a></li>
-                    <li><a data-value="lumen" href="#"><i class="whitespace"></i> Lumen</a></li>
-                    <li><a data-value="slate" href="#"><i class="whitespace"></i> Slate</a></li>
-                    <li><a data-value="spacelab" href="#"><i class="whitespace"></i> Spacelab</a></li>
-                    <li><a data-value="united" href="#"><i class="whitespace"></i> United</a></li>
-                </ul>
-            </div>
-            <!-- theme selector ends -->
+																			obj.opts.on('click',function(){
+																				var opt = $(this);
+																				obj.val = opt.text();
+																				obj.index = opt.index();
+																				obj.placeholder.text(obj.val);
+																			});
+																		},
+																		getValue : function() {
+																			return this.val;
+																		},
+																		getIndex : function() {
+																			return this.index;
+																		}
+																	}
 
-            <ul class="collapse navbar-collapse nav navbar-nav top-menu">
-                <li><a href="#"><i class="glyphicon glyphicon-globe"></i> Visit Site</a></li>
-                <li class="dropdown">
-                    <a href="#" data-toggle="dropdown"><i class="glyphicon glyphicon-star"></i> Dropdown <span
-                            class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <form class="navbar-search pull-left">
-                        <input placeholder="Search" class="search-query form-control col-md-10" name="query"
-                               type="text">
-                    </form>
-                </li>
-            </ul>
+																	$(function() {
 
-        </div>
-    </div>
-    <!-- topbar ends -->
-<div class="ch-container">
-    <div class="row">
-        
-        <!-- left menu starts -->
-        <div class="col-sm-2 col-lg-2">
-            <div class="sidebar-nav">
-                <div class="nav-canvas">
-                    <div class="nav-sm nav nav-stacked">
+																		var dd = new DropDown( $('#dd') );
 
-                    </div>
-                    <ul class="nav nav-pills nav-stacked main-menu">
-                        <li class="nav-header">Main</li>
-                        <li><a class="ajax-link" href="index.html"><i class="glyphicon glyphicon-home"></i><span> Dashboard</span></a>
-                        </li>
-                        <li><a class="ajax-link" href="ui.html"><i class="glyphicon glyphicon-eye-open"></i><span> UI Features</span></a>
-                        </li>
-                        <li><a class="ajax-link" href="form.html"><i
-                                    class="glyphicon glyphicon-edit"></i><span> Forms</span></a></li>
-                        <li><a class="ajax-link" href="chart.html"><i class="glyphicon glyphicon-list-alt"></i><span> Charts</span></a>
-                        </li>
-                        <li><a class="ajax-link" href="typography.html"><i class="glyphicon glyphicon-font"></i><span> Typography</span></a>
-                        </li>
-                        <li><a class="ajax-link" href="gallery.html"><i class="glyphicon glyphicon-picture"></i><span> Gallery</span></a>
-                        </li>
-                        <li class="nav-header hidden-md">Sample Section</li>
-                        <li><a class="ajax-link" href="table.html"><i
-                                    class="glyphicon glyphicon-align-justify"></i><span> Tables</span></a></li>
-                        <li class="accordion">
-                            <a href="#"><i class="glyphicon glyphicon-plus"></i><span> Accordion Menu</span></a>
-                            <ul class="nav nav-pills nav-stacked">
-                                <li><a href="#">Child Menu 1</a></li>
-                                <li><a href="#">Child Menu 2</a></li>
-                            </ul>
-                        </li>
-                        <li><a class="ajax-link" href="calendar.html"><i class="glyphicon glyphicon-calendar"></i><span> Calendar</span></a>
-                        </li>
-                        <li><a class="ajax-link" href="grid.html"><i
-                                    class="glyphicon glyphicon-th"></i><span> Grid</span></a></li>
-                        <li><a href="tour.html"><i class="glyphicon glyphicon-globe"></i><span> Tour</span></a></li>
-                        <li><a class="ajax-link" href="icon.html"><i
-                                    class="glyphicon glyphicon-star"></i><span> Icons</span></a></li>
-                        <li><a href="error.html"><i class="glyphicon glyphicon-ban-circle"></i><span> Error Page</span></a>
-                        </li>
-                        <li><a href="login.html"><i class="glyphicon glyphicon-lock"></i><span> Login Page</span></a>
-                        </li>
-                    </ul>
-                    <label id="for-is-ajax" for="is-ajax"><input id="is-ajax" type="checkbox"> Ajax on menu</label>
-                </div>
-            </div>
-        </div>
-        <!--/span-->
-        <!-- left menu ends -->
+																		$(document).click(function() {
+																			// all dropdowns
+																			$('.wrapper-dropdown-3').removeClass('active');
+																		});
 
-        <noscript>
-            <div class="alert alert-block col-md-12">
-                <h4 class="alert-heading">Warning!</h4>
+																	});
 
-                <p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a>
-                    enabled to use this site.</p>
-            </div>
-        </noscript>
+																</script>
+										
+										</li>
+									
+										<li class="dropdown note">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-envelope-o"></i> <span class="badge">3</span></a>
 
-        <div id="content" class="col-lg-10 col-sm-10">
-            <!-- content starts -->
-            
+												
+													<ul class="dropdown-menu two first">
+														<li>
+															<div class="notification_header">
+																<h3>You have 3 new messages  </h3> 
+															</div>
+														</li>
+														<li><a href="#">
+														   <div class="user_img"><img src="images/1.jpg" alt=""></div>
+														   <div class="notification_desc">
+															<p>Lorem ipsum dolor sit amet</p>
+															<p><span>1 hour ago</span></p>
+															</div>
+														   <div class="clearfix"></div>	
+														 </a></li>
+														 <li class="odd"><a href="#">
+															<div class="user_img"><img src="images/in.jpg" alt=""></div>
+														   <div class="notification_desc">
+															<p>Lorem ipsum dolor sit amet </p>
+															<p><span>1 hour ago</span></p>
+															</div>
+														  <div class="clearfix"></div>	
+														 </a></li>
+														<li><a href="#">
+														   <div class="user_img"><img src="images/in1.jpg" alt=""></div>
+														   <div class="notification_desc">
+															<p>Lorem ipsum dolor sit amet </p>
+															<p><span>1 hour ago</span></p>
+															</div>
+														   <div class="clearfix"></div>	
+														</a></li>
+														<li>
+															<div class="notification_bottom">
+																<a href="#">See all messages</a>
+															</div> 
+														</li>
+													</ul>
+										</li>
+										
+							<li class="dropdown note">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell-o"></i> <span class="badge">5</span></a>
 
-<div>
-    <ul class="breadcrumb">
-        <li>
-            <a href="#">Home</a>
-        </li>
-        <li>
-            <a href="#">Blank</a>
-        </li>
-    </ul>
-</div>
+									<ul class="dropdown-menu two">
+										<li>
+											<div class="notification_header">
+												<h3>You have 5 new notification</h3>
+											</div>
+										</li>
+										<li><a href="#">
+											<div class="user_img"><img src="images/in.jpg" alt=""></div>
+										   <div class="notification_desc">
+											<p>Lorem ipsum dolor sit amet</p>
+											<p><span>1 hour ago</span></p>
+											</div>
+										  <div class="clearfix"></div>	
+										 </a></li>
+										 <li class="odd"><a href="#">
+											<div class="user_img"><img src="images/in5.jpg" alt=""></div>
+										   <div class="notification_desc">
+											<p>Lorem ipsum dolor sit amet </p>
+											<p><span>1 hour ago</span></p>
+											</div>
+										   <div class="clearfix"></div>	
+										 </a></li>
+										 <li><a href="#">
+											<div class="user_img"><img src="images/in8.jpg" alt=""></div>
+										   <div class="notification_desc">
+											<p>Lorem ipsum dolor sit amet </p>
+											<p><span>1 hour ago</span></p>
+											</div>
+										   <div class="clearfix"></div>	
+										 </a></li>
+										 <li>
+											<div class="notification_bottom">
+												<a href="#">See all notification</a>
+											</div> 
+										</li>
+									</ul>
+							</li>	
+						<li class="dropdown note">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-tasks"></i> <span class="badge blue1">9</span></a>
+										<ul class="dropdown-menu two">
+										<li>
+											<div class="notification_header">
+												<h3>You have 9 pending task</h3>
+											</div>
+										</li>
+										<li><a href="#">
+												<div class="task-info">
+												<span class="task-desc">Database update</span><span class="percentage">40%</span>
+												<div class="clearfix"></div>	
+											   </div>
+												<div class="progress progress-striped active">
+												 <div class="bar yellow" style="width:40%;"></div>
+											</div>
+										</a></li>
+										<li><a href="#">
+											<div class="task-info">
+												<span class="task-desc">Dashboard done</span><span class="percentage">90%</span>
+											   <div class="clearfix"></div>	
+											</div>
+										   
+											<div class="progress progress-striped active">
+												 <div class="bar green" style="width:90%;"></div>
+											</div>
+										</a></li>
+										<li><a href="#">
+											<div class="task-info">
+												<span class="task-desc">Mobile App</span><span class="percentage">33%</span>
+												<div class="clearfix"></div>	
+											</div>
+										   <div class="progress progress-striped active">
+												 <div class="bar red" style="width: 33%;"></div>
+											</div>
+										</a></li>
+										<li><a href="#">
+											<div class="task-info">
+												<span class="task-desc">Issues fixed</span><span class="percentage">80%</span>
+											   <div class="clearfix"></div>	
+											</div>
+											<div class="progress progress-striped active">
+												 <div class="bar  blue" style="width: 80%;"></div>
+											</div>
+										</a></li>
+										<li>
+											<div class="notification_bottom">
+												<a href="#">See all pending task</a>
+											</div> 
+										</li>
+									</ul>
+							</li>		   							   		
+							<div class="clearfix"></div>	
+								</ul>
+							</div>
+							<div class="clearfix"></div>	
+							<!--//profile_details-->
+						</div>
+						<!--//menu-right-->
+					<div class="clearfix"></div>
+				</div>
+					<!-- //header-ends -->
+						<!--outter-wp-->
+							<div class="outter-wp">
+									<!--sub-heard-part-->
+									  <div class="sub-heard-part">
+									   <ol class="breadcrumb m-b-0">
+											<li><a href="index.html">Home</a></li>
+											<li class="active">Blank Page</li>
+										</ol>
+									   </div>
+								  <!--//sub-heard-part-->
+									<div class="graph-visual tables-main">
+											<h2 class="inner-tittle">Blank Page</h2>
+												<div class="graph">
+														 <div class="block-page">
+																	<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic 
+																		It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here.
+																	</p>
+																</div>
+												
+										        </div>
+											
+										</div>
+										<!--//graph-visual-->
+									</div>
+									<!--//outer-wp-->
+									 <!--footer section start-->
+										<footer>
+										   <p>Copyright &copy; 2016.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+										</footer>
+									<!--footer section end-->
+								</div>
+							</div>
+				<!--//content-inner-->
+			<!--/sidebar-menu-->
+				<div class="sidebar-menu">
+					<header class="logo">
+					<a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a> <a href="index.html"> <span id="logo"> <h1>Augment</h1></span> 
+					<!--<img id="logo" src="" alt="Logo"/>--> 
+				  </a> 
+				</header>
+			<div style="border-top:1px solid rgba(69, 74, 84, 0.7)"></div>
+			<!--/down-->
+							<div class="down">	
+									  <a href="index.html"><img src="images/admin.jpg"></a>
+									  <a href="index.html"><span class=" name-caret">Jasmin Leo</span></a>
+									 <p>System Administrator in Company</p>
+									<ul>
+									<li><a class="tooltips" href="index.html"><span>Profile</span><i class="lnr lnr-user"></i></a></li>
+										<li><a class="tooltips" href="index.html"><span>Settings</span><i class="lnr lnr-cog"></i></a></li>
+										<li><a class="tooltips" href="index.html"><span>Log out</span><i class="lnr lnr-power-switch"></i></a></li>
+										</ul>
+									</div>
+							   <!--//down-->
+								<div class="menu">
+									<ul id="menu" >
+										<li><a href="index.html"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
+										 <li id="menu-academico" ><a href="#"><i class="fa fa-table"></i> <span> Tabs &amp; Panels</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+										   <ul id="menu-academico-sub" >
+											<li id="menu-academico-avaliacoes" ><a href="tabs.html"> Tabs &amp; Panels</a></li>
+											<li id="menu-academico-boletim" ><a href="widget.html">Widgets</a></li>
+											<li id="menu-academico-avaliacoes" ><a href="calender.html">Calender</a></li>
+											
+										  </ul>
+										</li>
+										 <li id="menu-academico" ><a href="#"><i class="fa fa-file-text-o"></i> <span>Ui Elements</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+											 <ul id="menu-academico-sub" >
+												<li id="menu-academico-avaliacoes" ><a href="forms.html">Forms</a></li>
+												<li id="menu-academico-boletim" ><a href="validation.html">Validation Forms</a></li>
+												<li id="menu-academico-boletim" ><a href="table.html">Tables</a></li>
+												<li id="menu-academico-boletim" ><a href="buttons.html">Buttons</a></li>
+											  </ul>
+										 </li>
+									<li><a href="typography.html"><i class="lnr lnr-pencil"></i> <span>Typography</span></a></li>
+									<li id="menu-academico" ><a href="#"><i class="lnr lnr-book"></i> <span>Pages</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+										  <ul id="menu-academico-sub" >
+										    <li id="menu-academico-avaliacoes" ><a href="login.html">Login</a></li>
+										    <li id="menu-academico-boletim" ><a href="register.html">Register</a></li>
+											<li id="menu-academico-boletim" ><a href="404.html">404</a></li>
+											<li id="menu-academico-boletim" ><a href="sign.html">Login2</a></li>
+											<li id="menu-academico-boletim" ><a href="profile.html">Profile</a></li>
+										  </ul>
+									 </li>
+									 <li><a href="#"><i class="lnr lnr-envelope"></i> <span>Mail Box</span><span class="fa fa-angle-right" style="float: right"></span></a>
+									   <ul>
+										<li><a href="inbox.html"><i class="fa fa-inbox"></i> Inbox</a></li>
+										<li><a href="compose.html"><i class="fa fa-pencil-square-o"></i> Compose Mail</a></li>
+											<li><a href="editor.html"><span class="lnr lnr-highlight"></span> Editors Page</a></li>
+									
+									  </ul>
+									</li>
+							        <li id="menu-academico" ><a href="#"><i class="lnr lnr-layers"></i> <span>Components</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+										 <ul id="menu-academico-sub" >
+											<li id="menu-academico-avaliacoes" ><a href="grids.html">Grids</a></li>
+											<li id="menu-academico-boletim" ><a href="media.html">Media Objects</a></li>
 
-<div class="row">
-    <div class="box col-md-12">
-        <div class="box-inner">
-            <div class="box-header well" data-original-title="">
-                <h2><i class="glyphicon glyphicon-star-empty"></i> Blank</h2>
-
-                <div class="box-icon">
-                    <a href="#" class="btn btn-setting btn-round btn-default"><i
-                            class="glyphicon glyphicon-cog"></i></a>
-                    <a href="#" class="btn btn-minimize btn-round btn-default"><i
-                            class="glyphicon glyphicon-chevron-up"></i></a>
-                    <a href="#" class="btn btn-close btn-round btn-default"><i
-                            class="glyphicon glyphicon-remove"></i></a>
-                </div>
-            </div>
-            <div class="box-content">
-                <!-- put your content here -->
-            </div>
-        </div>
-    </div>
-</div><!--/row-->
-
-
-    <!-- content ends -->
-    </div><!--/#content.col-md-0-->
-</div><!--/fluid-row-->
-
-    <!-- Ad, you can remove it -->
-    <div class="row">
-        <div class="col-md-9 col-lg-9 col-xs-9 hidden-xs">
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- Charisma Demo 2 -->
-            <ins class="adsbygoogle"
-                 style="display:inline-block;width:728px;height:90px"
-                 data-ad-client="ca-pub-5108790028230107"
-                 data-ad-slot="3193373905"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        <div class="col-md-2 col-lg-3 col-sm-12 col-xs-12 email-subscription-footer">
-            <div class="mc_embed_signup">
-                <form action="//halalit.us3.list-manage.com/subscribe/post?u=444b176aa3c39f656c66381f6&amp;id=eeb0c04e84" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                    <div>
-                        <label>Keep up with my work</label>
-                        <input type="email" value="" name="EMAIL" class="email" placeholder="Email address" required>
-
-                        <div class="power_field"><input type="text" name="b_444b176aa3c39f656c66381f6_eeb0c04e84" tabindex="-1" value=""></div>
-                        <div class="clear"><input type="submit" value="Subscribe" name="subscribe" class="button"></div>
-                    </div>
-                </form>
-            </div>
-
-            <!--End mc_embed_signup-->
-        </div>
-
-    </div>
-    <!-- Ad ends -->
-
-    <hr>
-
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">×</button>
-                    <h3>Settings</h3>
-                </div>
-                <div class="modal-body">
-                    <p>Here settings can be configured...</p>
-                </div>
-                <div class="modal-footer">
-                    <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
-                    <a href="#" class="btn btn-primary" data-dismiss="modal">Save changes</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer class="row">
-        <p class="col-md-9 col-sm-9 col-xs-12 copyright">&copy; <a href="http://usman.it" target="_blank">Muhammad
-                Usman</a> 2012 - 2015</p>
-
-        <p class="col-md-3 col-sm-3 col-xs-12 powered-by">Powered by: <a
-                href="http://usman.it/free-responsive-admin-template">Charisma</a></p>
-    </footer>
-
-</div><!--/.fluid-container-->
-
-<!-- external javascript -->
-
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-<!-- library for cookie management -->
-<script src="js/jquery.cookie.js"></script>
-<!-- calender plugin -->
-<script src='bower_components/moment/min/moment.min.js'></script>
-<script src='bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
-<!-- data table plugin -->
-<script src='js/jquery.dataTables.min.js'></script>
-
-<!-- select or dropdown enhancer -->
-<script src="bower_components/chosen/chosen.jquery.min.js"></script>
-<!-- plugin for gallery image view -->
-<script src="bower_components/colorbox/jquery.colorbox-min.js"></script>
-<!-- notification plugin -->
-<script src="js/jquery.noty.js"></script>
-<!-- library for making tables responsive -->
-<script src="bower_components/responsive-tables/responsive-tables.js"></script>
-<!-- tour plugin -->
-<script src="bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
-<!-- star rating plugin -->
-<script src="js/jquery.raty.min.js"></script>
-<!-- for iOS style toggle switch -->
-<script src="js/jquery.iphone.toggle.js"></script>
-<!-- autogrowing textarea plugin -->
-<script src="js/jquery.autogrow-textarea.js"></script>
-<!-- multiple file upload plugin -->
-<script src="js/jquery.uploadify-3.1.min.js"></script>
-<!-- history.js for cross-browser state change on ajax -->
-<script src="js/jquery.history.js"></script>
-<!-- application script for Charisma demo -->
-<script src="js/charisma.js"></script>
-
-
+										  </ul>
+									 </li>
+									<li><a href="chart.html"><i class="lnr lnr-chart-bars"></i> <span>Charts</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+									  <ul>
+										<li><a href="map.html"><i class="lnr lnr-map"></i> Maps</a></li>
+										<li><a href="graph.html"><i class="lnr lnr-apartment"></i> Graph Visualization</a></li>
+									</ul>
+									</li>
+									<li id="menu-comunicacao" ><a href="#"><i class="fa fa-smile-o"></i> <span>More</span><span class="fa fa-angle-double-right" style="float: right"></span></a>
+									    <ul id="menu-comunicacao-sub" >
+										<li id="menu-mensagens" style="width:120px" ><a href="project.html">Projects <i class="fa fa-angle-right" style="float: right; margin-right: -8px; margin-top: 2px;"></i></a>
+										  <ul id="menu-mensagens-sub" >
+											<li id="menu-mensagens-enviadas" style="width:130px" ><a href="ribbon.html">Ribbons</a></li>
+											<li id="menu-mensagens-recebidas"  style="width:130px"><a href="blank.html">Blank</a></li>
+										  </ul>
+										</li>
+										<li id="menu-arquivos" ><a href="500.html">500</a></li>
+									  </ul>
+									</li>
+								  </ul>
+								</div>
+							  </div>
+							  <div class="clearfix"></div>		
+							</div>
+							<script>
+							var toggle = true;
+										
+							$(".sidebar-icon").click(function() {                
+							  if (toggle)
+							  {
+								$(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
+								$("#menu span").css({"position":"absolute"});
+							  }
+							  else
+							  {
+								$(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
+								setTimeout(function() {
+								  $("#menu span").css({"position":"relative"});
+								}, 400);
+							  }
+											
+											toggle = !toggle;
+										});
+							</script>
+<!--js -->
+	<script src="js/jquery.nicescroll.js"></script>
+	<script src="js/scripts.js"></script>
+<!-- Bootstrap Core JavaScript -->
+   <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

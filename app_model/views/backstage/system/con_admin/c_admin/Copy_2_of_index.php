@@ -1,16 +1,19 @@
+<?php if(!defined('VIEW_MODEL_BACKGROUD')){define('VIEW_MODEL_BACKGROUD', '/CodeIgniter/view_model/backstage/');}?>
 <!DOCTYPE HTML>
 <html>
 <head>
 <!-- *********** 初始化必须加载 ***************** （顶部JS加载） *********** 初始化必须加载 ***************** -->
-<?php include_once dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/model/backstage/pub_top_web_file.php';?>
-</head> 
+<?php include_once dirname(dirname(dirname(dirname(__FILE__)))).'/pub_top_web_file.php';?>
+</head>
 <body>
-   <div class="page-container">
-   <!--/content-inner-->
-	<div class="left-content">
-	   <div class="inner-content">
+	<div class="page-container sidebar-collapsed">
+		<!--/content-inner-->
+		<div class="left-content">
+			<div class="inner-content">
 				<!--*********** 初始化必须加载 ***************** （顶部导航栏加载） *********** 初始化必须加载 *****************   -->
-				<?php include_once dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/model/backstage/pub_top_menu.php';?>
+				<?php include_once dirname(dirname(dirname(dirname(__FILE__)))).'/pub_top_menu.php';?>
+				
+				<!-- 中间内容 -->
 				<div class="outter-wp">
 					<div class="but_list">
 						<ol class="breadcrumb">
@@ -119,7 +122,7 @@
 							</table>
 						</div>
 						<!--*********** 初始化必须加载 ***************** （分页信息） *********** 初始化必须加载 ***************** -->
-		                <?php include_once dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/model/backstage/pub_page.php';?>
+		                <?php include_once dirname(dirname(dirname(dirname(__FILE__)))).'/pub_page.php';?>
 						<div class="form-body">
 							<form>
 							     <div class="col-md-12 form-group button-2">
@@ -249,10 +252,13 @@
 					</div>
 				</div>
 				<!--*********** 初始化必须加载 ***************** （最下版权加载） *********** 初始化必须加载 ***************** -->
-		        <?php include_once dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/model/backstage/pub_footer.php';?>
+		        <?php include_once dirname(dirname(dirname(dirname(__FILE__)))).'/pub_footer.php';?>
 			</div>
-		</div>			
+		</div>
 		<!--*********** 初始化必须加载 ***************** （左侧目录加载） *********** 初始化必须加载 ***************** -->
-		<?php include_once dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/model/backstage/pub_left_menu.php';?>
+		<?php include_once dirname(dirname(dirname(dirname(__FILE__)))).'/pub_left_menu.php';?>
+	</div>
+	<!--*********** 初始化必须加载 ***************** （底部JS加载   必须放在下面） *********** 初始化必须加载 *****************   -->
+	<?php include_once dirname(dirname(dirname(dirname(__FILE__)))).'/pub_foot_web_file.php';?>
 </body>
 </html>
