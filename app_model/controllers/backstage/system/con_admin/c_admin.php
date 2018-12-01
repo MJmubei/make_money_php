@@ -11,7 +11,7 @@ class c_admin extends CI_Controller
      */
     public function index()
     {
-        $this->_init_page();
+        $this->_init_page(); 
         $this->load_view_file($this->auto_load_table('system','system_tables', 'general', 'query_tables'),__LINE__);
     }
     
