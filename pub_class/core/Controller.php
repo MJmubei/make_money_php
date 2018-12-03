@@ -10,7 +10,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 include_once APPPATH.'libraries/em_return.class.php';
 include_once APPPATH.'libraries/em_preg.class.php';
 include_once APPPATH.'libraries/em_logic.class.php';
-class CI_Controller
+include_once APPPATH.'libraries/em_guid.class.php';
+class CI_Controller 
 {
     /**
      * Reference to the CI singleton
@@ -341,119 +342,163 @@ class CI_Controller
                 em_return::set_ci_flow_desc($this->get_str_load_log_path(),$str_desc,'message','error');
                 em_return::set_ci_flow_desc($this->get_str_load_log_path(),"end---{{{控制器-接口控制器请求结束template_view界面展示错误模板}}}---end");
                 $this->write_global_info();
-                $this->load->view('model_error/model_error',array('arr_desc'=>em_return::_return_log_data()));
-            }
-            else
-            {
-                $data['arr_page_url']['list_url'] = VIEW_MODEL_BACKGROUD_REQUEST_URL.$str_path_info.'/'.$this->get_str_load_class().'/'.$this->get_str_load_method();
-                $data['arr_params'] = $this->arr_params;
-                em_return::set_ci_flow_desc($this->get_str_load_log_path(),"end---{{{控制器-接口控制器请求结束template_view界面展示正确模板}}}---end");
-                $this->write_global_info();
-                $this->load->view($str_path_info.'/'.$this->get_str_load_class().'/'.$this->get_str_load_method(),$data);
-            }
-        }
-    }
-
-    /**
-     * 全局错误日志书写
-     * @param string $str_project //项目名
-     * @param string $str_table //数据库表
-     * @param string $str_model //模块
-     * @param string $str_method //方法
-     */
-    public function write_global_info($str_project='system',$str_table='system_global_error',$str_model='l_general',$str_method='add')
-    {
-        $error_desc=em_return::get_ci_error_desc();
-        if(empty($error_desc) || !is_array($error_desc))
-        {
-            return ;
-        }
-        $date = date("Y-m-d H:i:s");
-        $arr_global_info = array(
-            'cms_stage'=>$this->get_str_load_stage(),
-            'cms_project'=>$this->get_str_load_project(),
-            'cms_model'=>$this->get_str_load_model(),
-            'cms_class'=>$this->get_str_load_class(),
-            'cms_method'=>$this->get_str_load_method(),
-            'cms_error_file'=>em_return::$last_file_log_path,
-            'cms_deleted'=>0,
-            'cms_create_time'=>$date,
-            'cms_modify_time'=>$date,
-        );
-        $add_data = null;
-        foreach ($error_desc as $key=>$val)
-        {
-            $arr_global_info['cms_error_type']=$key;
-            $arr_global_info['cms_error_info']=var_export($val,true);
-            $add_data[]=$arr_global_info;
-        }
-        $this->auto_load_table($str_project,$str_table,$str_model,$str_method,$add_data);
-        return ;
-    }
-
-    /**
-     * @param $str_project//项目名
-     * @param $str_table//表名
-     * @param $str_model//模块
-     * @param $str_method//操作数据库方法
-     * @param null $params
-     * @param null $str_databse//数据库
-     * @return array
-     */
-    public function auto_load_table($str_project,$str_table,$str_model,$str_method,$params=null,$str_databse=null)
-    {
-        empty($str_databse) ? $this->load->database() : $this->load->database($str_databse);
-        $str_table = (strlen($str_project)< strlen($str_table) && substr($str_table,0, strlen($str_project)) != $str_project) ? $str_project.'_'.$str_table : $str_table;
-        $logic_file_path = trim(rtrim(rtrim(defined('APPPATH') ? APPPATH : '','\/'),'\\')).'/logic/'.$this->get_str_load_stage().'/'.$str_project.'/'.$str_model.'/'.$str_table.'.class.php';
-        if(!file_exists($logic_file_path))
-        {
+    	        $this->load->view('model_error/model_error',array('arr_desc'=>em_return::_return_log_data()));
+    	    }
+    	    else
+    	    {
+    	        $data['arr_page_url']['list_url'] = VIEW_MODEL_BACKGROUD_REQUEST_URL.$str_path_info.'/'.$this->get_str_load_class().'/'.$this->get_str_load_method();
+    	        $data['arr_params'] = $this->arr_params;
+        	    em_return::set_ci_flow_desc($this->get_str_load_log_path(),"end---{{{控制器-接口控制器请求结束template_view界面展示正确模板}}}---end");
+        	    $this->write_global_info();
+        	    $data['data_menu'] = $this->system_auto_make_menu();
+        	    $data['data_menu'] = $this->system_auto_make_menu_arr($data['data_menu']);
+//         	    echo json_encode($data['data_menu']);die;
+        	    $this->load->view($str_path_info.'/'.$this->get_str_load_class().'/'.$this->get_str_load_method(),$data);
+    	    }
+	    }
+	}
+	
+	
+	public function system_auto_make_menu($level=1,$parent_id=0)
+	{
+	    $last_data=null;
+	    if($level==1)
+	    {
+	        $this->arr_page_params['cms_page_num'] = 0;
+	        $this->arr_page_params['cms_page_size'] = 0;
+	    }
+	    $temp_level = $level+1;
+	    $menu_data = $this->auto_load_table('system','auto','c_project','system_menu', 'query',array('where'=>array('cms_level'=>$level,'cms_parent_id'=>$parent_id)));
+	    $menu_data = isset($menu_data['data_info']) ? $menu_data['data_info'] :null;
+	    if(!is_array($menu_data) || empty($menu_data))
+	    {
+	        return $last_data;
+	    }
+	    foreach ($menu_data as $value)
+	    {
+	        $last_data[$value['cms_id']]['data']=$value;
+	        $data = $this->system_auto_make_menu($temp_level,$value['cms_id']);
+	        if(!is_array($data) || empty($data))
+	        {
+	            continue;
+	        }
+	        $last_data[$value['cms_id']]['child_list'] = $data;
+	    }
+	    return $last_data;
+	}
+	
+	
+	public function system_auto_make_menu_arr($last_data)
+	{
+	    $data = array_values($last_data);
+	    foreach ($data as $key=>$value)
+	    {
+	        if(!isset($value['child_list']) || empty($value['child_list']))
+	        {
+	            continue;
+	        }
+	        $data[$key]['child_list'] = $this->system_auto_make_menu_arr($value['child_list']);
+	    }
+	    return $data;
+	}
+	
+	/**
+	 * 全局错误日志书写
+	 * @param string $str_message
+	 * @param string $str_model
+	 */
+	public function write_global_info($str_project='system',$str_table='system_global_error',$str_model='l_general',$str_method='add')
+	{
+	    $error_desc=em_return::get_ci_error_desc();
+	    if(empty($error_desc) || !is_array($error_desc))
+	    {
+	        return ;
+	    }
+	    $date = date("Y-m-d H:i:s");
+	    $arr_global_info = array(
+	        'cms_stage'=>$this->get_str_load_stage(),
+	        'cms_project'=>$this->get_str_load_project(),
+	        'cms_model'=>$this->get_str_load_model(),
+	        'cms_class'=>$this->get_str_load_class(),
+	        'cms_method'=>$this->get_str_load_method(),
+	        'cms_error_file'=>em_return::$last_file_log_path,
+	        'cms_deleted'=>0,
+	        'cms_create_time'=>$date,
+	        'cms_modify_time'=>$date,
+	    );
+	    $add_data = null;
+	    foreach ($error_desc as $key=>$val)
+	    {
+	        $arr_global_info['cms_error_type']=$key;
+	        $arr_global_info['cms_error_info']=var_export($val,true);
+	        $add_data[]=$arr_global_info;
+	    }
+	    $this->auto_load_table($str_project,$str_table,$str_model,$str_method,$add_data);
+	    return ;
+	}
+	
+	/**
+	 * 自动加载表
+	 * @param string $str_project 项目标示
+	 * @param string $str_model 模块标示
+	 * @param string $str_child_model 子模块标示
+	 * @param string $str_table 表名
+	 * @param string $str_method logic 方法
+	 * @param string $params 参数
+	 * @param string $str_databse 数据库 如果未填写默认项目数据库
+	 */
+	public function auto_load_table($str_project,$str_model,$str_child_model,$str_table,$str_method,$params=null,$str_databse=null)
+	{
+	    empty($str_databse) ? $this->load->database() : $this->load->database($str_databse);
+	    $str_table = (strlen($str_project)< strlen($str_table) && substr($str_table,0, strlen($str_project)) != $str_project) ? $str_project.'_'.$str_table : $str_table;
+	    $logic_file_path = trim(rtrim(rtrim(defined('APPPATH') ? APPPATH : '','\/'),'\\')).'/logic/'.$this->get_str_load_stage().'/'.$str_project.'/'.$str_model.'/'.$str_child_model.'/'.$str_table.'/'.$str_table.'.class.php';
+	    if(!file_exists($logic_file_path))
+	    {
             em_return::set_ci_flow_desc($this->get_str_load_log_path(),"调用LOGIC类失败文件不存在[{$logic_file_path}];项目[{$this->get_str_load_project()}];表名[{$str_table}];模块[{$str_model}]",'sql','error');
             return em_return::_return_error_data();
-        }
-        include_once $logic_file_path;
-        $obj_logic = new $str_table($this, $str_table, $params);
-        if (!method_exists($obj_logic, $str_method))
-        {
-            em_return::set_ci_flow_desc($this->get_str_load_log_path(),"调用LOGIC类文件[{$logic_file_path}];项目[{$this->get_str_load_project()}];方法不存在[{$str_method}];表名[{$str_table}];模块[{$str_model}]",'sql','error');
-            return em_return::_return_error_data();
-        }
-        return $obj_logic->$str_method();
-    }
-
-
-    /**
-     * 自动加载表
-     * @param $str_table
-     * @param $str_method
-     * @param null $params
-     * @return array
-     */
-    public function auto_make_model($str_table,$str_method,$params=null)
-    {
-        include_once APPPATH.'libraries/em_model_bulid.class.php';
-        $obj_model_bulid = new em_model_bulid($this);
-        if (!method_exists($obj_model_bulid, $str_method))
-        {
-            em_return::set_ci_flow_desc($this->get_str_load_log_path(),"调用模板创建类文件[".APPPATH."libraries/em_model_bulid.class.php];方法不存在[{$str_method}]",'message','error');
-            return em_return::_return_error_data();
-        }
-        return $obj_model_bulid->$str_method($str_table,$params);
-    }
-
-    /**
-     * 全局自动检查登录
-     * @param $str_table
-     * @param $str_method
-     * @param null $params
-     */
-    public function auto_check_login($str_table,$str_method,$params=null)
-    {
-        //if ($this->need_login)
-        //{
-        //    $this->load->library('session');
-        //    $session =  $this->session->userdata('');
-        //}
-    }
+	    }
+	    include_once $logic_file_path;
+	    $obj_logic = new $str_table($this,$str_table,$params);
+	    if (!method_exists($obj_logic, $str_method))
+	    {
+	        em_return::set_ci_flow_desc($this->get_str_load_log_path(),"调用LOGIC类文件[{$logic_file_path}];项目[{$this->get_str_load_project()}];方法不存在[{$str_method}];表名[{$str_table}];模块[{$str_model}]",'sql','error');
+	        return em_return::_return_error_data();
+	    }
+	    return $obj_logic->$str_method($params);
+	}
+	
+	/**
+	 * 自动加载表
+	 * @param unknown $str_table
+	 * @param unknown $str_model
+	 * @param unknown $str_method
+	 * @param string $params
+	 * @param string $str_databse
+	 */
+	public function auto_make_model($str_table,$str_method,$params=null)
+	{
+	    include_once APPPATH.'libraries/em_model_bulid.class.php';
+	    $obj_model_bulid = new em_model_bulid($this);
+	    if (!method_exists($obj_model_bulid, $str_method))
+	    {
+	        em_return::set_ci_flow_desc($this->get_str_load_log_path(),"调用模板创建类文件[".APPPATH."libraries/em_model_bulid.class.php];方法不存在[{$str_method}]",'message','error');
+	        return em_return::_return_error_data();
+	    }
+	    return $obj_model_bulid->$str_method($str_table,$params);
+	}
+	
+	/**
+	 * 自动检查登录
+	 * @param unknown $str_table
+	 * @param unknown $str_model
+	 * @param unknown $str_method
+	 * @param string $params
+	 * @param string $str_databse
+	 */
+	public function auto_check_login($str_table,$str_method,$params=null)
+	{
+	    
+	}
 
     /**
      * 生成32位随机id
@@ -491,4 +536,21 @@ class CI_Controller
         list ($usec, $sec) = explode(' ', microtime ());
         return intval(substr($usec, 2, 3));
     }
+    public function auto_load_class($file_base_dir='')
+{
+    $file_base_dir = trim(trim(str_replace("\\", '/', $file_base_dir),'\\'));
+    if(strlen($file_base_dir) <1)
+    {
+        em_return::set_ci_flow_desc($this->get_str_load_log_path(),"加载文件参数为空",'message','error');
+        return em_return::_return_error_data();
+    }
+    $base_dir = dirname(dirname(dirname(__FILE__))).'/'.$file_base_dir;
+    if(!file_exists($base_dir))
+    {
+        em_return::set_ci_flow_desc($this->get_str_load_log_path(),"加载文件该文件不存在，路径[{$base_dir}]",'message','error');
+        return em_return::_return_error_data();
+    }
+    include_once $base_dir;
+    return em_return::_return_right_data('OK');
+}
 }

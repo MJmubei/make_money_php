@@ -20,7 +20,7 @@ class c_admin extends CI_Controller
      */
     public function add()
     {
-            $this->load_view_file(array('1','2'),__LINE__);
+        $this->load_view_file(array('1','2'),__LINE__);
     }
     
     /**
