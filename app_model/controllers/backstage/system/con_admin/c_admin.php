@@ -62,4 +62,20 @@ class c_admin extends CI_Controller
     {
         $this->load_view_file(array('1','2'),__LINE__);
     }
+
+    /**
+     * 测试支付
+     */
+    public function pay_test()
+    {
+        include_once dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/pub_class/libraries/Pay/WeChat/pay.demo.php';
+        $obj_pay = new test();
+
+        //二维码
+        //$str_ret = $obj_pay->scan();
+        //web页
+        $str_ret = $obj_pay->web();
+
+        echo var_export($str_ret,true);
+    }
 }
