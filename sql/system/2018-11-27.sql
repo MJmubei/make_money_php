@@ -260,3 +260,7 @@ CREATE TABLE `system_role` (
 -- ----------------------------
 -- Records of system_role
 -- ----------------------------
+
+-- ----------------------------
+-- Records of system_role test commit-gao
+-- ----------------------------

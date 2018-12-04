@@ -159,6 +159,68 @@ class em_file
 		return $arr_temp_base_file_dir;
 	}
 	
+	
+	/**
+	 * 获取文件
+	 * @param unknown $base_file_dir
+	 * @param number $dir_child
+	 * @return unknown|string|boolean
+	 */
+	public function get_files_list($base_file_dir,$flag=false)
+	{
+	    $last_data = array();
+	    $base_file_dir = trim(rtrim(rtrim($base_file_dir,'/'),'\\'));
+	    $base_file_dir = strlen($base_file_dir) <1 ? '/' : $base_file_dir.'/';
+	    if(!is_dir($base_file_dir))
+	    {
+	        return false;
+	    }
+	    $arr_base_file_dir = scandir($base_file_dir);
+	    if((!is_array($arr_base_file_dir) || empty($arr_base_file_dir)))
+	    {
+	        return true;
+	    }
+	    $arr_base_file_dir = array_diff($arr_base_file_dir, array('.','..'));
+	    if((!is_array($arr_base_file_dir) || empty($arr_base_file_dir)))
+	    {
+	        return true;
+	    }
+	    foreach ($arr_base_file_dir as $afile)
+	    {
+	        if (is_dir($base_file_dir . $afile))
+	        {
+	            $data = $this->get_files_list($base_file_dir . $afile,true);
+	            if(is_array($data) && !empty($data))
+	            {
+	                $last_data = array_merge($last_data,$data);
+	            }
+	            continue;
+	        }
+	        if(isset($this->ex_file_name) && strlen($this->ex_file_name) >1)
+	        {
+	            $pathinfo_file = pathinfo($base_file_dir.$afile);
+	            if(!isset($pathinfo_file['extension']) || strlen($pathinfo_file['extension']) <1 || strtolower($pathinfo_file['extension'])!=strtolower($this->ex_file_name))
+	            {
+	                continue;
+	            }
+	        }
+	        $last_data[] = array(
+	            'path'=>$base_file_dir.$afile,
+	            'time'=>$this->get_file_date($base_file_dir.$afile)
+	        );
+	    }
+	    if($flag === false)
+	    {
+	        $this->ex_file_name = '';
+	    }
+	    if(empty($last_data))
+	    {
+	        return true;
+	    }
+	    return $last_data;
+	}
+	
+	
 	/**
 	 * 获取文件的创建时间
 	 * @param unknown $file_path

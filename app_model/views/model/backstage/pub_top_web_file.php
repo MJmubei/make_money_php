@@ -20,6 +20,12 @@
 	type='text/css' />
 <!-- /js -->
 <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/jquery-1.10.2.min.js"></script>
+<!--clock init-->
+<script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/css3clock.js"></script>
+<!--Easy Pie Chart-->
+<!--skycons-icons-->
+<script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/skycons.js"></script>
+<!--//skycons-icons-->
 <script>
 var toggle = true;
 			
@@ -39,6 +45,18 @@ $(".sidebar-icon").click(function() {
 				
 				toggle = !toggle;
 			});
+</script>
+
+<script type="text/javascript">
+	 $('.main-search').hide();
+	$('button').click(function (){
+		$('.main-search').show();
+		$('.main-search text').focus();
+	}
+	);
+	$('.close').click(function(){
+		$('.main-search').hide();
+	});
 </script>
 <!--js -->
 <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/jquery.nicescroll.js"></script>
