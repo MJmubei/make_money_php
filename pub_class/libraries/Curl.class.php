@@ -22,15 +22,9 @@ class np_http_curl_class
     }
 
     /**
-     * HTTP请求（支持IPV4/IPV6）
-     * @param $filename
-     * @param bool $use_include_path
-     * @param null $context
-     * @param null $offset
-     * @param null $maxlen
-     * @return bool|mixed|string
+     * file_get_contents/curl（支持IPV4/IPV6）
      */
-    function file_get_contents_support_ipv6($filename, $use_include_path = false, $context = null, $offset = null, $maxlen = null)
+    function file_contents_http_request($filename, $use_include_path = false, $context = null, $offset = null, $maxlen = null)
     {
         $params_count = func_num_args();
         if($params_count < 1)
@@ -38,7 +32,7 @@ class np_http_curl_class
             return false;
         }
 
-        $type = judge_url_type_support_ipv6($filename);
+        $type = $this->judge_url_type_support_ipv6($filename);
         $result = false;
         if($type == 1)
         {
@@ -63,40 +57,33 @@ class np_http_curl_class
         }
         else
         {
-            if(!class_exists('np_http_curl_class'))
-            {
-                $np_dir = dirname(dirname(__DIR__)) . '/np';
-                include_once $np_dir . '/np_http_curl.class.php';
-            }
-            $curl = new np_http_curl_class();
-
             switch($params_count)
             {
                 case 1:
                 case 2:
-                    $result = $curl->get($filename);
+                    $result = $this->get($filename);
                     break;
                 case 3:
                 case 4:
                 case 5:
                     if(!is_null($context))
                     {
-                        $options = parse_stream_data_support_ipv6($context);
+                        $options = $this->parse_stream_data_support_ipv6($context);
                         if(is_array($options) && count($options) > 0)
                         {
                             if($options['method'] == 'get')
                             {
-                                $result = $curl->get($filename, null, $options['header'], $options['timeout']);
+                                $result = $this->get($filename, $options['header'], $options['timeout']);
                             }
                             else if($options['method'] == 'post')
                             {
-                                $result = $curl->post($filename, $options['content'], $options['header'], $options['timeout']);
+                                $result = $this->post($filename, $options['content'], $options['header'], $options['timeout']);
                             }
                         }
                     }
                     else
                     {
-                        $result = $curl->get($filename);
+                        $result = $this->get($filename);
                     }
                     break;
             }
@@ -262,5 +249,98 @@ class np_http_curl_class
             return $data;
         }
     }
+
+    /**
+     * 判断传入的文件类型
+     */
+    private function judge_url_type_support_ipv6($filename)
+    {
+        if(strpos($filename, "http://") === false && strpos($filename, "https://") === false)
+        {
+            return 1;
+        }
+        return 3;
+    }
+
+    /**
+     * 解析file_get_contents第三个参数,stream
+     * 将资源类型的stream还原为基础类型变量
+     */
+    private function parse_stream_data_support_ipv6($stream)
+    {
+        if(!is_resource($stream))
+        {
+            return false;
+        }
+        $params = stream_context_get_params($stream);
+        if(!isset($params['options']))
+        {
+            return false;
+        }
+        $params = $params['options'];
+        $options = array();
+        foreach($params as $type => $value)
+        {
+            if(strtolower($type) == 'http')
+            {
+                if(is_array($value))
+                {
+                    //获取请求方式,get还是post
+                    if(isset($value['method']))
+                    {
+                        $options['method'] = strtolower($value['method']);
+                    }
+                    if(isset($value['METHOD']))
+                    {
+                        $options['method'] = strtolower($value['METHOD']);
+                    }
+                    $options['method'] = isset($options['method']) ? $options['method'] : 'get';
+
+                    //获取超时时间设置
+                    $options['timeout'] = isset($value['timeout']) ? intval($value['timeout']) : 5;
+
+                    //获取请求的内容参数
+                    if(isset($value['content']))
+                    {
+                        $options['content'] = $value['content'];
+                    }
+                    else
+                    {
+                        $options['content'] = null;
+                    }
+
+                    //获取请求头
+                    if(isset($value['header']))
+                    {
+                        if(is_array($value['header']))
+                        {
+                            $options['header'] = $value['header'];
+                        }
+                        else
+                        {
+                            $headers = explode("\r\n", $value['header']);
+                            foreach($headers as $map => $header)
+                            {
+                                if(strlen($header) == 0)
+                                {
+                                    unset($headers[$map]);
+                                    continue;
+                                }
+                                $headers[$map] = trim($header);
+                            }
+                            unset($header);
+                            $options['header'] = $headers;
+                        }
+                    }
+                    else
+                    {
+                        $options['header'] = array();
+                    }
+                }
+            }
+        }
+        return $options;
+    }
+
 
 }

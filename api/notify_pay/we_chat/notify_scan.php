@@ -8,7 +8,8 @@
 header("content-type:text/html;charset=utf-8");
 
 //日志路径
-$str_olg_file_path = 'api/notify_pay/we_chat';
+include_once dirname(dirname(dirname(__DIR__))) . '/app_model/libraries/em_return.class.php';
+$str_olg_file_path = 'api/notify_pay/we_chat/notify_scan';
 em_return::set_ci_flow_desc($str_olg_file_path,'微信扫码/JSAPI支付回调:异步通知开始','message','info');
 //提取回调数据
 $obj_notify_data = isset($GLOBALS['HTTP_RAW_POST_DATA']) ? $GLOBALS['HTTP_RAW_POST_DATA'] : file_get_contents('php://input');

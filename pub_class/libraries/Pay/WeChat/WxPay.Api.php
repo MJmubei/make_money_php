@@ -24,23 +24,25 @@ class WxPayApi
 	 */
 	public static function unifiedOrder($inputObj, $timeOut = 10)
 	{
-		$pay_url = self::getWeixinServerUrl();
-		$url = $pay_url . '/pay/unifiedorder';
+        //下单基地址
+		$url = self::getWeixinServerUrl() . '/pay/unifiedorder';
 		//检测必填参数
 		if(!$inputObj->IsOut_trade_noSet())
 		{
 			throw new WxPayException("缺少统一支付接口必填参数out_trade_no！");
-		}else if(!$inputObj->IsBodySet())
+		}
+        else if(!$inputObj->IsBodySet())
 		{
 			throw new WxPayException("缺少统一支付接口必填参数body！");
-		}else if(!$inputObj->IsTotal_feeSet())
+		}
+        else if(!$inputObj->IsTotal_feeSet())
 		{
 			throw new WxPayException("缺少统一支付接口必填参数total_fee！");
-		}else if(!$inputObj->IsTrade_typeSet())
+		}
+        else if(!$inputObj->IsTrade_typeSet())
 		{
 			throw new WxPayException("缺少统一支付接口必填参数trade_type！");
 		}
-		
 		//关联参数
 		if($inputObj->GetTrade_type() == "JSAPI" && !$inputObj->IsOpenidSet())
 		{
@@ -48,26 +50,23 @@ class WxPayApi
 		}
 		if($inputObj->GetTrade_type() == "NATIVE" && !$inputObj->IsProduct_idSet())
 		{
-			throw new WxPayException("统一支付接口中，缺少必填参数product_id！trade_type为JSAPI时，product_id为必填参数！");
+			throw new WxPayException("统一支付接口中，缺少必填参数product_id！trade_type为NATIVE时，product_id为必填参数！");
 		}
-		
 		//异步通知url未设置，则使用配置文件中的url
 		if(!$inputObj->IsNotify_urlSet())
 		{
 			$inputObj->SetNotify_url(WxPayConfig::$NOTIFY_URL);//异步通知url
 		}
-		
 		$inputObj->SetAppid(WxPayConfig::$APPID);//公众账号ID
 		$inputObj->SetMch_id(WxPayConfig::$MCHID);//商户号
         //微信统一下单接口只能使用ipv4地址，对ipv6地址做兼容
-        $ipv4 = np_get_ip();
+        $ipv4 = self::getIP();
         $ip_arr = explode(':', $ipv4);
         if(count($ip_arr) > 1)
         {
             $ipv4 = $ip_arr[count($ip_arr)-1];
         }
 		$inputObj->SetSpbill_create_ip($ipv4);//终端ip
-		//$inputObj->SetSpbill_create_ip("1.1.1.1");  	    
 		$inputObj->SetNonce_str(self::getNonceStr());//随机字符串
 		
 		//签名
@@ -75,9 +74,7 @@ class WxPayApi
 		$xml = $inputObj->ToXml();
 		
 		$startTimeStamp = self::getMillisecond();//请求开始时间
-        nl_log_v2_info('WxPay', '发起统一下单请求：'.$xml." 超时时间 = ".$timeOut);
 		$response = self::postXmlCurl($xml, $url, false, $timeOut);
-        nl_log_v2_info('WxPay', '发起统一下单请求返回结果：'.$response);
 		$result = WxPayResults::Init($response);
 		self::reportCostTime($url, $startTimeStamp, $result);//上报请求花费时间
 		
@@ -91,15 +88,15 @@ class WxPayApi
 	 * @param WxPayOrderQuery $inputObj
 	 * @param int $timeOut
 	 * @throws WxPayException
-	 * @return 成功时返回，其他抛异常
+	 * @return string 成功时返回，其他抛异常
 	 */
 	public static function orderQuery($inputObj, $timeOut = 6)
 	{
-		$pay_url = self::getWeixinServerUrl();
-		$url = $pay_url . '/pay/orderquery';
+		$url = self::getWeixinServerUrl() . '/pay/orderquery';
 
 		//检测必填参数
-		if(!$inputObj->IsOut_trade_noSet() && !$inputObj->IsTransaction_idSet()) {
+		if(!$inputObj->IsOut_trade_noSet() && !$inputObj->IsTransaction_idSet())
+        {
 			throw new WxPayException("订单查询接口中，out_trade_no、transaction_id至少填一个！");
 		}
 		$inputObj->SetAppid(WxPayConfig::$APPID);//公众账号ID
@@ -124,28 +121,32 @@ class WxPayApi
 	 * @param WxPayCloseOrder $inputObj
 	 * @param int $timeOut
 	 * @throws WxPayException
-	 * @return 成功时返回，其他抛异常
+	 * @return string 成功时返回，其他抛异常
 	 */
 	public static function closeOrder($inputObj, $timeOut = 6)
 	{
-		$pay_url = self::getWeixinServerUrl();
-		$url = $pay_url . '/pay/closeorder';
-
+        //下单基地址
+		$url = self::getWeixinServerUrl() . '/pay/closeorder';
 		//检测必填参数
-		if(!$inputObj->IsOut_trade_noSet()) {
+		if(!$inputObj->IsOut_trade_noSet())
+        {
 			throw new WxPayException("订单查询接口中，out_trade_no必填！");
 		}
-		$inputObj->SetAppid(WxPayConfig::$APPID);//公众账号ID
-		$inputObj->SetMch_id(WxPayConfig::$MCHID);//商户号
-		$inputObj->SetNonce_str(self::getNonceStr());//随机字符串
-		
-		$inputObj->SetSign();//签名
+        //公众账号ID
+		$inputObj->SetAppid(WxPayConfig::$APPID);
+        //商户号
+		$inputObj->SetMch_id(WxPayConfig::$MCHID);
+        //随机字符串
+		$inputObj->SetNonce_str(self::getNonceStr());
+        //签名
+		$inputObj->SetSign();
 		$xml = $inputObj->ToXml();
-		
-		$startTimeStamp = self::getMillisecond();//请求开始时间
+        //请求开始时间
+		$startTimeStamp = self::getMillisecond();
 		$response = self::postXmlCurl($xml, $url, false, $timeOut);
 		$result = WxPayResults::Init($response);
-		self::reportCostTime($url, $startTimeStamp, $result);//上报请求花费时间
+        //上报请求花费时间
+		self::reportCostTime($url, $startTimeStamp, $result);
 		
 		return $result;
 	}
@@ -158,23 +159,31 @@ class WxPayApi
 	 * @param WxPayRefund $inputObj
 	 * @param int $timeOut
 	 * @throws WxPayException
-	 * @return 成功时返回，其他抛异常
+	 * @return string 成功时返回，其他抛异常
 	 */
 	public static function refund($inputObj, $timeOut = 6)
 	{
-		$pay_url = self::getWeixinServerUrl();
-		$url = $pay_url . '/secapi/pay/refund';
+		$url = self::getWeixinServerUrl() . '/secapi/pay/refund';
 
 		//检测必填参数
-		if(!$inputObj->IsOut_trade_noSet() && !$inputObj->IsTransaction_idSet()) {
+		if(!$inputObj->IsOut_trade_noSet() && !$inputObj->IsTransaction_idSet())
+        {
 			throw new WxPayException("退款申请接口中，out_trade_no、transaction_id至少填一个！");
-		}else if(!$inputObj->IsOut_refund_noSet()){
+		}
+        else if(!$inputObj->IsOut_refund_noSet())
+        {
 			throw new WxPayException("退款申请接口中，缺少必填参数out_refund_no！");
-		}else if(!$inputObj->IsTotal_feeSet()){
+		}
+        else if(!$inputObj->IsTotal_feeSet())
+        {
 			throw new WxPayException("退款申请接口中，缺少必填参数total_fee！");
-		}else if(!$inputObj->IsRefund_feeSet()){
+		}
+        else if(!$inputObj->IsRefund_feeSet())
+        {
 			throw new WxPayException("退款申请接口中，缺少必填参数refund_fee！");
-		}else if(!$inputObj->IsOp_user_idSet()){
+		}
+        else if(!$inputObj->IsOp_user_idSet())
+        {
 			throw new WxPayException("退款申请接口中，缺少必填参数op_user_id！");
 		}
 		$inputObj->SetAppid(WxPayConfig::$APPID);//公众账号ID
@@ -201,18 +210,18 @@ class WxPayApi
 	 * @param WxPayRefundQuery $inputObj
 	 * @param int $timeOut
 	 * @throws WxPayException
-	 * @return 成功时返回，其他抛异常
+	 * @return string 成功时返回，其他抛异常
 	 */
 	public static function refundQuery($inputObj, $timeOut = 6)
 	{
-		$pay_url = self::getWeixinServerUrl();
-		$url = $pay_url . '/pay/refundquery';
+		$url = self::getWeixinServerUrl()  . '/pay/refundquery';
 
 		//检测必填参数
 		if(!$inputObj->IsOut_refund_noSet() &&
 			!$inputObj->IsOut_trade_noSet() &&
 			!$inputObj->IsTransaction_idSet() &&
-			!$inputObj->IsRefund_idSet()) {
+			!$inputObj->IsRefund_idSet())
+        {
 			throw new WxPayException("退款查询接口中，out_refund_no、out_trade_no、transaction_id、refund_id四个参数必填一个！");
 		}
 		$inputObj->SetAppid(WxPayConfig::$APPID);//公众账号ID
@@ -236,15 +245,15 @@ class WxPayApi
 	 * @param WxPayDownloadBill $inputObj
 	 * @param int $timeOut
 	 * @throws WxPayException
-	 * @return 成功时返回，其他抛异常
+	 * @return string 成功时返回，其他抛异常
 	 */
 	public static function downloadBill($inputObj, $timeOut = 6)
 	{
-		$pay_url = self::getWeixinServerUrl();
-		$url = $pay_url . '/pay/downloadbill';
+		$url = self::getWeixinServerUrl() . '/pay/downloadbill';
 
 		//检测必填参数
-		if(!$inputObj->IsBill_dateSet()) {
+		if(!$inputObj->IsBill_dateSet())
+        {
 			throw new WxPayException("对账单接口中，缺少必填参数bill_date！");
 		}
 		$inputObj->SetAppid(WxPayConfig::$APPID);//公众账号ID
@@ -267,7 +276,7 @@ class WxPayApi
 	 * 由商户收银台或者商户后台调用该接口发起支付。
 	 * WxPayWxPayMicroPay中body、out_trade_no、total_fee、auth_code参数必填
 	 * appid、mchid、spbill_create_ip、nonce_str不需要填入
-	 * @param WxPayWxPayMicroPay $inputObj
+	 * @param object $inputObj
 	 * @param int $timeOut
 	 */
 	public static function micropay($inputObj, $timeOut = 10)
@@ -343,7 +352,7 @@ class WxPayApi
 	 * @param WxPayReport $inputObj
 	 * @param int $timeOut
 	 * @throws WxPayException
-	 * @return 成功时返回，其他抛异常
+	 * @return string 成功时返回，其他抛异常
 	 */
 	public static function report($inputObj, $timeOut = 1)
 	{
@@ -383,7 +392,7 @@ class WxPayApi
 	 * @param WxPayBizPayUrl $inputObj
 	 * @param int $timeOut
 	 * @throws WxPayException
-	 * @return 成功时返回，其他抛异常
+	 * @return string 成功时返回，其他抛异常
 	 */
 	public static function bizpayurl($inputObj, $timeOut = 6)
 	{
@@ -410,7 +419,7 @@ class WxPayApi
 	 * @param WxPayShortUrl $inputObj
 	 * @param int $timeOut
 	 * @throws WxPayException
-	 * @return 成功时返回，其他抛异常
+	 * @return string 成功时返回，其他抛异常
 	 */
 	public static function shorturl($inputObj, $timeOut = 6)
 	{
@@ -439,7 +448,7 @@ class WxPayApi
  	/**
  	 * 
  	 * 支付结果通用通知
- 	 * @param function $callback
+ 	 * @param string $callback
  	 * 直接回调函数使用方法: notify(you_function);
  	 * 回调类成员函数方法:notify(array($this, you_function));
  	 * $callback  原型为：function function_name($data){}
@@ -462,7 +471,7 @@ class WxPayApi
 	 * 
 	 * 产生随机字符串，不长于32位
 	 * @param int $length
-	 * @return 产生的随机字符串
+	 * @return string 产生的随机字符串
 	 */
 	public static function getNonceStr($length = 32) 
 	{
@@ -569,8 +578,6 @@ class WxPayApi
 			curl_setopt($ch,CURLOPT_PROXYPORT, WxPayConfig::CURL_PROXY_PORT);
 		}
 		curl_setopt($ch,CURLOPT_URL, $url);
-//        curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,TRUE);
-//        curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,2);//严格校验
         curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,FALSE);
         curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,FALSE);
 		//设置header
@@ -592,7 +599,6 @@ class WxPayApi
 		curl_setopt($ch, CURLOPT_POST, TRUE);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
 		//运行curl
-        nl_log_v2_info('WxPay', "发起post请求");
 		$data = curl_exec($ch);
 		//返回结果
 		if($data){
@@ -624,116 +630,107 @@ class WxPayApi
 		return $time;
 	}
 
-	/**
-	 * 根据IP获取微信支付服务器地址
-	 * getWeixinServerUrl_old()为5.5之前的逻辑
-	 * getWeixinServerUrl()为5.5重写的逻辑
-	 */
-	private static function getWeixinServerUrl_old()
-	{
-		$ip = np_get_ip();
-		include_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'intel_epg' . DIRECTORY_SEPARATOR . 'ip.class.php';
-		// 读取配置数据
-		$weixin_pay_url_config = get_config_v2('g_pay_weixin_pay_server_url');
-		//nl_log_to_syslog::write_info_json_log('1102001000',array('detail' => '获取到的微信下订单地址配置为' . json_encode($weixin_pay_url_config)));
-		$dc = nl_get_dc(array(
-			"db_policy" => NL_DB_WRITE,
-			"cache_policy" => NP_KV_CACHE_TYPE_MEMCACHE
-		));
-		$user_ip_long = ip2long($ip);
-		// 获取CMS IP黑名单数据
-		$ip_data = nl_ip::get_ip_list($dc,array('nns_ip' => $user_ip_long . '#' . $user_ip_long),null,null,true);
-		//nl_log_to_syslog::write_info_json_log('1102001000',array('detail' => '根据用户IP获取地区信息结果' . json_encode($ip_data)));
-		if (!is_array($ip_data))
-		{
-			//nl_log_to_syslog::write_info_json_log('1102001000',array('detail' => '根据用户IP获取地区信息结果为空'));
-			if (!isset($weixin_pay_url_config['default']) || empty($weixin_pay_url_config['default']))
-			{
-				//nl_log_to_syslog::write_info_json_log('1102001000',array('detail' => '没有读取到微信支付地址配置文件，统一使用大陆下单地址'));
-				$pay_url = 'https://api.mch.weixin.qq.com';
-			}
-			else
-			{
-				//nl_log_to_syslog::write_info_json_log('1102001000',array('detail' => '读取到微信支付地址配置文件，使用默认下单地址'));
-				$pay_url = $weixin_pay_url_config['default'];
-			}
-		}
-		else
-		{
-			//nl_log_to_syslog::write_info_json_log('1102001000',array('detail' => '根据用户IP获取地区信息结果存在，匹配地区开始'));
-			foreach($ip_data as $key => $ip_val)
-			{
-				$pay_weixin_pay_area_relation = get_config_v2('g_pay_weixin_pay_area_relation');
-				//nl_log_to_syslog::write_info_json_log('1102001000',array('detail' => '获取地区配置结果' . json_encode($pay_weixin_pay_area_relation)));
-				if (is_array($pay_weixin_pay_area_relation) && is_array($weixin_pay_url_config))
-				{
-					foreach ($pay_weixin_pay_area_relation as $key1 => $area_val)
-					{
-						// 截取地区码前三位
-						$area_code = substr($ip_val['nns_area_code'], 0, 3);
-						$area_val_arr = explode(',', $area_val);
-						if (in_array($area_code, $area_val_arr))
-						{
-
-							$pay_url = $weixin_pay_url_config[$key1];
-							break;
-						}
-						else
-						{
-							$pay_url = $weixin_pay_url_config['other'];
-						}
-					}
-				}
-				else
-				{
-					$pay_url = "https://api.mch.weixin.qq.com";
-				}
-			}
-		}
-
-		if (!empty($pay_url))
-		{
-			return $pay_url;
-		}
-		/*
-		$get_str = (file_get_contents($pay_url));
-		if (preg_match('/Powered By Tencent/', $get_str))
-		{
-			return $pay_url;
-		}
-		*/
-
-		$pay_url = "https://api.mch.weixin.qq.com";
-		return $pay_url;
-	}
-
 	private static function getWeixinServerUrl()
 	{
-		// 读取配置数据
-		$weixin_pay_url_config = get_config_v2('g_pay_weixin_pay_server_url');
-		nl_log_to_syslog::write_info_json_log('1104001000', array('detail' => '获取到的微信下订单地址配置为' . json_encode($weixin_pay_url_config)));
-
-		if (!isset($weixin_pay_url_config['default']) || empty($weixin_pay_url_config['default']))
-		{
-			$pay_url = "https://api.mch.weixin.qq.com";
-			nl_log_to_syslog::write_info_json_log('1104001000', array('detail' => '后台未配置下单地址，系统默认订单地址为:' . $pay_url ));
-		}
-		else
-		{
-			$pay_url = $weixin_pay_url_config['default'];
-			//判断地址是否正确
-			$weixin_pay_url_config_arr = get_config_v2('g_pay_weixin_pay_server_url_arr');
-			nl_log_to_syslog::write_info_json_log('1104001000', array('detail' => '配置文件aaa_config中获取到的微信下订单地址为' . json_encode($weixin_pay_url_config_arr)));
-			if (is_array($weixin_pay_url_config_arr) && !in_array($pay_url, $weixin_pay_url_config_arr))
-			{
-				$pay_url = "https://api.mch.weixin.qq.com";
-				nl_log_to_syslog::write_info_json_log('1104001000', array('detail' => '后台配置默认下单地址不在aaa_config数组里(地址非法)，使用默认地址' . $pay_url));
-			}
-		}
-
-		nl_log_to_syslog::write_info_json_log('1104001000',array('detail' => '最后获取到的微信下订单地址为' . $pay_url));
-		return $pay_url;
+        //TODO 这个需要加到配置文件里面去
+		return 'https://api.mch.weixin.qq.com';
 	}
+
+    /**
+     * 获取IP地址
+     */
+    private static function getIP()
+    {
+        if (isset($_SERVER))
+        {
+            if (isset($_SERVER['HTTP_CDN_SRC_IP']) && !empty($_SERVER['HTTP_CDN_SRC_IP'])){
+                $ip=$_SERVER['HTTP_CDN_SRC_IP'];
+                $ip = trim($ip);
+                if (self::checkIpValid($ip)) return $ip;
+            }
+
+            if (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && !empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+                $ips = $_SERVER['HTTP_X_FORWARDED_FOR'];
+                $ips = urldecode($ips);
+                $arr = explode(',', $ips);
+                /* 取X-Forwarded-For中第一个非unknown的有效IP字符串 */
+                foreach ($arr as $ip)
+                {
+                    $ip = trim($ip);
+
+                    if ($ip != 'unknown' && !empty($ip))
+                    {
+                        if (self::checkIpValid($ip)) return $ip;
+                    }
+                }
+            }
+
+            if (isset($_SERVER['HTTP_CLIENT_IP']) && !empty($_SERVER['HTTP_CLIENT_IP']))
+            {
+                $ip=$_SERVER['HTTP_CLIENT_IP'];
+                $ip = trim($ip);
+                if (self::checkIpValid($ip)) return $ip;
+            }
+
+            if (isset($_SERVER['REMOTE_ADDR']) && !empty($_SERVER['REMOTE_ADDR']))
+            {
+                $ip=$_SERVER['REMOTE_ADDR'];
+                $ip = trim($ip);
+                if (self::checkIpValid($ip)) return $ip;
+            }
+        }
+        else
+        {
+            if (getenv('HTTP_X_FORWARDED_FOR'))
+            {
+                $ips = getenv('HTTP_X_FORWARDED_FOR');
+                $ips = urldecode($ips);
+                $arr = explode(',', $ips);
+
+                /* 取X-Forwarded-For中第一个非unknown的有效IP字符串 */
+                foreach ($arr as $ip)
+                {
+                    $ip = trim($ip);
+
+                    if ($ip != 'unknown' && !empty($ip))
+                    {
+                        if (self::checkIpValid($ip)) return $ip;
+                    }
+                }
+            }
+            if (getenv('HTTP_CLIENT_IP'))
+            {
+                $ip = getenv('HTTP_CLIENT_IP');
+                $ip = trim($ip);
+                if (self::checkIpValid($ip)) return $ip;
+            }
+            if (getenv('REMOTE_ADDR'))
+            {
+                $ip = getenv('REMOTE_ADDR');
+                $ip = trim($ip);
+                if (self::checkIpValid($ip)) return $ip;
+            }
+        }
+
+        return '0.0.0.0';
+    }
+
+    /**
+     * IP类型
+     */
+    private static function checkIpValid($ip)
+    {
+        $bool = filter_var($ip,FILTER_VALIDATE_IP, FILTER_FLAG_IPV4|FILTER_FLAG_IPV6);
+        //ipv4 和ipv6都不是返回false
+        if(!$bool)
+        {
+            return FALSE;
+        }
+        else
+        {
+            return TRUE;
+        }
+    }
 
 
 	/**
@@ -752,7 +749,6 @@ class WxPayApi
 	{
 		$pay_url = self::getWeixinServerUrl();
 		$url = $pay_url . '/pay/contractorder';
-		nl_log_v2_info('WxPay', '获取的微信支付中签约接口URL：'.$url);
 
 		// 检测必填参数
 		if(!$inputObj->IsOut_trade_noSet())
@@ -824,8 +820,7 @@ class WxPayApi
 		else
 		{
 			//微信统一下单接口只能使用ipv4地址，对ipv6地址做兼容
-			$ipv4 = np_get_ip();
-			nl_log_v2_info('WxPay', '获取的客户端ip地址：'.$ipv4);
+			$ipv4 = self::getIP();
 			$ip_arr = explode(':', $ipv4);
 			if(count($ip_arr) > 1)
 			{
@@ -845,9 +840,7 @@ class WxPayApi
 		$xml = $inputObj->ToXml();
 
 		$startTimeStamp = self::getMillisecond();//请求开始时间
-		nl_log_v2_info('WxPay', '发起支付中签约接口中请求：'.$xml." 超时时间 = ".$timeOut);
 		$response = self::postXmlCurl($xml, $url, false, $timeOut);
-		nl_log_v2_info('WxPay', '发起支付中签约接口中请求返回结果：'.$response);
 		$result = WxPayResults::Init($response);
 		self::reportCostTime($url, $startTimeStamp, $result);//上报请求花费时间
 		return $result;
@@ -869,7 +862,6 @@ class WxPayApi
 	{
 		$pay_url = self::getWeixinServerUrl();
 		$url = $pay_url . '/papay/deletecontract';
-		nl_log_v2_info('WxPay', '获取的微信解约接口地址URL：'.$url);
 
 		// 检测必填参数
 		if(!$inputObj->IsContract_termination_remarkSet())
@@ -895,9 +887,7 @@ class WxPayApi
 		$xml = $inputObj->ToXml();
 
 		$startTimeStamp = self::getMillisecond();//请求开始时间
-		nl_log_v2_info('WxPay', '发起解约中请求：'.$xml." 超时时间 = ".$timeOut);
 		$response = self::postXmlCurl($xml, $url, false, $timeOut);
-		nl_log_v2_info('WxPay', '发起解约请求返回结果：'.$response);
 		$result = WxPayResults::Init($response);
 		self::reportCostTime($url, $startTimeStamp, $result);//上报请求花费时间
 		return $result;
@@ -911,13 +901,12 @@ class WxPayApi
 	 * @param WxPayPapPayApply $inputObj
 	 * @param int $timeOut
 	 * @throws WxPayException
-	 * @return 成功时返回，其他抛异常
+	 * @return string 成功时返回，其他抛异常
 	 */
 	public static function papPayApply($inputObj, $timeOut = 10)
 	{
 		$pay_url = self::getWeixinServerUrl();
 		$url = $pay_url . '/pay/pappayapply';
-		nl_log_v2_info('WxPay', '获取的申请扣款接口URL：'.$url);
 		//检测必填参数
 		if(!$inputObj->IsOut_trade_noSet())
 		{
@@ -943,8 +932,7 @@ class WxPayApi
 		$inputObj->SetMch_id(WxPayConfig::$MCHID);//商户号
 
 		//微信统一下单接口只能使用ipv4地址，对ipv6地址做兼容
-		$ipv4 = np_get_ip();
-		nl_log_v2_info('WxPay', '获取的客户端ip地址：'.$ipv4);
+		$ipv4 = self::getIP();
 		$ip_arr = explode(':', $ipv4);
 		if(count($ip_arr) > 1)
 		{
@@ -965,9 +953,7 @@ class WxPayApi
 		$xml = $inputObj->ToXml();
 
 		$startTimeStamp = self::getMillisecond();//请求开始时间
-		nl_log_v2_info('WxPay', '发起申请扣款请求：'.$xml." 超时时间 = ".$timeOut);
 		$response = self::postXmlCurl($xml, $url, false, $timeOut);
-		nl_log_v2_info('WxPay', '发起申请扣款返回结果：'.$response);
 		$result = WxPayResults::Init($response);
 		self::reportCostTime($url, $startTimeStamp, $result);//上报请求花费时间
 
