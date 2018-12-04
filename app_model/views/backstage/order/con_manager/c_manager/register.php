@@ -48,12 +48,13 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                 <div class="sign-up">
                     <input type="reset" value="重置">
                     <input type="submit" value="注册">
+
                 </div>
                 <div class="clearfix"></div>
 
                 <div class="new">
-                    <p style="float: left"><label class="checkbox11"><input type="checkbox" name="checkbox"><i> </i>同意约定条款</label></p>
-                    <p class="sign" style="float: right">已经注册了? <a href="login.html">登陆</a></p>
+                    <p><label class="checkbox11"><input type="checkbox" name="checkbox"><i> </i>同意约定条款</label></p>
+                    <p class="sign">已经注册了? <a href="login.html">登陆</a></p>
                     <div class="clearfix"></div>
                 </div>
             </form>

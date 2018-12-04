@@ -48,8 +48,8 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                 <div class="clearfix"></div>
 
                 <div class="new">
-                    <p style="float: left"><label class="checkbox11"><input type="checkbox" name="checkbox"><i> </i>是否记住密码?</label></p>
-                    <p class="sign" style="float: right">还没有账号?<a href="">注册</a></p>
+                    <p><label class="checkbox11"><input type="checkbox" name="checkbox"><i> </i>是否记住密码?</label></p>
+                    <p class="sign">还没有账号?<a href="">注册</a></p>
                     <div class="clearfix"></div>
                 </div>
             </form>
