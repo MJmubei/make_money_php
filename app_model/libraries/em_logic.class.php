@@ -59,7 +59,6 @@ class em_logic
             }
             return $flag ? $this->_check_params($result, $define_params) ? $result : $arr_in_params : $result;
         }
-
         foreach ($in_params as $key=>$val)
         {
             $result = $this->_except_useless_params($this->make_em_pre($val),$define_params);
@@ -510,57 +509,10 @@ class em_logic
         }
         return em_return::_return_right_data('ok',isset($data['data_info']) ? $data['data_info'] : null,$mix_limit);
     }
-
-    /**
-     * 查询一条数据
-     * @param $params
-     * @param string $table
-     * @return array
-     */
-    public function make_query_only_sql($params, $table='')
+    
+    public function make_query_only_sql($params,$limit)
     {
-        if(isset($table) && strlen($table) >0)
-        {
-            $this->str_base_table = $table;
-        }
-        $wh = array ();
-        $where = null;
-        if (is_array($params))
-        {
-            foreach ($params as $k => $v)
-            {
-                if(is_string($v) || is_int($v))
-                {
-                    $wh[] = "$k='$v'";
-                }
-                else if(is_array($v))
-                {
-                    if(!empty($v))
-                    {
-                        $wh[] = "$k in ('" . implode("','", $v) . "') ";
-                    }
-                }
-            }
-            !empty($wh) && $where = implode(' and ', $wh);
-        }
-        else if(is_string($params) && strlen($params) >0)
-        {
-            $where = $params;
-        }
-        if (is_string($where) && $where)
-        {
-            $where = "where $where";
-        }
-        $limit = " limit 1";
-
-        $sql = "select * from {$this->str_base_table} $where ".$limit;
-
-        $data =  $this->_make_query_sql($sql);
-        if($data['ret'] !=0)
-        {
-            return em_return::_return_error_data($data);
-        }
-        return em_return::_return_right_data('ok',isset($data['data_info'][0]) ? $data['data_info'][0] : null);
+        
     }
     
     /**
