@@ -24,20 +24,7 @@
     					<div class="graph-2 general">
 							<div class="grid-1">
 							   <form class="form-horizontal">
-							        <div class="form-group">
-										<label class="col-md-2 control-label">项目标示</label>
-										<div class="col-md-8">
-											<div class="input-group input-icon right">
-												<span class="input-group-addon">
-													<i class="fa fa-file-text-o"></i>
-												</span>
-												<input id="cms_mark" name="cms_mark" class="form-control1 icon" type="text" value="<?php echo $data_info[0]['cms_name'];?>" placeholder="">
-											</div>
-										</div>
-										<div class="col-sm-2">
-											<p class="help-block">With tooltip</p>
-										</div>
-									</div>
+							        <input id="cms_id" name="cms_id" class="form-control1 icon" type="hidden" value="<?php echo $data_info[0]['cms_id'];?>" placeholder="">
 									<div class="form-group">
 										<label class="col-md-2 control-label">项目名称</label>
 										<div class="col-md-8">

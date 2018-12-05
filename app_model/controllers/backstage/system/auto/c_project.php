@@ -17,6 +17,14 @@ class c_project extends CI_Controller
     }
     
     /**
+     * 列表页
+     */
+    public function tree()
+    {
+        $this->load_view_file(null,__LINE__);
+    }
+    
+    /**
      * 修改页面
      */
     public function add()
@@ -44,7 +52,7 @@ class c_project extends CI_Controller
         $cms_id = isset($this->arr_params['cms_id']) ? $this->arr_params['cms_id'] : null;
         if(strlen($cms_id) <1)
         {
-            return em_return::return_data(1,'修改参数条件为空');
+            $this->load_view_file(em_return::return_data(1,'修改参数条件为空'),__LINE__);
         }
         unset($this->arr_params['cms_id']);
         $edit_params = array(
