@@ -71,7 +71,13 @@ class system_project extends system_project_base
     public function query($arr_params=null)
     {
         $arr_params_where = $this->make_em_pre(isset($arr_params['where']) ? $arr_params['where'] : null);
+        $arr_params_where_like = $this->make_em_pre(isset($arr_params['where_like']) ? $arr_params['where_like'] : null);
+        $arr_params_where_left_like = $this->make_em_pre(isset($arr_params['where_left_like']) ? $arr_params['where_left_like'] : null);
+        $arr_params_where_right_like = $this->make_em_pre(isset($arr_params['where_right_like']) ? $arr_params['where_right_like'] : null);
         $arr_params_where = $this->_except_empty_data($arr_params_where);
+        $arr_params_where_like = $this->_except_empty_data($arr_params_where_like);
+        $arr_params_where_left_like = $this->_except_empty_data($arr_params_where_left_like);
+        $arr_params_where_right_like = $this->_except_empty_data($arr_params_where_right_like);
         $arr_params_where = $this->_check_query_params($this->table_define, $arr_params_where);
         if($arr_params_where['ret'] !=0)
         {

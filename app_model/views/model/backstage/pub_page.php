@@ -86,6 +86,11 @@
 	</form>
 </div>
 <script type="text/javascript">
+    $(function(){
+    	$('#button_query_list').click(function(){
+    		url_refresh();
+        });
+    });
 	$("#location_cms_page_size").change(function(){
 	  	var value = $(this).children('option:selected').val();
 	  	$("#cms_page_size").val(value);

@@ -28,15 +28,7 @@
 								<div class="form-group">
 									<label for="disabledinput" class="col-sm-1 control-label">名称</label>
 									<div class="col-sm-2">
-										<input type="text" class="form-control1" name="TABLE_NAME" id="focusedinput" value="<?php echo isset($arr_params['TABLE_NAME']) ? $arr_params['TABLE_NAME'] : '';?>">
-									</div>
-									<label for="disabledinput" class="col-sm-1 control-label">类型</label>
-									<div class="col-sm-2">
-										<input type="text" class="form-control1" id="focusedinput" value="<?php echo isset($arr_params['TABLE_TYPE']) ? $arr_params['TABLE_TYPE'] : '';?>">
-									</div>
-									<label for="disabledinput" class="col-sm-1 control-label">引擎</label>
-									<div class="col-sm-2">
-										<input type="text" class="form-control1" id="focusedinput" value="<?php echo isset($arr_params['ENGINE']) ? $arr_params['ENGINE'] : '';?>">
+										<input type="text" class="form-control1" name="cms_name" id="focusedinput" value="<?php echo isset($arr_params['cms_name']) ? $arr_params['cms_name'] : '';?>">
 									</div>
 									<div class="col-sm-1">
     									<button class="btn btn-success" type="button" id="button_query_list">
@@ -90,12 +82,6 @@
             												    <i class="fa fa-chevron-down icon_8"></i>
             											    </a>
             												<ul class="dropdown-menu float-right">
-            												    <li>
-            													   <a href="../../../system/auto/c_project/auto_make_project" title=""> 
-            													       <i class="fa fa-book icon_9"></i> 
-            												                  生成logic
-            													   </a>
-            													</li>
             													<li>
             													   <a href="../../../system/auto/c_project/edit?cms_id=<?php echo $val['cms_id'];?>" title=""> 
             													       <i class="fa fa-pencil-square-o icon_9"></i> 
@@ -103,8 +89,8 @@
             													   </a>
             													</li>
             													<li>
-            													    <a href="#" class="font-red" title="">
-            													       <i class="fa fa-trash-o" icon_9=""></i> 
+            													    <a href="../../../system/auto/c_project/delete?cms_id=<?php echo $val['cms_id'];?>" class="font-red" title="">
+            													       <i class="fa fa-trash-o icon_9""></i> 
             													            删除
             													    </a>
             													</li>
@@ -135,7 +121,9 @@
 									<i class="fa fa-times-circle"> 取消</i>
 								</button>
 								<button class="btn purple" type="button" data-toggle="modal" data-target="#myModal">
-									<i class="fa fa-book"> 添加</i>
+								    <a href="../../../system/auto/c_project/add" title="">
+									   <i class="fa fa-book"> 添加</i>
+									</a>
 								</button>
 								<button class="btn purple" type="button" data-toggle="modal" data-target="#myModal1">
 									<i class="fa fa-edit"> 生成项目 </i>

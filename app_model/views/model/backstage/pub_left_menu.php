@@ -10,7 +10,7 @@
 	<!--/down-->
 	<div class="down">
 		<a href="index.html"><img src="images/admin.jpg"></a> <a
-			href="index.html"><span class=" name-caret">Jasmin Leo</span></a>
+			href="index.html"><span class="name-caret">Jasmin Leo</span></a>
 		<p>System Administrator in Company</p>
 		<ul>
 			<li><a class="tooltips" href="index.html"><span>Profile</span><i
