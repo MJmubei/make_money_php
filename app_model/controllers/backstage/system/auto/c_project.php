@@ -12,9 +12,23 @@ class c_project extends CI_Controller
     public function index()
     {
         $this->_init_page();
-        $this->load_view_file($this->auto_load_table('system','auto','c_project','system_project', 'query'),__LINE__);
+        $where_params = array('where'=>($this->arr_params));
+        $this->load_view_file($this->auto_load_table('system','auto','c_project','system_project', 'query',$where_params),__LINE__);
     }
     
+    /**
+     * 修改页面
+     */
+    public function add()
+    {
+        $this->load_view_file($this->arr_params,__LINE__);
+    }
+    
+    public function do_add()
+    {
+        $insert_params = array('insert'=>($this->arr_params));
+        $this->load_view_file($this->auto_load_table('system','auto','c_project','system_project', 'add',$insert_params),__LINE__);
+    }
     
     /**
      * 修改页面
@@ -42,6 +56,13 @@ class c_project extends CI_Controller
         $this->load_view_file($this->auto_load_table('system','auto','c_project','system_project', 'edit',$edit_params),__LINE__);
     }
     
+    /**
+     * delete页面
+     */
+    public function delete()
+    {
+        $this->load_view_file($this->arr_params,__LINE__);
+    }
     
     /**
      * 自动生成项目
