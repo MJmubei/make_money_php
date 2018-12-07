@@ -142,19 +142,30 @@ class em_return
      *            分页数据
      * @param array $other_data
      *            其他扩展数据
-     * @return array('ret'=>'状态码','reason'=>'原因','data'=>'数据')
+     * @param string $format
+     *            其他扩展数据
+     * @return array('ret'=>'状态码','reason'=>'原因','data'=>'数据')|json格式
      * @author liangpan
      *         @date 2015-09-07
      */
-    public static function return_data($ret, $reason = null, $data = null, $page_data = null, $other_data = null)
+    public static function return_data($ret, $reason = null, $data = null, $page_data = null, $other_data = null, $format = 'array')
     {
-        return array(
+        $result = array(
             'ret' => (int) $ret,
             'reason' => $reason,
             'data_info' => $data,
             'page_info' => $page_data,
             'other_info' => $other_data
         );
+        if ($format == 'json')
+        {
+            $last_result = json_encode($result);
+        }
+        else
+        {
+            $last_result = $result;
+        }
+        return $last_result;
     }
     
     

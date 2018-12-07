@@ -759,13 +759,11 @@ class em_logic
         unset($arr_rule,$_params_key,$key,$_params);
         return em_return::return_data(0,'ok',$str_in_param);
     }
-    
-    
-    
+
     /**
      * 添加数据库参数前缀
-     * @param string $params
-     * @return NULL|multitype:unknown
+     * @param null $params
+     * @return array
      * @author liangpan
      * @date 2016-09-24
      */
