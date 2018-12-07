@@ -61,7 +61,9 @@
     									       {
 								    ?>
         										<tr class='odd selected'>
-        										    <td scope="row"><input type="checkbox" value="<?php echo $val['cms_id'];?>"/></td>
+        										    <td>
+        										    <div id="system_select_checkbox"><input type="checkbox"  value="<?php echo $val['cms_id'];?>"></div>
+        										    </td>
         										    <?php if($val['cms_name'] == $val['cms_mark']){?>
         										    
         											<td><font color='red'><?php echo $val['cms_name'];?></font></td>
@@ -142,9 +144,10 @@
 										</div>
 									</div>
 								</div>
-								<button class="btn red six" type="button">
+								<button class="btn red six" type="button" id="pre-system-button-submit-add" >
 									<i class="fa fa-trash-o"> 删除</i>
 								</button>
+		                        <?php //include_once dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/model/backstage/pub_ajax_delete.php';?>
 							</div>
 							<div class="clearfix"></div>
 						</div>

@@ -1,93 +1,9 @@
 <div class="header-section">
 	<!--menu-right-->
 	<div class="top_menu">
-		<div class="main-search">
-			<form>
-				<input type="text" value="Search" onFocus="this.value = '';"
-					onBlur="if (this.value == '') {this.value = 'Search';}"
-					class="text" /> <input type="submit" value="" />
-			</form>
-			<div class="close">
-				<img src="images/cross.png" />
-			</div>
-		</div>
-		<div class="srch">
-			<button></button>
-		</div>
-		<script type="text/javascript">
-										 $('.main-search').hide();
-										$('button').click(function (){
-											$('.main-search').show();
-											$('.main-search text').focus();
-										}
-										);
-										$('.close').click(function(){
-											$('.main-search').hide();
-										});
-									</script>
-		<!--/profile_details-->
 		<div class="profile_details_left">
 			<ul class="nofitications-dropdown">
-				<li class="dropdown note dra-down">
-					<div id="dd" class="wrapper-dropdown-3" tabindex="1">
-						<span>Italy</span>
-						<ul class="dropdown">
-							<li><a class="deutsch">France</a></li>
-							<li><a class="english"> Italy</a></li>
-							<li><a class="espana">Brazil</a></li>
-							<li><a class="russian">Usa</a></li>
-
-						</ul>
-					</div> <script type="text/javascript">
-			
-																	function DropDown(el) {
-																		this.dd = el;
-																		this.placeholder = this.dd.children('span');
-																		this.opts = this.dd.find('ul.dropdown > li');
-																		this.val = '';
-																		this.index = -1;
-																		this.initEvents();
-																	}
-																	DropDown.prototype = {
-																		initEvents : function() {
-																			var obj = this;
-
-																			obj.dd.on('click', function(event){
-																				$(this).toggleClass('active');
-																				return false;
-																			});
-
-																			obj.opts.on('click',function(){
-																				var opt = $(this);
-																				obj.val = opt.text();
-																				obj.index = opt.index();
-																				obj.placeholder.text(obj.val);
-																			});
-																		},
-																		getValue : function() {
-																			return this.val;
-																		},
-																		getIndex : function() {
-																			return this.index;
-																		}
-																	}
-
-																	$(function() {
-
-																		var dd = new DropDown( $('#dd') );
-
-																		$(document).click(function() {
-																			// all dropdowns
-																			$('.wrapper-dropdown-3').removeClass('active');
-																		});
-
-																	});
-
-																</script>
-
-
-				</li>
-
+				
 				<li class="dropdown note"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" aria-expanded="false"><i
 						class="fa fa-envelope-o"></i> <span class="badge">3</span></a>

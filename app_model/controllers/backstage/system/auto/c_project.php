@@ -21,8 +21,30 @@ class c_project extends CI_Controller
      */
     public function tree()
     {
-        $this->load_view_file(null,__LINE__);
+        $this->load_view_file(array('menu_fenlei'=>$this->make_child()),__LINE__);
     }
+    
+    
+    public function make_child($level = 1)
+    {
+        $last_data=$temp_data=null;
+        $num = rand(1, 6);
+        if($level >3)
+        {
+            return null;
+        }
+        for ($i=0;$i<$num;$i++)
+        {
+            $last_data[] = array(
+                'text'=>$level."级菜单[{$i}]",
+                'text1111'=>$level."级菜单[{$i}]",
+                'nodes'=>$this->make_child($level+1),
+                'levels'=>$level,
+            );
+        }
+        return $last_data;
+    }
+
     
     /**
      * 修改页面
