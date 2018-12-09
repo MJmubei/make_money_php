@@ -47,7 +47,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                             <div class="msg"></div>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" id="inputEmail3" placeholder="用户名或电子邮件">
+                            <input type="email" class="form-control" id="inputEmail3" placeholder="手机号">
                             <i class="fa fa-user"></i>
                         </div>
                         <div class="form-group help">
@@ -56,11 +56,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                             <a href="#" class="fa fa-question-circle"></a>
                         </div>
                         <div class="form-group">
-                            <div class="main-checkbox">
-                                <input type="checkbox" value="None" id="checkbox1" name="check"/>
-                                <label for="checkbox1"></label>
-                            </div>
-                            <span class="text">记住密码</span>
+                            <span class="text">忘记密码？</span><a>找回密码</a>
                             <button type="submit" class="btn btn-default">登录</button>
                         </div>
                     </form>
