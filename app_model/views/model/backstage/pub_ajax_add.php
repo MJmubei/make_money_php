@@ -113,7 +113,7 @@
 						<p class="modal-body" id="system-button-submit-add-title-content"></p>
 					</div>
 					<div class="modal-footer">
-						<button id="system-button-submit-add-hidden2" type="button" class="btn btn-default close">取消</button>
+						<button id="system-button-submit-add-hidden2" type="button" class="btn btn-primary">取消</button>
 						<button id="system-button-submit-add-confirm" type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
 						<button id="system-button-submit-add-ajax" type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
 						<button id="system-button-submit-add-back" type="button" class="btn btn-primary" data-dismiss="modal">确定</button>

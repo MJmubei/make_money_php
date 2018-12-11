@@ -7,7 +7,7 @@
 <body>
    <div class="page-container">
    <!--/content-inner-->
-	<div class="left-content">
+   <div class="left-content">
 	   <div class="inner-content">
 				<!--*********** 初始化必须加载 ***************** （顶部导航栏加载） *********** 初始化必须加载 *****************   -->
 				<?php include_once dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/model/backstage/pub_top_menu.php';?>
@@ -39,10 +39,10 @@
 							</form>
 						</div>
 						<div class="view_tables">
-							<table class="table table-hover">
+							<table class="table table-hover" id="index_list">
 								<thead>
 									<tr>
-										<th><input type="checkbox"></th>
+									    <th><input type="checkbox" id="checkAll" name="checkAll" /></th>
 										<th>项目名称</th>
 										<th>联系人手机号码</th>
 										<th>联系人座机号码</th>
@@ -61,11 +61,8 @@
     									       {
 								    ?>
         										<tr class='odd selected'>
-        										    <td>
-        										    <div id="system_select_checkbox"><input type="checkbox"  value="<?php echo $val['cms_id'];?>"></div>
-        										    </td>
+        										    <td><input type="checkbox" name="checkItem" attr-key="cms_id" value="<?php echo $val['cms_id'];?>"/></td>
         										    <?php if($val['cms_name'] == $val['cms_mark']){?>
-        										    
         											<td><font color='red'><?php echo $val['cms_name'];?></font></td>
         										    <?php }else{?>
         											<td><?php echo $val['cms_name'];?></td>
@@ -85,16 +82,16 @@
             											    </a>
             												<ul class="dropdown-menu float-right">
             													<li>
-            													   <a href="../../../system/auto/c_project/edit?cms_id=<?php echo $val['cms_id'];?>" title=""> 
+            													   <a href="#" data-toggle="modal" data-target="#system-edit-modal" class="system-edit-modal-right" attr-key="cms_id" attr-value="<?php echo $val['cms_id']; ?>" class="font-red" title="">
             													       <i class="fa fa-pencil-square-o icon_9"></i> 
             												                  修改
             													   </a>
             													</li>
             													<li>
-            													    <a href="../../../system/auto/c_project/delete?cms_id=<?php echo $val['cms_id'];?>" class="font-red" title="">
+            													   <a href="#" data-toggle="modal" data-target="#system-delete-modal-right" class="system-delete-modal-right" attr-key="cms_id" attr-value="<?php echo $val['cms_id']; ?>"  class="font-red" title="">
             													       <i class="fa fa-trash-o icon_9""></i> 
             													            删除
-            													    </a>
+            													   </a>
             													</li>
             												</ul>
             											</div>
@@ -103,51 +100,16 @@
 									<?php     }
     									   }
     							     ?>
-    							     
 								</tbody>
 							</table>
 						</div>
 						<!--*********** 初始化必须加载 ***************** （分页信息） *********** 初始化必须加载 ***************** -->
 		                <?php include_once dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/model/backstage/pub_page.php';?>
 						<div class="form-body">
-						     <div class="col-md-12 form-group button-2">
-								<button class="btn blue" type="button" id="btn_tablecheckbox_check">
-									<i class="fa fa-check-circle-o"> 全选</i>
-								</button>
-								
-								<button class="btn blue" type="button" id="btn_tablecheckbox_exchange">
-									<i class="fa fa-times-circle-o"> 反选</i>
-								</button>
-								
-								<button class="btn blue" type="button" id="btn_tablecheckbox_uncheck">
-									<i class="fa fa-times-circle"> 取消</i>
-								</button>
-								<button class="btn purple" type="button" data-toggle="modal" data-target="#myModal">
-								    <a href="../../../system/auto/c_project/add" title="">
-									   <i class="fa fa-book"> 添加</i>
-									</a>
-								</button>
-								<button class="btn purple" type="button" data-toggle="modal" data-target="#myModal1">
-									<i class="fa fa-edit"> 生成项目 </i>
-								</button>
-								<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close second" data-dismiss="modal" aria-hidden="true">×</button>
-												<h2 class="modal-title">是否确认自动生成项目清单？</h2>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default" data-dismiss="modal"> 取消 </button>
-												<button type="button" class="btn btn-primary"> 确认 </button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<button class="btn red six" type="button" id="pre-system-button-submit-add" >
-									<i class="fa fa-trash-o"> 删除</i>
-								</button>
-		                        <?php //include_once dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/model/backstage/pub_ajax_delete.php';?>
+								<?php include_once dirname(__FILE__).'/add.php';?>
+								<?php include_once dirname(__FILE__).'/edit.php';?>
+								<?php include_once dirname(__FILE__).'/delete.php';?>
+								<?php include_once dirname(__FILE__).'/auto_make_project.php';?>
 							</div>
 							<div class="clearfix"></div>
 						</div>

@@ -53,7 +53,7 @@ class system_project extends system_project_base
     public function delete($arr_params=null)
     {
         $arr_params_where = $this->make_em_pre(isset($arr_params['where']) ? $arr_params['where'] : null);
-        $arr_params_where = $this->_check_edit_del_params($this->table_define, $arr_params_where);
+        $arr_params_where = $this->_check_query_params($this->table_define, $arr_params_where);
         if($arr_params_where['ret'] !=0)
         {
             return $arr_params_where;
