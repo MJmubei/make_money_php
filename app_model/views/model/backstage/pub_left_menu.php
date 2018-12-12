@@ -2,25 +2,12 @@
 	<header class="logo">
 		<a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span>
 		</a> <a href="index.html"> <span id="logo">
-				<h1>Augment</h1>
+				<h1>管理系统</h1>
 		</span> <!--<img id="logo" src="" alt="Logo"/>-->
 		</a>
 	</header>
 	<div style="border-top: 1px solid rgba(69, 74, 84, 0.7)"></div>
 	<!--/down-->
-	<div class="down">
-		<a href="index.html"><img src="images/admin.jpg"></a> <a
-			href="index.html"><span class="name-caret">Jasmin Leo</span></a>
-		<p>System Administrator in Company</p>
-		<ul>
-			<li><a class="tooltips" href="index.html"><span>Profile</span><i
-					class="lnr lnr-user"></i></a></li>
-			<li><a class="tooltips" href="index.html"><span>Settings</span><i
-					class="lnr lnr-cog"></i></a></li>
-			<li><a class="tooltips" href="index.html"><span>Log out</span><i
-					class="lnr lnr-power-switch"></i></a></li>
-		</ul>
-	</div>
 	<!--//down-->
 	<div class="menu">
 		<ul id="menu">
