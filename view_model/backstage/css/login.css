@@ -363,9 +363,13 @@ a:hover,a:focus{color:#74777b;text-decoration: none;}
     float: left;
     margin-left: 7px;
     line-height: 20px;
-    padding-top: 5px;
+    padding-top: 10px;
     text-transform: capitalize;
 }
+.form-horizontal .zhmm{
+    color: #00b4ef;
+}
+
 .form-horizontal .btn{
     float: right;
     font-size: 14px;
