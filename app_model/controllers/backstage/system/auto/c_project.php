@@ -21,13 +21,13 @@ class c_project extends CI_Controller
      */
     public function tree()
     {
-        $this->load_view_file(array('menu_fenlei'=>$this->make_child()),__LINE__);
+        $this->load_view_file(array('menu_fenlei'=>$this->CI_make_child()),__LINE__);
     }
     
     
     public function classify()
     {
-        $this->load_view_file(array('menu_fenlei'=>$this->make_child()),__LINE__);
+        $this->load_view_file(array('menu_fenlei'=>$this->CI_make_child()),__LINE__);
     }
     
     public function CI_make_child($level = 1,$parent=0)
@@ -58,7 +58,7 @@ class c_project extends CI_Controller
                 'cms_parent_id'=>$parent,
                 'cms_id'=>$id,
                 'cms_order'=>0.00,
-                'nodes'=>$this->make_child($level+1,$id),
+                'nodes'=>$this->CI_make_child($level+1,$id),
             );
         }
         return $last_data;
