@@ -26,3 +26,4 @@
 
 ./idea/.
 app_model/config/database.php
+/data_model/log/*
