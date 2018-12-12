@@ -9,6 +9,12 @@ class c_manager extends CI_Controller
 {
 
 
+    public function __construct($str_class = null, $str_file = null, $str_method = null, $str_directory = null)
+    {
+        parent::__construct($str_class, $str_file, $str_method, $str_directory);
+        $this->load->library('session');
+    }
+
     public function index()
     {
         $this->_init_page();
@@ -20,20 +26,50 @@ class c_manager extends CI_Controller
      */
     public function login()
     {
-        $this->load_view_file(array('1','2'),__LINE__);
+        $this->load_view();
     }
 
     /**
      * 登陆动作
      */
-    public function signin()
+    public function sigin()
     {
-        $user = $this->auto_load_table('order','order_manager', 'manager', 'query_only');
+        //验证用户是否存在
+        $params = array(
+            'where' => array(
+                'telephone' => $this->arr_params['telephone'],
+            ),
+        );
+        $user = $this->auto_load_table('order','order_manager', 'c_manager', 'manager', 'query_only', $params);
         if ($user != 0)
         {
-            $this->load_view_file(array('1','2'),__LINE__);
+            return em_return::return_data(1,'用户不存在', '', '', '', 'json');
         }
-        $_SESSION['user'] = $user['data_info'];
+        var_dump($user);die;
+        //用户密码加密后进行验证
+        if ($user['password'] != md5(md5($this->arr_params['telephone']) . $this->arr_params['telephone']))
+        {
+            return em_return::return_data(1,'密码错误', '', '', '', 'json');
+        }
+        //添加到session
+        $data = array(
+            'set' => array(
+                'login_time' => date('Y-m-d H:i:s'),
+                'user_ip' => $_SERVER['REMOTE_ADDR'],
+                'login_count' => $user['nns_login_count']+1,
+            ),
+            'where' => array(
+                'id' => $user['nns_id'],
+            ),
+        );
+        $modify_info = $this->auto_load_table('order','order_manager', 'c_manager', 'manager', 'edit', $data);
+        if ($modify_info['ret'] != 0)
+        {
+            return em_return::return_data(1,'登陆异常，请联系超级管理员', '', '', '', 'json');
+        }
+        $this->session->set_userdata($data['set']);
+        #todo 跳转到管理员个人中心页面
+        $this->load_view_file(array('1','2'),__LINE__);
     }
 
     /**
