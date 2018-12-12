@@ -1,4 +1,0 @@
-[18:37:41] [info] [message] '参数组装开始'
-[18:37:41] [info] [message] '参数组装结束'
-[18:37:41] [info] [message] 'begin--{{{控制器-初始化控制器开始:文件路径:[D:\\starcordemo\\project\\project\\app_model\\controllers/backstage/system/manager/manager.php];界面框架:[backstage];项目:[system];界面模板:[manager];类名称:[manager];方法:[index]}}}--begin'
-[18:37:41] [error] [sql] '调用LOGIC类失败文件不存在[D:\\starcordemo\\project\\project\\app_model/logic/backstage/system/system_manager/manager/query/query.class.php];项目[system];表名[query];模块[system_manager]'
