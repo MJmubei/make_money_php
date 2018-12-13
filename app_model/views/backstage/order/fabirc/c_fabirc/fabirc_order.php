@@ -62,11 +62,9 @@
 <body>
     <div class="inbox-mail">
         <div class="col-md-3 compose">
-            <h2>分类</h2>
+            <h2>面辅料分类</h2>
             <div id="treeview-selectable" class=""></div>
         </div>
-
-        <div class="clearfix"></div>
     </div>
 </body>
 </html>

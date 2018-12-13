@@ -17,17 +17,17 @@
             <!--*********** 初始化必须加载 ***************** （顶部导航栏加载） *********** 初始化必须加载 *****************   -->
             <?php include_once dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/model/backstage/pub_top_menu.php';?>
             <div class="outter-wp">
-                <!--/sub-heard-part-->
                 <div class="sub-heard-part">
                     <ol class="breadcrumb m-b-0">
-                        <li><a href="index.html">Home</a></li>
-                        <li class="active">Inbox</li>
+                        <li><a href="../../../system/auto/c_project/index">首页</a></li>
+                        <li class="active">面辅料</li>
                     </ol>
                 </div>
-                <!--/sub-heard-part-->
-                <!--/inbox-->
-                <iframe width=25% height=680 frameborder=0 src="./fabirc_order"></iframe>
-                <iframe width=73% height=680 frameborder=0 src="./fabirc?big_fabirc_id=<?php echo isset($_GET['big_fabirc_id']) ? $_GET['big_fabirc_id'] : '';?>"></iframe>
+                <h3 class="inner-tittle two">面辅料订单</h3>
+                <div class="graph">
+                    <iframe width=25% height=630 frameborder=0 src="./fabirc_order"></iframe>
+                    <iframe width=73% height=630 frameborder=0 src="./fabirc?big_fabirc_id=<?php echo isset($_GET['big_fabirc_id']) ? $_GET['big_fabirc_id'] : '';?>"></iframe>
+                </div>
             </div>
             <!--*********** 初始化必须加载 ***************** （最下版权加载） *********** 初始化必须加载 ***************** -->
             <?php include_once dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/model/backstage/pub_footer.php';?>

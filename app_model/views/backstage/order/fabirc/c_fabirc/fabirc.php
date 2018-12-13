@@ -10,7 +10,7 @@
     </style>
 </head>
 <body>
-    <table class="table">
+    <table class="table" border="0">
         <tbody>
         <?php foreach ($fabirc as $value) {?>
         <tr class="table-row">
@@ -19,13 +19,11 @@
                 <h6><?php echo $value['cms_name'];?></h6>
             </td>
             <td><?php echo ($value['cms_is_scarce'] == 1) ? '<span class="ur">奇缺</span>' : '<span class="work">普通</span>' ?></td>
-            <td class="march"></td>
             <td><i class="fa fa-star-half-o icon-state-warning"></i></td>
         </tr>
         <?php }?>
         </tbody>
     </table>
-
     <!--*********** 初始化必须加载 ***************** （分页信息） *********** 初始化必须加载 ***************** -->
     <?php include_once dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/model/backstage/pub_page.php';?>
     <div class="form-body">
