@@ -122,3 +122,31 @@ CREATE TABLE IF NOT EXISTS `cms_wechat_accounts` (
   UNIQUE KEY `index_accounts_account_app` (`cms_account_id`,`cms_app_id`)
 )ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+-- ------------------------------------------------------------------------------------
+-- Table system_order_type_parent gao 2018-12-13 14:21:47
+-- ------------------------------------------------------------------------------------
+CREATE TABLE `system_order_type_parent` (
+`cms_id`  int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键id' ,
+`cms_category_parent_id`  int(11) UNSIGNED NOT NULL DEFAULT 0 COMMENT '订单类型父级id' ,
+`cms_category_id`  int(11) UNSIGNED NOT NULL DEFAULT 0 COMMENT '订单类型id' ,
+`cms_category_name`  varchar(255) NOT NULL DEFAULT '' COMMENT '类型栏目名称' ,
+`cms_create_time`  datetime NOT NULL COMMENT '创建时间' ,
+`cms_modify_time`  datetime NOT NULL COMMENT '修改时间' ,
+PRIMARY KEY (`cms_id`),
+INDEX `create_modify_time` (`cms_create_time`, `cms_modify_time`)
+)ENGINE=InnoDB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ------------------------------------------------------------------------------------
+-- Table system_order_type gao 2018-12-13 14:21:47
+-- ------------------------------------------------------------------------------------
+CREATE TABLE `system_order_type` (
+`cms_id`  int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键id' ,
+`cms_category_id`  int(11) UNSIGNED NOT NULL DEFAULT 0 COMMENT '订单类型父级id' ,
+`cms_type_id`  int(11) UNSIGNED NOT NULL DEFAULT 0 COMMENT '订单类型id' ,
+`cms_type_name`  varchar(255) NOT NULL DEFAULT '' COMMENT '类型名称' ,
+`cms_create_time`  datetime NOT NULL COMMENT '创建时间' ,
+`cms_modify_time`  datetime NOT NULL COMMENT '修改时间' ,
+PRIMARY KEY (`cms_id`),
+INDEX `create_modify_time` (`cms_create_time`, `cms_modify_time`)
+)ENGINE=InnoDB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_unicode_ci;
+
