@@ -154,33 +154,33 @@ INDEX `create_modify_time` (`cms_create_time`, `cms_modify_time`)
 -- Table order_fabirc zhiyong.luo 2018-12-13 14:21:47 面辅料表
 -- ------------------------------------------------------------------------------------
 CREATE TABLE `order_fabirc` (
-  `cms_id` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `cms_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键ID',
   `cms_name` varchar(32) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '面辅料名称',
   `cms_fabirc_attribute` varchar(256) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '面辅料属性，json存储格式',
   `cms_is_scarce` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否属于奇缺面辅料0普通1奇缺',
   `cms_create_time` datetime DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   `cms_modify_time` datetime DEFAULT '0000-00-00 00:00:00' COMMENT '修改时间',
   PRIMARY KEY (`cms_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ------------------------------------------------------------------------------------
 -- Table order_fabirc_type zhiyong.luo 2018-12-13 14:21:47 面辅料订单类型表
 -- ------------------------------------------------------------------------------------
 CREATE TABLE `order_fabirc_type` (
-  `cms_id` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `cms_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键ID',
   `cms_name` varchar(32) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '面辅料类型名称',
   `cms_create_time` datetime DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   `cms_modify_time` datetime DEFAULT '0000-00-00 00:00:00' COMMENT '修改时间',
   PRIMARY KEY (`cms_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ------------------------------------------------------------------------------------
 -- Table order_fabirc_map zhiyong.luo 2018-12-13 14:21:47 面辅料关系绑定表
 -- ------------------------------------------------------------------------------------
 CREATE TABLE `order_fabirc_map` (
-  `cms_fabirc_type_id` varchar(32) COLLATE utf8_unicode_ci NOT NULL COMMENT '面辅料类型ID',
-  `cms_fabirc_id` varchar(32) COLLATE utf8_unicode_ci NOT NULL COMMENT '面辅料ID',
+  `cms_fabirc_type_id` int(11) unsigned NOT NULL COMMENT '面辅料类型ID',
+  `cms_fabirc_id` int(11) unsigned NOT NULL COMMENT '面辅料ID',
   `cms_create_time` datetime DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   `cms_modify_time` datetime DEFAULT '0000-00-00 00:00:00' COMMENT '修改时间',
   UNIQUE KEY `fabirc_unique` (`cms_fabirc_type_id`,`cms_fabirc_id`) USING BTREE
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

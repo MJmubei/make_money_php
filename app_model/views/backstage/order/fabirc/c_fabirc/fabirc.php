@@ -38,9 +38,15 @@
                 <i class="fa fa-times-circle-o"> 反选</i>
             </button>
 
-            <button class="btn blue" type="button"
-                    id="btn_tablecheckbox_uncheck">
-                <i class="fa fa-times-circle"> 取消</i>
+            <button class="btn purple" type="button" id="btn_tablecheckbox_exchange">
+                <i class="fa fa-book"> 加入购物车</i>
+            </button>
+            <button class="btn purple" type="button" id="btn_tablecheckbox_exchange">
+                <i class="fa fa-book"> 支付面料</i>
+            </button>
+
+            <button class="btn blue" type="button" id="btn_tablecheckbox_exchange">
+                <i class="fa fa-book"> 下一步</i>
             </button>
         </div>
         <div class="clearfix"></div>
