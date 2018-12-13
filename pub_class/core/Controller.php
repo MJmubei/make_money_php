@@ -351,7 +351,7 @@ class CI_Controller
                 em_return::set_ci_flow_desc($this->get_str_load_log_path(),"end---{{{控制器-接口控制器请求结束template_view界面展示正确模板}}}---end");
                 $this->write_global_info();
                 $data['data_menu'] = $this->system_auto_make_menu();
-                $data['data_menu'] = $this->system_auto_make_menu_arr($data['data_menu']);
+                //$data['data_menu'] = $this->system_auto_make_menu_arr($data['data_menu']);
                 //         	    echo json_encode($data['data_menu']);die;
                 $this->load->view($str_path_info.'/'.$this->get_str_load_class().'/'.$this->get_str_load_method(),$data);
             }
@@ -496,12 +496,20 @@ class CI_Controller
     {
         empty($str_databse) ? $this->load->database() : $this->load->database($str_databse);
         $str_table = (strlen($str_project)< strlen($str_table) && substr($str_table,0, strlen($str_project)) != $str_project) ? $str_project.'_'.$str_table : $str_table;
+        //加载base文件,不一定非要加载base文件
+        $logic_base_file_path = trim(rtrim(rtrim(defined('APPPATH') ? APPPATH : '','\/'),'\\')).'/logic/'.$this->get_str_load_stage().'/'.$str_project.'/'.$str_model.'/'.$str_child_model.'/'.$str_table.'/'.$str_table.'.base.php';
+        if(file_exists($logic_base_file_path))
+        {
+            include_once $logic_base_file_path;
+        }
+        //加载logic文件
         $logic_file_path = trim(rtrim(rtrim(defined('APPPATH') ? APPPATH : '','\/'),'\\')).'/logic/'.$this->get_str_load_stage().'/'.$str_project.'/'.$str_model.'/'.$str_child_model.'/'.$str_table.'/'.$str_table.'.class.php';
         if(!file_exists($logic_file_path))
         {
             em_return::set_ci_flow_desc($this->get_str_load_log_path(),"调用LOGIC类失败文件不存在[{$logic_file_path}];项目[{$this->get_str_load_project()}];表名[{$str_table}];模块[{$str_model}]",'sql','error');
             return em_return::_return_error_data();
         }
+
         include_once $logic_file_path;
         $obj_logic = new $str_table($this,$str_table,$params);
         if (!method_exists($obj_logic, $str_method))
