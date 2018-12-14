@@ -97,7 +97,7 @@ class CI_Controller
             return ;
         }
         $this->arr_page_params['cms_page_num'] = 1;
-        $this->arr_page_params['cms_page_size'] = 6;
+        $this->arr_page_params['cms_page_size'] = 5;
     }
 
     /**

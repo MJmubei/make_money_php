@@ -13,7 +13,6 @@
 		.htmleaf-icon{color: #fff;}
 	</style>
     <script type="text/javascript">
-
         $(function() {
             var defaultData = <?php echo (isset($fabirc_type)&&is_array($fabirc_type)) ? json_encode($fabirc_type) : json_encode(array());?>;
             var $searchableTree = $('#treeview-searchable').treeview({
