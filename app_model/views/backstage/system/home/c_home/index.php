@@ -3,15 +3,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-
-
+<script type="application/x-javascript">
+    addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+</script>
 <link href="<?php echo VIEW_MODEL_BACKGROUD; ?>hplus/css/bootstrap.min14ed.css" rel="stylesheet">
 <link href="<?php echo VIEW_MODEL_BACKGROUD; ?>hplus/css/font-awesome.min93e3.css" rel="stylesheet">
 <link href="<?php echo VIEW_MODEL_BACKGROUD; ?>hplus/css/animate.min.css" rel="stylesheet">
 <link href="<?php echo VIEW_MODEL_BACKGROUD; ?>hplus/css/style.min862f.css" rel="stylesheet">
-
-
+<script src="<?php echo VIEW_MODEL_BACKGROUD; ?>hplus/js/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".select_cl").click(function () {
+            var location_url = $(this).find("input[type='hidden']").val();
+            $(".J_iframe").attr("src",location_url);
+        })
+    })
+</script>
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden">
 	<div id="wrapper">
@@ -24,17 +31,15 @@
 				<ul class="nav" id="side-menu">
 					<li class="nav-header">
 						<div class="dropdown profile-element">
-							<span><img alt="image" class="img-circle"
-								src="img/profile_small.jpg" /></span> <a data-toggle="dropdown"
-								class="dropdown-toggle" href="#"> <span class="clear">
+<!--							<span><img alt="image" class="img-circle" src="img/profile_small.jpg" /></span>-->
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="clear">
 									<span class="block m-t-xs"><strong class="font-bold">Beaut-zihan</strong></span>
-									<span class="text-muted text-xs block">超级管理员<b
-										class="caret"></b></span>
-							</span>
+									<span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
+							    </span>
 							</a>
 							<ul class="dropdown-menu animated fadeInRight m-t-xs">
-								<li><a class="J_menuItem" href="form_avatar.html">修改头像</a>
-								</li>
+								<li><a class="J_menuItem" href="form_avatar.html">修改头像</a></li>
 								<li><a class="J_menuItem" href="profile.html">个人资料</a></li>
 								<li><a class="J_menuItem" href="contacts.html">联系我们</a></li>
 								<li><a class="J_menuItem" href="mailbox.html">信箱</a></li>
@@ -45,9 +50,18 @@
 						<div class="logo-element">H+</div>
 					</li>
 					<?php $i=0;if(isset($data_info) && is_array($data_info)){foreach ($data_info as $menu_1_val){?>
+                        <li>
+                            <a class="select_cl">
+                                <input type="hidden" value="../../../<?php echo $menu_1_val['data']['cms_url'];?>" />
+                                <i class="fa fa-flask"></i>
+                                <span class="nav-label"><?php echo $menu_1_val['data']['cms_name'];?></span>
+                                <span class="fa arrow"></span>
+                            </a>
+                        </li>
         			     <?php if(isset($menu_1_val['child_list']) && is_array($menu_1_val['child_list']) && !empty($menu_1_val['child_list']) && isset($menu_1_val['child_list'][0]['child_list'][0]['data']['cms_url'])){?>
             			     <li>
-        					   <a href="../../../<?php echo $menu_1_val['child_list'][0]['child_list'][0]['data']['cms_url'];?>">
+        					   <a class="select_cl">
+                                   <input type="hidden" value="../../../<?php echo $menu_1_val['child_list'][0]['child_list'][0]['data']['cms_url'];?>" />
         					       <i class="fa fa-flask"></i> 
         					       <span class="nav-label"><?php echo $menu_1_val['data']['cms_name'];?></span>
         					       <span class="fa arrow"></span>
@@ -55,11 +69,17 @@
 					           <ul class="nav nav-second-level">
             			             <?php foreach ($menu_1_val['child_list'] as $menu_2_val){?>
         			                     <?php if(isset($menu_2_val['child_list']) && is_array($menu_2_val['child_list']) && !empty($menu_2_val['child_list'])){?>
-                			                 <li><a href="../../../<?php echo $menu_1_val['child_list'][0]['child_list'][0]['data']['cms_url'];?>"><?php echo $menu_2_val['data']['cms_name'];?> <span class="fa arrow"></span></a>
-								                <ul class="nav nav-third-level">
+                			                 <li>
+                                                 <a class="select_cl" href="#">
+                                                     <input type="hidden" value="../../../<?php echo $menu_1_val['child_list'][0]['child_list'][0]['data']['cms_url'];?>" /><?php echo $menu_2_val['data']['cms_name'];?> <span class="fa arrow"></span>
+                                                 </a>
+								                    <ul class="nav nav-third-level">
                 						              <?php foreach ($menu_2_val['child_list'] as $menu_3_val){$i++?>
                     									<li>
-                    									   <a class="J_menuItem" <?php if ($i==1){echo 'data-index="0"';}?> href="../../../<?php echo $menu_3_val['data']['cms_url'];?>"><?php echo $menu_3_val['data']['cms_name'];?></a>
+                    									   <a class="J_menuItem select_cl" <?php if ($i==1){echo 'data-index="0"';}?> href="#">
+                                                               <input type="hidden" value="../../../<?php echo $menu_3_val['data']['cms_url'];?>" />
+                                                               <?php echo $menu_3_val['data']['cms_name'];?>
+                                                           </a>
                     									</li>
                 						              <?php }?>
                 						          </ul>
@@ -287,7 +307,6 @@
 			</div>
 		</div>
 	</div>
-	<script src="<?php echo VIEW_MODEL_BACKGROUD; ?>hplus/js/jquery.min.js"></script>
 	<script src="<?php echo VIEW_MODEL_BACKGROUD; ?>hplus/js/bootstrap.min.js"></script>
 	<script src="<?php echo VIEW_MODEL_BACKGROUD; ?>hplus/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 	<script src="<?php echo VIEW_MODEL_BACKGROUD; ?>hplus/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
