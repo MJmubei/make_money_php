@@ -34,22 +34,36 @@ class c_manager extends CI_Controller
      */
     public function sigin()
     {
+        if (empty($this->arr_params['telephone']) || !isset($this->arr_params['telephone']))
+        {
+            $re = em_return::return_data(1,'手机号不能为空');
+            $this->load_view_file($re,__LINE__);
+        }
+        if (empty($this->arr_params['password']) || !isset($this->arr_params['password']))
+        {
+            $re = em_return::return_data(1,'密码不能为空');
+            $this->load_view_file($re,__LINE__);
+        }
+
         //验证用户是否存在
         $params = array(
             'where' => array(
                 'telephone' => $this->arr_params['telephone'],
             ),
         );
-        $user = $this->auto_load_table('order','order_manager', 'c_manager', 'manager', 'query_only', $params);
-        if ($user != 0)
+
+        $user = $this->auto_load_table('order','manager', 'c_manager', 'manager', 'query_only', $params);
+        if ($user['ret'] != 0)
         {
-            return em_return::return_data(1,'用户不存在', '', '', '', 'json');
+            $re = em_return::return_data(1,'用户不存在');
+            $this->load_view_file($re,__LINE__);
         }
-        var_dump($user);die;
+
         //用户密码加密后进行验证
-        if ($user['password'] != md5(md5($this->arr_params['telephone']) . $this->arr_params['telephone']))
+        if ($user['data_info']['password'] != md5($this->arr_params['password']))
         {
-            return em_return::return_data(1,'密码错误', '', '', '', 'json');
+            $re = em_return::return_data(1,'密码错误');
+            $this->load_view($re,__LINE__);
         }
         //添加到session
         $data = array(
@@ -62,14 +76,14 @@ class c_manager extends CI_Controller
                 'id' => $user['nns_id'],
             ),
         );
-        $modify_info = $this->auto_load_table('order','order_manager', 'c_manager', 'manager', 'edit', $data);
+        $modify_info = $this->auto_load_table('order','manager', 'c_manager', 'manager', 'edit', $data);
         if ($modify_info['ret'] != 0)
         {
             return em_return::return_data(1,'登陆异常，请联系超级管理员', '', '', '', 'json');
         }
         $this->session->set_userdata($data['set']);
         #todo 跳转到管理员个人中心页面
-        $this->load_view_file(array('1','2'),__LINE__);
+        $this->load_view(array('1','2'),__LINE__);
     }
 
     /**
@@ -95,24 +109,65 @@ class c_manager extends CI_Controller
 
     }
 
+    /**
+     * 注册动作
+     */
     public function registry()
     {
-        //先查询是否已经存在了
-        $user = $this->auto_load_table('order','order_manager', 'manager', 'query_only', $this->arr_params);
-
-        if ($user != 0)
+        //手机号
+        if (empty($this->arr_params['telephone']) || !isset($this->arr_params['telephone']))
         {
-
+            $re = em_return::return_data(1,'手机号不能为空');
+            $this->load_view_file($re,__LINE__);
+        }
+        //密码
+        if (empty($this->arr_params['password']) || !isset($this->arr_params['password']) || empty($this->arr_params['confirmPassword']) || !isset($this->arr_params['confirmPassword']))
+        {
+            $re = em_return::return_data(1,'密码不能为空');
+            $this->load_view_file($re,__LINE__);
+        }
+        if ($this->arr_params['password'] != $this->arr_params['confirmPassword'])
+        {
+            $re = em_return::return_data(1,'两次密码不一致');
+            $this->load_view_file($re,__LINE__);
+        }
+        //用户角色
+        if (empty($this->arr_params['role_id']) || !isset($this->arr_params['role_id']))
+        {
+            $re = em_return::return_data(1,'请选择用户角色');
+            $this->load_view_file($re,__LINE__);
         }
 
+
+        //验证用户是否存在
+        $params = array(
+            'where' => array(
+                'telephone' => $this->arr_params['telephone'],
+            ),
+        );
+
+        //先查询是否已经存在了
+        $user = $this->auto_load_table('order','manager', 'c_manager', 'manager', 'query_only', $params);
+        if ($user['ret'] == 0 && is_array($user['data_info']) && count($user['data_info']) > 0)
+        {
+            $re = em_return::return_data(1,'用户已经存在,请直接登陆');
+            $this->load_view_file($re,__LINE__);
+        }
+
+        #todo 调取短信验证码，并验证短信
+
         $time = date('Y-m-d H:i:s');
+        $this->arr_params['password'] = md5($this->arr_params['password']);
         $this->arr_params['create_time'] = $time;
         $this->arr_params['modify_time'] = $time;
-        $this->arr_params['id'] = $this->get_guid();
         $this->arr_params['user_ip'] = $_SERVER['REMOTE_ADDR'];
-        $add_user = $this->auto_load_table('order','order_manager', 'manager', 'add', $this->arr_params);
-
-        $_SESSION['user'] = $user['data_info'];
+        $add_user = $this->auto_load_table('order','manager', 'c_manager', 'manager', 'add', $this->arr_params);
+        if ($add_user['ret'] != 0)
+        {
+            $re = em_return::return_data(1,'注册失败');
+            $this->load_view_file($re,__LINE__);
+        }
+        $_SESSION['user'] = $this->arr_params;
     }
 
 

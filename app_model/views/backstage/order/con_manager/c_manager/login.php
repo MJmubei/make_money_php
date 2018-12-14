@@ -32,8 +32,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
     <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/bootstrapValidator.min.js"></script>
     <script type="text/javascript">
         $(function(){/* 文档加载，执行一个函数*/
-            $('#defaultForm')
-                .bootstrapValidator({
+            $('#defaultForm').bootstrapValidator({
                     message: 'This value is not valid',
                     feedbackIcons: {/*input状态样式图片*/
                         valid: 'glyphicon glyphicon-ok',
@@ -62,7 +61,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 },
                                 regexp: {
                                     regexp: /^[a-zA-Z0-9_\.]+$/,
-                                    message: 'The username can only consist of alphabetical, number, dot and underscore'
+                                    message: '用户名只能由字母、数字、点和下划线组成'
                                 }
                             }
                         },
@@ -81,36 +80,35 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                             }
                         },
                     }
-                })
-                .on('success.form.bv', function(e) {//点击提交之后
-                    // Prevent form submission
-                    e.preventDefault();
-
-                    // Get the form instance
-                    var $form = $(e.target);
-
-                    // Get the BootstrapValidator instance
-                    var bv = $form.data('bootstrapValidator');
-                    alert(bv);
-                    // Use Ajax to submit form data 提交至form标签中的action，result自定义
-                    $.post($form.attr('action'), $form.serialize(), function(result) {
-                    //do something...
-
-                    });
+            }).on('success.form.bv',function(e){
+                e.preventDefault();
+                var url = '../../../../../../../make_money_php/index.php/backstage/order/con_manager/c_manager/sigin';
+                var submitData = $('#defaultForm').serialize() + "&flag_ajax_reurn=1";
+                //submitData是解码后的表单数据，结果同上
+                $.post(url, submitData, function(result){
+                    var dataObj=eval("("+result+")");
+                    if(dataObj.ret != 0)
+                    {
+                        alert(dataObj.reason);
+                        $('#password').val("");
+                    }
                 });
+            });
         });
+
+
     </script>
 </head>
 <body>
 <div class="htmleaf-container">
     <header class="htmleaf-header">
-        <h1>欢迎使用订购系统<span>happy enjoy</span></h1>
+        <h1>欢迎使用<span></span></h1>
     </header>
     <div class="demo form-bg" style="padding: 20px 0;">
         <div class="container">
             <div class="row">
                 <div class="col-md-offset-3 col-md-6">
-                    <form class="form-horizontal" id="defaultForm" action="">
+                    <form class="form-horizontal" id="defaultForm">
                         <div class="heading-div">
                             <span class="heading">用户登录</span>
                         </div>
@@ -124,7 +122,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                         </div>
                         <div class="form-group">
                             <span class="text">忘记密码？<a href="#" class="zhmm">找回密码</a></span>
-                            <button type="submit" class="btn btn-default">登录</button>
+                            <button type="submit" id="system-button-submit-edit-ajax" class="btn btn-default">登录</button>
                         </div>
                     </form>
                 </div>

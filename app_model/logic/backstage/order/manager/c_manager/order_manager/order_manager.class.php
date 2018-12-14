@@ -5,6 +5,7 @@
  * Author: xinxin.deng
  * Date: 2018/11/29 14:45
  */
+include_once dirname(__FILE__).'/order_manager.base.php';
 class order_manager extends order_manager_base
 {
 
