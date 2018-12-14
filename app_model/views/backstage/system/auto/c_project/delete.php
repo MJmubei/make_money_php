@@ -1,46 +1,5 @@
 <script type="text/javascript">
-$(function(){  
-    function initTableCheckbox() {  
-        var $thr = $('#index_list thead tr');  
-        var $checkAll = $thr.find('input');  
-        $checkAll.click(function(event){  
-            /*将所有行的选中状态设成全选框的选中状态*/  
-            $tbr.find("input[name='checkItem']").prop('checked',$(this).prop('checked'));  
-            /*并调整所有选中行的CSS样式*/  
-            if ($(this).prop('checked')) {  
-                $tbr.find("input[name='checkItem']").parent().parent().addClass('warning');  
-            } else{  
-                $tbr.find("input[name='checkItem']").parent().parent().removeClass('warning');  
-            }  
-            /*阻止向上冒泡，以防再次触发点击操作*/  
-            event.stopPropagation();  
-        });  
-        var $tbr = $('#index_list tbody tr');  
-        $tbr.find("input[name='checkItem']").click(function(event){  
-            /*调整选中行的CSS样式*/  
-            $(this).parent().parent().toggleClass('warning');  
-            /*如果已经被选中行的行数等于表格的数据行数，将全选框设为选中状态，否则设为未选中状态*/  
-            $checkAll.prop('checked',$tbr.find('input:checked').length == $tbr.length ? true : false);  
-            /*阻止向上冒泡，以防再次触发点击操作*/  
-            event.stopPropagation();  
-        });  
-        /*点击每一行时也触发该行的选中操作*/  
-        $tbr.click(function(){  
-            $(this).find("input[name='checkItem']").click();  
-        });  
-    }
-    initTableCheckbox();
-    function check_checkbox_value()
-    {
-        var cms_id = ''; 
-        $('#index_list tbody tr').find("input[name='checkItem']").each(function(){
-        	if ($(this).is(':checked') && $(this).val().length >0 && $(this).attr('attr-key').length >0) 
-            {
-        		cms_id+=$(this).attr('attr-key')+'[]='+$(this).val()+'&';
-    		} 
-    	});
-    	return cms_id;
-    }
+$(function(){
     $('#system-delete-modal').click(function (){
     	if(check_checkbox_value().length<1)
         {
@@ -51,8 +10,6 @@ $(function(){
     		$('#system-delete-modal-ok').modal({backdrop:'false',keyboard:false});
     	}
 	});
-
-
 	$('.system-delete-modal-right').click(function (){
         var attr_key = $(this).attr('attr-key');
         var attr_value = $(this).attr('attr-value');
@@ -65,9 +22,6 @@ $(function(){
         $('#system-delete-modal-confirm-right').attr('attr-value',cms_id);
         $('#system-delete-modal-ok-right').modal({backdrop:'false',keyboard:false});
 	});
-
-    
-	
     function system_delete_submit_data(submitData)
     {
     	//submitData是解码后的表单数据，结果同上
@@ -126,11 +80,10 @@ $(function(){
     	$('#system-delete-modal-ok-right').modal('hide');
     	system_delete_submit_data(cms_id);
 	});
-    
 });
 </script>
 <button class="btn purple" type="button" data-toggle="modal" id="system-delete-modal">
-   <i class="fa fa-book"> 删除</i>
+   <i class="fa fa-trash-o"> 删除</i>
 </button>
 <div class="modal fade" id="system-delete-modal-error" tabindex="-1"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" >

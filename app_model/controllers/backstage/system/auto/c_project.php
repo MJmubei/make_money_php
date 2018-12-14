@@ -94,15 +94,50 @@ class c_project extends CI_Controller
         {
             $this->load_view_file(em_return::return_data(1,'删除参数条件为空'),__LINE__);
         }
-        $delete_params = array(
+        $cms_state = isset($this->arr_params['cms_state']) ? $this->arr_params['cms_state'] : null;
+        if(strlen($cms_state) <1)
+        {
+            $this->load_view_file(em_return::return_data(1,'删除参数条件为空'),__LINE__);
+        }
+        $edit_params = array(
+            'set'=>array(
+                'cms_state'=>$cms_state,
+            ),
             'where'=>array(
                 'cms_id'=>$cms_id,
             ),
         );
-        $this->load_view_file($this->auto_load_table('system','auto','c_project','system_project', 'delete',$delete_params),__LINE__);
+        $this->load_view_file($this->auto_load_table('system','auto','c_project','system_project', 'edit',$edit_params),__LINE__);
     }
     
     
+    
+    public function order()
+    {
+        $action_type = isset($this->arr_params['action_type']) ? $this->arr_params['action_type'] : '';
+        $cms_id = isset($this->arr_params['cms_id']) ? $this->arr_params['cms_id'] : null;
+        if(empty($cms_id) || !is_array($cms_id) || !in_array($action_type, array('top','up','down','bottom')))
+        {
+            $this->load_view_file(em_return::return_data(1,'排序参数条件为空'),__LINE__);
+        }
+        
+        
+        switch ($action_type)
+        {
+            case 'top':
+                break;
+            case 'up':
+        
+                break;
+            case 'down':
+        
+                break;
+            case 'bottom':
+        
+                break;
+        }
+        
+    }
     
     
     /**

@@ -171,7 +171,7 @@ $(document).ready(function() {
 <!-- <button class="btn purple" type="button" data-toggle="modal" data-target="#system-edit-modal"> -->
 <!-- 	   <i class="fa fa-book"> 修改</i> -->
 <!-- </button> -->
-<div class="modal fade" id="system-edit-modal" tabindex="-1"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="system-edit-modal-right" tabindex="-1"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" >
 		<div class="modal-content">
 			<div class="modal-header">

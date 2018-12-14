@@ -26,4 +26,8 @@
 
 ./idea/.
 app_model/config/database.php
+<<<<<<< HEAD
+/data_model/
+=======
 /data_model/log/*
+>>>>>>> refs/remotes/origin/master

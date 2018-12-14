@@ -350,6 +350,7 @@ class CI_Controller
                 $data['arr_params'] = $this->arr_params;
                 em_return::set_ci_flow_desc($this->get_str_load_log_path(),"end---{{{控制器-接口控制器请求结束template_view界面展示正确模板}}}---end");
                 $this->write_global_info();
+
                 $data['data_menu'] = $this->system_auto_make_menu();
                 //$data['data_menu'] = $this->system_auto_make_menu_arr($data['data_menu']);
                 //         	    echo json_encode($data['data_menu']);die;

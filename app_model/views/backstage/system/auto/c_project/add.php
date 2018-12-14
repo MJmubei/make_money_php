@@ -106,7 +106,7 @@ $(document).ready(function() {
 });
 </script>
 <button class="btn purple" type="button" data-toggle="modal" data-target="#system-add-modal">
-	   <i class="fa fa-book"> 添加</i>
+	   <i class="fa fa-plus"> 添加</i>
 </button>
 <div class="modal fade" id="system-add-modal" tabindex="-1"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" >
