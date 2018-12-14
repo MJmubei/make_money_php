@@ -53,12 +53,11 @@ class c_manager extends CI_Controller
         );
 
         $user = $this->auto_load_table('order','manager', 'c_manager', 'manager', 'query_only', $params);
-        if ($user['ret'] != 0)
+        if ($user['ret'] != 0 || !is_array($user['data_info']) && count($user['data_info']) < 1)
         {
             $re = em_return::return_data(1,'用户不存在');
             $this->load_view_file($re,__LINE__);
         }
-
         //用户密码加密后进行验证
         if ($user['data_info']['password'] != md5($this->arr_params['password']))
         {
@@ -167,7 +166,7 @@ class c_manager extends CI_Controller
             $re = em_return::return_data(1,'注册失败');
             $this->load_view_file($re,__LINE__);
         }
-        $_SESSION['user'] = $this->arr_params;
+        $this->load_view_file($add_user,__LINE__);
     }
 
 

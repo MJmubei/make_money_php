@@ -17,7 +17,7 @@ class order_manager extends order_manager_base
      */
     public function add()
     {
-        return $this->make_insert_sql($this->except_useless_params($this->arr_params, $this->table_define,true),__LINE__);
+        return $this->make_insert_sql($this->except_useless_params($this->arr_params, $this->table_define,false),__LINE__);
     }
 
     /**
@@ -92,7 +92,7 @@ class order_manager extends order_manager_base
      */
     public function query_only()
     {
-        return $this->make_query_only_sql($this->except_useless_params($this->arr_params, $this->table_define,true),$this->str_base_table);
+        return $this->make_query_only_sql($this->except_useless_params($this->arr_params['where'], $this->table_define,false),$this->str_base_table);
     }
 
 }

@@ -31,128 +31,132 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
     <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/bootstrap.min.js"></script>
     <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/bootstrapValidator.min.js"></script>
     <script type="text/javascript">
-        //$(function(){/* 文档加载，执行一个函数*/
-        //    $('#defaultForm').bootstrapValidator({
-        //        message: 'This value is not valid',
-        //        feedbackIcons: {/*input状态样式图片*/
-        //            valid: 'glyphicon glyphicon-ok',
-        //            invalid: 'glyphicon glyphicon-remove',
-        //            validating: 'glyphicon glyphicon-refresh'
-        //
-        //        },
-        //        fields: {/*验证：规则*/
-        //            password: {
-        //                message:'密码无效',
-        //                validators: {
-        //                    notEmpty: {
-        //                        message: '密码不能为空'
-        //                    },
-        //                    stringLength: {
-        //                        min: 6,
-        //                        max: 30,
-        //                        message: '用户名长度必须在6到30之间'
-        //                    },
-        //                    identical: {//相同
-        //                        field: 'password', //需要进行比较的input name值
-        //                        message: '两次密码不一致'
-        //                    },
-        //                    different: {//不能和用户名相同
-        //                        field: 'username',//需要进行比较的input name值
-        //                        message: '不能和用户名相同'
-        //                    },
-        //                    regexp: {
-        //                        regexp: /^[a-zA-Z0-9_\.]+$/,
-        //                        message: '用户名只能由字母、数字、点和下划线组成'
-        //                    }
-        //                }
-        //            },
-        //            confirmPassword: {
-        //                message:'密码无效',
-        //                validators: {
-        //                    notEmpty: {
-        //                        message: '密码不能为空'
-        //                    },
-        //                    stringLength: {
-        //                        min: 6,
-        //                        max: 30,
-        //                        message: '用户名长度必须在6到30之间'
-        //                    },
-        //                    identical: {//相同
-        //                        field: 'password', //需要进行比较的input name值
-        //                        message: '两次密码不一致'
-        //                    },
-        //                    different: {//不能和用户名相同
-        //                        field: 'username',//需要进行比较的input name值
-        //                        message: '不能和用户名相同'
-        //                    },
-        //                    regexp: {
-        //                        regexp: /^[a-zA-Z0-9_\.]+$/,
-        //                        message: '用户名只能由字母、数字、点和下划线组成'
-        //                    }
-        //                }
-        //            },
-        //            telephone: {
-        //                message: 'The phone is not valid',
-        //                validators: {
-        //                    notEmpty: {
-        //                        message: '手机号码不能为空'
-        //                    },
-        //                    regexp: {
-        //                        min: 11,
-        //                        max: 11,
-        //                        regexp: /^1[3|5|8]{1}[0-9]{9}$/,
-        //                        message: '请输入正确的手机号码'
-        //                    }
-        //                }
-        //            },
-        //            num: {
-        //                message:'密码无效',
-        //                validators: {
-        //                    notEmpty: {
-        //                        message: '验证码不能为空'
-        //                    },
-        //                    stringLength: {
-        //                        min: 6,
-        //                        max: 6,
-        //                        message: '验证码填写错误'
-        //                    },
-        //                    different: {//不能和用户名相同
-        //                        field: 'username',//需要进行比较的input name值
-        //                        message: '不能和用户名相同'
-        //                    },
-        //                    regexp: {
-        //                        regexp: /^[a-zA-Z0-9_\.]+$/,
-        //                        message: '用户名只能由字母、数字、点和下划线组成'
-        //                    }
-        //                }
-        //            },
-        //        }
-        //    }).on('success.form.bv',function(e){
-        //        e.preventDefault();
-        //        var url = '../../../../../../../make_money_php/index.php/backstage/order/con_manager/c_manager/registry';
-        //        var submitData = $('#defaultForm').serialize() + "&flag_ajax_reurn=1";
-        //        //submitData是解码后的表单数据，结果同上
-        //        $.post(url, submitData, function(result){
-        //            var dataObj=eval("("+result+")");
-        //            if(dataObj.ret != 0)
-        //            {
-        //                alert(dataObj.reason);
-        //                $('#password').val("");
-        //            }
-        //        });
-        //    });
-        //    $('#checkbox1').change(function()
-        //    {
-        //        if($('#checkbox1').is(':checked'))
-        //        {
-        //            $('#system-button-submit-edit-ajax').prop('disabled',false);
-        //        }
-        //        else
-        //        {
-        //            $('#system-button-submit-edit-ajax').prop('disabled',true);
-        //        }
-        //    });
-        //});
+        $(function(){/* 文档加载，执行一个函数*/
+            $('#defaultForm').bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {/*input状态样式图片*/
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+
+                },
+                fields: {/*验证：规则*/
+                    password: {
+                        message:'密码无效',
+                        validators: {
+                            notEmpty: {
+                                message: '密码不能为空'
+                            },
+                            stringLength: {
+                                min: 6,
+                                max: 30,
+                                message: '用户名长度必须在6到30之间'
+                            },
+                            identical: {//相同
+                                field: 'password', //需要进行比较的input name值
+                                message: '两次密码不一致'
+                            },
+                            different: {//不能和用户名相同
+                                field: 'username',//需要进行比较的input name值
+                                message: '不能和用户名相同'
+                            },
+                            regexp: {
+                                regexp: /^[a-zA-Z0-9_\.]+$/,
+                                message: '用户名只能由字母、数字、点和下划线组成'
+                            }
+                        }
+                    },
+                    confirmPassword: {
+                        message:'密码无效',
+                        validators: {
+                            notEmpty: {
+                                message: '密码不能为空'
+                            },
+                            stringLength: {
+                                min: 6,
+                                max: 30,
+                                message: '用户名长度必须在6到30之间'
+                            },
+                            identical: {//相同
+                                field: 'password', //需要进行比较的input name值
+                                message: '两次密码不一致'
+                            },
+                            different: {//不能和用户名相同
+                                field: 'username',//需要进行比较的input name值
+                                message: '不能和用户名相同'
+                            },
+                            regexp: {
+                                regexp: /^[a-zA-Z0-9_\.]+$/,
+                                message: '用户名只能由字母、数字、点和下划线组成'
+                            }
+                        }
+                    },
+                    telephone: {
+                        message: 'The phone is not valid',
+                        validators: {
+                            notEmpty: {
+                                message: '手机号码不能为空'
+                            },
+                            regexp: {
+                                min: 11,
+                                max: 11,
+                                regexp: /^1[3|5|8]{1}[0-9]{9}$/,
+                                message: '请输入正确的手机号码'
+                            }
+                        }
+                    },
+                    num: {
+                        message:'密码无效',
+                        validators: {
+                            notEmpty: {
+                                message: '验证码不能为空'
+                            },
+                            stringLength: {
+                                min: 6,
+                                max: 6,
+                                message: '验证码填写错误'
+                            },
+                            different: {//不能和用户名相同
+                                field: 'username',//需要进行比较的input name值
+                                message: '不能和用户名相同'
+                            },
+                            regexp: {
+                                regexp: /^[a-zA-Z0-9_\.]+$/,
+                                message: '用户名只能由字母、数字、点和下划线组成'
+                            }
+                        }
+                    },
+                }
+            }).on('success.form.bv',function(e){
+                e.preventDefault();
+                var url = '../../../../../../../make_money_php/index.php/backstage/order/con_manager/c_manager/registry';
+                var submitData = $('#defaultForm').serialize() + "&flag_ajax_reurn=1";
+                //submitData是解码后的表单数据，结果同上
+                $.post(url, submitData, function(result){
+                    var dataObj=eval("("+result+")");
+                    if(dataObj.ret != 0)
+                    {
+                        alert(dataObj.reason);
+                        $('#password').val("");
+                    }
+                    else
+                    {
+                        window.location.href='login';
+                    }
+                });
+            });
+            $('#checkbox1').change(function()
+            {
+                if($('#checkbox1').is(':checked'))
+                {
+                    $('#system-button-submit-edit-ajax').prop('disabled',false);
+                }
+                else
+                {
+                    $('#system-button-submit-edit-ajax').prop('disabled',true);
+                }
+            });
+        });
     </script>
 </head>
 <body>
@@ -164,13 +168,9 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
         <div class="container">
             <div class="row">
                 <div class="col-md-offset-3 col-md-6">
-                    <form class="form-horizontal" id="defaultForm" action="../../../../../../../make_money_php/index.php/backstage/order/con_manager/c_manager/registry">
+                    <form class="form-horizontal" id="defaultForm">
                         <div class="heading-div">
                             <span class="heading">用户注册</span>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="用户名">
-                            <i class="fa fa-user"></i>
                         </div>
                         <div class="form-group">
                             <select class="form-control-select" name="role_id">
@@ -205,7 +205,10 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 <input type="checkbox" value="None" id="checkbox1" name="check" checked/>
                                 <label for="checkbox1"></label>
                             </div>
-                            <span class="zctext">我已阅读并同意遵守<a href="#" class="zhmm">《订购用户服务协议》</a></span>
+                            <span class="zctext">我已阅读并同意遵守<a href="#" class="agree">《订购用户服务协议》</a></span>
+                            <span  class="dltext">有账号？<a href="login" class="login-a">直接登陆</a></span>
+                        </div>
+                        <div class="form-group">
                             <button type="submit" id="system-button-submit-edit-ajax" class="btn btn-default">同意协议并注册</button>
                         </div>
                     </form>

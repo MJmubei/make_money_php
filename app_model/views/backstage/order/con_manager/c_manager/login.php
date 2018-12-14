@@ -92,6 +92,10 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                         alert(dataObj.reason);
                         $('#password').val("");
                     }
+                    else
+                    {
+                        window.location.href='../../../../system/home/c_home/index';
+                    }
                 });
             });
         });
@@ -121,8 +125,8 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                             <i class="fa fa-lock"></i>
                         </div>
                         <div class="form-group">
-                            <span class="text">忘记密码？<a href="#" class="zhmm">找回密码</a></span>
-                            <button type="submit" id="system-button-submit-edit-ajax" class="btn btn-default">登录</button>
+                            <span class="text">忘记密码？<a href="#" class="agree">找回密码</a></span>
+                            <button type="submit" class="btn btn-default">登录</button>
                         </div>
                     </form>
                 </div>
