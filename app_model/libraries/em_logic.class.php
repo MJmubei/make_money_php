@@ -1103,7 +1103,7 @@ class em_logic
         return $last_data;
     }
     
-    public function make_query_sql($params,$table='')
+    public function make_query_sql($params,$table='',$str_field = '*')
     {
         if(isset($table) && strlen($table) >0)
         {
@@ -1148,7 +1148,7 @@ class em_logic
             }
             $mix_limit['cms_data_count'] = isset($data_count['data_info'][0]['count']) ? $data_count['data_info'][0]['count'] : 0;
         }
-        $sql = "select * from {$this->str_base_table} $where ".$mix_limit['sql'];
+        $sql = "select " . $str_field . " from {$this->str_base_table} $where ".$mix_limit['sql'];
 //         echo $sql."<br/>";
         unset($mix_limit['sql']);
         $data =  $this->_make_query_sql($sql);
@@ -1166,7 +1166,7 @@ class em_logic
      * @param string $table
      * @return array
      */
-    public function make_query_only_sql($params, $table='')
+    public function make_query_only_sql($params, $table='',$str_field = '*')
     {
         if(isset($table) && strlen($table) >0)
         {
@@ -1203,7 +1203,7 @@ class em_logic
         $limit = " limit 1";
 
         
-        $sql = "select * from {$this->str_base_table} $where ".$limit;
+        $sql = "select " . $str_field . " from {$this->str_base_table} $where ".$limit;
 
         $data =  $this->_make_query_sql($sql);
         if($data['ret'] !=0)
