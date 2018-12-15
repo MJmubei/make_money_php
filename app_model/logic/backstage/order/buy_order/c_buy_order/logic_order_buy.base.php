@@ -43,7 +43,7 @@ class logic_order_buy_base extends em_logic
             'type' => 'tinyint',
             'isempty' => '',
             'length' => '1',
-            'desc' => '订单类型。0批量订单；1面料小样；2样板订单；3样衣订单；4稀缺面料定金订单',
+            'desc' => '订单类型。0批量订单；1面料小样；2样板订单；3样衣订单；4稀缺面料定金订单；5充值类订单',
         ),
         'cms_order_state' => array(
             'type' => 'tinyint',
@@ -58,7 +58,7 @@ class logic_order_buy_base extends em_logic
             'desc' => '业务状态。0未完成；1完成',
         ),
         'cms_pay_order_id' => array(
-            'type' => 'VARCHAR',
+            'type' => 'varchar',
             'isempty' => '',
             'length' => '0-32',
             'desc' => '支付订单号',
@@ -75,11 +75,17 @@ class logic_order_buy_base extends em_logic
             'length' => '0-4',
             'desc' => '支付渠道。1微信支付；2支付宝支付',
         ),
-        'cms_pay_mode_id' => array(
+        'cms_pay_channel_mode' => array(
             'type' => 'int',
             'isempty' => '',
             'length' => '0-4',
             'desc' => '支付方式。10微信二维码；20支付宝二维码',
+        ),
+        'cms_pay_mode_type' => array(
+            'type' => 'int',
+            'isempty' => '',
+            'length' => '1',
+            'desc' => '支付方式。0余额支付；1实时支付',
         ),
         'cms_create_time' => array(
             'type' => 'datetime',
@@ -122,6 +128,12 @@ class logic_order_buy_base extends em_logic
             'isempty' => '',
             'length' => '',
             'desc' => '订单数据，以JSON格式存储',
+        ),
+        'nns_order_parent' => array(
+            'type' => 'int',
+            'isempty' => '',
+            'length' => '0-11',
+            'desc' => '父级订单ID',
         ),
     );
 

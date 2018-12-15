@@ -1,13 +1,13 @@
 <?php
 /**
  * Created by PhpStorm.
- * Use : 购买订单业务类
+ * Use : 接收订单业务类
  * User: kan.yang@starcor.com
- * Date: 18-12-13
- * Time: 下午7:36
+ * Date: 18-12-15
+ * Time: 下午5:10
  */
 
-class order_buy_logic extends logic_order_buy_base
+class accept_order_logic extends logic_accept_order_base
 {
 
     /**
@@ -24,15 +24,14 @@ class order_buy_logic extends logic_order_buy_base
     }
 
     /**
-     * 查询订单列表
+     * 查询接受订单列表
      * @param array $arr_query_params array(
             'cms_id'            => '主键ID',
-            'cms_user_id'       => '用户ID',
+            'cms_accept_user_id'=> '接收订单用户ID',
+            'cms_buy_order_id'  => '购买订单ID',
             'cms_start_time'    => '开始时间',
             'cms_end_time'      => '结束时间',
-            'cms_order_type'    => '订单类型。0批量订单；1面料小样；2样板订单；3样衣订单；4稀缺面料定金订单',
-            'cms_order_state'   => '订单状态。0未支付；1已支付；2已取消；3已过期；4退款中；5已退订；6订单异常',
-            'cms_business_state'=> '业务状态。0未完成；1完成',
+            'cms_status'        => '接收订单状态，默认0。0处理中；1完成；2终止，未完成',
             'cms_uuid'          => '外部标识',
      * )
      * @param string $str_field     查询字段
@@ -48,7 +47,7 @@ class order_buy_logic extends logic_order_buy_base
         $this->_init_logic($arr_query_params);
         //组装过滤条件
         $str_where_sql = '1=1';
-        $this->_batch_comm_query_where($arr_query_params,array('cms_start_time','cms_end_time'),$str_where_sql);
+        $this->_batch_comm_query_where($arr_query_params,array('cms_start_time','cms_end_time'),'in',$str_where_sql);
         //开始时间
         if(isset($arr_query_params['cms_start_time']))
         {
@@ -84,13 +83,12 @@ class order_buy_logic extends logic_order_buy_base
     }
 
     /**
-     * 查询订单详情
+     * 查询接收订单详情
      * @param array $arr_query_params array(
             'cms_id'            => '主键ID',
-            'cms_user_id'       => '用户ID',
-            'cms_order_type'    => '订单类型。0批量订单；1面料小样；2样板订单；3样衣订单；4稀缺面料定金订单',
-            'cms_order_state'   => '订单状态。0未支付；1已支付；2已取消；3已过期；4退款中；5已退订；6订单异常',
-            'cms_business_state'=> '业务状态。0未完成；1完成',
+            'cms_accept_user_id'=> '接收订单用户ID',
+            'cms_buy_order_id'  => '购买订单ID',
+            'cms_status'        => '接收订单状态，默认0。0处理中；1完成；2终止，未完成',
             'cms_uuid'          => '外部标识',
      * )
      * @param string $str_field     查询字段
@@ -105,7 +103,7 @@ class order_buy_logic extends logic_order_buy_base
         $this->_init_logic($arr_query_params);
         //组装过滤条件
         $str_where_sql = '1=1';
-        $this->_batch_comm_query_where($arr_query_params,array('cms_start_time','cms_end_time'),'=',$str_where_sql);
+        $this->_batch_comm_query_where($arr_query_params,array(),'=',$str_where_sql);
         //分组
         if(!empty($str_group))
         {
@@ -122,6 +120,66 @@ class order_buy_logic extends logic_order_buy_base
             $this->str_base_table = $str_join;
         }
         return $this->make_query_only_sql($str_where_sql,$this->str_base_table,$str_field);
+    }
+
+    /**
+     * 添加接收订单
+     * @param array$arr_add_params array(
+            'cms_id'            => '主键ID',
+            'cms_accept_user_id'=> '接收订单用户ID',
+            'cms_buy_order_id'  => '购买订单ID',
+            'cms_status'        => '接收订单状态，默认0。0处理中；1完成；2终止，未完成',
+            'cms_desc           => '商户描述',
+            'cms_uuid'          => '外部标识',
+     * )
+     * @return array array('ret' => 0/1,'reason' => '描述信息','data_info' => array('cms_id' => '唯一标识','cms_uuid' => '外部标识'))
+     */
+    public function add($arr_add_params)
+    {
+        //缺省参数
+        if(!isset($arr_add_params['cms_uuid']) || empty($arr_add_params['cms_uuid']))
+        {
+            $arr_add_params['cms_uuid'] = system_guid_rand();
+        }
+        //创建/修改时间
+        if(empty($arr_add_params['cms_create_time']) || empty($arr_add_params['cms_modify_time']))
+        {
+            $arr_add_params['cms_create_time'] = $arr_add_params['cms_modify_time'] = date('Y-m-d H:i:s');
+        }
+        //标准化入参
+        $this->_init_logic($arr_add_params);
+        //添加
+        $arr_add_ret = $this->make_insert_sql($this->except_useless_params($arr_add_params, $this->table_define,true),__LINE__);
+        if($arr_add_ret['ret'] == 0)
+        {
+            $arr_add_ret['data_info']['cms_uuid'] = $arr_add_params['cms_uuid'];
+        }
+        return $arr_add_ret;
+    }
+
+    /**
+     * 更新接收订单
+     * @param array $arr_ids          主键ID集合
+     * @param array $arr_edit_params  更新字段，请参照 $this->table_define
+     * @return array array('ret' => 0/1,'reason' => '描述信息')
+     */
+    public function edit($arr_ids,$arr_edit_params)
+    {
+        //标准化入参
+        $this->_init_logic($arr_edit_params);
+        $str_params_where = 'cms_id in (' . $this->_handle_array_string_params($arr_ids) . ')';
+        return $this->make_update_sql($arr_edit_params,$str_params_where);
+    }
+
+    /**
+     * 删除接收订单
+     * @param array $arr_ids          主键ID集合
+     * @return array array('ret' => 0/1,'reason' => '描述信息')
+     */
+    public function del($arr_ids)
+    {
+        $str_params_where = 'cms_id in (' . $this->_handle_array_string_params($arr_ids) . ')';
+        return $this->make_delete_sql($str_params_where);
     }
 
     /**
@@ -179,7 +237,7 @@ class order_buy_logic extends logic_order_buy_base
     /**
      * 通用数组/字符串
      */
-    private function _handle_array_string_params($obj_params)
+    private function _handle_array_string_params(&$obj_params)
     {
         if(is_string($obj_params))
         {
