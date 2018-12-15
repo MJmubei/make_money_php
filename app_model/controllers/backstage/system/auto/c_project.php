@@ -11,9 +11,94 @@ class c_project extends CI_Controller
      */
     public function index()
     {
+        $system_file_list = array(
+            array(
+                'url'=>'system/auto/c_project/add.php',
+                'class'=>'system-auto-c_project-add',
+                'ajax'=>'system/auto/c_project/add',
+                'function'=>'add',
+                'button_data'=>array( 
+                    array(
+                        'name'=>'添加',
+                        'icon'=>'fa-plus',
+                        'params'=>'',
+                        'where'=>'',
+                    ),
+                ),
+            ),
+            array(
+                'url'=>'system/auto/c_project/edit.php',
+                'class'=>'system-auto-c_project-edit',
+                'ajax'=>'system/auto/c_project/edit',
+                'function'=>'edit',
+                'button_data'=>array( 
+                    array(
+                        'name'=>'修改',
+                        'icon'=>'fa-pencil-square-o',
+                        'params'=>'',
+                        'where'=>'',
+                    ),
+                ),
+            ),
+            array(
+                'url'=>'system/auto/c_project/state.php',
+                'class'=>'system-auto-c_project-state',
+                'ajax'=>'system/auto/c_project/state',
+                'function'=>'state',
+                'button_data'=>array(
+                    array(
+                        'name'=>'启用',
+                        'icon'=>'fa-unlock',
+                        'params'=>'&cms_state=0',
+                        'where'=>array(
+                            'cms_state'=>0,
+                        ),
+                    ),
+                    array(
+                        'name'=>'禁用',
+                        'icon'=>'fa-lock',
+                        'params'=>'&cms_state=1',
+                        'where'=>array(
+                            'cms_state'=>1,
+                        ),
+                    ),
+                ),
+            ),
+            array(
+                'url'=>'system/auto/c_project/delete.php',
+                'class'=>'system-auto-c_project-delete',
+                'ajax'=>'system/auto/c_project/delete',
+                'function'=>'delete',
+                'button_data'=>array(
+                    array(
+                        'name'=>'删除',
+                        'icon'=>'fa-trash-o',
+                        'params'=>'',
+                        'where'=>'',
+                    ),
+                ),
+            ),
+            array(
+                'url'=>'system/auto/c_project/auto_make_project.php',
+                'class'=>'system-auto-c_project-auto_make_project',
+                'ajax'=>'system/auto/c_project/auto_make_project',
+                'function'=>'auto',
+                'button_data'=>array(
+                    array(
+                        'name'=>'自动生成项目',
+                        'icon'=>'fa-euro',
+                        'params'=>'',
+                        'where'=>'',
+                    ),
+                ),
+            ),
+            
+        );
         $this->_init_page();
         $where_params = array('where'=>($this->arr_params));
-        $this->load_view_file($this->auto_load_table('system','auto','c_project','system_project', 'query',$where_params),__LINE__);
+        $data_info = $this->auto_load_table('system','auto','c_project','system_project', 'query',$where_params);
+        $data_info['system_file_list'] = $system_file_list;
+        $this->load_view_file($data_info,__LINE__);
     }
     
     /**

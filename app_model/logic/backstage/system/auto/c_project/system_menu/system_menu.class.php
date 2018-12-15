@@ -3,7 +3,7 @@ include_once dirname(__FILE__).'/system_menu.base.php';
 class system_menu extends system_menu_base
 {
     
-      /**
+     /**
       * 添加信息
       * @param array $arr_params参数
       * @return array('ret'=>'状态码','reason'=>'原因')|string
@@ -29,8 +29,8 @@ class system_menu extends system_menu_base
     {
         $arr_params_set = $this->make_em_pre(isset($arr_params['set']) ? $arr_params['set'] : null);
         $arr_params_where = $this->make_em_pre(isset($arr_params['where']) ? $arr_params['where'] : null);
-        $arr_params_set = $this->_check_edit_del_params($this->table_define, $arr_params_set);
-        $arr_params_where = $this->_check_edit_del_params($this->table_define, $arr_params_where);
+        $arr_params_set = $this->_check_query_params($this->table_define, $arr_params_set);
+        $arr_params_where = $this->_check_query_params($this->table_define, $arr_params_where);
         if($arr_params_set['ret'] !=0)
         {
             return $arr_params_set;
@@ -53,7 +53,7 @@ class system_menu extends system_menu_base
     public function delete($arr_params=null)
     {
         $arr_params_where = $this->make_em_pre(isset($arr_params['where']) ? $arr_params['where'] : null);
-        $arr_params_where = $this->_check_edit_del_params($this->table_define, $arr_params_where);
+        $arr_params_where = $this->_check_query_params($this->table_define, $arr_params_where);
         if($arr_params_where['ret'] !=0)
         {
             return $arr_params_where;
@@ -71,7 +71,13 @@ class system_menu extends system_menu_base
     public function query($arr_params=null)
     {
         $arr_params_where = $this->make_em_pre(isset($arr_params['where']) ? $arr_params['where'] : null);
+        $arr_params_where_like = $this->make_em_pre(isset($arr_params['where_like']) ? $arr_params['where_like'] : null);
+        $arr_params_where_left_like = $this->make_em_pre(isset($arr_params['where_left_like']) ? $arr_params['where_left_like'] : null);
+        $arr_params_where_right_like = $this->make_em_pre(isset($arr_params['where_right_like']) ? $arr_params['where_right_like'] : null);
         $arr_params_where = $this->_except_empty_data($arr_params_where);
+        $arr_params_where_like = $this->_except_empty_data($arr_params_where_like);
+        $arr_params_where_left_like = $this->_except_empty_data($arr_params_where_left_like);
+        $arr_params_where_right_like = $this->_except_empty_data($arr_params_where_right_like);
         $arr_params_where = $this->_check_query_params($this->table_define, $arr_params_where);
         if($arr_params_where['ret'] !=0)
         {

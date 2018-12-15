@@ -401,13 +401,14 @@ if ( ! is_php('5.4'))
 	$method = $RTR->method;
 	
 // 	echo json_encode($RTR);die;
+// 	echo json_encode($class);die;
 	
 	if (empty($class) OR ! file_exists(APPPATH.'controllers/'.$RTR->directory.$class.'.php'))
 	{
 	    $e404 = TRUE;
 	}
 	else
-	{
+	{	    
 		require_once(APPPATH.'controllers/'.$RTR->directory.$class.'.php');
 		if ( ! class_exists($class, FALSE) OR $method[0] === '_' OR method_exists('CI_Controller', $method))
 		{
@@ -452,7 +453,6 @@ if ( ! is_php('5.4'))
 			}
 
 			$error_class = ucfirst($error_class);
-
 			if ( ! class_exists($error_class, FALSE))
 			{
 				if (file_exists(APPPATH.'controllers/'.$RTR->directory.$error_class.'.php'))
@@ -475,7 +475,6 @@ if ( ! is_php('5.4'))
 				$e404 = FALSE;
 			}
 		}
-
 		// Did we reset the $e404 flag? If so, set the rsegments, starting from index 1
 		if ( ! $e404)
 		{

@@ -7,13 +7,189 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class c_menu extends CI_Controller
 {
     /**
-     * 创建controll模板列表
+     * 列表页
      */
     public function index()
     {
+        $system_file_list = array(
+            array(
+                'url'=>'system/auto/c_menu/add.php',
+                'class'=>'system-auto-c_menu-add',
+                'ajax'=>'system/auto/c_menu/add',
+                'function'=>'add',
+                'button_data'=>array(
+                    array(
+                        'name'=>'添加',
+                        'icon'=>'fa-plus',
+                        'params'=>'',
+                        'where'=>'',
+                    ),
+                ),
+            ),
+            array(
+                'url'=>'system/auto/c_menu/edit.php',
+                'class'=>'system-auto-c_menu-edit',
+                'ajax'=>'system/auto/c_menu/edit',
+                'function'=>'edit',
+                'button_data'=>array(
+                    array(
+                        'name'=>'修改',
+                        'icon'=>'fa-pencil-square-o',
+                        'params'=>'',
+                        'where'=>'',
+                    ),
+                ),
+            ),
+            array(
+                'url'=>'system/auto/c_menu/state.php',
+                'class'=>'system-auto-c_menu-state',
+                'ajax'=>'system/auto/c_menu/state',
+                'function'=>'state',
+                'button_data'=>array(
+                    array(
+                        'name'=>'启用',
+                        'icon'=>'fa-unlock',
+                        'params'=>'&cms_state=0',
+                        'where'=>array(
+                            'cms_state'=>0,
+                        ),
+                    ),
+                    array(
+                        'name'=>'禁用',
+                        'icon'=>'fa-lock',
+                        'params'=>'&cms_state=1',
+                        'where'=>array(
+                            'cms_state'=>1,
+                        ),
+                    ),
+                ),
+            ),
+            array(
+                'url'=>'system/auto/c_menu/delete.php',
+                'class'=>'system-auto-c_menu-delete',
+                'ajax'=>'system/auto/c_menu/delete',
+                'function'=>'delete',
+                'button_data'=>array(
+                    array(
+                        'name'=>'删除',
+                        'icon'=>'fa-trash-o',
+                        'params'=>'',
+                        'where'=>'',
+                    ),
+                ),
+            ),
+            array(
+                'url'=>'system/auto/c_menu/auto_make_menu.php',
+                'class'=>'system-auto-c_menu-auto_make_menu',
+                'ajax'=>'system/auto/c_menu/auto_make_menu',
+                'function'=>'auto',
+                'button_data'=>array(
+                    array(
+                        'name'=>'自动生成菜单',
+                        'icon'=>'fa-euro',
+                        'params'=>'',
+                        'where'=>'',
+                    ),
+                ),
+            ),
+        
+        );
+        $result_project = $this->auto_load_table('system','auto','c_project','system_project', 'query');
+        if($result_project['ret'] !=0)
+        {
+            return $result_project;
+        }
+        $project_list = null;
+        if(isset($result_project['data_info']) && is_array($result_project['data_info']) && !empty($result_project['data_info']))
+        {
+            foreach ($result_project['data_info'] as $val)
+            {
+                $project_list[$val['cms_id']] = $val;
+            }
+        }
         $this->_init_page();
-        $result = $this->auto_load_table('system','auto','c_project','system_menu', 'query');
-        $this->load_view_file($this->auto_load_table('system','auto','c_project','system_menu', 'query'),__LINE__);
+        $where_params = array('where'=>($this->arr_params));
+        $data_info = $this->auto_load_table('system','auto','c_project','system_menu', 'query',$where_params);
+        $data_info['project_list'] = $project_list;
+        $data_info['system_file_list'] = $system_file_list;
+        $this->load_view_file($data_info,__LINE__);
+    }
+    
+
+    
+    /**
+     * 添加
+     */
+    public function add()
+    {
+        $insert_params = array('insert'=>($this->arr_params));
+        $this->load_view_file($this->auto_load_table('system','auto','c_project','system_menu', 'add',$insert_params),__LINE__);
+    }
+    
+    
+    /**
+     * 修改
+     */
+    public function edit()
+    {
+        $cms_id = isset($this->arr_params['cms_id']) ? $this->arr_params['cms_id'] : null;
+        if(strlen($cms_id) <1)
+        {
+            $this->load_view_file(em_return::return_data(1,'修改参数条件为空'),__LINE__);
+        }
+        unset($this->arr_params['cms_id']);
+        $edit_params = array(
+            'where'=>array(
+                'cms_id'=>$cms_id,
+            ),
+            'set'=>$this->arr_params,
+        );
+        $this->load_view_file($this->auto_load_table('system','auto','c_project','system_menu', 'edit',$edit_params),__LINE__);
+    }
+    
+    
+    
+    /**
+     * 删除
+     */
+    public function delete()
+    {
+        $cms_id = isset($this->arr_params['cms_id']) ? $this->arr_params['cms_id'] : null;
+        if(empty($cms_id) && !is_array($cms_id))
+        {
+            $this->load_view_file(em_return::return_data(1,'删除参数条件为空'),__LINE__);
+        }
+        $delete_params = array(
+            'where'=>array(
+                'cms_id'=>$cms_id,
+            ),
+        );
+        $this->load_view_file($this->auto_load_table('system','auto','c_project','system_menu', 'delete',$delete_params),__LINE__);
+    }
+    
+    
+    
+    public function state()
+    {
+        $cms_id = isset($this->arr_params['cms_id']) ? $this->arr_params['cms_id'] : null;
+        if(empty($cms_id) && !is_array($cms_id))
+        {
+            $this->load_view_file(em_return::return_data(1,'删除参数条件为空'),__LINE__);
+        }
+        $cms_state = isset($this->arr_params['cms_state']) ? $this->arr_params['cms_state'] : null;
+        if(strlen($cms_state) <1)
+        {
+            $this->load_view_file(em_return::return_data(1,'删除参数条件为空'),__LINE__);
+        }
+        $edit_params = array(
+            'set'=>array(
+                'cms_state'=>$cms_state,
+            ),
+            'where'=>array(
+                'cms_id'=>$cms_id,
+            ),
+        );
+        $this->load_view_file($this->auto_load_table('system','auto','c_project','system_menu', 'edit',$edit_params),__LINE__);
     }
     
     
@@ -70,7 +246,7 @@ class c_menu extends CI_Controller
         {
             return em_return::return_data(1,'没有需要生成的目录');
         }
-        $result_poject = $this->auto_load_table('system','auto','c_project','system_project', 'query',array('where'=>array('cms_mark'=>$temp_arr['prject'],'cms_state'=>0)));
+        $result_poject = $this->auto_load_table('system','auto','c_project','system_menu', 'query',array('where'=>array('cms_mark'=>$temp_arr['prject'],'cms_state'=>0)));
         if($result_poject['ret'] !=0)
         {
             return $result_poject;

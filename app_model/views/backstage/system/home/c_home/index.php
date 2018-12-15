@@ -4,14 +4,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-
-
 <link href="<?php echo VIEW_MODEL_BACKGROUD; ?>hplus/css/bootstrap.min14ed.css" rel="stylesheet">
 <link href="<?php echo VIEW_MODEL_BACKGROUD; ?>hplus/css/font-awesome.min93e3.css" rel="stylesheet">
 <link href="<?php echo VIEW_MODEL_BACKGROUD; ?>hplus/css/animate.min.css" rel="stylesheet">
 <link href="<?php echo VIEW_MODEL_BACKGROUD; ?>hplus/css/style.min862f.css" rel="stylesheet">
-
-
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden">
 	<div id="wrapper">
@@ -25,7 +21,7 @@
 					<li class="nav-header">
 						<div class="dropdown profile-element">
 							<span><img alt="image" class="img-circle"
-								src="img/profile_small.jpg" /></span> <a data-toggle="dropdown"
+								src="#" /></span> <a data-toggle="dropdown"
 								class="dropdown-toggle" href="#"> <span class="clear">
 									<span class="block m-t-xs"><strong class="font-bold">Beaut-zihan</strong></span>
 									<span class="text-muted text-xs block">超级管理员<b
@@ -33,16 +29,16 @@
 							</span>
 							</a>
 							<ul class="dropdown-menu animated fadeInRight m-t-xs">
-								<li><a class="J_menuItem" href="form_avatar.html">修改头像</a>
+								<li><a class="J_menuItem" href="#">修改头像</a>
 								</li>
-								<li><a class="J_menuItem" href="profile.html">个人资料</a></li>
-								<li><a class="J_menuItem" href="contacts.html">联系我们</a></li>
-								<li><a class="J_menuItem" href="mailbox.html">信箱</a></li>
+								<li><a class="J_menuItem" href="#">个人资料</a></li>
+								<li><a class="J_menuItem" href="#">联系我们</a></li>
+								<li><a class="J_menuItem" href="#">信箱</a></li>
 								<li class="divider"></li>
-								<li><a href="login.html">安全退出</a></li>
+								<li><a href="#">安全退出</a></li>
 							</ul>
 						</div>
-						<div class="logo-element">H+</div>
+						<div class="logo-element"></div>
 					</li>
 					<?php $i=0;if(isset($data_info) && is_array($data_info)){foreach ($data_info as $menu_1_val){?>
         			     <?php if(isset($menu_1_val['child_list']) && is_array($menu_1_val['child_list']) && !empty($menu_1_val['child_list']) && isset($menu_1_val['child_list'][0]['child_list'][0]['data']['cms_url'])){?>
@@ -97,7 +93,7 @@
 								<li class="m-t-xs">
 									<div class="dropdown-messages-box">
 										<a href="profile.html" class="pull-left"> <img alt="image"
-											class="img-circle" src="img/a7.jpg">
+											class="img-circle" src="#">
 										</a>
 										<div class="media-body">
 											<small class="pull-right">46小时前</small> <strong>小四</strong>
@@ -110,7 +106,7 @@
 								<li>
 									<div class="dropdown-messages-box">
 										<a href="profile.html" class="pull-left"> <img alt="image"
-											class="img-circle" src="img/a4.jpg">
+											class="img-circle" src="#">
 										</a>
 										<div class="media-body ">
 											<small class="pull-right text-navy">25小时前</small> <strong>国民岳父</strong>
