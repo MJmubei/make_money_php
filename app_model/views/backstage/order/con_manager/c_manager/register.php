@@ -30,6 +30,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
     <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/jquery-1.10.2.min.js"></script>
     <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/bootstrap.min.js"></script>
     <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/bootstrapValidator.min.js"></script>
+    <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/md5.js"></script>
     <script type="text/javascript">
         $(function(){/* 文档加载，执行一个函数*/
             $('#defaultForm').bootstrapValidator({
@@ -129,7 +130,11 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                 }
             }).on('success.form.bv',function(e){
                 e.preventDefault();
-                var url = '../../../../../../../make_money_php/index.php/backstage/order/con_manager/c_manager/registry';
+                var url = 'registry';
+                var md5_password =  hex_md5($('#password').val());
+                var md5_confirmPassword =  hex_md5($('#confirmPassword').val());
+                $('#password').val(md5_password);
+                $('#confirmPassword').val(md5_confirmPassword);
                 var submitData = $('#defaultForm').serialize() + "&flag_ajax_reurn=1";
                 //submitData是解码后的表单数据，结果同上
                 $.post(url, submitData, function(result){
@@ -141,6 +146,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                     }
                     else
                     {
+                        alert('注册成功');
                         window.location.href='login';
                     }
                 });
@@ -175,10 +181,12 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                         <div class="form-group">
                             <select class="form-control-select" name="role_id">
                                 <option value="" selected></option>
-                                <option value="1">系统管理员</option>
-                                <option value="2">供应商</option>
-                                <option value="3">订购商</option>
-                                <option value="4">生产商</option>
+                                <option value="1">订单管理员</option>
+                                <option value="2">平台管理</option>
+                                <option value="3">生产商</option>
+                                <option value="4">供应商</option>
+                                <option value="5">样板师</option>
+                                <option value="6">样衣师</option>
                             </select>
                             <i class="fa fa-user"></i>
                             <label class="label-select">请选择角色</label>

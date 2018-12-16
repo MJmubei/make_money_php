@@ -51,7 +51,6 @@ class c_manager extends CI_Controller
                 'telephone' => $this->arr_params['telephone'],
             ),
         );
-
         $user = $this->auto_load_table('order','manager', 'c_manager', 'manager', 'query_only', $params);
         if ($user['ret'] != 0 || !is_array($user['data_info']) && count($user['data_info']) < 1)
         {
@@ -59,30 +58,34 @@ class c_manager extends CI_Controller
             $this->load_view_file($re,__LINE__);
         }
         //用户密码加密后进行验证
-        if ($user['data_info']['password'] != md5($this->arr_params['password']))
+        if ($user['data_info']['cms_password'] != $this->arr_params['password'])
         {
             $re = em_return::return_data(1,'密码错误');
-            $this->load_view($re,__LINE__);
+            $this->load_view_file($re,__LINE__);
         }
         //添加到session
         $data = array(
             'set' => array(
                 'login_time' => date('Y-m-d H:i:s'),
                 'user_ip' => $_SERVER['REMOTE_ADDR'],
-                'login_count' => $user['nns_login_count']+1,
+                'login_count' => $user['data_info']['cms_login_count']+1,
             ),
             'where' => array(
-                'id' => $user['nns_id'],
+                'id' => $user['data_info']['cms_id'],
             ),
         );
         $modify_info = $this->auto_load_table('order','manager', 'c_manager', 'manager', 'edit', $data);
         if ($modify_info['ret'] != 0)
         {
-            return em_return::return_data(1,'登陆异常，请联系超级管理员', '', '', '', 'json');
+            $re = em_return::return_data(1,'登陆异常，请联系超级管理员');
+            $this->load_view_file($re,__LINE__);
         }
+        $data['set']['telephone'] =  $this->arr_params['telephone'];
+        $data['set']['user_id'] =  $user['data_info']['cms_id'];
+        $data['set']['role_id'] =  $user['data_info']['cms_role_id'];
         $this->session->set_userdata($data['set']);
-        #todo 跳转到管理员个人中心页面
-        $this->load_view(array('1','2'),__LINE__);
+        $re = em_return::return_data(0,'登陆成功');
+        $this->load_view_file($re,__LINE__);
     }
 
     /**
@@ -156,11 +159,17 @@ class c_manager extends CI_Controller
         #todo 调取短信验证码，并验证短信
 
         $time = date('Y-m-d H:i:s');
-        $this->arr_params['password'] = md5($this->arr_params['password']);
-        $this->arr_params['create_time'] = $time;
-        $this->arr_params['modify_time'] = $time;
-        $this->arr_params['user_ip'] = $_SERVER['REMOTE_ADDR'];
-        $add_user = $this->auto_load_table('order','manager', 'c_manager', 'manager', 'add', $this->arr_params);
+        $add_params = array(
+            'insert' => array(
+                'telephone' => $this->arr_params['telephone'],
+                'password' => $this->arr_params['password'],
+                'create_time' => $time,
+                'modify_time' => $time,
+                'user_ip' => $_SERVER['REMOTE_ADDR'],
+                'role_id' => $this->arr_params['role_id'],
+            ),
+        );
+        $add_user = $this->auto_load_table('order','manager', 'c_manager', 'manager', 'add', $add_params);
         if ($add_user['ret'] != 0)
         {
             $re = em_return::return_data(1,'注册失败');

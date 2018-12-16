@@ -30,6 +30,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
     <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/jquery-1.10.2.min.js"></script>
     <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/bootstrap.min.js"></script>
     <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/bootstrapValidator.min.js"></script>
+    <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/md5.js"></script>
     <script type="text/javascript">
         $(function(){/* 文档加载，执行一个函数*/
             $('#defaultForm').bootstrapValidator({
@@ -82,7 +83,9 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                     }
             }).on('success.form.bv',function(e){
                 e.preventDefault();
-                var url = '../../../../../../../make_money_php/index.php/backstage/order/con_manager/c_manager/sigin';
+                var url = 'sigin';
+                var md5_password =  hex_md5($('#password').val());
+                $('#password').val(md5_password);
                 var submitData = $('#defaultForm').serialize() + "&flag_ajax_reurn=1";
                 //submitData是解码后的表单数据，结果同上
                 $.post(url, submitData, function(result){
@@ -94,7 +97,8 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                     }
                     else
                     {
-                        window.location.href='../../../../system/home/c_home/index';
+                        alert('登陆成功');
+                        window.location.href='../../../../backstage/order/index/c_index/index?project_id=' + <?php echo $this->session->userdata('role_id');?>;
                     }
                 });
             });
