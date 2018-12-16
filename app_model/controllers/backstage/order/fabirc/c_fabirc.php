@@ -35,7 +35,7 @@ class c_fabirc extends CI_Controller
         $this->load_view_file($return_arr,__LINE__);
     }
 
-    public function fabirc_v2()
+    public function fabirc()
     {
         $this->_init_page();
         $fabirc = array();
