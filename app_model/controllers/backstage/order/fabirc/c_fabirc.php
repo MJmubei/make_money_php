@@ -62,4 +62,9 @@ class c_fabirc extends CI_Controller
         //取出面辅料
         $this->load_view_file($return_arr,__LINE__);
     }
+
+    public function shopping_list()
+    {
+        $this->load_view_file(array('fabirc' => array()),__LINE__);
+    }
 }
