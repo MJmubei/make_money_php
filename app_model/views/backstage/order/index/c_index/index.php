@@ -1,4 +1,36 @@
-<?php if(!defined('VIEW_MODEL_BACKGROUD')){define('VIEW_MODEL_BACKGROUD', '/CodeIgniter/view_model/backstage/');}?>
+<?php
+    if(!defined('VIEW_MODEL_BACKGROUD')){
+        define('VIEW_MODEL_BACKGROUD', '/CodeIgniter/view_model/backstage/');
+    }
+    if(empty($user_id) || empty($project_id))
+    {
+        echo "<script>window.location.href='../../../order/con_manager/c_manager/login';</script>";die;
+    }
+    switch ($project_id)
+    {
+        case '1':
+            $role = '';
+            break;
+        case '2':
+            $role = '平台管理员';
+            break;
+        case '3':
+            $role = '生产商';
+            break;
+        case '4':
+            $role = '供应商';
+            break;
+        case '5':
+            $role = '样板师';
+            break;
+        case '6':
+            $role = '样衣师';
+            break;
+        default:
+            $role = '超级管理员';
+            break;
+    }
+    ?>
 <title>服装系统</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -205,8 +237,8 @@
         <div class="footer">
             <div class="pull-right">
                 Copyright &copy; 2018.Company name All rights reserved.More Templates
-                <a href="http://www.cssmoban.com/" target="_blank" title="任性工作室">任性工作室</a>
-                - Collect from <a href="http://www.cssmoban.com/" title="任性工作室"
+                <a href="../../../order/index/c_index/index?project_id=<?php echo $project_id;?>" target="_blank" title="任性工作室">任性工作室</a>
+                - Collect from <a href="../../../order/index/c_index/index?project_id=<?php echo $project_id;?>" title="任性工作室"
                                   target="_blank">任性工作室</a>
             </div>
         </div>
