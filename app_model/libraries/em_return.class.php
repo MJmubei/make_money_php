@@ -157,6 +157,7 @@ class em_return
             'page_info' => $page_data,
             'other_info' => $other_data
         );
+
         if ($format == 'json')
         {
             $last_result = json_encode($result);

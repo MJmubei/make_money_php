@@ -304,3 +304,31 @@ if ( ! function_exists('repeater'))
 		return ($num > 0) ? str_repeat($data, $num) : '';
 	}
 }
+
+// 32位随机字符串，GUUID------------------------------------------------------------------------
+
+if ( ! function_exists('system_guid_rand'))
+{
+    function system_guid_rand($something = "rand")
+    {
+        $result = dechex(  time() );
+        $result = $result.dechex( system_millisecond() );
+
+        $a = "";
+        if( isset( $_ENV ["COMPUTERNAME"] ) )
+            $a .= $_ENV ["COMPUTERNAME"];
+        if( isset( $_SERVER ["SERVER_ADDR"] ) )
+            $a .= $_SERVER ["SERVER_ADDR"];
+        if( isset( $_SERVER ["REMOTE_ADDR"] ) )
+            $a .= $_SERVER ["REMOTE_ADDR"];
+
+        $a = $a.rand(0,10000);
+        $a = $a.rand(0,10000);
+        $a = $a.rand(0,10000);
+        $a = $a.microtime ();
+
+
+        $result = $result.md5( $a.$something );
+        return substr( $result, 0, 32 );
+    }
+}

@@ -2,11 +2,10 @@
     $int_page_show_num =5;
     $int_page_show_num = ($int_page_show_num%5) == '1' ? $int_page_show_num+1 : $int_page_show_num;
     $arr_page_index = array(
-        '1',
-        '6',
-        '12',
-        '24',
-        '48',
+        '5',
+        '10',
+        '25',
+        '50',
         '100',
     );
     $int_page_size = (!isset($page_info['cms_page_size']) || !in_array($page_info['cms_page_size'], $arr_page_index)) ? $arr_page_index[0] : $page_info['cms_page_size'];
