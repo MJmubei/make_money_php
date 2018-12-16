@@ -9,16 +9,46 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class c_index extends CI_Controller
 {
     /**
-     * 列表页
+     *  首页数据
      */
     public function index()
     {
+        session_start();
         $data = $this->__index_menu();
         if(is_array($data) && !empty($data))
         {
             $data = $this->system_auto_make_menu_arr($data);
         }
-        $this->load_view_file(em_return::return_data(0,'ok',$data),__LINE__);
+        switch ($this->arr_params['project_id'])
+        {
+            case '1':
+                $role = '';
+                break;
+            case '2':
+                $role = '平台管理员';
+                break;
+            case '3':
+                $role = '生产商';
+                break;
+            case '4':
+                $role = '供应商';
+                break;
+            case '5':
+                $role = '样板师';
+                break;
+            case '6':
+                $role = '样衣师';
+                break;
+            default:
+                $role = '超级管理员';
+                break;
+        }
+        $retun_arr = array(
+            'data_info' => $data,
+            'user_id' => '17302816961',//$this->session->userdata('role_id'),
+            'role' => $role,
+        );
+        $this->load_view_file($retun_arr,__LINE__);
     }
 
     private function __index_menu($level = 1,$parent_id = 0)
