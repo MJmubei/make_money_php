@@ -24,7 +24,7 @@ class np_http_curl_class
     /**
      * file_get_contents/curl（支持IPV4/IPV6）
      */
-    function file_contents_http_request($filename, $use_include_path = false, $context = null, $offset = null, $maxlen = null)
+    public function file_contents_http_request($filename, $use_include_path = false, $context = null, $offset = null, $maxlen = null)
     {
         $params_count = func_num_args();
         if($params_count < 1)
