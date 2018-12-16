@@ -62,7 +62,7 @@
             			     <li>
         					   <a class="select_cl">
                                    <input type="hidden" value="../../../<?php echo $menu_1_val['child_list'][0]['child_list'][0]['data']['cms_url'];?>" />
-        					       <i class="fa fa-flask"></i> 
+        					       <i class="fa fa-flask"></i>
         					       <span class="nav-label"><?php echo $menu_1_val['data']['cms_name'];?></span>
         					       <span class="fa arrow"></span>
         				       </a>
