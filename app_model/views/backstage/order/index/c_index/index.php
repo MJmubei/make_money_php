@@ -76,7 +76,7 @@
 <!--                            <li><a class="J_menuItem" href="contacts.html">联系我们</a></li>-->
 <!--                            <li><a class="J_menuItem" href="mailbox.html">信箱</a></li>-->
 <!--                            <li class="divider"></li>-->
-                            <li><a href="login.html">安全退出</a></li>
+                            <li><a href="../../con_manager/c_manager/logout">安全退出</a></li>
                         </ul>
                     </div>
                     <div class="logo-element">H+</div>

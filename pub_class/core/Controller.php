@@ -34,7 +34,7 @@ class CI_Controller
     public $arr_page_params = null;
 
 
-    public $need_login = false;//项目全局登陆验证
+    public $need_login = true;//项目全局登陆验证
 
     /**
      * Class constructor
@@ -72,7 +72,7 @@ class CI_Controller
         $this->load =& load_class('Loader', 'core');
         $this->load->initialize();
         $this->_check_params();
-        //$this->auto_check_login();
+        $this->auto_check_login();//全局登陆验证
         if(isset($this->arr_params['cms_page_num']))
         {
             $this->arr_page_params['cms_page_num'] = (int)$this->arr_params['cms_page_num'];
@@ -549,9 +549,22 @@ class CI_Controller
      * @param string $params
      * @param string $str_databse
      */
-    public function auto_check_login($str_table,$str_method,$params=null)
+    public function auto_check_login()
     {
-
+        if($this->need_login)
+        {
+            $this->load->library('session');
+            $session_telephone = $this->session->userdata('telephone');
+            $session_role = $this->session->userdata('role_id');
+            if (!$session_telephone || !$session_role)
+            {
+                $url = "../../../../backstage/order/con_manager/c_manager/login";//判断登录超时后，要跳转到的页面
+                echo "<script language='javascript' type='text/javascript'>";
+                echo "window.location.href='$url'";
+                echo "</script>";
+                exit;
+            }
+        }
     }
 
     /**

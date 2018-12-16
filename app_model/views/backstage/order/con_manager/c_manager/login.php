@@ -75,7 +75,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 regexp: {
                                     min: 11,
                                     max: 11,
-                                    regexp: /^1[3|5|8]{1}[0-9]{9}$/,
+                                    regexp: /^1\d{10}$/,
                                     message: '请输入正确的手机号码'
                                 }
                             }
@@ -98,12 +98,11 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                     else
                     {
                         alert('登陆成功');
-                        window.location.href='../../../../backstage/order/index/c_index/index?project_id=' + <?php echo $this->session->userdata('role_id');?>;
+                        window.location.href='../../../../backstage/order/index/c_index/index';
                     }
                 });
             });
         });
-
 
     </script>
 </head>

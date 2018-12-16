@@ -8,9 +8,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class c_manager extends CI_Controller
 {
 
-
     public function __construct($str_class = null, $str_file = null, $str_method = null, $str_directory = null)
     {
+        $this->need_login = false;
         parent::__construct($str_class, $str_file, $str_method, $str_directory);
         $this->load->library('session');
     }
@@ -81,8 +81,8 @@ class c_manager extends CI_Controller
             $this->load_view_file($re,__LINE__);
         }
         $data['set']['telephone'] =  $this->arr_params['telephone'];
-        $data['set']['user_id'] =  $user['data_info']['cms_id'];
-        $data['set']['role_id'] =  $user['data_info']['cms_role_id'];
+        $data['set']['user_id'] = isset($user['data_info']['cms_id']) ? $user['data_info']['cms_id'] : '';
+        $data['set']['role_id'] =  isset($user['data_info']['cms_role_id']) ? $user['data_info']['cms_role_id'] : '';
         $this->session->set_userdata($data['set']);
         $re = em_return::return_data(0,'登陆成功');
         $this->load_view_file($re,__LINE__);
@@ -93,13 +93,11 @@ class c_manager extends CI_Controller
      */
     public function logout()
     {
-        unset($_SESSION['user']);
-        $str_path_info = (strlen($this->get_str_load_stage()) >0) ? $this->get_str_load_stage() : '';
-        $str_path_info .= (strlen($this->get_str_load_project()) >0) ? '/'.$this->get_str_load_project() : '';
-        $str_path_info .= (strlen($this->get_str_load_model()) >0) ? '/'.$this->get_str_load_model() : '';
-        $str_path_info .= (strlen($this->get_str_load_class()) >0) ? '/'.$this->get_str_load_class() : '';
-        $str_path_info .= '/login';
-        $this->load_view_file(array('1','2'),__LINE__);
+        $this->session->unset_userdata('telephone');
+        $this->session->unset_userdata('user_id');
+        $this->session->unset_userdata('role_id');
+        echo "<script>window.location.href='login';</script>";
+        exit;
     }
 
     /**

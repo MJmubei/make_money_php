@@ -19,15 +19,21 @@ class c_index extends CI_Controller
      */
     public function index()
     {
+        if(empty($this->session->userdata('telephone')) || empty($this->session->userdata('role_id')))
+        {
+            echo "<script>window.location.href='../../../order/con_manager/c_manager/login';</script>";die;
+        }
+        $this->arr_params['project_id'] = $this->session->userdata('role_id');
         $data = $this->__index_menu();
         if(is_array($data) && !empty($data))
         {
             $data = $this->system_auto_make_menu_arr($data);
         }
+
         $retun_arr = array(
             'data_info' => $data,
-            'user_id' => '',//$this->session->userdata('user_id')
-            'project_id' => '',//$this->session->userdata('role_id')
+            'user_id' => $this->session->userdata('telephone'),
+            'project_id' => $this->session->userdata('role_id'),
         );
         $this->load_view_file($retun_arr,__LINE__);
     }
