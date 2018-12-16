@@ -35,7 +35,7 @@ class c_fabirc extends CI_Controller
         $this->load_view_file($return_arr,__LINE__);
     }
 
-    public function fabirc()
+    public function fabirc_v2()
     {
         $this->_init_page();
         $fabirc = array();
@@ -54,8 +54,40 @@ class c_fabirc extends CI_Controller
             $fabirc = $fabirc['data_info'];
         }
 
+        //底部选择框
+        $system_file_list = array(
+            array(
+                'url'=>'system/auto/c_project/add.php',
+                'class'=>'system-auto-c_project-add',
+                'ajax'=>'system/auto/c_project/add',
+                'function'=>'edit',
+                'button_data'=>array(
+                    array(
+                        'name'=>'下一步',
+                        'icon'=>'fa-book',
+                        'params'=>'',
+                        'where'=>'',
+                    ),
+                ),
+            ),
+            array(
+                'url'=>'system/auto/c_project/auto_make_project.php',
+                'class'=>'system-auto-c_project-auto_make_project',
+                'ajax'=>'system/auto/c_project/auto_make_project',
+                'function'=>'auto',
+                'button_data'=>array(
+                    array(
+                        'name'=>'自动生成项目',
+                        'icon'=>'fa-euro',
+                        'params'=>'',
+                        'where'=>'',
+                    ),
+                ),
+            ),
+        );
         $return_arr = array(
-            'fabirc' => $fabirc,//面辅料
+            'data_info' => $fabirc,//面辅料
+            'system_file_list' => $system_file_list,
             'url_params'  => $this->arr_params,
             'page_info'   => $page_info,
         );
