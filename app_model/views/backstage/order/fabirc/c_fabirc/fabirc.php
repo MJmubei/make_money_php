@@ -155,10 +155,7 @@
                 <button class="btn blue" type="button" id="btn_tablecheckbox_exchange">
                     <i class="fa fa-times-circle-o"> 反选</i>
                 </button>
-
-                <button class="btn purple" type="button" id="btn_tablecheckbox_exchange">
-                    <i class="fa fa-book"> 购物车列表</i>
-                </button>
+                <?php include_once dirname(__FILE__).'/shopping_list.php';?> <!-- 购物列表-->
                 <button class="btn purple" type="button" id="btn_tablecheckbox_exchange">
                     <i class="fa fa-book"> 支付面料</i>
                 </button>
