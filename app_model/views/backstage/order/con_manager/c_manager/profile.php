@@ -2,7 +2,7 @@
 /**
  * Created by <stacrcor.com>.
  * Author: xinxin.deng
- * Date: 2018/12/16 15:27
+ * Date: 2018/12/18 17:38
  */
 if(!defined('VIEW_MODEL_BACKGROUD'))
 {
@@ -191,22 +191,6 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
         .center{
             text-align: center!important;
         }
-
-        .nav-tabs {
-            border-color: #c5d0dc;
-            margin-bottom: 0;
-            margin-left: 0;
-            position: relative;
-            top: 1px;
-        }
-        .nav-tabs.padding-12 {
-            padding-left: 12px;
-        }
-        .nav-tabs.background-blue {
-            padding-top: 6px;
-            background-color: #eff3f8;
-            border: 1px solid #c5d0dc;
-        }
     </style>
     <script type="text/javascript">
         $(function() {
@@ -256,43 +240,11 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
 </head>
 <body>
 <div class="col-xs-12">
-    <div class="tabbale">
-        <ul class="nav nav-tabs padding-12 tab-color-blue background-blue" id="myTab4">
-
-            <li class="active">
-                <a data-toggle="tab" href="#profile">基本资料</a>
-            </li>
-
-            <li>
-                <a data-toggle="tab" href="#edit_profile">完善资料</a>
-            </li>
-
-            <li>
-                <a data-toggle="tab" href="#edit_password">修改密码</a>
-            </li>
-
-            <li>
-                <a data-toggle="tab" href="#edit_telephone">修改手机号</a>
-            </li>
-        </ul>
-        <div class="tab-content">
-            <!--基本资料-->
-            <div class="user-profile row tab-pane active" id="profile">
-                <div class="col-xs-12 col-sm-3 center">
-                    <div>
-                    <span class="profile-picture">
-                        <img class="editable img-resposive editable-click" src="<?php echo VIEW_MODEL_BACKGROUD; ?>images/profile-pic.jpg">
-                    </span>
-                        <div class="space-4"></div>
-                        <div class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">
-                            <div class="inline position-relative">
-                                <span class="white"><?PHP echo $user['cms_name']?></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-9">
-                    <div class="profile-user-info profile-user-info-striped">
+    <div>
+        <div class="user-profile row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="profile-user-info profile-user-info-striped">
+                    <form>
                         <div class="profile-info-row">
                             <div class="profile-info-name">用户id</div>
 
@@ -349,96 +301,16 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 <span class="editable" id="about">Editable as WYSIWYG</span>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <!--完善资料-->
-            <div class="user-profile row tab-pane" id="edit_profile">
-                <div class="col-xs-12 col-sm-12">
-                    <form>
-                        <div class="profile-user-info profile-user-info-striped">
 
-                            <div class="profile-info-row">
-                                <div class="profile-info-name">用户id</div>
-
-                                <div class="profile-info-value">
-                                    <span class="editable" id="user_id"><?PHP echo $user['cms_id']?></span>
-                                </div>
-                            </div>
-                            <div class="profile-info-row">
-                                <div class="profile-info-name">用户名</div>
-
-                                <div class="profile-info-value">
-                                    <input type="text" class="editable" id="username" value="<?PHP echo $user['cms_name']?>">
-                                </div>
-                            </div>
-
-                            <div class="profile-info-row">
-                                <div class="profile-info-name">手机号</div>
-
-                                <div class="profile-info-value">
-                                    <span class="editable" id="telephone"><?PHP echo $user['cms_telephone']?></span>
-                                </div>
-                            </div>
-
-                            <div class="profile-info-row">
-                                <div class="profile-info-name">地址</div>
-
-                                <div class="profile-info-value">
-                                    <input type="text" class="editable" id="address" value="<?PHP if (isset($user['cms_address'])){echo $user['cms_address'];}?>">
-                                </div>
-                            </div>
-
-                            <div class="profile-info-row">
-                                <div class="profile-info-name">邮箱</div>
-
-                                <div class="profile-info-value">
-                                    <input type="email" class="editable" id="email" value="<?PHP echo $user['cms_email']?>">
-                                </div>
-                            </div>
-
-                            <div class="profile-info-row">
-                                <div class="profile-info-name">用户角色</div>
-
-                                <div class="profile-info-value">
-                                    <span class="editable" id="login">3 hours ago</span>
-                                </div>
-                            </div>
-
-                            <div class="profile-info-row">
-                                <div class="profile-info-name">简介</div>
-
-                                <div class="profile-info-value">
-                                    <input type="text" class="editable" id="desc"value="<?PHP echo $user['cms_desc']?>">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="profile-info-row center">
+                        <div class="profile-info-row">
                             <button class="btn btn-primary">确认修改</button>
                         </div>
                     </form>
+
                 </div>
             </div>
-
         </div>
-
-
     </div>
-    <!--<div class="hr dotted"></div>-->
-    <!--<div class="">-->
-    <!--    <div class="col-xs-12 center">-->
-    <!--        <div class="col-xs-12 col-sm-3">-->
-    <!--            <button class="btn btn-primary" href="edit_profile">完善资料</button>-->
-    <!--        </div>-->
-    <!--        <div class="col-xs-12 col-sm-3">-->
-    <!--            <button class="btn btn-primary">修改密码</button>-->
-    <!--        </div>-->
-    <!--        <div class="col-xs-12 col-sm-3">-->
-    <!--            <button class="btn btn-primary">修改手机号</button>-->
-    <!--        </div>-->
-    <!--        <div class="col-xs-12 col-sm-3"></div>-->
-    <!--    </div>-->
-    <!--</div>-->
 </div>
 
 </body>
