@@ -33,3 +33,15 @@ CREATE TABLE IF NOT EXISTS `cms_accept_order` (
   KEY `index_accept_user_order` (`cms_accept_user_id`,`cms_buy_order_id`)
 )ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+-- ------------------------------------------------------------------------------------
+-- Table Shop User Money. By kan.yang@starcor.com. Date 2018-12-16 13:00:00
+-- ------------------------------------------------------------------------------------
+ALTER TABLE `order_manager` ADD COLUMN `cms_user_money` DECIMAL(10,2) NOT NULL DEFAULT 0.00 COMMENT '用户余额';
+
+-- ------------------------------------------------------------------------------------
+-- Table Shop Buy Order Column. By kan.yang@starcor.com. Date 2018-12-16 15:00:00
+-- ------------------------------------------------------------------------------------
+ALTER TABLE `system_buy_order` ADD COLUMN `cms_order_desc` VARCHAR(256) NOT NULL DEFAULT '' COMMENT '订单描述';
+ALTER TABLE `system_buy_order` ADD COLUMN `cms_pay_order_code` INT(11) NOT NULL COMMENT '购买订单ID（订单系统对应主键）';
+ALTER TABLE `system_buy_order` DROP COLUMN nns_order_data;
+

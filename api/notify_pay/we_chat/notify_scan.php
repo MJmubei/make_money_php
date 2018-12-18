@@ -26,6 +26,33 @@ if(!isset($arr_notify_data) || empty($arr_notify_data))
 }
 unset($obj_notify_data);
 
+include_once dirname(dirname(dirname(__DIR__))) . 'pub_class/libraries/Pay/WeChat/WxPay.Api.php';
+class cms_wechat_notify_scan
+{
+
+    public function __construct()
+    {
+
+    }
+
+    public function init()
+    {
+
+    }
+
+    /**
+     * 验签
+     */
+    private function _check_sign()
+    {
+
+    }
+
+    private function _xml_array()
+    {
+
+    }
+}
 //查询订单信息
 $str_buy_order = $arr_notify_data['out_trade_no'];
 

@@ -511,3 +511,9 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+
+//引入自定义配置文件
+include_once dirname(__FILE__) . '/config_app.php';
+$arr_config_app = isset($arr_config_app) ? $arr_config_app : array();
+$config = array_merge($config,$arr_config_app);

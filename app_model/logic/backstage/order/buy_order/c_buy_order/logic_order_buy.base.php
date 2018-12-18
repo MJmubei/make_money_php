@@ -123,17 +123,23 @@ class logic_order_buy_base extends em_logic
             'length' => '32',
             'desc' => 'GUUID，外部标识',
         ),
-        'nns_order_data' => array(
-            'type' => 'text',
+        'cms_order_desc' => array(
+            'type' => 'varchar',
             'isempty' => '',
-            'length' => '',
-            'desc' => '订单数据，以JSON格式存储',
+            'length' => '0-256',
+            'desc' => '订单描述',
         ),
         'nns_order_parent' => array(
             'type' => 'int',
             'isempty' => '',
             'length' => '0-11',
             'desc' => '父级订单ID',
+        ),
+        'cms_pay_order_code' => array(
+            'type' => 'int',
+            'isempty' => '',
+            'length' => '0-11',
+            'desc' => '购买订单ID（订单系统对应主键）',
         ),
     );
 

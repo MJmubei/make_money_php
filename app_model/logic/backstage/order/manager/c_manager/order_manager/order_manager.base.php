@@ -138,6 +138,12 @@ class order_manager_base extends em_logic
                 'length' => '',
                 'desc' => '描述信息',
             ),
+            'cms_user_money' => array(
+                'type' => 'DECIMAL',
+                'isempty' => '',
+                'length' => '',
+                'desc' => '用户余额',
+            ),
         ),
     );
 }

@@ -42,7 +42,7 @@ class order_buy_logic extends logic_order_buy_base
             'cms_end_time'      => '结束时间',
             'cms_order_type'    => '订单类型。0批量订单；1面料小样；2样板订单；3样衣订单；4稀缺面料定金订单',
             'cms_order_state'   => '订单状态。0未支付；1已支付；2已取消；3已过期；4退款中；5已退订；6订单异常',
-            'cms_business_state'=> '业务状态。0未完成；1完成',
+            'cms_business_state'=> '业务状态。0未完成；1成功；2失败',
             'cms_uuid'          => '外部标识',
      * )
      * @param string $str_field     查询字段
@@ -99,8 +99,8 @@ class order_buy_logic extends logic_order_buy_base
             'cms_id'            => '主键ID',
             'cms_user_id'       => '用户ID',
             'cms_order_type'    => '订单类型。0批量订单；1面料小样；2样板订单；3样衣订单；4稀缺面料定金订单；5充值类订单',
-            'cms_order_state'   => '订单状态。0未支付；1已支付；2已取消；3已过期；4退款中；5已退订；6订单异常',
-            'cms_business_state'=> '业务状态。0未完成；1完成',
+            'cms_order_state'   => '订单状态。0未支付；1已支付；2已取消；3已过期；4退款中；5已退订；6订单异常；7微信充值成功，用户余额充值失败',
+            'cms_business_state'=> '业务状态。0未完成；1成功；2失败',
             'cms_uuid'          => '外部标识',
      * )
      * @param string $str_field     查询字段
@@ -141,7 +141,8 @@ class order_buy_logic extends logic_order_buy_base
             'cms_order_name'      => '订单名称',
             'cms_order_price'     => '订单金额',
             'cms_order_type'      => '订单类型。0批量订单；1面料小样；2样板订单；3样衣订单；4稀缺面料定金订单；5充值类订单',
-            'cms_order_state'     => '订单状态。0未支付；1已支付；2已取消；3已过期；4退款中；5已退订；6订单异常',
+            'cms_order_state'     => '订单状态。0未支付；1已支付；2已取消；3已过期；4退款中；5已退订；6订单异常；7微信充值成功，用户余额充值失败',
+            'cms_business_state'  => '0未完成；1成功；2失败',
             'nns_order_parent'    => '订单父级ID',
             'nns_order_data'      => '订单数据',
             'cms_pay_partner_id'  => '订单商户ID',
