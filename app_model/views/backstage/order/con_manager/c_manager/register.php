@@ -196,7 +196,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                             <i class="fa fa-phone"></i>
                         </div>
                         <div class="form-group">
-                            <button type="button" class="btn-gain-num">获取验证码</button>
+                            <button type="button" class="btn-gain-num" id="verification_code">获取验证码</button>
                             <input type="text" class="form-control" id="num" name="num" placeholder="请输入验证码">
                             <i class="fa fa-mobile"></i>
                         </div>
@@ -241,8 +241,20 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
         setTimeout(roof,1000);
     }
     $('.btn-gain-num').on('click',function(){
+        var telephone = $('#telephone').val();
         $(this).prop('disabled',true);
         roof();
+        var submitData = "cms_mobile_code=" + telephone;
+        $.ajax({
+            url:'../../../../backstage/system/auto/c_smsg/send_msg',
+            type:"POST",
+            data:submitData,
+            cache:false,//false是不缓存，true为缓存
+            async:true,//true为异步，false为同步
+            success:function(result){
+                alert('发送成功');
+            }
+        });
     });
 
 
