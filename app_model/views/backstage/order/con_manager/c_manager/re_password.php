@@ -2,8 +2,9 @@
 /**
  * Created by <stacrcor.com>.
  * Author: xinxin.deng
- * Date: 2018/12/7 17:16
+ * Date: 2018/12/19 14:00
  */
+
 if(!defined('VIEW_MODEL_BACKGROUD'))
 {
     define('VIEW_MODEL_BACKGROUD', '/CodeIgniter/view_model/backstage/');
@@ -12,7 +13,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>注册</title>
+    <title>找回密码</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="" />
@@ -51,7 +52,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                             stringLength: {
                                 min: 6,
                                 max: 30,
-                                message: '密码长度必须在6到30之间'
+                                message: '用户名长度必须在6到30之间'
                             },
                             identical: {//相同
                                 field: 'password', //需要进行比较的input name值
@@ -76,7 +77,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                             stringLength: {
                                 min: 6,
                                 max: 30,
-                                message: '密码长度必须在6到30之间'
+                                message: '用户名长度必须在6到30之间'
                             },
                             identical: {//相同
                                 field: 'password', //需要进行比较的input name值
@@ -107,7 +108,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                         }
                     },
                     num: {
-                        message:'验证码无效',
+                        message:'密码无效',
                         validators: {
                             notEmpty: {
                                 message: '验证码不能为空'
@@ -116,6 +117,10 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 min: 6,
                                 max: 6,
                                 message: '验证码填写错误'
+                            },
+                            different: {//不能和用户名相同
+                                field: 'username',//需要进行比较的input name值
+                                message: '不能和用户名相同'
                             },
                             regexp: {
                                 regexp: /^[a-zA-Z0-9_\.]+$/,
@@ -126,7 +131,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                 }
             }).on('success.form.bv',function(e){
                 e.preventDefault();
-                var url = 'registry';
+                var url = 're_password';
                 var md5_password =  hex_md5($('#password').val());
                 var md5_confirmPassword =  hex_md5($('#confirmPassword').val());
                 $('#password').val(md5_password);
@@ -147,17 +152,6 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                     }
                 });
             });
-            $('#checkbox1').change(function()
-            {
-                if($('#checkbox1').is(':checked'))
-                {
-                    $('#system-button-submit-edit-ajax').prop('disabled',false);
-                }
-                else
-                {
-                    $('#system-button-submit-edit-ajax').prop('disabled',true);
-                }
-            });
         });
     </script>
 </head>
@@ -172,20 +166,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                 <div class="col-md-offset-3 col-md-6">
                     <form class="form-horizontal" id="defaultForm">
                         <div class="heading-div">
-                            <span class="heading">用户注册</span>
-                        </div>
-                        <div class="form-group">
-                            <select class="form-control-select" name="role_id">
-                                <option value="" selected></option>
-                                <option value="1">订单管理员</option>
-                                <option value="2">平台管理</option>
-                                <option value="3">生产商</option>
-                                <option value="4">供应商</option>
-                                <option value="5">样板师</option>
-                                <option value="6">样衣师</option>
-                            </select>
-                            <i class="fa fa-user"></i>
-                            <label class="label-select">请选择角色</label>
+                            <span class="heading">找回密码</span>
                         </div>
                         <div class="form-group">
                             <input type="tel" class="form-control" id="telephone" name="telephone" placeholder="手机号">
@@ -197,23 +178,19 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                             <i class="fa fa-mobile"></i>
                         </div>
                         <div class="form-group help">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="密码">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="新密码">
                             <i class="fa fa-lock"></i>
                         </div>
                         <div class="form-group help">
-                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="再次输入密码">
+                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="再次输入新密码">
                             <i class="fa fa-lock"></i>
                         </div>
                         <div class="form-group">
-                            <div class="main-checkbox">
-                                <input type="checkbox" value="None" id="checkbox1" name="check" checked/>
-                                <label for="checkbox1"></label>
-                            </div>
-                            <span class="zctext">我已阅读并同意遵守<a href="#" class="agree">《订购用户服务协议》</a></span>
-                            <span  class="dltext">有账号？<a href="login" class="login-a">直接登陆</a></span>
+                            <span class="zctext">没账号？<a href="register" class="agree">点击注册</a></span>
+                            <span  class="dltext">密码没忘记？<a href="login" class="login-a">直接登陆</a></span>
                         </div>
                         <div class="form-group">
-                            <button type="submit" id="system-button-submit-edit-ajax" class="btn btn-default">同意协议并注册</button>
+                            <button type="submit" id="system-button-submit-edit-ajax" class="btn btn-default">确认找回密码</button>
                         </div>
                     </form>
                 </div>

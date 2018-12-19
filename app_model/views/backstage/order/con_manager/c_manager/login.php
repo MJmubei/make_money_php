@@ -128,8 +128,11 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                             <i class="fa fa-lock"></i>
                         </div>
                         <div class="form-group">
-                            <span class="text">忘记密码？<a href="#" class="agree">找回密码</a></span>
-                            <button type="submit" class="btn btn-default">登录</button>
+                            <span class="zctext">忘记密码？<a href="re_password" class="agree">找回密码</a></span>
+                            <span  class="dltext">没账号？<a href="register" class="login-a">点击注册</a></span>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" id="system-button-submit-edit-ajax" class="btn btn-default">登录</button>
                         </div>
                     </form>
                 </div>

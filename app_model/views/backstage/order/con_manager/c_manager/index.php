@@ -16,6 +16,8 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
     <!-- *********** 初始化必须加载 ***************** （顶部JS加载） *********** 初始化必须加载 ***************** -->
     <?php include_once dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/model/backstage/pub_top_web_file.php';?>
     <link href="<?php echo VIEW_MODEL_BACKGROUD; ?>css/bootstrap.min.css" rel="stylesheet">
+    <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/bootstrapValidator.min.js"></script>
+    <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/md5.js"></script>
     <style type="text/css">
         .htmleaf-header{margin-bottom: 15px;font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;}
         .htmleaf-icon{color: #fff;}
@@ -209,47 +211,152 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
         }
     </style>
     <script type="text/javascript">
-        $(function() {
-            var defaultData = <?php echo (isset($fabirc_type)&&is_array($fabirc_type)) ? json_encode($fabirc_type) : json_encode(array());?>;
-            var $searchableTree = $('#treeview-searchable').treeview({
-                showBorder: true, //是否在节点周围显示边框
-                showCheckbox: false, //是否在节点上显示复选框
-                showIcon: true, //是否显示节点图标
-                highlightSelected: true,
-                levels: 1,
-                multiSelect: false, //是否可以同时选择多个节点
-                showTags: true,
-                data: defaultData,
-            });
-            var initSelectableTree = function() {
-                return $('#treeview-selectable').treeview({
-                    data: defaultData,
-                    onNodeSelected: function(event, node) {
-// 					alert("节点["+node.text+"]选中");
-                        var inputobj = $(".form-horizontal :input");
-                        for(var k=0;k<inputobj.length;k++){
-                            var typeofstr = inputobj[k].name;
-                            typeofstr = typeofstr.toString();
-                            inputobj[k].value = node[typeofstr];
+        $(function(){/* 文档加载，执行一个函数*/
+            $('#edit-password-form').bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {/*input状态样式图片*/
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {/*验证：规则*/
+                    old_password: {
+                        message:'密码无效',
+                        validators: {
+                            notEmpty: {
+                                message: '密码不能为空'
+                            },
+                            stringLength: {
+                                min: 6,
+                                max: 30,
+                                message: '密码长度必须在6到30之间'
+                            },
+                            identical: {//相同
+                                field: 'password', //需要进行比较的input name值
+                                message: '两次密码不一致'
+                            },
+                            different: {//不能和用户名相同
+                                field: 'username',//需要进行比较的input name值
+                                message: '不能和用户名相同'
+                            },
+                            regexp: {
+                                regexp: /^[a-zA-Z0-9_\.]+$/,
+                                message: '用户名只能由字母、数字、点和下划线组成'
+                            }
                         }
-                        //展示右侧面辅料
-
                     },
-                    onNodeUnselected: function (event, node) {
-                        //取消
-
+                    new_password: {
+                        message:'密码无效',
+                        validators: {
+                            notEmpty: {
+                                message: '密码不能为空'
+                            },
+                            stringLength: {
+                                min: 6,
+                                max: 30,
+                                message: '密码长度必须在6到30之间'
+                            },
+                            identical: {//相同
+                                field: 'password', //需要进行比较的input name值
+                                message: '两次密码不一致'
+                            },
+                            different: {//不能和用户名相同
+                                field: 'old_password',//需要进行比较的input name值
+                                message: '不能和旧密码相同'
+                            },
+                            regexp: {
+                                regexp: /^[a-zA-Z0-9_\.]+$/,
+                                message: '用户名只能由字母、数字、点和下划线组成'
+                            }
+                        }
+                    },
+                    confirmPassword: {
+                        message:'密码无效',
+                        validators: {
+                            notEmpty: {
+                                message: '密码不能为空'
+                            },
+                            stringLength: {
+                                min: 6,
+                                max: 30,
+                                message: '密码长度必须在6到30之间'
+                            },
+                            identical: {//相同
+                                field: 'new_password', //需要进行比较的input name值
+                                message: '两次密码不一致'
+                            },
+                            different: {//不能和用户名相同
+                                field: 'old_password',//需要进行比较的input name值
+                                message: '不能和旧密码相同'
+                            },
+                            regexp: {
+                                regexp: /^[a-zA-Z0-9_\.]+$/,
+                                message: '用户名只能由字母、数字、点和下划线组成'
+                            }
+                        }
+                    },
+                }
+            }).on('success.form.bv',function(e){
+                e.preventDefault();
+                var url = 'edit_password';
+                var md5_old_password =  hex_md5($('#old_password').val());
+                var md5_new_password =  hex_md5($('#new_password').val());
+                var confirmPassword =  hex_md5($('#confirmPassword').val());
+                $('#old_password').val(md5_old_password);
+                $('#new_password').val(md5_new_password);
+                $('#confirmPassword').val(confirmPassword);
+                var submitData = $('#edit-password-form').serialize() + "&flag_ajax_reurn=1";
+                //submitData是解码后的表单数据，结果同上
+                $.post(url, submitData, function(result){
+                    var dataObj=eval("("+result+")");
+                    if(dataObj.ret != 0)
+                    {
+                        alert(dataObj.reason);
+                        $('#password').val("");
+                    }
+                    else
+                    {
+                        alert('修改密码成功');
+                        location.reload();
                     }
                 });
-            };
-            var $selectableTree = initSelectableTree();
-            var findSelectableNodes = function() {
-                return $selectableTree.treeview('search', [ $('#input-select-node').val(), { ignoreCase: true, exactMatch: false } ]);
-            };
+            });
 
-            var selectableNodes = findSelectableNodes();
-            $('#input-select-node').on('keyup', function (e) {
-                selectableNodes = findSelectableNodes();
-                $('.select-node').prop('disabled', !(selectableNodes.length >= 1));
+            $('#edit-profile-form').bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {/*input状态样式图片*/
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {/*验证：规则*/
+                    email: {
+                        message:'密码无效',
+                        emailAddress: {
+                            regexp: {
+                                message: '邮箱地址不正确'
+                            }
+                        }
+                    }
+                }
+            }).on('success.form.bv',function(e){
+                e.preventDefault();
+                var url = 'edit_profile';
+                var submitData = $('#edit-profile-form').serialize() + "&flag_ajax_reurn=1";
+                //submitData是解码后的表单数据，结果同上
+                $.post(url, submitData, function(result){
+                    var dataObj=eval("("+result+")");
+                    if(dataObj.ret != 0)
+                    {
+                        alert(dataObj.reason);
+                        $('#password').val("");
+                    }
+                    else
+                    {
+                        alert('修改资料成功');
+                        location.reload();
+                    }
+                });
             });
         });
     </script>
@@ -338,7 +445,26 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                             <div class="profile-info-name">用户角色</div>
 
                             <div class="profile-info-value">
-                                <span class="editable" id="login">3 hours ago</span>
+                                <?php switch ($user['cms_role_id']){
+                                    case 1:
+                                        echo '<span class="editable" id="login">订单管理员</span>';
+                                        break;
+                                    case 2:
+                                        echo '<span class="editable" id="login">平台管理员</span>';
+                                        break;
+                                    case 3:
+                                        echo '<span class="editable" id="login">生产商</span>';
+                                        break;
+                                    case 4:
+                                        echo '<span class="editable" id="login">供应商</span>';
+                                        break;
+                                    case 5:
+                                        echo '<span class="editable" id="login">样板师</span>';
+                                        break;
+                                    case 6:
+                                        echo '<span class="editable" id="login">样衣师</span>';
+                                        break;
+                                } ?>
                             </div>
                         </div>
 
@@ -355,21 +481,22 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
             <!--完善资料-->
             <div class="user-profile row tab-pane" id="edit_profile">
                 <div class="col-xs-12 col-sm-12">
-                    <form>
+                    <form id="edit-profile-form">
                         <div class="profile-user-info profile-user-info-striped">
 
                             <div class="profile-info-row">
                                 <div class="profile-info-name">用户id</div>
 
                                 <div class="profile-info-value">
-                                    <span class="editable" id="user_id"><?PHP echo $user['cms_id']?></span>
+                                    <span class="editable"><?PHP echo $user['cms_id']?></span>
+                                    <input hidden id="user_id" value="<?PHP echo $user['cms_id']?>">
                                 </div>
                             </div>
                             <div class="profile-info-row">
                                 <div class="profile-info-name">用户名</div>
 
                                 <div class="profile-info-value">
-                                    <input type="text" class="editable" id="username" value="<?PHP echo $user['cms_name']?>">
+                                    <input type="text" class="editable" id="username" name="username" value="<?PHP echo $user['cms_name']?>">
                                 </div>
                             </div>
 
@@ -385,7 +512,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 <div class="profile-info-name">地址</div>
 
                                 <div class="profile-info-value">
-                                    <input type="text" class="editable" id="address" value="<?PHP if (isset($user['cms_address'])){echo $user['cms_address'];}?>">
+                                    <input type="text" class="editable" id="address" name="address" value="<?PHP if (isset($user['cms_address'])){echo $user['cms_address'];}?>">
                                 </div>
                             </div>
 
@@ -393,7 +520,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 <div class="profile-info-name">邮箱</div>
 
                                 <div class="profile-info-value">
-                                    <input type="email" class="editable" id="email" value="<?PHP echo $user['cms_email']?>">
+                                    <input type="email" class="editable" id="email" name="email" value="<?PHP echo $user['cms_email']?>">
                                 </div>
                             </div>
 
@@ -401,7 +528,26 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 <div class="profile-info-name">用户角色</div>
 
                                 <div class="profile-info-value">
-                                    <span class="editable" id="login">3 hours ago</span>
+                                    <?php switch ($user['cms_role_id']){
+                                        case 1:
+                                            echo '<span class="editable" id="login">订单管理员</span>';
+                                            break;
+                                        case 2:
+                                            echo '<span class="editable" id="login">平台管理员</span>';
+                                            break;
+                                        case 3:
+                                            echo '<span class="editable" id="login">生产商</span>';
+                                            break;
+                                        case 4:
+                                            echo '<span class="editable" id="login">供应商</span>';
+                                            break;
+                                        case 5:
+                                            echo '<span class="editable" id="login">样板师</span>';
+                                            break;
+                                        case 6:
+                                            echo '<span class="editable" id="login">样衣师</span>';
+                                            break;
+                                    } ?>
                                 </div>
                             </div>
 
@@ -409,7 +555,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 <div class="profile-info-name">简介</div>
 
                                 <div class="profile-info-value">
-                                    <input type="text" class="editable" id="desc"value="<?PHP echo $user['cms_desc']?>">
+                                    <input type="text" class="editable" id="desc" name="desc" value="<?PHP echo $user['cms_desc']?>">
                                 </div>
                             </div>
                         </div>
@@ -419,9 +565,58 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                     </form>
                 </div>
             </div>
+            <!--修改密码-->
+            <div class="user-profile row tab-pane" id="edit_password">
+                <div class="col-xs-12 col-sm-12">
+                    <form id="edit-password-form">
+                        <div class="profile-user-info profile-user-info-striped">
 
+                            <div class="profile-info-row">
+                                <div class="profile-info-name">用户id</div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable"><?PHP echo $user['cms_id']?></span>
+                                    <input type="text"  hidden name="user_id" id="user_id" value="<?PHP echo $user['cms_id']?>">
+                                </div>
+                            </div>
+                            <div class="profile-info-row">
+                                <div class="profile-info-name">手机号</div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable"><?PHP echo $user['cms_telephone']?></span>
+                                    <input type="tel" hidden name="telephone" id="telephone" value="<?PHP echo $user['cms_telephone']?>">
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name">旧密码</div>
+
+                                <div class="profile-info-value">
+                                    <input type="password" class="editable" id="old_password" name="old_password">
+                                </div>
+                            </div>
+                            <div class="profile-info-row">
+                                <div class="profile-info-name">新密码</div>
+
+                                <div class="profile-info-value">
+                                    <input type="password" class="editable" id="new_password" name="new_password">
+                                </div>
+                            </div>
+                            <div class="profile-info-row">
+                                <div class="profile-info-name">再次输入新密码</div>
+
+                                <div class="profile-info-value">
+                                    <input type="password" class="editable" id="confirmPassword" name="confirmPassword">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-info-row center">
+                            <button type="submit" class="btn btn-primary">确认修改</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-
 
     </div>
     <!--<div class="hr dotted"></div>-->

@@ -176,7 +176,7 @@ class c_manager extends CI_Controller
             $re = em_return::return_data(1,'请选择用户角色');
             $this->load_view_file($re,__LINE__);
         }
-        //用户角色
+        //验证码
         if (empty($this->arr_params['num']) || !isset($this->arr_params['num']))
         {
             $re = em_return::return_data(1,'验证码不正确');
@@ -268,52 +268,194 @@ class c_manager extends CI_Controller
             $this->load_view_file($re,__LINE__);
         }
 
-        unset($params['where']['telephone']);
-        //要修改手机号
-        if (!empty($this->session->userdata['re_telephone']) && !isset($this->session->userdata['re_telephone']))
+        //email
+        if (!empty($this->arr_params['username']) && isset($this->arr_params['username']))
         {
-            #todo 验证码验证手机号修改
-            $params['set']['telephone'] =  $this->session->userdata['re_telephone'];
-        }
-        //角色
-        if (!empty($this->session->userdata['role_id']) && !isset($this->session->userdata['role_id']))
-        {
-            $params['set']['rile_id'] =  $this->session->userdata['role_id'];
+            $params['set']['name'] =  $this->arr_params['username'];
         }
         //email
-        if (!empty($this->session->userdata['email']) && !isset($this->session->userdata['email']))
+        if (!empty($this->arr_params['email']) && isset($this->arr_params['email']))
         {
-            $params['set']['email'] =  $this->session->userdata['email'];
+            $params['set']['email'] =  $this->arr_params['email'];
         }
         //描述
-        if (!empty($this->session->userdata['desc']) && !isset($this->session->userdata['desc']))
+        if (!empty($this->arr_params['desc']) && isset($this->arr_params['desc']))
         {
-            $params['set']['desc'] =  $this->session->userdata['desc'];
+            $params['set']['desc'] =  $this->arr_params['desc'];
         }
-        //密码
-        if (!empty($this->session->userdata['password']) && !isset($this->session->userdata['password']))
-        {
-            #todo 是否要验证原密码？
-            $params['set']['password'] =  $this->session->userdata['password'];
-        }
+        $params['set']['modify_time'] =  date('Y-m-d H:i:s');
 
         $modify_info = $this->auto_load_table('order','manager', 'c_manager', 'manager', 'edit', $params);
         if ($modify_info['ret'] != 0)
         {
-            $re = em_return::return_data(1,'登陆异常，请联系超级管理员');
+            $re = em_return::return_data(1,'修改失败');
             $this->load_view_file($re,__LINE__);
         }
 
-        //密码
-        if (!empty($this->session->userdata['password']) && !isset($this->session->userdata['password']))
+        $this->load_view_file($modify_info,__LINE__);
+    }
+
+    /**
+     * 通过手机短信找回密码，重置密码
+     */
+    public function re_password()
+    {
+        if (empty($this->arr_params) || !isset($this->arr_params) || is_null($this->arr_params))
         {
-            $this->session->unset_userdata('telephone');
-            $this->session->unset_userdata('user_id');
-            $this->session->unset_userdata('role_id');
-            echo "<script>window.location.href='login';</script>";
-            exit;
+            $this->load_view_file(array('1','2'),__LINE__);
+        }
+        else
+        {
+            //手机号
+            if (empty($this->arr_params['telephone']) || !isset($this->arr_params['telephone']))
+            {
+                $re = em_return::return_data(1,'手机号不能为空');
+                $this->load_view_file($re,__LINE__);
+            }
+            //密码
+            if (empty($this->arr_params['password']) || !isset($this->arr_params['password']) || empty($this->arr_params['confirmPassword']) || !isset($this->arr_params['confirmPassword']))
+            {
+                $re = em_return::return_data(1,'密码不能为空');
+                $this->load_view_file($re,__LINE__);
+            }
+            if ($this->arr_params['password'] != $this->arr_params['confirmPassword'])
+            {
+                $re = em_return::return_data(1,'两次密码不一致');
+                $this->load_view_file($re,__LINE__);
+            }
+            //验证码
+            if (empty($this->arr_params['num']) || !isset($this->arr_params['num']))
+            {
+                $re = em_return::return_data(1,'验证码不正确');
+                $this->load_view_file($re,__LINE__);
+            }
+
+            //验证用户是否存在
+            $params = array(
+                'where' => array(
+                    'telephone' => $this->arr_params['telephone'],
+                ),
+            );
+
+            //先查询是否已经存在了
+            $user = $this->auto_load_table('order','manager', 'c_manager', 'manager', 'query_only', $params);
+            if ($user['ret'] != 0 || !is_array($user['data_info']) || count($user['data_info']) < 1)
+            {
+                $re = em_return::return_data(1,'用户不存在或找回密码异常');
+                $this->load_view_file($re,__LINE__);
+            }
+
+            //调取短信验证码，并验证短信
+            include_once dirname(dirname(dirname(dirname(__DIR__)))) . '/logic/backstage/system/auto/c_smsg/system_smsg.class.php';
+            $obj_system_smsg = new system_smsg($this,'');
+            $arr_send_ret = $obj_system_smsg->check_verify_code($this->arr_params['telephone'], $this->arr_params['num']);
+            if ($arr_send_ret['ret'] != 0)
+            {
+                $re = em_return::return_data(1,$arr_send_ret['reason']);
+                $this->load_view_file($re,__LINE__);
+            }
+
+            $edit_params = array(
+                'set' => array(
+                    'login_time' => date('Y-m-d H:i:s'),
+                    'modify_time' => date('Y-m-d H:i:s'),
+                    'pass_word_modify_time' => date('Y-m-d H:i:s'),
+                    'password' => $this->arr_params['password']
+                ),
+                'where' => array(
+                    'id' => $user['data_info']['cms_id'],
+                    'telephone' => $user['data_info']['telephone']
+                ),
+            );
+            $add_user = $this->auto_load_table('order','manager', 'c_manager', 'manager', 'edit', $edit_params);
+            if ($add_user['ret'] != 0)
+            {
+                $re = em_return::return_data(1,'重置密码失败');
+                $this->load_view_file($re,__LINE__);
+            }
+            $this->load_view_file($add_user,__LINE__);
         }
 
-
     }
+
+    /**
+     * 后台修改密码
+     */
+    public function edit_password()
+    {
+        $this->flag_ajax_reurn = true;
+        //手机号
+        if (empty($this->arr_params['telephone']) || !isset($this->arr_params['telephone']))
+        {
+            $re = em_return::return_data(1,'手机号不能为空');
+            $this->load_view_file($re,__LINE__);
+        }
+        //用户id
+        if (empty($this->arr_params['user_id']) || !isset($this->arr_params['user_id']))
+        {
+            $re = em_return::return_data(1,'手机号不能为空');
+            $this->load_view_file($re,__LINE__);
+        }
+        //原密码
+        if (empty($this->arr_params['old_password']) || !isset($this->arr_params['old_password']) ||
+            empty($this->arr_params['new_password']) || !isset($this->arr_params['new_password'])
+            || empty($this->arr_params['confirmPassword']) || !isset($this->arr_params['confirmPassword']))
+        {
+            $re = em_return::return_data(1,'密码不能为空');
+            $this->load_view_file($re,__LINE__);
+        }
+        if ($this->arr_params['new_password'] != $this->arr_params['confirmPassword'])
+        {
+            $re = em_return::return_data(1,'两次新密码不一致');
+            $this->load_view_file($re,__LINE__);
+        }
+
+        //验证用户是否存在
+        $params = array(
+            'where' => array(
+                'telephone' => $this->arr_params['telephone'],
+                'id' => $this->arr_params['user_id'],
+            ),
+        );
+
+        //先查询是否已经存在了
+        $user = $this->auto_load_table('order','manager', 'c_manager', 'manager', 'query_only', $params);
+        if ($user['ret'] != 0 || !is_array($user['data_info']) || count($user['data_info']) < 1)
+        {
+            $re = em_return::return_data(1,'用户不存在或找回密码异常');
+            $this->load_view_file($re,__LINE__);
+        }
+        //用户密码加密后进行验证
+        if ($user['data_info']['cms_password'] != $this->arr_params['old_password'])
+        {
+            $re = em_return::return_data(1,'旧密码输入错误');
+            $this->load_view_file($re,__LINE__);
+        }
+
+        $edit_params = array(
+            'set' => array(
+                'modify_time' => date('Y-m-d H:i:s'),
+                'pass_word_modify_time' => date('Y-m-d H:i:s'),
+                'password' => $this->arr_params['new_password']
+            ),
+            'where' => array(
+                'id' => $user['data_info']['cms_id'],
+                'telephone' => $user['data_info']['cms_telephone']
+            ),
+        );
+        $add_user = $this->auto_load_table('order','manager', 'c_manager', 'manager', 'edit', $edit_params);
+        if ($add_user['ret'] != 0)
+        {
+            $re = em_return::return_data(1,'重置密码失败');
+            $this->load_view_file($re,__LINE__);
+        }
+        //修改后将session重置，然后进行重新登录
+        //$this->session->unset_userdata('telephone');
+        //$this->session->unset_userdata('user_id');
+        //$this->session->unset_userdata('role_id');
+
+        $this->load_view_file($add_user,__LINE__);
+    }
+
+
 }
