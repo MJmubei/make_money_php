@@ -20,6 +20,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo VIEW_MODEL_BACKGROUD; ?>css/bootstrap.min.css" rel='stylesheet' type='text/css' />
     <link href="<?php echo VIEW_MODEL_BACKGROUD; ?>css/font-awesome.css" rel="stylesheet">
+    <link href="<?php echo VIEW_MODEL_BACKGROUD; ?>css/city-picker.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="<?php echo VIEW_MODEL_BACKGROUD; ?>css/login.css" rel='stylesheet' type='text/css' />
     <!-- jQuery -->
@@ -31,6 +32,8 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
     <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/bootstrap.min.js"></script>
     <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/bootstrapValidator.min.js"></script>
     <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/md5.js"></script>
+    <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/city-picker.data.js"></script>
+    <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/city-picker.js"></script>
     <script type="text/javascript">
         $(function(){/* 文档加载，执行一个函数*/
             $('#defaultForm').bootstrapValidator({
@@ -126,6 +129,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                 }
             }).on('success.form.bv',function(e){
                 e.preventDefault();
+                $('#city-picker3').citypicker('destroy');
                 var url = 'registry';
                 var md5_password =  hex_md5($('#password').val());
                 var md5_confirmPassword =  hex_md5($('#confirmPassword').val());
@@ -139,6 +143,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                     {
                         alert(dataObj.reason);
                         $('#password').val("");
+                        location.reload();
                     }
                     else
                     {
@@ -147,6 +152,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                     }
                 });
             });
+
             $('#checkbox1').change(function()
             {
                 if($('#checkbox1').is(':checked'))
@@ -171,49 +177,88 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
             <div class="row">
                 <div class="col-md-offset-3 col-md-6">
                     <form class="form-horizontal" id="defaultForm">
-                        <div class="heading-div">
-                            <span class="heading">用户注册</span>
-                        </div>
-                        <div class="form-group">
-                            <select class="form-control-select" name="role_id">
-                                <option value="" selected></option>
-                                <option value="1">订单管理员</option>
-                                <option value="2">平台管理</option>
-                                <option value="3">生产商</option>
-                                <option value="4">供应商</option>
-                                <option value="5">样板师</option>
-                                <option value="6">样衣师</option>
-                            </select>
-                            <i class="fa fa-user"></i>
-                            <label class="label-select">请选择角色</label>
-                        </div>
-                        <div class="form-group">
-                            <input type="tel" class="form-control" id="telephone" name="telephone" placeholder="手机号">
-                            <i class="fa fa-phone"></i>
-                        </div>
-                        <div class="form-group">
-                            <button type="button" class="btn-gain-num" id="verification_code">获取验证码</button>
-                            <input type="text" class="form-control" id="num" name="num" placeholder="请输入验证码">
-                            <i class="fa fa-mobile"></i>
-                        </div>
-                        <div class="form-group help">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="密码">
-                            <i class="fa fa-lock"></i>
-                        </div>
-                        <div class="form-group help">
-                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="再次输入密码">
-                            <i class="fa fa-lock"></i>
-                        </div>
-                        <div class="form-group">
-                            <div class="main-checkbox">
-                                <input type="checkbox" value="None" id="checkbox1" name="check" checked/>
-                                <label for="checkbox1"></label>
+                        <div class="one-step" id="one_step">
+                            <div class="heading-div">
+                                <span class="heading">用户注册</span>
                             </div>
-                            <span class="zctext">我已阅读并同意遵守<a href="#" class="agree">《订购用户服务协议》</a></span>
-                            <span  class="dltext">有账号？<a href="login" class="login-a">直接登陆</a></span>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="username" name="username" placeholder="名称">
+                                <i class="fa fa-user"></i>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control-select" name="sex">
+                                    <option value="1" selected>未知</option>
+                                    <option value="2">男</option>
+                                    <option value="3">女</option>
+                                </select>
+                                <i class="fa fa-users"></i>
+                                <label class="label-select">请选择性别</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" class="form-control" id="telephone" name="telephone" placeholder="手机号">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn-gain-num" id="verification_code">获取验证码</button>
+                                <input type="text" class="form-control" id="num" name="num" placeholder="请输入验证码">
+                                <i class="fa fa-mobile"></i>
+                            </div>
+                            <div class="form-group help">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="密码">
+                                <i class="fa fa-lock"></i>
+                            </div>
+                            <div class="form-group help">
+                                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="再次输入密码">
+                                <i class="fa fa-lock"></i>
+                            </div>
+                            <div class="form-group">
+                                <span  class="zctext">有账号？<a href="login" class="login-a">直接登陆</a></span>
+                                <button type="button" id="next_btn" class="next-btn">下一步</button>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <button type="submit" id="system-button-submit-edit-ajax" class="btn btn-default">同意协议并注册</button>
+                        <div class="tow-step" id="tow_step">
+                            <div class="heading-div">
+                                <span class="heading">用户注册</span>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="company_name" name="company_name" placeholder="企业名称（允许个人）">
+                                <i class="fa fa-users"></i>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control-select" name="role_id">
+                                    <option value="" selected></option>
+                                    <option value="1">订单管理员</option>
+                                    <option value="3">生产商</option>
+                                    <option value="4">供应商</option>
+                                    <option value="5">样板师</option>
+                                    <option value="6">样衣师</option>
+                                </select>
+                                <i class="fa fa-user"></i>
+                                <label class="label-select">请选择角色</label>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control-select" name="area">
+                                    <option value="1" selected>中国</option>
+                                </select>
+                                <i class="fa fa-home"></i>
+                                <label class="label-select">国家</label>
+                            </div>
+                            <div class="form-group">
+                                <input id="city-picker3" class="form-control-select" readonly type="text" value="" name="city-picker3" data-toggle="city-picker">
+                                <button type="button" class="label-select" id="area-reset">重置</button>
+                            </div>
+                            <div class="form-group">
+                                <div class="main-checkbox">
+                                    <input type="checkbox" value="None" id="checkbox1" name="check" checked/>
+                                    <label for="checkbox1"></label>
+                                </div>
+                                <span class="zctext">我已阅读并同意遵守<a href="#" class="agree">《订购用户服务协议》</a>&nbsp;&nbsp;有账号？<a href="login" class="login-a">直接登陆</a></span>
+                                <span ></span>
+                                <button type="button" id="pre_btn" class="pre-btn">上一步</button>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" id="system-button-submit-edit-ajax" class="btn btn-default">同意协议并注册</button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -253,7 +298,28 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
         });
     });
 
+    //下一步进行表单检查
+    $('.next-btn').on('click',function(){
+        var flag1 = $('#defaultForm').data("bootstrapValidator").validateField('telephone');
+        var flag2 = $('#defaultForm').data("bootstrapValidator").validateField('num');
+        var flag3 = $('#defaultForm').data("bootstrapValidator").validateField('password');
+        var flag4 = $('#defaultForm').data("bootstrapValidator").validateField('confirmPassword');
 
+        if(flag1.isValid() && flag2.isValid() && flag3.isValid() && flag4.isValid())
+        {
+            $('.one-step').css({"left":"-100%","opacity":"0"});
+            $('.tow-step').css({"left":"0","opacity":"1","display":"inline-block"});
+        }
+    });
+    $('.pre-btn').on('click',function(){
+        $('.one-step').css({"left":"0","opacity":"1","display":"inline-block"});
+        $('.tow-step').css({"left":"100%","opacity":"0"});
+    });
+
+    //重置地区选择
+    $('#area-reset').click(function () {
+        $('#city-picker3').citypicker('reset');
+    });
 </script>
 </body>
 </html>

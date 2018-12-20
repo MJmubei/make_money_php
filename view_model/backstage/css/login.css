@@ -265,11 +265,11 @@ a:hover,a:focus{color:#74777b;text-decoration: none;}
     display: block;
     font-size: 35px;
     font-weight: 700;
-    padding-top: 35px;
+    padding-top: 20px;
 }
 .form-horizontal .heading-div
 {
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #00b4ef;
     margin-bottom: 30px;
 }
 .form-horizontal .msg
@@ -335,9 +335,52 @@ a:hover,a:focus{color:#74777b;text-decoration: none;}
     text-transform: capitalize;
     transition: all 0.5s ease 0s;
 }
-.btn-gain-num:disabled {
+.next-btn
+{
+    font-size: 14px;
+    color: #fff;
+    float: right;
+    background-color: #00b4ef;
+    border-radius: 30px;
+    padding: 10px 25px;
+    border: none;
+    text-transform: capitalize;
+    transition: all 0.5s ease 0s;
+}
+.pre-btn
+{
+    font-size: 14px;
+    color: #fff;
+    float: right;
+    background-color: #00b4ef;
+    border-radius: 30px;
+    padding: 10px 25px;
+    border: none;
+    text-transform: capitalize;
+    transition: all 0.5s ease 0s;
+}
+.one-step
+{
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    position: relative
+}
+.tow-step
+{
+    width: 100%;
+    top: 0;
+    left: 100%;
+    opacity: 0;
+    position: absolute;
+    display: inline-block;
+}
+
+.btn-gain-num:disabled, .next-btn:disabled{
     background-color: #ddd;
 }
+
 #system-button-submit-edit-ajax:disabled{
     background-color: #ddd;
 }
@@ -425,7 +468,7 @@ a:hover,a:focus{color:#74777b;text-decoration: none;}
     float: left;
     margin-left: 3px;
     line-height: 20px;
-    padding-top: 10px;
+    padding-top: 13px;
     font-size: 12px;
     text-transform: capitalize;
 }
