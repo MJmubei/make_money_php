@@ -639,7 +639,6 @@ class CI_Controller
      */
     protected function control_params_check($arr_params_rule, $arr_params)
     {
-        $arr_ckeck_re = array('ret' => NF_RETURN_SUCCESS_CODE, 'reason' => 'success');
         if(is_array($arr_params_rule)&&is_array($arr_params))
         {
             foreach ($arr_params_rule as $str_param => $arr_val)
@@ -650,38 +649,50 @@ class CI_Controller
                 }
                 switch (strtolower($arr_val['rule']))
                 {
-                    case 'callback':$arr_ckeck_re = $this->callback($arr_params[$str_param], $arr_val['func'], $arr_val['reason']);
+                    case 'callback':
+                        $arr_ckeck_re = $this->callback($arr_params[$str_param], $arr_val['func'], $arr_val['reason']);
                         break;
-                    case 'email':$arr_ckeck_re    = $this->email($arr_params[$str_param], $arr_val['reason']);
+                    case 'email':
+                        $arr_ckeck_re = $this->email($arr_params[$str_param], $arr_val['reason']);
                         break;
-                    case 'in':$arr_ckeck_re       = $this->in($arr_params[$str_param], $arr_val['in'], $arr_val['reason']);
+                    case 'in':
+                        $arr_ckeck_re = $this->in($arr_params[$str_param], $arr_val['in'], $arr_val['reason']);
                         break;
-                    case 'length':$arr_ckeck_re   = $this->length($arr_params[$str_param], $arr_val['length'], $arr_val['reason']);
+                    case 'length':
+                        $arr_ckeck_re = $this->length($arr_params[$str_param], $arr_val['length'], $arr_val['reason']);
                         break;
-                    case 'notnull':$arr_ckeck_re  = $this->notnull($arr_params[$str_param], $arr_val['reason']);
+                    case 'notnull':
+                        $arr_ckeck_re = $this->notnull($arr_params[$str_param], $arr_val['reason']);
                         break;
-                    case 'number':$arr_ckeck_re   = $this->number($arr_params[$str_param], $arr_val['reason']);
+                    case 'number':
+                        $arr_ckeck_re = $this->number($arr_params[$str_param], $arr_val['reason']);
                         break;
-                    case 'regex':$arr_ckeck_re    = $this->regex($arr_params[$str_param], $arr_val['regex'], $arr_val['reason']);
+                    case 'regex':
+                        $arr_ckeck_re = $this->regex($arr_params[$str_param], $arr_val['regex'], $arr_val['reason']);
                         break;
-                    case 'url':$arr_ckeck_re      = $this->url($arr_params[$str_param], $arr_val['reason']);
+                    case 'url':
+                        $arr_ckeck_re = $this->url($arr_params[$str_param], $arr_val['reason']);
                         break;
-                    case 'mobile':$arr_ckeck_re   = $this->mobile($arr_params[$str_param], $arr_val['reason']);
+                    case 'mobile':
+                        $arr_ckeck_re = $this->mobile($arr_params[$str_param], $arr_val['reason']);
                         break;
-                    case 'array':$arr_ckeck_re    = $this->array_type($arr_params[$str_param], $arr_val['reason']);
+                    case 'array':
+                        $arr_ckeck_re = $this->array_type($arr_params[$str_param], $arr_val['reason']);
                         break;
-                    case 'string':$arr_ckeck_re   = $this->string_type($arr_params[$str_param], $arr_val['reason']);
+                    case 'string':
+                        $arr_ckeck_re = $this->string_type($arr_params[$str_param], $arr_val['reason']);
                         break;
-                    default: $arr_ckeck_re        = array('ret' => NF_RETURN_ERROR_CODE, 'reason' => 'type is not exist');
+                    default:
+                        $arr_ckeck_re = array('ret' => NF_RETURN_ERROR_CODE, 'reason' => 'type is not exist');
                     break;
                 }
+                if($arr_ckeck_re['ret'] != NF_RETURN_SUCCESS_CODE)
+                {
+                    $this->flag_ajax_reurn = true;
+                    $this->load_view_file($arr_ckeck_re,__LINE__);
+                    exit;
+                }
             }
-        }
-        if($arr_ckeck_re['ret'] != NF_RETURN_SUCCESS_CODE)
-        {
-            $this->flag_ajax_reurn = true;
-            $this->load_view_file($arr_ckeck_re,__LINE__);
-            exit;
         }
     }
 

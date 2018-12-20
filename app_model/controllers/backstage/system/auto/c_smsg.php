@@ -29,6 +29,7 @@ class c_smsg extends CI_Controller
             'ret' => 0 成功
                      1 失败
                      2 验证码未过期，不再重复发送
+            'code'   => '验证码'
             'reason' => '描述信息'
      * )
      */

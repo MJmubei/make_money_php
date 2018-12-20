@@ -126,7 +126,7 @@ class system_smsg extends em_logic
             if($str_cache_code == $str_verify_code)
             {
                 $arr_check_ret = array('ret' => 0,'reason' => '正确');
-                $obj_redis->del($this->str_verify_comm_key . $str_mobile);
+                $obj_redis->delete($this->str_verify_comm_key . $str_mobile);
             }
             else
             {
