@@ -7,45 +7,24 @@
  * Time: 下午1:30
  */
 
+include_once 'SignatureHelper.php';
 include_once dirname(dirname(dirname(dirname(dirname(dirname(__DIR__)))))) . '/pub_class/libraries/Curl.class.php';
 class system_smsg extends em_logic
 {
 
+    //是否启用https
+    private $bool_security= false;
     //短信接口地址
-    private $API_SEND_URL = 'http://smssh1.253.com/msg/send/json';
+    private $API_SEND_URL = 'dysmsapi.aliyuncs.com';
     //账户
-    private $API_ACCOUNT  = 'N4040642';
+    private $API_ACCOUNT  = 'LTAIzDNqjq2w6NdI';
     //密码
-    private $API_PASSWORD = 'ReqmwPgKY84a97';
-    //错误码
-    private $arr_error_status = array(
-        '0'  =>'发送成功',
-        '101'=>'无此用户',
-        '102'=>'密码错',
-        '103'=>'提交过快',
-        '104'=>'系统忙',
-        '105'=>'敏感短信',
-        '106'=>'消息长度错',
-        '107'=>'错误的手机号码',
-        '108'=>'手机号码个数错',
-        '109'=>'无发送额度',
-        '110'=>'不在发送时间内',
-        '112'=>'无此产品',
-        '113'=>'扩展码格式错',
-        '114'=>'可用参数组个数错误',
-        '116'=>'签名不合法或未带签名',
-        '117'=>'IP地址认证错,请求调用的IP地址不是系统登记的IP地址',
-        '118'=>'用户没有相应的发送权限',
-        '119'=>'用户已过期',
-        '120'=>'违反防盗用策略',
-        '123'=>'发送类型错误',
-        '124'=>'白模板匹配错误',
-        '125'=>'匹配驳回模板，提交失败',
-        '128'=>'内容解码失败',
-        '129'=>'JSON格式错误',
-        '130'=>'请求参数错误',
-        '133'=>'单一手机号错误',
-    );
+    private $API_PASSWORD = 'ZqFBhPCfFcHU7pRqB1bpSMSZ5p5w95';
+    //短信签名
+    private $API_SignName = '云裳供应链';
+    //短信模板ID
+    private $API_TemplateCode = 'SMS_152853072';
+
     //缓存验证码公共KEY
     private $str_verify_comm_key = 'system_smsg_verify_';
     //验证码缓存时间，默认5分钟
@@ -53,46 +32,44 @@ class system_smsg extends em_logic
 
     /**
      * 发送短信
-     * @param string $str_mobile    手机号码
-     * @param string $str_msg       短信内容
-     * @param string $str_send_time 定时发送短信时间，格式：yyyyMMddHHmm
-     * @param bool $bool_report     是否需要状态报告
-     * @param string $str_extend    下发短信号码扩展码
-     * @param string $str_uuid      业务系统内的ID
+     * @param array  $arr_msg_params array(
+            'PhoneNumbers'    => '手机号码',
+            'SignName'        => '短信签名',
+            'TemplateCode'    => '短信模板ID',
+            'TemplateParam'   => '设置模板参数',
+            'OutId'           => '发送短信流水号',  //选填
+            'SmsUpExtendCode' => '上行短信扩展码',  //选填
+     * )
      * @return array('ret' => 0/1,'reason' => '描述信息')
      */
-    function send_msg($str_mobile,$str_msg,$str_send_time = '',$bool_report = false,$str_extend = '',$str_uuid = '')
+    function send_msg($arr_msg_params)
     {
         $this->_init_app_config();
 
         //发送短信的接口参数
-        $arr_post_data = array (
-            'account'  => $this->API_ACCOUNT,
-            'password' =>  $this->API_PASSWORD,
-            'msg'      => $str_msg,
-            'phone'    => $str_mobile,
-            'sendtime' => $str_send_time,
-            'report'   => $bool_report,
-            'extend'   => $str_extend,
-            'uid'      => $str_uuid,
+        $obj_send_helper = new SignatureHelper();
+        //缺省值
+        $arr_msg_params['SignName'] = $this->API_SignName;
+        $arr_msg_params['TemplateCode'] = $this->API_TemplateCode;
+        $obj_response_data = $obj_send_helper->request(
+            $this->API_ACCOUNT,
+            $this->API_PASSWORD,
+            $this->API_SEND_URL,
+            array_merge($arr_msg_params, array(
+                "RegionId" => "cn-hangzhou",
+                "Action" => "SendSms",
+                "Version" => "2017-05-25",
+            )),
+            $this->bool_security
         );
-
-        //Header信息
-        $arr_header_info = array('Content-Type:application/json');
-
-        //初始化CURL处理类
-        $obj_http_curl_class = new np_http_curl_class();
-        $obj_response_data = $obj_http_curl_class->post($this->API_SEND_URL,json_encode($arr_post_data),$arr_header_info,30);
-
-        //处理应答结果
-        $obj_response_data = json_decode($obj_response_data,true);
-        if($obj_response_data['code'] == 0)
+        //解析短信反馈
+        if(strtoupper($obj_response_data['Code']) == 'OK')
         {
-            return array('ret' => 0,'reason' => $this->arr_error_status[$obj_response_data['code']]);
+            return array('ret' => 0,'reason' => '成功');
         }
         else
         {
-            return array('ret' => 1,'reason' => $this->arr_error_status[$obj_response_data['code']]);
+            return array('ret' => 1,'reason' => $obj_response_data['Message']);
         }
     }
 
@@ -115,10 +92,14 @@ class system_smsg extends em_logic
         }
         //重新发送验证码
         $str_code = $this->get_verify_code();
-        $str_msg  = '验证码 ' . $str_code . ' ，请勿在任何短信或邮件链接的页面中输入验证码！';
-        $arr_send_ret = $this->send_msg($str_mobile,$str_msg);
+        $arr_template_param = array('code' => $str_code);
+        $arr_send_ret = $this->send_msg(array(
+            'PhoneNumbers'    => $str_mobile,
+            'TemplateParam'   => json_encode($arr_template_param),
+        ));
         if($arr_send_ret['ret'] == 0)
         {
+            $arr_send_ret['code'] = $str_code;
             $obj_redis->save($str_cache_key,$str_code,$this->int_cache_verify_expire_time);
         }
         return $arr_send_ret;
@@ -210,6 +191,14 @@ class system_smsg extends em_logic
             if(!empty($arr_smsg_config['api_password']))
             {
                 $this->API_PASSWORD = $arr_smsg_config['api_password'];
+            }
+            if(!empty($arr_smsg_config['api_sign_name']))
+            {
+                $this->API_SignName = $arr_smsg_config['api_sign_name'];
+            }
+            if(!empty($arr_smsg_config['api_template_code']))
+            {
+                $this->API_TemplateCode = $arr_smsg_config['api_template_code'];
             }
         }
     }

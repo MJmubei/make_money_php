@@ -621,4 +621,312 @@ class CI_Controller
         include_once $base_dir;
         return em_return::_return_right_data('OK');
     }
+
+    /**
+     * 验证参数是否正确
+     * @param array $arr_params_rule 参数名称   array(
+            'cms_params_name' => array(
+                'rule' => '验证规则',
+                'func' => '回调函数',
+                'in'   => '范围，多个使用“ - 或者 , ”隔开',
+                'length=> '长度范围，多个使用“ - 或者 , ”隔开',
+                'regex => '正则表达式',
+                'reason=> '描述信息',
+     * )
+     * @param array $arr_params      参数属性值 array(
+            'cms_params_name' => 'cms_params_value'
+     * )
+     */
+    protected function control_params_check($arr_params_rule, $arr_params)
+    {
+        $arr_ckeck_re = array('ret' => NF_RETURN_SUCCESS_CODE, 'reason' => 'success');
+        if(is_array($arr_params_rule)&&is_array($arr_params))
+        {
+            foreach ($arr_params_rule as $str_param => $arr_val)
+            {
+                if(empty($arr_val['reason']))
+                {
+                    $arr_val['reason']=$str_param." format is not ".$arr_val['rule'];
+                }
+                switch (strtolower($arr_val['rule']))
+                {
+                    case 'callback':$arr_ckeck_re = $this->callback($arr_params[$str_param], $arr_val['func'], $arr_val['reason']);
+                        break;
+                    case 'email':$arr_ckeck_re    = $this->email($arr_params[$str_param], $arr_val['reason']);
+                        break;
+                    case 'in':$arr_ckeck_re       = $this->in($arr_params[$str_param], $arr_val['in'], $arr_val['reason']);
+                        break;
+                    case 'length':$arr_ckeck_re   = $this->length($arr_params[$str_param], $arr_val['length'], $arr_val['reason']);
+                        break;
+                    case 'notnull':$arr_ckeck_re  = $this->notnull($arr_params[$str_param], $arr_val['reason']);
+                        break;
+                    case 'number':$arr_ckeck_re   = $this->number($arr_params[$str_param], $arr_val['reason']);
+                        break;
+                    case 'regex':$arr_ckeck_re    = $this->regex($arr_params[$str_param], $arr_val['regex'], $arr_val['reason']);
+                        break;
+                    case 'url':$arr_ckeck_re      = $this->url($arr_params[$str_param], $arr_val['reason']);
+                        break;
+                    case 'mobile':$arr_ckeck_re   = $this->mobile($arr_params[$str_param], $arr_val['reason']);
+                        break;
+                    case 'array':$arr_ckeck_re    = $this->array_type($arr_params[$str_param], $arr_val['reason']);
+                        break;
+                    case 'string':$arr_ckeck_re   = $this->string_type($arr_params[$str_param], $arr_val['reason']);
+                        break;
+                    default: $arr_ckeck_re        = array('ret' => NF_RETURN_ERROR_CODE, 'reason' => 'type is not exist');
+                    break;
+                }
+            }
+        }
+        if($arr_ckeck_re['ret'] != NF_RETURN_SUCCESS_CODE)
+        {
+            $this->flag_ajax_reurn = true;
+            $this->load_view_file($arr_ckeck_re,__LINE__);
+            exit;
+        }
+    }
+
+    /**
+     * 使用自定义的正则表达式进行验证
+     * @param	string	$value	需要验证的值
+     * @param	string	$msg	验证失败的提示消息
+     * @param	string	$rules	正则表达式
+     * @return  array   array('ret' => 0/1,'reason' => '描述信息')
+     */
+    protected function regex($value, $rules, $msg = 'param error')
+    {
+        $arr_re = array('ret' => NF_RETURN_SUCCESS_CODE, 'reason' => 'success');
+        if (!preg_match($rules, $value))
+        {
+            $arr_re['ret'] = NF_RETURN_ERROR_CODE;
+            $arr_re['reason'] = $msg;
+        }
+        return $arr_re;
+    }
+
+    /**
+     * 非空验证
+     * @param	string	$value	需要验证的值
+     * @param	string	$msg	验证失败的提示消息
+     * @return  array   array('ret' => 0/1,'reason' => '描述信息')
+     */
+    protected function notnull($value, $msg = 'param error')
+    {
+        $value = trim($value);
+        $arr_re = array('ret' => NF_RETURN_SUCCESS_CODE, 'reason' => 'success');
+        if (strlen($value) == 0)
+        {
+            $arr_re['ret'] = NF_RETURN_ERROR_CODE;
+            $arr_re['reason'] = $msg;
+        }
+        return $arr_re;
+    }
+
+    /**
+     * Email格式验证
+     * @param	string	$value	需要验证的值
+     * @param	string	$msg	验证失败的提示消息
+     * @return  array   array('ret' => 0/1,'reason' => '描述信息')
+     */
+    protected function email($value, $msg = 'param error')
+    {
+        $arr_re = array('ret' => NF_RETURN_SUCCESS_CODE, 'reason' => 'success');
+        $rules = "/\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/";
+        if (!preg_match($rules, $value))
+        {
+            $arr_re['ret'] = NF_RETURN_ERROR_CODE;
+            $arr_re['reason'] = $msg;
+        }
+        return $arr_re;
+    }
+
+    /**
+     * URL格式验证
+     * @param	string	$value	需要验证的值
+     * @param	string	$msg	验证失败的提示消息
+     * @return  array   array('ret' => 0/1,'reason' => '描述信息')
+     */
+    protected function url($value, $msg = 'param error')
+    {
+        $arr_re = array('ret' => NF_RETURN_SUCCESS_CODE, 'reason' => 'success');
+        $rules = '/^http\:\/\/([\w-]+\.)+[\w-]+(\/[\w-.\/?%&=]*)?$/';
+        if (!preg_match($rules, $value))
+        {
+            $arr_re['ret'] = NF_RETURN_ERROR_CODE;
+            $arr_re['reason'] = $msg;
+        }
+        return $arr_re;
+    }
+
+    /**
+     * 手机号码格式验证
+     * @param	string	$value	需要验证的值
+     * @param	string	$msg	验证失败的提示消息
+     * @return  array   array('ret' => 0/1,'reason' => '描述信息')
+     */
+    protected function mobile($value, $msg = 'param error')
+    {
+
+        $arr_re = array('ret' => NF_RETURN_SUCCESS_CODE, 'reason' => 'success');
+        $rules  = '/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$/';
+        if (!preg_match($rules, $value))
+        {
+            $arr_re['ret'] = NF_RETURN_ERROR_CODE;
+            $arr_re['reason'] = $msg;
+        }
+        return $arr_re;
+    }
+
+    /**
+     * 数组类型
+     * @param	string	$value	需要验证的值
+     * @param	string	$msg	验证失败的提示消息
+     * @return  array   array('ret' => 0/1,'reason' => '描述信息')
+     */
+    protected function array_type($value, $msg = 'param error')
+    {
+        $arr_re = array('ret' => NF_RETURN_SUCCESS_CODE, 'reason' => 'success');
+        if (!is_array($value))
+        {
+            $arr_re['ret'] = NF_RETURN_ERROR_CODE;
+            $arr_re['reason'] = $msg;
+        }
+        return $arr_re;
+    }
+
+    /**
+     * 字符串类型
+     * @param	string	$value	需要验证的值
+     * @param	string	$msg	验证失败的提示消息
+     * @return  array   array('ret' => 0/1,'reason' => '描述信息')
+     */
+    protected function string_type($value, $msg = 'param error')
+    {
+        $arr_re = array('ret' => NF_RETURN_SUCCESS_CODE, 'reason' => 'success');
+        if (!is_string($value))
+        {
+            $arr_re['ret'] = NF_RETURN_ERROR_CODE;
+            $arr_re['reason'] = $msg;
+        }
+        return $arr_re;
+    }
+
+    /**
+     * 数字格式验证
+     * @param	string	$value	需要验证的值
+     * @param	string	$msg	验证失败的提示消息
+     * @return  array   array('ret' => 0/1,'reason' => '描述信息')
+     */
+    protected function number($value, $msg = 'param error')
+    {
+        $arr_re = array('ret' => NF_RETURN_SUCCESS_CODE, 'reason' => 'success');
+        $rules = '/^\d+$/';
+        if (!preg_match($rules, $value))
+        {
+            $arr_re['ret'] = NF_RETURN_ERROR_CODE;
+            $arr_re['reason'] = $msg;
+        }
+        return $arr_re;
+    }
+
+    /**
+     * 使用回调用函数进行验证
+     * @param	string	$value	需要验证的值
+     * @param	string	$msg	验证失败的提示消息
+     * @param	string	$rules	回调函数名称
+     * @return  array   array('ret' => 0/1,'reason' => '描述信息')
+     */
+    protected function callback($value, $rules, $msg = 'param error')
+    {
+        $arr_re = array('ret' => NF_RETURN_SUCCESS_CODE, 'reason' => 'success');
+        if (!call_user_func_array($rules, array($value)))
+        {
+            $arr_re['ret'] = NF_RETURN_ERROR_CODE;
+            $arr_re['reason'] = $msg;
+        }
+        return $arr_re;
+    }
+
+    /**
+     * 验证数据的值是否在一定的范围内
+     * @param	string	$value	需要验证的值
+     * @param	string	$msg	验证失败的提示消息
+     * @param	string	$rules	一个值或多个值，或一个范围
+     * @return  array   array('ret' => 0/1,'reason' => '描述信息')
+     */
+    protected function in($value, $rules, $msg = 'param error')
+    {
+        $arr_re = array('ret' => NF_RETURN_SUCCESS_CODE, 'reason' => 'success');
+        //多个值使用的是逗号分隔
+        if (strstr($rules, ","))
+        {
+            if (!in_array($value, explode(",", $rules)))
+            {
+                $arr_re['ret'] = NF_RETURN_ERROR_CODE;
+                $arr_re['reason'] = $msg;
+            }
+        }
+        else if (strstr($rules, '-'))
+        {//多个值使用的是-分隔
+
+            list($min, $max) = explode("-", $rules);
+            if (!($value >= $min && $value <= $max))
+            {
+                $arr_re['ret'] = NF_RETURN_ERROR_CODE;
+                $arr_re['reason'] = $msg;
+            }
+        }
+        else
+        {
+
+            if ($rules != $value)
+            {
+                $arr_re['ret'] = NF_RETURN_ERROR_CODE;
+                $arr_re['reason'] = $msg;
+            }
+        }
+        return $arr_re;
+    }
+
+    /**
+     * 验证数据的值的长度是否在一定的范围内
+     * @param	string	$value	需要验证的值
+     * @param	string	$msg	验证失败的提示消息
+     * @param	string	$rules	一个范围，例如 3-20(3-20之间)、3,20(3-20之间)、3(必须是3个)、3,(3个以上)
+     * @return  array   array('ret' => 0/1,'reason' => '描述信息')
+     */
+    protected function length($value, $rules, $msg = 'param error')
+    {
+        $arr_re = array('ret' => NF_RETURN_SUCCESS_CODE, 'reason' => 'success');
+        $fg = strstr($rules, '-') ? "-" : ",";
+        $int_val_length=mb_strlen($value,'UTF-8');
+        if (!strstr($rules, $fg))
+        {
+            if ( $int_val_length!= $rules)
+            {
+                $arr_re['ret'] = NF_RETURN_ERROR_CODE;
+                $arr_re['reason'] = $msg;
+            }
+        }
+        else
+        {
+
+            list($min, $max) = explode($fg, $rules);
+
+            if (empty($max))
+            {
+                if ($int_val_length < $rules)
+                {
+                    $arr_re['ret'] = NF_RETURN_ERROR_CODE;
+                    $arr_re['reason'] = $msg;
+                }
+            }
+            else if (($int_val_length < $min) || ($int_val_length > $max))
+            {
+                $arr_re['ret'] = NF_RETURN_ERROR_CODE;
+                $arr_re['reason'] = $msg;
+            }
+        }
+        return $arr_re;
+    }
+
 }

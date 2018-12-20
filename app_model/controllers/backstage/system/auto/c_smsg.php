@@ -10,6 +10,19 @@ include_once dirname(dirname(dirname(dirname(__DIR__)))) . '/logic/backstage/sys
 class c_smsg extends CI_Controller
 {
 
+
+    //sign key
+    private $str_sign_key = '04997110aa2db7e27991ece0749064f4';
+
+    /**
+     * 默认构造函数
+     */
+    public function __construct()
+    {
+        $this->need_login = false;
+        parent::__construct();
+    }
+
     /**
      * 发送短信
      * @return array(
@@ -22,15 +35,32 @@ class c_smsg extends CI_Controller
     public function send_msg()
     {
         $this->flag_ajax_reurn = true;
-        if(empty($this->arr_params['cms_mobile_code']))
+        //参数验证
+        $this->control_params_check(array(
+            'cms_mobile_code' => array(
+                'rule'   => 'mobile',
+                'reason' => '手机号码非法'
+            ),
+            'cms_time' => array(
+                'rule'   => 'notnull',
+                'reason' => '约定时间非法'
+            ),
+            'sign' => array(
+                'rule'   => 'notnull',
+                'reason' => '签名非法'
+            ),
+        ),$this->arr_params);
+        if($this->arr_params['sign'] != md5($this->arr_params['cms_mobile_code'] . $this->arr_params['cms_time'] . $this->str_sign_key))
         {
-            $arr_send_ret = array('ret' => 1,'reason' => '手机号码为必填参数');
+            $arr_send_ret = array('ret' => 1,'reason' => '失败：校验签名异常');
         }
         else
         {
+            //发送验证码
             $obj_system_smsg = new system_smsg($this,'');
             $arr_send_ret = $obj_system_smsg->send_verify_code($this->arr_params['cms_mobile_code']);
         }
+
         $this->load_view_file($arr_send_ret,__LINE__);
     }
 

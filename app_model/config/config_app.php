@@ -19,6 +19,10 @@ define('TRADE_PROCESS', 310003);
 define('TRADE_REFUND', 310004);
 //订单状态缓存时间
 define('ORDER_STATUS_BUFF_TIME',1800);
+//成功状态码
+define('NF_RETURN_SUCCESS_CODE',0);
+//失败状态码
+define('NF_RETURN_ERROR_CODE',1);
 
 
 
@@ -26,9 +30,11 @@ define('ORDER_STATUS_BUFF_TIME',1800);
 
 //253短信配置项
 $arr_config_app['short_message_config'] = array(
-    'api_send_url' => 'http://smssh1.253.com/msg/send/json',
-    'api_account'  => 'N4040642',
-    'api_password' => 'ReqmwPgKY84a97',
+    'api_send_url' => 'dysmsapi.aliyuncs.com',                 //请求地址
+    'api_account'  => 'LTAIzDNqjq2w6NdI',                      //Access Id
+    'api_password' => 'ZqFBhPCfFcHU7pRqB1bpSMSZ5p5w95',        //Access Secret
+    'api_sign_name'=> '云裳供应链',                             //短信签名
+    'api_template_code' => 'SMS_153190005',                    //短信模板ID
 );
 
 
