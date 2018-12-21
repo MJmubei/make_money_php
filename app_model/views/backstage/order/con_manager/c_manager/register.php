@@ -245,6 +245,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                             </div>
                             <div class="form-group">
                                 <input id="city-picker3" class="form-control-select" readonly type="text" value="" name="city-picker3" data-toggle="city-picker">
+                                <i class="glyphicon glyphicon-map-marker"></i>
                                 <button type="button" class="label-select" id="area-reset">重置</button>
                             </div>
                             <div class="form-group">
@@ -274,18 +275,22 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
             $('.btn-gain-num').text('发送验证码('+times+'s)');
             $('.btn-gain-num').prop('disabled',false);
             $('.btn-gain-num').text('发送验证码');
-            times = 10;
+            times = 60;
             return
         }
         $('.btn-gain-num').text('发送验证码('+times+'s)');
         times--;
         setTimeout(roof,1000);
     }
+    //发送短信
     $('.btn-gain-num').on('click',function(){
         var telephone = $('#telephone').val();
         $(this).prop('disabled',true);
         roof();
-        var submitData = "cms_mobile_code=" + telephone;
+        var key = '04997110aa2db7e27991ece0749064f4';
+        var timestamp=new Date().getTime();
+        var sign = hex_md5(telephone+timestamp+key);
+        var submitData = "cms_mobile_code=" + telephone + "&sign=" + sign + "&cms_time=" + timestamp;
         $.ajax({
             url:'../../../../backstage/system/auto/c_smsg/send_msg',
             type:"POST",
@@ -304,16 +309,22 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
         var flag2 = $('#defaultForm').data("bootstrapValidator").validateField('num');
         var flag3 = $('#defaultForm').data("bootstrapValidator").validateField('password');
         var flag4 = $('#defaultForm').data("bootstrapValidator").validateField('confirmPassword');
-
+        $('.one-step input').prop('disabled',true);
+        $('.one-step select').prop('disabled',true);
+        $('.one-step button').prop('disabled',true);
         if(flag1.isValid() && flag2.isValid() && flag3.isValid() && flag4.isValid())
         {
             $('.one-step').css({"left":"-100%","opacity":"0"});
             $('.tow-step').css({"left":"0","opacity":"1","display":"inline-block"});
         }
     });
+    //上一步
     $('.pre-btn').on('click',function(){
+        $('.one-step input').prop('disabled',false);
+        $('.one-step select').prop('disabled',false);
+        $('.one-step button').prop('disabled',false);
         $('.one-step').css({"left":"0","opacity":"1","display":"inline-block"});
-        $('.tow-step').css({"left":"100%","opacity":"0"});
+        $('.tow-step').css({"left":"100%","opacity":"0","display":"none"});
     });
 
     //重置地区选择

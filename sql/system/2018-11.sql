@@ -7,7 +7,7 @@ CREATE TABLE `order_manager` (
   `cms_name` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
   `cms_password` VARCHAR(32) COLLATE utf8_unicode_ci DEFAULT NULL,
   `cms_state` int(4) NOT NULL DEFAULT '0' COMMENT '启用禁用状态,0启用，1禁用',
-  `cms_role_id` mediumtext COLLATE utf8_unicode_ci COMMENT '角色ID,1系统管理员，2供应商，3订购商，4生产商',
+  `cms_role_id` int(4) NOT NULL DEFAULT '1' COLLATE utf8_unicode_ci COMMENT '角色ID,1系统管理员，2供应商，3订购商，4生产商',
   `cms_create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   `cms_modify_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '修改时间',
   `cms_login_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '登录时间',

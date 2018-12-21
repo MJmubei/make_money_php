@@ -15,6 +15,11 @@ class c_manager extends CI_Controller
         $this->load->library('session');
     }
 
+    public function test()
+    {
+        $this->load_view();
+    }
+
     public function index()
     {
         if(empty($this->session->userdata('telephone')) || empty($this->session->userdata('role_id')))

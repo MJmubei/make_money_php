@@ -16,6 +16,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
     <!-- *********** 初始化必须加载 ***************** （顶部JS加载） *********** 初始化必须加载 ***************** -->
     <?php include_once dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/model/backstage/pub_top_web_file.php';?>
     <link href="<?php echo VIEW_MODEL_BACKGROUD; ?>css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo VIEW_MODEL_BACKGROUD; ?>css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/bootstrapValidator.min.js"></script>
     <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/md5.js"></script>
     <style type="text/css">
@@ -33,7 +34,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
         }
         .profile-info-name {
             position: absolute;
-            width: 110px;
+            width: 20%;
             text-align: right;
             padding: 6px 10px 6px 0;
             left: 0;
@@ -54,7 +55,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
         }
         .profile-info-value {
             padding: 6px 4px 6px 6px;
-            margin-left: 120px;
+            margin-left: 20%;
             border-top: 1px dotted #d5e4f1;
         }
         .editable-click {
@@ -479,19 +480,13 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                 </div>
             </div>
             <!--完善资料-->
-            <div class="user-profile row tab-pane" id="edit_profile">
+            <div class="user-profile row tab-pane" id="edit_profile" >
                 <div class="col-xs-12 col-sm-12">
                     <form id="edit-profile-form">
                         <div class="profile-user-info profile-user-info-striped">
-
-                            <div class="profile-info-row">
-                                <div class="profile-info-name">用户id</div>
-
-                                <div class="profile-info-value">
-                                    <span class="editable"><?PHP echo $user['cms_id']?></span>
-                                    <input hidden id="user_id" value="<?PHP echo $user['cms_id']?>">
-                                </div>
-                            </div>
+                            <input hidden id="user_id" value="<?PHP echo $user['cms_id']?>">
+                            <input hidden id="telephone" value="<?PHP echo $user['cms_telephone']?>">
+                            <input hidden id="role_id" value="<?PHP echo $user['cms_role_id']?>">
                             <div class="profile-info-row">
                                 <div class="profile-info-name">用户名</div>
 
@@ -499,15 +494,6 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                     <input type="text" class="editable" id="username" name="username" value="<?PHP echo $user['cms_name']?>">
                                 </div>
                             </div>
-
-                            <div class="profile-info-row">
-                                <div class="profile-info-name">手机号</div>
-
-                                <div class="profile-info-value">
-                                    <span class="editable" id="telephone"><?PHP echo $user['cms_telephone']?></span>
-                                </div>
-                            </div>
-
                             <div class="profile-info-row">
                                 <div class="profile-info-name">地址</div>
 
@@ -523,39 +509,65 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                     <input type="email" class="editable" id="email" name="email" value="<?PHP echo $user['cms_email']?>">
                                 </div>
                             </div>
-
                             <div class="profile-info-row">
-                                <div class="profile-info-name">用户角色</div>
+                                <div class="profile-info-name">成立时间</div>
 
                                 <div class="profile-info-value">
-                                    <?php switch ($user['cms_role_id']){
-                                        case 1:
-                                            echo '<span class="editable" id="login">订单管理员</span>';
-                                            break;
-                                        case 2:
-                                            echo '<span class="editable" id="login">平台管理员</span>';
-                                            break;
-                                        case 3:
-                                            echo '<span class="editable" id="login">生产商</span>';
-                                            break;
-                                        case 4:
-                                            echo '<span class="editable" id="login">供应商</span>';
-                                            break;
-                                        case 5:
-                                            echo '<span class="editable" id="login">样板师</span>';
-                                            break;
-                                        case 6:
-                                            echo '<span class="editable" id="login">样衣师</span>';
-                                            break;
-                                    } ?>
+                                    <div class="input-group date form_date" style="padding-bottom: 0!important;width: 33%" data-date="" data-date-format="yyyy-mm-dd" data-link-field="establish_date" data-link-format="yyyy-mm-dd">
+                                        <input class="form-control" type="text" value="" readonly>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+                                    <input type="hidden" id="establish_date" value="" />
                                 </div>
                             </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name">主营产品</div>
+
+                                <div class="profile-info-value">
+                                    <input type="text" style="width: 50%" class="editable" id="main_product" name="main_product" value="<?PHP echo $user['cms_desc']?>">
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name">销售渠道</div>
+
+                                <div class="profile-info-value">
+                                    <input type="text" style="width: 50%" class="editable" id="sale_channels" name="sale_channels" value="<?PHP echo $user['cms_desc']?>">
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name">对公银行账户数据信息</div>
+
+                                <div class="profile-info-value">
+                                    <input type="text" style="width: 100%" class="editable" id="bank_info" name="bank_info" value="" placeholder="如开户名、开户地、开户行、银行卡号">
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name">快递发货地址、电话、收件人</div>
+
+                                <div class="profile-info-value">
+                                    <input type="text" style="width: 100%" class="editable" id="courier_info" name="courier_info" value="">
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name">大件发货地址、电话、收件人</div>
+
+                                <div class="profile-info-value">
+                                    <input type="text" style="width: 100%" class="editable" id="courier_big_info" name="courier_big_info" value="">
+                                </div>
+                            </div>
+
 
                             <div class="profile-info-row">
                                 <div class="profile-info-name">简介</div>
 
                                 <div class="profile-info-value">
-                                    <input type="text" class="editable" id="desc" name="desc" value="<?PHP echo $user['cms_desc']?>">
+                                    <input type="text" style="width: 100%" class="editable" id="desc" name="desc" value="<?PHP echo $user['cms_desc']?>">
                                 </div>
                             </div>
                         </div>
@@ -635,6 +647,20 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
     <!--    </div>-->
     <!--</div>-->
 </div>
-
+<script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+<script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script type="text/javascript">
+    $('.form_date').datetimepicker({
+        language:  'zh-CN',
+        weekStart: 0, //一周从哪一天开始
+        todayBtn:  1, //
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0,
+        showMeridian: 1
+    });
+</script>
 </body>
 </html>
