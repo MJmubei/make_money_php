@@ -172,8 +172,11 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
     <header class="htmleaf-header">
         <h1>欢迎使用<span></span></h1>
     </header>
+
     <div class="demo form-bg" style="padding: 20px 0;">
+        <div style="height: 630px;float: left;width: 20%;z-index: 998;position: absolute;opacity: 0"></div>
         <div class="container">
+
             <div class="row">
                 <div class="col-md-offset-3 col-md-6">
                     <form class="form-horizontal" id="defaultForm">
@@ -237,8 +240,8 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 <label class="label-select">请选择角色</label>
                             </div>
                             <div class="form-group">
-                                <select class="form-control-select" name="area">
-                                    <option value="1" selected>中国</option>
+                                <select class="form-control-select" name="country">
+                                    <option value="中国" selected>中国</option>
                                 </select>
                                 <i class="fa fa-home"></i>
                                 <label class="label-select">国家</label>
@@ -309,9 +312,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
         var flag2 = $('#defaultForm').data("bootstrapValidator").validateField('num');
         var flag3 = $('#defaultForm').data("bootstrapValidator").validateField('password');
         var flag4 = $('#defaultForm').data("bootstrapValidator").validateField('confirmPassword');
-        $('.one-step input').prop('disabled',true);
-        $('.one-step select').prop('disabled',true);
-        $('.one-step button').prop('disabled',true);
+
         if(flag1.isValid() && flag2.isValid() && flag3.isValid() && flag4.isValid())
         {
             $('.one-step').css({"left":"-100%","opacity":"0"});
@@ -320,9 +321,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
     });
     //上一步
     $('.pre-btn').on('click',function(){
-        $('.one-step input').prop('disabled',false);
-        $('.one-step select').prop('disabled',false);
-        $('.one-step button').prop('disabled',false);
+
         $('.one-step').css({"left":"0","opacity":"1","display":"inline-block"});
         $('.tow-step').css({"left":"100%","opacity":"0","display":"none"});
     });

@@ -389,7 +389,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                 <div class="col-xs-12 col-sm-3 center">
                     <div>
                     <span class="profile-picture">
-                        <img class="editable img-resposive editable-click" src="<?php echo VIEW_MODEL_BACKGROUD; ?>images/profile-pic.jpg">
+                        <img id="avatar" class="editable img-resposive editable-click editable-empty" src="<?php echo VIEW_MODEL_BACKGROUD; ?>images/profile-pic.jpg">
                     </span>
                         <div class="space-4"></div>
                         <div class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">
@@ -411,8 +411,8 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                         <div class="profile-info-row">
                             <div class="profile-info-name">用户名</div>
 
-                            <div class="profile-info-value">
-                                <span class="editable" id="username"><?PHP echo $user['cms_name']?></span>
+                            <div class="profile-info-value" style="height: 33px">
+                                <span class="editable" style="height: 20px" id="username"><?PHP echo $user['cms_name']?></span>
                             </div>
                         </div>
 
@@ -424,21 +424,21 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                             </div>
                         </div>
 
-                        <div class="profile-info-row">
+                        <div class="profile-info-row" style="height: 33px">
                             <div class="profile-info-name">地址</div>
 
                             <div class="profile-info-value">
                                 <i class="icon-map-marker light-orange bigger-110"></i>
-                                <span class="editable" id="country">Netherlands</span>
-                                <span class="editable" id="city">Amsterdam</span>
+                                <span class="editable" style="height: 20px" id="country"><?PHP echo $user['cms_country']?></span>
+                                <span class="editable" style="height: 20px" id="city"><?PHP echo $user['cms_address']?></span>
                             </div>
                         </div>
 
-                        <div class="profile-info-row">
+                        <div class="profile-info-row" style="height: 33px">
                             <div class="profile-info-name">邮箱</div>
 
                             <div class="profile-info-value">
-                                <span class="editable" id="email">946015091@qq.com</span>
+                                <span class="editable" style="height: 20px" id="email"><?PHP echo $user['cms_email']?></span>
                             </div>
                         </div>
 
@@ -469,11 +469,11 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                             </div>
                         </div>
 
-                        <div class="profile-info-row">
+                        <div class="profile-info-row" style="height: 33px">
                             <div class="profile-info-name">简介</div>
 
                             <div class="profile-info-value">
-                                <span class="editable" id="about">Editable as WYSIWYG</span>
+                                <span class="editable" id="about"><?PHP echo $user['cms_desc']?></span>
                             </div>
                         </div>
                     </div>
@@ -498,7 +498,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 <div class="profile-info-name">地址</div>
 
                                 <div class="profile-info-value">
-                                    <input type="text" class="editable" id="address" name="address" value="<?PHP if (isset($user['cms_address'])){echo $user['cms_address'];}?>">
+                                    <input type="text" style="width: 50%" class="editable" id="address" name="address" value="<?PHP if (isset($user['cms_address'])){echo $user['cms_address'];}?>">
                                 </div>
                             </div>
 
@@ -514,11 +514,11 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
 
                                 <div class="profile-info-value">
                                     <div class="input-group date form_date" style="padding-bottom: 0!important;width: 33%" data-date="" data-date-format="yyyy-mm-dd" data-link-field="establish_date" data-link-format="yyyy-mm-dd">
-                                        <input class="form-control" type="text" value="" readonly>
+                                        <input class="form-control" type="text" value="<?PHP if (isset($user['cms_establish_date'])){echo $user['cms_establish_date'];}?>" readonly>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
-                                    <input type="hidden" id="establish_date" value="" />
+                                    <input type="hidden" id="establish_date" value="<?PHP if (isset($user['cms_establish_date'])){echo $user['cms_establish_date'];}?>" />
                                 </div>
                             </div>
 
@@ -526,7 +526,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 <div class="profile-info-name">主营产品</div>
 
                                 <div class="profile-info-value">
-                                    <input type="text" style="width: 50%" class="editable" id="main_product" name="main_product" value="<?PHP echo $user['cms_desc']?>">
+                                    <input type="text" style="width: 50%" class="editable" id="main_product" name="main_product" value="<?PHP if (isset($user['cms_main_product'])){echo $user['cms_main_product'];}?>">
                                 </div>
                             </div>
 
@@ -534,7 +534,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 <div class="profile-info-name">销售渠道</div>
 
                                 <div class="profile-info-value">
-                                    <input type="text" style="width: 50%" class="editable" id="sale_channels" name="sale_channels" value="<?PHP echo $user['cms_desc']?>">
+                                    <input type="text" style="width: 50%" class="editable" id="sale_channels" name="sale_channels" value="<?PHP if (isset($user['cms_sale_channels'])){echo $user['cms_sale_channels'];}?>">
                                 </div>
                             </div>
 
@@ -542,7 +542,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 <div class="profile-info-name">对公银行账户数据信息</div>
 
                                 <div class="profile-info-value">
-                                    <input type="text" style="width: 100%" class="editable" id="bank_info" name="bank_info" value="" placeholder="如开户名、开户地、开户行、银行卡号">
+                                    <input type="text" style="width: 100%" class="editable" id="bank_info" name="bank_info" value="<?PHP if (isset($user['cms_bank_info'])){echo $user['cms_bank_info'];}?>" placeholder="如开户名、开户地、开户行、银行卡号">
                                 </div>
                             </div>
 
@@ -550,7 +550,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 <div class="profile-info-name">快递发货地址、电话、收件人</div>
 
                                 <div class="profile-info-value">
-                                    <input type="text" style="width: 100%" class="editable" id="courier_info" name="courier_info" value="">
+                                    <input type="text" style="width: 100%" class="editable" id="courier_info" name="courier_info" value="<?PHP if (isset($user['cms_courier_info'])){echo $user['cms_courier_info'];}?>">
                                 </div>
                             </div>
 
@@ -558,7 +558,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 <div class="profile-info-name">大件发货地址、电话、收件人</div>
 
                                 <div class="profile-info-value">
-                                    <input type="text" style="width: 100%" class="editable" id="courier_big_info" name="courier_big_info" value="">
+                                    <input type="text" style="width: 100%" class="editable" id="courier_big_info" name="courier_big_info" value="<?PHP if (isset($user['cms_courier_big_info'])){echo $user['cms_courier_big_info'];}?>">
                                 </div>
                             </div>
 
@@ -628,24 +628,61 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                     </form>
                 </div>
             </div>
+            <!--修改手机号-->
+            <div class="user-profile row tab-pane" id="edit_telephone">
+                <div class="col-xs-12 col-sm-12">
+                    <form id="edit-password-form">
+                        <div class="profile-user-info profile-user-info-striped">
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name">用户id</div>
+                                <div class="profile-info-value">
+                                    <span class="editable"><?PHP echo $user['cms_id']?></span>
+                                    <input type="text"  hidden name="user_id" id="user_id" value="<?PHP echo $user['cms_id']?>">
+                                </div>
+                            </div>
+                            <div class="profile-info-row">
+                                <div class="profile-info-name">旧手机号</div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable"><?PHP echo $user['cms_telephone']?></span>
+                                    <input type="tel" hidden name="old_telephone" id="old_telephone" value="<?PHP echo $user['cms_telephone']?>">
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name">输入验证码</div>
+
+                                <div class="profile-info-value">
+                                    <input type="text" class="editable" id="num" name="num">
+                                    <button type="button" onclick="send_smsg('num1')" id="num1">获取验证码</button>
+                                </div>
+                            </div>
+                            <div class="profile-info-row">
+                                <div class="profile-info-name">新手机号</div>
+
+                                <div class="profile-info-value">
+                                    <input type="tel" name="new_telephone" id="old_telephone" value="">
+                                </div>
+                            </div>
+                            <div class="profile-info-row">
+                                <div class="profile-info-name">输入验证码</div>
+
+                                <div class="profile-info-value">
+                                    <input type="text" class="editable" id="re_num" name="re_num">
+                                    <button type="button" onclick="send_smsg('num2')" id="num2" >获取验证码</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-info-row center">
+                            <button type="submit" class="btn btn-primary">确认修改</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
     </div>
-    <!--<div class="hr dotted"></div>-->
-    <!--<div class="">-->
-    <!--    <div class="col-xs-12 center">-->
-    <!--        <div class="col-xs-12 col-sm-3">-->
-    <!--            <button class="btn btn-primary" href="edit_profile">完善资料</button>-->
-    <!--        </div>-->
-    <!--        <div class="col-xs-12 col-sm-3">-->
-    <!--            <button class="btn btn-primary">修改密码</button>-->
-    <!--        </div>-->
-    <!--        <div class="col-xs-12 col-sm-3">-->
-    <!--            <button class="btn btn-primary">修改手机号</button>-->
-    <!--        </div>-->
-    <!--        <div class="col-xs-12 col-sm-3"></div>-->
-    <!--    </div>-->
-    <!--</div>-->
 </div>
 <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
 <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
@@ -661,6 +698,48 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
         forceParse: 0,
         showMeridian: 1
     });
+
+    var times = 60;
+    function roof(btn_id){
+        if(times == 0){
+            $('#' + btn_id).text('发送验证码('+times+'s)');
+            $('#' + btn_id).prop('disabled',false);
+            $('#' + btn_id).text('发送验证码');
+            times = 60;
+            return
+        }
+        $('#' + btn_id).text('发送验证码('+times+'s)');
+        times--;
+        setTimeout(roof,1000);
+    }
+    //发送短信
+    function send_smsg(btn_id)
+    {
+        if (btn_id == 'num1')
+        {
+            var telephone = $('#old_telephone').val();
+        }
+        else
+        {
+            var telephone = $('#new_telephone').val();
+        }
+        $('#'+btn_id).prop('disabled',true);
+        roof(btn_id);
+        var key = '04997110aa2db7e27991ece0749064f4';
+        var timestamp=new Date().getTime();
+        var sign = hex_md5(telephone+timestamp+key);
+        var submitData = "cms_mobile_code=" + telephone + "&sign=" + sign + "&cms_time=" + timestamp;
+        $.ajax({
+            url:'../../../../backstage/system/auto/c_smsg/send_msg',
+            type:"POST",
+            data:submitData,
+            cache:false,//false是不缓存，true为缓存
+            async:true,//true为异步，false为同步
+            success:function(result){
+                alert('发送成功');
+            }
+        });
+    }
 </script>
 </body>
 </html>
