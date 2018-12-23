@@ -184,3 +184,13 @@ CREATE TABLE `order_fabirc_map` (
   `cms_modify_time` datetime DEFAULT '0000-00-00 00:00:00' COMMENT '修改时间',
   UNIQUE KEY `fabirc_unique` (`cms_fabirc_type_id`,`cms_fabirc_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ------------------------------------------------------------------------------------
+-- Table Shop Change Column And Table Name. By kan.yang@starcor.com. Date 2018-12-12 20:25:00
+-- ------------------------------------------------------------------------------------
+ALTER TABLE `system_buy_order` MODIFY `cms_pay_order_id` VARCHAR(32) NOT NULL DEFAULT ''  COMMENT '支付订单号';
+ALTER TABLE `system_buy_order` ADD COLUMN `nns_order_data` TEXT NOT NULL COMMENT '订单数据，以JSON格式存储';
+ALTER TABLE `cms_wechat_accounts` RENAME TO `system_wechat_accounts`;
+ALTER TABLE `cms_channel_mode` RENAME TO `system_channel_mode`;
+ALTER TABLE `cms_channel` RENAME TO `system_channel`;
+

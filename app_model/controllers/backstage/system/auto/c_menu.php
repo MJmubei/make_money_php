@@ -199,19 +199,19 @@ class c_menu extends CI_Controller
         $result = $this->auto_load_class('app_model/libraries/em_file.class.php');
         if($result['ret'] !=0)
         {
-            return $result;
+            $this->load_view_file($result,__LINE__);
         }
         $em_file = new em_file($this,'php');
         $result_files = $em_file->get_files_list($base_dir);
         if(empty($result_files) ||!is_array($result_files))
         {
-            return em_return::return_data(1,'NO file find');
+            $this->load_view_file(em_return::return_data(1,'NO file find'),__LINE__);
         }
         $last_data = null;
         $result = $this->auto_load_table('system','auto','c_project','system_menu', 'edit',array('set'=>array('cms_state'=>1,'cms_modify_time'=>date("Y-m-d H:i:s"))));
         if($result['ret'] !=0)
         {
-            return $result;
+            $this->load_view_file($result,__LINE__);
         }
         $temp_arr = null;
         foreach ($result_files as $file_list)
@@ -244,17 +244,17 @@ class c_menu extends CI_Controller
         }
         if(!is_array($temp_arr) || empty($temp_arr))
         {
-            return em_return::return_data(1,'没有需要生成的目录');
+            $this->load_view_file(em_return::return_data(1,'没有需要生成的目录'),__LINE__);
         }
-        $result_poject = $this->auto_load_table('system','auto','c_project','system_menu', 'query',array('where'=>array('cms_mark'=>$temp_arr['prject'],'cms_state'=>0)));
+        $result_poject = $this->auto_load_table('system','auto','c_project','system_project', 'query',array('where'=>array('cms_mark'=>$temp_arr['prject'],'cms_state'=>0)));
         if($result_poject['ret'] !=0)
         {
-            return $result_poject;
+            $this->load_view_file($result_poject,__LINE__);
         }
         $result_poject = isset($result_poject['data_info']) ? $result_poject['data_info'] : null;
         if(empty($result_poject) || !is_array($result_poject))
         {
-            return em_return::return_data(1,'查询无项目数据,请先检查项目数据是否生成');
+            $this->load_view_file(em_return::return_data(1,'查询无项目数据,请先检查项目数据是否生成'),__LINE__);
         }
         $arr_poject = null;
         foreach ($result_poject as $value)
@@ -309,12 +309,12 @@ class c_menu extends CI_Controller
                 ));
                 if($result['ret'] !=0)
                 {
-                    return $result;
+                    $this->load_view_file($result,__LINE__);
                 }
                 $data[$_key][$_value['key']] = $result['data_info']['cms_id'];
             }
         }
         $result = $this->auto_load_table('system', 'auto', 'c_project', 'system_menu', 'delete', array('where' => array('cms_state' => 1)));
-        return em_return::return_data(0,'OK');
+        $this->load_view_file(em_return::return_data(0,'OK'),__LINE__);
     }
 }

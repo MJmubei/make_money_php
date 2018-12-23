@@ -12,7 +12,10 @@ class c_home extends CI_Controller
     public function index()
     {
         $data = $this->system_auto_make_menu();
-        $data = $this->system_auto_make_menu_arr($data);
+        if(is_array($data) && !empty($data))
+        {
+            $data = $this->system_auto_make_menu_arr($data);
+        }
         $this->load_view_file(em_return::return_data(0,'ok',$data),__LINE__);
     }
 }

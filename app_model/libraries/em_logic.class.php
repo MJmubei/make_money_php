@@ -1103,7 +1103,7 @@ class em_logic
         return $last_data;
     }
     
-    public function make_query_sql($params,$table='')
+    public function make_query_sql($params,$table='',$str_field = '*')
     {
         if(isset($table) && strlen($table) >0)
         {
@@ -1148,8 +1148,8 @@ class em_logic
             }
             $mix_limit['cms_data_count'] = isset($data_count['data_info'][0]['count']) ? $data_count['data_info'][0]['count'] : 0;
         }
-        $sql = "select * from {$this->str_base_table} $where ".$mix_limit['sql'];
-//         echo $sql."<br/>";
+        $sql = "select " . $str_field . " from {$this->str_base_table} $where ".$mix_limit['sql'];
+//         echo $sql."<br/>";die;
         unset($mix_limit['sql']);
         $data =  $this->_make_query_sql($sql);
         if($data['ret'] !=0)
@@ -1166,7 +1166,7 @@ class em_logic
      * @param string $table
      * @return array
      */
-    public function make_query_only_sql($params, $table='')
+    public function make_query_only_sql($params, $table='',$str_field = '*')
     {
         if(isset($table) && strlen($table) >0)
         {
@@ -1203,7 +1203,7 @@ class em_logic
         $limit = " limit 1";
 
         
-        $sql = "select * from {$this->str_base_table} $where ".$limit;
+        $sql = "select " . $str_field . " from {$this->str_base_table} $where ".$limit;
 
         $data =  $this->_make_query_sql($sql);
         if($data['ret'] !=0)
@@ -1328,4 +1328,69 @@ class em_logic
         unset($this->str_base_table);
         unset($this->obj_controller);
     }
+
+    /**
+     * 初始化入参
+     * 1 统一字段头
+     * 2 过滤空入参
+     * 3 字段匹配
+     */
+    protected function _init_logic(&$arr_query_params)
+    {
+        $arr_query_params = $this->make_em_pre($arr_query_params);
+        $arr_query_params = $this->_except_empty_data($arr_query_params);
+        $arr_query_params = $this->_check_query_params($this->table_define, $arr_query_params);
+    }
+
+    /**
+     * 批量处理查询条件
+     * @param array  $arr_where_items  字段
+     * @param array  $arr_filter       排除字段
+     * @param string $str_flag         连接字符。=、in、llike、rlike、like
+     * @param string $str_where_sql    SQL语句
+     */
+    protected function _batch_comm_query_where($arr_where_items,$arr_filter = array(),$str_flag = '=',&$str_where_sql = '')
+    {
+        if(empty($str_where_sql))
+        {
+            $str_where_sql = '1=1';
+        }
+        foreach($arr_where_items as $k => $v)
+        {
+            if(in_array($k,$arr_filter)) continue;
+            switch($str_flag)
+            {
+                case 'llike':
+                    $str_where_sql .= ' and ' . $k . ' like \'%' . $v . '\'';
+                    break;
+                case 'rlike':
+                    $str_where_sql .= ' and ' . $k . ' = \'' . $v . '%\'';
+                    break;
+                case 'like':
+                    $str_where_sql .= ' and ' . $k . ' = \'%' . $v . '%\'';
+                    break;
+                case 'in':
+                    $this->_handle_array_string_params($v);
+                    $str_where_sql .= ' and ' . $k . ' in (' . $v . ')';
+                    break;
+                case '=':
+                default:
+                    $str_where_sql .= ' and ' . $k . ' = \'' . $v . '\'';
+                    break;
+            }
+        }
+    }
+
+    /**
+     * 通用数组/字符串
+     */
+    protected function _handle_array_string_params(&$obj_params)
+    {
+        if(is_string($obj_params))
+        {
+            $obj_params = explode(',',$obj_params);
+        }
+        $obj_params = '\'' . implode("','",$obj_params) . '\'';
+    }
+
 }

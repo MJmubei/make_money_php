@@ -221,8 +221,8 @@
 								<a href="#">
 									<div class="pull-left text-center">
 										<div class="m-t-xs">
-											<i class="fa fa-star text-warning"></i> <i
-												class="fa fa-star text-warning"></i>
+											<i class="fa fa-star text-warning"></i> 
+											<i class="fa fa-star text-warning"></i>
 										</div>
 									</div>
 									<div class="media-body">

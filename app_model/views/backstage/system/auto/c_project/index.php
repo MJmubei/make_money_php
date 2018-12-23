@@ -14,12 +14,12 @@
 			</ol>
 		</div>
 		<div class="graph">
-			<div class="form-body">
-				<form class="form-horizontal" method="post" action="<?php echo $arr_page_url['list_url'];?>">
+		    <div class="form-body">
+    			<form class="form-horizontal" method="post" action="<?php echo $arr_page_url['list_url'];?>">
     				<div class="form-group">
     					<label for="disabledinput" class="col-sm-1 control-label">名称</label>
     					<div class="col-sm-2">
-    						<input type="text" class="form-control1" name="cms_name" id="focusedinput" value="<?php echo isset($arr_params['cms_name']) ? $arr_params['cms_name'] : '';?>">
+    						<input type="text" class="form-control1" name="cms_name" id="cms_name" value="<?php echo isset($arr_params['cms_name']) ? $arr_params['cms_name'] : '';?>">
     					</div>
     					<div class="col-sm-1">
     						<button class="btn btn-success" type="button" id="button_query_list">
@@ -27,8 +27,8 @@
     						</button>
     					</div>
     				</div>
-			     </form>
-		    </div>
+    			</form>
+    		</div>
     		<div class="view_tables">
     			<table class="table table-hover" id="index_list">
     				<thead>
@@ -83,13 +83,14 @@
     					<?php     }
     						   }
     				     ?>
-				</tbody>
-			</table>
-		</div>
-		<!--*********** 初始化必须加载 ***************** （分页信息） *********** 初始化必须加载 ***************** -->
-        <?php include_once dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/model/backstage/pub_page.php';?>
-		<!--*********** 初始化必须加载 ***************** （底部按钮信息） *********** 初始化必须加载 ***************** -->
-        <?php include_once dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/model/backstage/public_bottom_button.php';?>
+    				</tbody>
+    			</table>
+    		</div>
+    		<!--*********** 初始化必须加载 ***************** （分页信息） *********** 初始化必须加载 ***************** -->
+            <?php include_once dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/model/backstage/pub_page.php';?>
+    		<!--*********** 初始化必须加载 ***************** （底部按钮信息） *********** 初始化必须加载 ***************** -->
+            <?php include_once dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/model/backstage/public_bottom_button.php';?>
+	   </div>
 	</div>
 </body>
 </html>

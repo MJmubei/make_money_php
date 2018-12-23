@@ -7,10 +7,7 @@
 <body>
    <div class="page-container">
    <!--/content-inner-->
-	<div class="left-content">
 	   <div class="inner-content">
-				<!--*********** 初始化必须加载 ***************** （顶部导航栏加载） *********** 初始化必须加载 *****************   -->
-				<?php include_once dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/model/backstage/pub_top_menu.php';?>
 				<div class="outter-wp">
 					<div class="but_list">
 						<ol class="breadcrumb">
@@ -23,9 +20,7 @@
 					<div class="graph">
 						<div class="form-body">
 							<form class="form-horizontal" method="post" action="<?php echo $arr_page_url['list_url'];?>">
-							    <input type="hidden" name="cms_page_num" id="cms_page_num" value="<?php echo isset($page_info['cms_page_num']) ? $page_info['cms_page_num'] : 1;?>">
-							    <input type="hidden" name="cms_page_size" id="cms_page_size" value="<?php echo isset($page_info['cms_page_size']) ? $page_info['cms_page_size'] : 10;?>">
-								<div class="form-group">
+							    <div class="form-group">
 									<label for="disabledinput" class="col-sm-1 control-label">名称</label>
 									<div class="col-sm-2">
 										<input type="text" class="form-control1" name="TABLE_NAME" id="focusedinput" value="<?php echo isset($arr_params['TABLE_NAME']) ? $arr_params['TABLE_NAME'] : '';?>">
@@ -114,7 +109,6 @@
 									<?php     }
     									   }
     							     ?>
-    							     
 								</tbody>
 							</table>
 						</div>
@@ -241,18 +235,11 @@
 										<i class="fa fa-trash-o"> 删除</i>
 									</button>
 								</div>
-								
-								
 								<div class="clearfix"></div>
 						    </form>
 						</div>
 					</div>
 				</div>
-				<!--*********** 初始化必须加载 ***************** （最下版权加载） *********** 初始化必须加载 ***************** -->
-		        <?php include_once dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/model/backstage/pub_footer.php';?>
 			</div>
-		</div>			
-		<!--*********** 初始化必须加载 ***************** （左侧目录加载） *********** 初始化必须加载 ***************** -->
-		<?php include_once dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/model/backstage/pub_left_menu.php';?>
 </body>
 </html>

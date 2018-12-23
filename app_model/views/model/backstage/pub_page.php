@@ -2,7 +2,6 @@
     $int_page_show_num =5;
     $int_page_show_num = ($int_page_show_num%5) == '1' ? $int_page_show_num+1 : $int_page_show_num;
     $arr_page_index = array(
-        '1',
         '6',
         '12',
         '24',

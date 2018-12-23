@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * 超级管理管理模块
  * @author pan.liang
  */
-class c_menu extends CI_Controller
+class c_page extends CI_Controller
 {
     /**
      * 创建controll模板列表

@@ -35,6 +35,14 @@ $(document).ready(function() {
         }
     });
 
+    $('#<?php echo $system_file_list_value['class'];?>-reset').click(function() {
+        $('#<?php echo $system_file_list_value['class'];?>-form').data('bootstrapValidator').resetForm(true);
+    });
+    
+	$('#<?php echo $system_file_list_value['class'];?>-cancel').click(function() {
+        $('#<?php echo $system_file_list_value['class'];?>-form').data('bootstrapValidator').resetForm(true);
+    });
+
 });
 </script>
 <div class="modal fade" id="<?php echo $system_file_list_value['class'];?>" tabindex="-1"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

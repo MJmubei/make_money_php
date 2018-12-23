@@ -38,6 +38,14 @@
                 }
             }
         });
+        
+        $('#<?php echo $system_file_list_value['class'];?>-reset').click(function() {
+            $('#<?php echo $system_file_list_value['class'];?>-form').data('bootstrapValidator').resetForm(true);
+        });
+        
+    	$('#<?php echo $system_file_list_value['class'];?>-cancel').click(function() {
+            $('#<?php echo $system_file_list_value['class'];?>-form').data('bootstrapValidator').resetForm(true);
+        });
     });
 </script>
 <?php foreach ($system_file_list_value['button_data'] as $key=>$button_data_value){?>

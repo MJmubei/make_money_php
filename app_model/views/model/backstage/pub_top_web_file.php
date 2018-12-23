@@ -33,6 +33,12 @@
 <!-- Sweet Alert -->
 <link href="<?php echo VIEW_MODEL_BACKGROUD; ?>hplus/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>hplus/js/plugins/sweetalert/sweetalert.min.js"></script>
+
+
+<script type="text/javascript" src="<?php echo VIEW_MODEL_BACKGROUD; ?>public/jquery-3.3.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo VIEW_MODEL_BACKGROUD; ?>webuploader-0.1.5/webuploader.css">
+<script type="text/javascript" src="<?php echo VIEW_MODEL_BACKGROUD; ?>webuploader-0.1.5/webuploader.js"></script>
+
 <script type="text/javascript">
     var toggle = true;
     $(".sidebar-icon").click(function() {                
@@ -250,14 +256,14 @@
 	//need_refresh  true 界面需要刷新  | false 界面不刷新
     function system_submit_data(str_class,submitData,url,need_refresh)
     {
-        var show_log=true;
+        var show_log=false;
     	//submitData是解码后的表单数据，结果同上
     	submitData+="&flag_ajax_reurn=1";
 		var temp_data = $('#'+str_class+'-form').serialize();
 		if(temp_data !== undefined && temp_data !== null){
 			submitData+='&'+temp_data;
 		}
-        alert(submitData);
+        //alert(submitData);
     	$.ajax({
         	url:url,
 			type:"POST",
@@ -487,14 +493,6 @@
                 }
         	});
 		}
-		
-    	$('#'+str_class+'-reset').click(function() {
-            $('#'+str_class+'-form').data('bootstrapValidator').resetForm(true);
-        });
-        
-    	$('#'+str_class+'-cancel').click(function() {
-            $('#'+str_class+'-form').data('bootstrapValidator').resetForm(true);
-        });
     }
 </script>
 <!--js -->

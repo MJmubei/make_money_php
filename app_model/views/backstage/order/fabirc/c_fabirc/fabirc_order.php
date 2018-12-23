@@ -3,17 +3,12 @@
 <head>
 <!-- *********** 初始化必须加载 ***************** （顶部JS加载） *********** 初始化必须加载 ***************** -->
 <?php include_once dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/model/backstage/pub_top_web_file.php';?>
-    <?php
-    //获取多余的GET参数
-
-    ?>
 <link href="<?php echo VIEW_MODEL_BACKGROUD; ?>/css/bootstrap.min.css" rel="stylesheet">
 	<style type="text/css">
 		.htmleaf-header{margin-bottom: 15px;font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;}
 		.htmleaf-icon{color: #fff;}
 	</style>
     <script type="text/javascript">
-
         $(function() {
             var defaultData = <?php echo (isset($fabirc_type)&&is_array($fabirc_type)) ? json_encode($fabirc_type) : json_encode(array());?>;
             var $searchableTree = $('#treeview-searchable').treeview({
@@ -68,3 +63,9 @@
     </div>
 </body>
 </html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#treeview-selectable ul li').eq(0).css('color','#ffffff');
+        $('#treeview-selectable ul li').eq(0).css('background-color','#428bca');
+    })
+</script>
