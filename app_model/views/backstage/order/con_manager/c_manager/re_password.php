@@ -217,7 +217,10 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
         var telephone = $('#telephone').val();
         $(this).prop('disabled',true);
         roof();
-        var submitData = "cms_mobile_code=" + telephone;
+        var key = '04997110aa2db7e27991ece0749064f4';
+        var timestamp=new Date().getTime();
+        var sign = hex_md5(telephone+timestamp+key);
+        var submitData = "cms_mobile_code=" + telephone + "&sign=" + sign + "&cms_time=" + timestamp;
         $.ajax({
             url:'../../../../backstage/system/auto/c_smsg/send_msg',
             type:"POST",
