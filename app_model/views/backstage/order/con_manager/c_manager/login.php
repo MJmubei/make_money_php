@@ -31,6 +31,9 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
     <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/bootstrap.min.js"></script>
     <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/bootstrapValidator.min.js"></script>
     <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/md5.js"></script>
+    <!-- Sweet Alert -->
+    <link href="<?php echo VIEW_MODEL_BACKGROUD; ?>hplus/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>hplus/js/plugins/sweetalert/sweetalert.min.js"></script>
     <script type="text/javascript">
         $(function(){/* 文档加载，执行一个函数*/
             $('#defaultForm').bootstrapValidator({
@@ -92,13 +95,36 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                     var dataObj=eval("("+result+")");
                     if(dataObj.ret != 0)
                     {
-                        alert(dataObj.reason);
+                        swal(
+                            {
+                                title:'登录失败',
+                                text:dataObj.reason,
+                                type:"error",
+                                showCancelButton:false,
+                                confirmButtonColor:"#DD6B55",
+                                confirmButtonText:"确定",
+                                closeOnConfirm:false
+                            },
+                        );
                         $('#password').val("");
                     }
                     else
                     {
-                        alert('登陆成功');
-                        window.location.href='../../../../backstage/order/index/c_index/index';
+                        swal(
+                            {
+                                title:'登录成功',
+                                text:'',
+                                type:"success",
+                                showCancelButton:false,
+                                showConfirmButton:false,
+                                confirmButtonColor:"#DD6B55",
+                                confirmButtonText:"确定",
+                                closeOnConfirm:false,
+                                timer:1500
+                            },function(){
+                                window.location.href='../../../../backstage/order/index/c_index/index';
+                            }
+                        );
                     }
                 });
             });
