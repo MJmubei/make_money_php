@@ -213,7 +213,7 @@ class c_manager extends CI_Controller
             $re = em_return::return_data(1,$arr_send_ret['reason']);
             $this->load_view_file($re,__LINE__);
         }
-
+        $addr = isset($this->arr_params['city-picker3']) ? str_replace('/','', $this->arr_params['city-picker3']) : '';
         $time = date('Y-m-d H:i:s');
         $add_params = array(
             'insert' => array(
@@ -223,8 +223,15 @@ class c_manager extends CI_Controller
                 'modify_time' => $time,
                 'user_ip' => $_SERVER['REMOTE_ADDR'],
                 'role_id' => $this->arr_params['role_id'],
-            ),
+                'sex' => $this->arr_params['sex'],
+                'username' => $this->arr_params['username'],
+                'company_name' => $this->arr_params['company_name'],
+                'country' => $this->arr_params['country'],
+                'address' => $addr
+            )
         );
+
+
         $add_user = $this->auto_load_table('order','manager', 'c_manager', 'manager', 'add', $add_params);
         if ($add_user['ret'] != 0)
         {
@@ -409,7 +416,7 @@ class c_manager extends CI_Controller
                 ),
                 'where' => array(
                     'id' => $user['data_info']['cms_id'],
-                    'telephone' => $user['data_info']['telephone']
+                    'telephone' => $user['data_info']['cms_telephone']
                 ),
             );
             $add_user = $this->auto_load_table('order','manager', 'c_manager', 'manager', 'edit', $edit_params);
@@ -503,7 +510,7 @@ class c_manager extends CI_Controller
     }
 
     /**
-     * 后台修改密码
+     * 后台修改手机号
      */
     public function edit_telephone()
     {
@@ -533,7 +540,7 @@ class c_manager extends CI_Controller
             $this->load_view_file($re,__LINE__);
         }
         //新手机验证码
-        if (empty($this->arr_params['num']) || !isset($this->arr_params['num']))
+        if (empty($this->arr_params['re_num']) || !isset($this->arr_params['re_num']))
         {
             $re = em_return::return_data(1,'新手机验证码不能为空');
             $this->load_view_file($re,__LINE__);
