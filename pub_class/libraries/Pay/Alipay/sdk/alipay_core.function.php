@@ -145,7 +145,7 @@ function get_http_response_post($url, $cacert_url, $param, $input_charset = '')
  * @param $cacert_url 指定当前工作目录绝对路径
  * return 远程输出的数据
  */
-function get_http_response_get($url, $cacert_url)
+function get_http_response_get($url, $cacert_url = '')
 {
 	$curl = curl_init($url);
 	//过滤HTTP头

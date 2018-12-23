@@ -13,6 +13,16 @@ class c_notify extends CI_Controller
 {
 
     /**
+     * 默认构造函数
+     */
+    public function __construct()
+    {
+        $this->flag_ajax_reurn = true;
+        $this->need_login = false;
+        parent::__construct();
+    }
+
+    /**
      * 微信支付回调
      */
     public function wx_notify()

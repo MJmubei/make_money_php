@@ -81,6 +81,12 @@ class logic_channel_base extends em_logic
             'length' => '32',
             'desc' => 'GUUID，外部标识',
         ),
+        'nns_partner_id' => array(
+            'type' => 'int',
+            'isempty' => '',
+            'length' => '0-11',
+            'desc' => '商户ID',
+        ),
     );
 
     /**

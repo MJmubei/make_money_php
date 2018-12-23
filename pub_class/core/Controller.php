@@ -4,6 +4,8 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+//开启SESSION
+session_start();
 /**
  * Application Controller Class
  */

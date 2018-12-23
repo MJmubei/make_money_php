@@ -186,6 +186,10 @@ class channel_mode_logic extends logic_channel_mode_base
      */
     public function edit($arr_ids,$arr_edit_params)
     {
+        if(isset($arr_edit_params['cms_id']))
+        {
+            unset($arr_edit_params['cms_id']);
+        }
         //标准化入参
         $this->_init_logic($arr_edit_params);
         $str_params_where = 'cms_id in (' . $this->_handle_array_string_params($arr_ids) . ')';

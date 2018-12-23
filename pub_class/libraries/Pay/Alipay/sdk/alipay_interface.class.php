@@ -1,15 +1,17 @@
 <?php
 /**
- * 支付宝接口封装
- * Author:陈波
- * Date:2015/01/05 18:34:45
+ * Created by PhpStorm.
+ * Use : 支付宝接口封装
+ * User: kan.yang@starcor.com
+ * Date: 18-12-22
+ * Time: 上午12:30
  */
 
-require_once("alipay_core.function.php");
-require_once("alipay_rsa.function.php");
-
+include_once 'alipay_core.function.php';
+include_once 'alipay_rsa.function.php';
 class nl_alipay_interface
 {
+
 	/**
 	 * HTTPS形式消息验证地址
 	 */
@@ -43,8 +45,6 @@ class nl_alipay_interface
 
 	/**
 	 * 针对notify_url验证消息是否是支付宝发出的合法消息
-	 * Author:陈波
-	 * Date:2015/01/05 18:34:45
 	 * @param $param = array(    支付宝异步通知的所有参数,$_POST或者$_GET
 	 *               'sign'=>'签名支付串',
 	 *               'notify_id'=>'通知ID',
@@ -61,7 +61,6 @@ class nl_alipay_interface
 		}
 		//生成签名结果
 		$isSign = self::get_sign_veryfy($param, $param["sign"]);
-        nl_log_v2_info('k13_a_2', "支付宝APP支付异步通知签名结果:" .$isSign);
 		//获取支付宝远程服务器ATN结果（验证是否是支付宝发来的消息）
 		$responseTxt = 'true';
 		if (empty($_POST["notify_id"]))
@@ -69,7 +68,6 @@ class nl_alipay_interface
 			return false;
 		}
 		$responseTxt = self::get_veryfy_response($param["notify_id"]);
-        nl_log_v2_info('k13_a_2', "支付宝APP支付异步通知ATN结果:" .$responseTxt);
 		//验证
 		//$responsetTxt的结果不是true，与服务器设置问题、合作身份者ID、notify_id一分钟失效有关
 		//isSign的结果不是true，与安全校验码、请求时的参数格式（如：带自定义参数等）、编码格式有关
@@ -82,8 +80,6 @@ class nl_alipay_interface
 
 	/**
 	 * 针对return_url验证消息是否是支付宝发出的合法消息
-	 * Author:陈波
-	 * Date:2015/01/05 18:34:45
 	 * @param $param = array(    支付宝同步通知的所有参数,$_POST或者$_GET
 	 *               'sign'=>'签名支付串',
 	 *               'notify_id'=>'通知ID',
@@ -118,11 +114,9 @@ class nl_alipay_interface
 
 	/**
 	 * 获取返回时的签名验证结果
-	 * Author:陈波
-	 * Date:2015/01/05 18:34:45
-	 * @param array $param_temp 通知返回来的参数数组
+	 * @param array  $param_temp 通知返回来的参数数组
 	 * @param string $sign      返回的签名结果
-	 * @return 签名验证结果
+	 * @return bool  签名验证结果
 	 */
 	public static function get_sign_veryfy($param_temp, $sign)
 	{
@@ -142,11 +136,6 @@ class nl_alipay_interface
 				$is_sign = md5_verify($prestr, $sign, self::$alipay_config['key']);
 				break;
             case "RSA" :
-                // for test
-//                echo "\nrsa加密后的sign：\n";
-//                echo rsaSign($prestr, self::$alipay_config['private_key_path']);
-//                echo "\n传递过来的sign结果\n";
-//                echo $sign;
                 $is_sign = rsaVerify($prestr, self::$alipay_config['ali_public_key_path'], $sign);
                 break;
             case "RSA2" :
@@ -161,10 +150,8 @@ class nl_alipay_interface
 
 	/**
 	 * 获取远程服务器ATN结果,验证异步通知的有效性
-	 * Author:陈波
-	 * Date:2015/01/05 18:34:45
-	 * @param $notify_id 通知校验ID
-	 * @return 服务器ATN结果
+	 * @param string $notify_id 通知校验ID
+	 * @return string/bool 服务器ATN结果
 	 *         验证结果集：
 	 *         invalid命令参数不对 出现这个错误，请检测返回处理中partner和key是否为空
 	 *         true 返回正确信息
@@ -178,13 +165,11 @@ class nl_alipay_interface
 		if ($transport == 'https')
 		{
 			$verify_url = self::$https_verify_url . "partner=" . $partner . "&notify_id=" . $notify_id;
-			nl_log_v2_info('alipay_verify', "支付宝订单查询地址为：" . $verify_url);
 			$response_txt = get_http_response_get($verify_url, self::$alipay_config['cacert']);
 		}
 		else
 		{
 			$verify_url = self::$http_verify_url . "partner=" . $partner . "&notify_id=" . $notify_id;
-			nl_log_v2_info('alipay_verify', "支付宝订单查询地址为：" . $verify_url);
 			$response_txt = get_http_response_get($verify_url);
 		}
 		return $response_txt;
@@ -192,10 +177,8 @@ class nl_alipay_interface
 
 	/**
 	 * 生成签名结果
-	 * Author:陈波
-	 * Date:2015/01/06 14:34:29
-	 * @param array $param 要签名的数组
-	 * @return atring 签名结果字符串
+	 * @param  array $param_sort 要签名的数组
+	 * @return string           签名结果字符串
 	 */
 	public static function build_request_mysign($param_sort)
 	{
@@ -217,8 +200,6 @@ class nl_alipay_interface
 
 	/**
 	 * 生成要请求给支付宝的参数数组
-	 * Author:陈波
-	 * Date:2015/01/06 14:34:29
 	 * @param array $param_temp 请求前的参数数组
 	 * @return array 要请求的参数数组
 	 */
@@ -242,8 +223,8 @@ class nl_alipay_interface
 
 	/**
 	 * 生成要请求给支付宝的参数数组
-	 * @param $param_temp 请求前的参数数组
-	 * @return 要请求的参数数组字符串
+	 * @param  string $param_temp 请求前的参数数组
+	 * @return string 要请求的参数数组字符串
 	 */
 	function build_request_param_string($param_temp)
 	{
@@ -257,8 +238,6 @@ class nl_alipay_interface
 	}
 	/**
 	 * 获取用户账务明细，用于对账
-	 * Author:陈波
-	 * Date:2015/01/06 14:34:29
 	 * @param array $param = array(
 	 *                     'page_no'=>'',
 	 *                     'page_size'=>'',

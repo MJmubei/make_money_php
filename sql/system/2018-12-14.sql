@@ -45,3 +45,13 @@ ALTER TABLE `system_buy_order` ADD COLUMN `cms_order_desc` VARCHAR(256) NOT NULL
 ALTER TABLE `system_buy_order` ADD COLUMN `cms_pay_order_code` INT(11) NOT NULL COMMENT '购买订单ID（订单系统对应主键）';
 ALTER TABLE `system_buy_order` DROP COLUMN nns_order_data;
 
+-- ------------------------------------------------------------------------------------
+-- Table Shop Channel Column. By kan.yang@starcor.com. Date 2018-12-22 12:30:00
+-- ------------------------------------------------------------------------------------
+ALTER TABLE `system_channel_mode` ADD COLUMN `cms_input_charset` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '输入字符集';
+ALTER TABLE `system_channel_mode` ADD COLUMN `nns_transport` VARCHAR(32) NOT NULL DEFAULT '' COMMENT '传输协议';
+ALTER TABLE `system_channel` ADD COLUMN `nns_partner_id` INT(11) NOT NULL COMMENT '商户ID';
+ALTER TABLE `system_channel_mode` ADD COLUMN `nns_channel_mode_flag` TINYINT(1) NOT NULL COMMENT '支付渠道类型：0二维码；1APP；2WAP';
+
+
+
