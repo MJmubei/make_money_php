@@ -34,7 +34,7 @@ $arr_config_app['short_message_config'] = array(
     'api_account'  => 'LTAIzDNqjq2w6NdI',                      //Access Id
     'api_password' => 'ZqFBhPCfFcHU7pRqB1bpSMSZ5p5w95',        //Access Secret
     'api_sign_name'=> '云裳供应链',                             //短信签名
-    'api_template_code' => 'SMS_153190005',                    //短信模板ID
+    'api_template_code' => 'SMS_152853072',                    //短信模板ID
 );
 
 

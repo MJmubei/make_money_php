@@ -11,6 +11,9 @@ include_once dirname(dirname(dirname(dirname(dirname(dirname(__DIR__)))))) . '/p
 class logic_wx_notify extends c_nofity_base
 {
 
+    /**
+     * 回调实现
+     */
     public function notify($str_notify_xml)
     {
         em_return::set_ci_flow_desc($this->str_log_path,'微信扫码/JSAPI支付回调:开始','message','info');
@@ -77,7 +80,7 @@ class logic_wx_notify extends c_nofity_base
             $bool_logic_ret = $this->logic_init(true,array(
                 'cms_buy_order_id' => $this->arr_order_info['cms_id'],
                 'cms_pay_order_id' => $arr_notify_data['transaction_id'],
-                'cms_reason'       => '',
+                'cms_reason'       => $arr_notify_data['err_code_des'],
             ));
         }
         else
