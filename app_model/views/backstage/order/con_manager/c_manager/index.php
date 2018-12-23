@@ -213,6 +213,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
     </style>
     <script type="text/javascript">
         $(function(){/* 文档加载，执行一个函数*/
+            //修改密码
             $('#edit-password-form').bootstrapValidator({
                 message: 'This value is not valid',
                 feedbackIcons: {/*input状态样式图片*/
@@ -235,10 +236,6 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                             identical: {//相同
                                 field: 'password', //需要进行比较的input name值
                                 message: '两次密码不一致'
-                            },
-                            different: {//不能和用户名相同
-                                field: 'username',//需要进行比较的input name值
-                                message: '不能和用户名相同'
                             },
                             regexp: {
                                 regexp: /^[a-zA-Z0-9_\.]+$/,
@@ -323,6 +320,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                 });
             });
 
+            //完善资料
             $('#edit-profile-form').bootstrapValidator({
                 message: 'This value is not valid',
                 feedbackIcons: {/*input状态样式图片*/
@@ -355,6 +353,98 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                     else
                     {
                         alert('修改资料成功');
+                        location.reload();
+                    }
+                });
+            });
+
+            //修改手机号
+            $('#edit-telephone-form').bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {/*input状态样式图片*/
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {/*验证：规则*/
+                    old_telephone: {
+                        message: 'The phone is not valid',
+                        validators: {
+                            notEmpty: {
+                                message: '手机号码不能为空'
+                            },
+                            regexp: {
+                                min: 11,
+                                max: 11,
+                                regexp: /^1[3|5|8]{1}[0-9]{9}$/,
+                                message: '请输入正确的手机号码'
+                            }
+                        }
+                    },
+                    num: {
+                        message:'验证码无效',
+                        validators: {
+                            notEmpty: {
+                                message: '验证码不能为空'
+                            },
+                            stringLength: {
+                                min: 6,
+                                max: 6,
+                                message: '验证码填写错误'
+                            },
+                            regexp: {
+                                regexp: /^[a-zA-Z0-9_\.]+$/,
+                                message: '用户名只能由字母、数字、点和下划线组成'
+                            }
+                        }
+                    }
+                    new_telephone: {
+                        message: 'The phone is not valid',
+                        validators: {
+                            notEmpty: {
+                                message: '手机号码不能为空'
+                            },
+                            regexp: {
+                                min: 11,
+                                max: 11,
+                                regexp: /^1[3|5|8]{1}[0-9]{9}$/,
+                                message: '请输入正确的手机号码'
+                            }
+                        }
+                    },
+                    re_num: {
+                        message:'验证码无效',
+                        validators: {
+                            notEmpty: {
+                                message: '验证码不能为空'
+                            },
+                            stringLength: {
+                                min: 6,
+                                max: 6,
+                                message: '验证码填写错误'
+                            },
+                            regexp: {
+                                regexp: /^[a-zA-Z0-9_\.]+$/,
+                                message: '用户名只能由字母、数字、点和下划线组成'
+                            }
+                        }
+                    }
+                }
+            }).on('success.form.bv',function(e){
+                e.preventDefault();
+                var url = 'edit_telephone';
+                var submitData = $('#edit-telephone-form').serialize() + "&flag_ajax_reurn=1";
+                //submitData是解码后的表单数据，结果同上
+                $.post(url, submitData, function(result){
+                    var dataObj=eval("("+result+")");
+                    if(dataObj.ret != 0)
+                    {
+                        alert(dataObj.reason);
+                        $('#password').val("");
+                    }
+                    else
+                    {
+                        alert('修改手机号成功');
                         location.reload();
                     }
                 });
@@ -631,7 +721,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
             <!--修改手机号-->
             <div class="user-profile row tab-pane" id="edit_telephone">
                 <div class="col-xs-12 col-sm-12">
-                    <form id="edit-password-form">
+                    <form id="edit-telephone-form">
                         <div class="profile-user-info profile-user-info-striped">
 
                             <div class="profile-info-row">
