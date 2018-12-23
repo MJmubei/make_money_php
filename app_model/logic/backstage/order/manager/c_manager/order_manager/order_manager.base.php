@@ -76,7 +76,7 @@ class order_manager_base extends em_logic
                 'desc' => '修改时间',
             ),
             'cms_establish_date' => array(
-                'type' => 'date',
+                'type' => 'datetime',
                 'default'   => '0000-00-00',
                 'isempty' => '',
                 'length' => '',
@@ -203,7 +203,6 @@ class order_manager_base extends em_logic
             ),
             'cms_user_money' => array(
                 'type' => 'DECIMAL',
-                'default' => '',
                 'isempty' => '',
                 'length' => '',
                 'desc' => '用户余额',

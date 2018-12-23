@@ -60,6 +60,10 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 field: 'password', //需要进行比较的input name值
                                 message: '两次密码不一致'
                             },
+                            different: {//不能和用户名相同
+                                field: 'username',//需要进行比较的input name值
+                                message: '不能和用户名相同'
+                            },
                             regexp: {
                                 regexp: /^[a-zA-Z0-9_\.]+$/,
                                 message: '用户名只能由字母、数字、点和下划线组成'
@@ -80,6 +84,10 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                             identical: {//相同
                                 field: 'password', //需要进行比较的input name值
                                 message: '两次密码不一致'
+                            },
+                            different: {//不能和用户名相同
+                                field: 'username',//需要进行比较的input name值
+                                message: '不能和用户名相同'
                             },
                             regexp: {
                                 regexp: /^[a-zA-Z0-9_\.]+$/,
