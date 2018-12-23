@@ -11,9 +11,9 @@ class order_buy_logic extends logic_order_buy_base
 {
 
     //订单类型
-    private $arr_order_type = array(
+    public $arr_order_type = array(
         '0' => '批量订单',
-        '1' => '面料小样',
+        '1' => '面料小样订单',
         '2' => '样板订单',
         '3' => '样衣订单',
         '4' => '稀缺面料定金订单',
