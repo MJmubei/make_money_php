@@ -19,6 +19,9 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
     <link href="<?php echo VIEW_MODEL_BACKGROUD; ?>css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/bootstrapValidator.min.js"></script>
     <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/md5.js"></script>
+    <!-- Sweet Alert -->
+    <!--<link href="--><?php //echo VIEW_MODEL_BACKGROUD; ?><!--hplus/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">-->
+    <!--<script src="--><?php //echo VIEW_MODEL_BACKGROUD; ?><!--hplus/js/plugins/sweetalert/sweetalert.min.js"></script>-->
     <style type="text/css">
         .htmleaf-header{margin-bottom: 15px;font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;}
         .htmleaf-icon{color: #fff;}
@@ -233,10 +236,6 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 max: 30,
                                 message: '密码长度必须在6到30之间'
                             },
-                            identical: {//相同
-                                field: 'password', //需要进行比较的input name值
-                                message: '两次密码不一致'
-                            },
                             regexp: {
                                 regexp: /^[a-zA-Z0-9_\.]+$/,
                                 message: '用户名只能由字母、数字、点和下划线组成'
@@ -253,10 +252,6 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 min: 6,
                                 max: 30,
                                 message: '密码长度必须在6到30之间'
-                            },
-                            identical: {//相同
-                                field: 'password', //需要进行比较的input name值
-                                message: '两次密码不一致'
                             },
                             different: {//不能和用户名相同
                                 field: 'old_password',//需要进行比较的input name值
@@ -292,7 +287,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 message: '用户名只能由字母、数字、点和下划线组成'
                             }
                         }
-                    },
+                    }
                 }
             }).on('success.form.bv',function(e){
                 e.preventDefault();
@@ -309,13 +304,37 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                     var dataObj=eval("("+result+")");
                     if(dataObj.ret != 0)
                     {
-                        alert(dataObj.reason);
-                        $('#password').val("");
+                        swal(
+                            {
+                                title:'修改密码失败',
+                                text:dataObj.reason,
+                                type:"error",
+                                showCancelButton:false,
+                                showConfirmButton:false,
+                                timer:1500
+                            },function()
+                            {
+                                $('#old_password').val("");
+                                $('#new_password').val("");
+                                $('#confirmPassword').val("");
+                            }
+                        );
                     }
                     else
                     {
-                        alert('修改密码成功');
-                        location.reload();
+                        swal(
+                            {
+                                title:'修改密码成功',
+                                text:'',
+                                type:"success",
+                                showCancelButton:false,
+                                showConfirmButton:false,
+                                timer:1500
+                            },function()
+                            {
+                                location.reload();
+                            }
+                        );
                     }
                 });
             });
@@ -330,7 +349,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                 },
                 fields: {/*验证：规则*/
                     email: {
-                        message:'密码无效',
+                        message:'邮箱无效',
                         emailAddress: {
                             regexp: {
                                 message: '邮箱地址不正确'
@@ -347,13 +366,35 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                     var dataObj=eval("("+result+")");
                     if(dataObj.ret != 0)
                     {
-                        alert(dataObj.reason);
-                        $('#password').val("");
+                        swal(
+                            {
+                                title:'完善资料失败',
+                                text:dataObj.reason,
+                                type:"error",
+                                showCancelButton:false,
+                                showConfirmButton:false,
+                                timer:1500
+                            },function()
+                            {
+                                location.reload();
+                            }
+                        );
                     }
                     else
                     {
-                        alert('修改资料成功');
-                        location.reload();
+                        swal(
+                            {
+                                title:'完善资料成功',
+                                text:'',
+                                type:"success",
+                                showCancelButton:false,
+                                showConfirmButton:false,
+                                timer:1500
+                            },function()
+                            {
+                                location.reload();
+                            }
+                        );
                     }
                 });
             });
@@ -397,7 +438,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 message: '用户名只能由字母、数字、点和下划线组成'
                             }
                         }
-                    }
+                    },
                     new_telephone: {
                         message: 'The phone is not valid',
                         validators: {
@@ -439,13 +480,32 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                     var dataObj=eval("("+result+")");
                     if(dataObj.ret != 0)
                     {
-                        alert(dataObj.reason);
-                        $('#password').val("");
+                        swal(
+                            {
+                                title:'修改手机号失败',
+                                text:dataObj.reason,
+                                type:"error",
+                                showCancelButton:false,
+                                showConfirmButton:false,
+                                timer:1500
+                            }
+                        );
                     }
                     else
                     {
-                        alert('修改手机号成功');
-                        location.reload();
+                        swal(
+                            {
+                                title:'修改手机号成功',
+                                text:'',
+                                type:"success",
+                                showCancelButton:false,
+                                showConfirmButton:false,
+                                timer:1500
+                            },function()
+                            {
+                                location.reload();
+                            }
+                        );
                     }
                 });
             });
@@ -826,7 +886,33 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
             cache:false,//false是不缓存，true为缓存
             async:true,//true为异步，false为同步
             success:function(result){
-                alert('发送成功');
+                var dataObj=eval("("+result+")");
+                if(dataObj.ret != 0)
+                {
+                    swal(
+                        {
+                            title:'发送失败',
+                            text:dataObj.reason,
+                            type:"error",
+                            showCancelButton:false,
+                            showConfirmButton:false,
+                            timer:1500
+                        },
+                    );
+                }
+                else
+                {
+                    swal(
+                        {
+                            title:'发送成功',
+                            text:'',
+                            type:"success",
+                            showCancelButton:false,
+                            showConfirmButton:false,
+                            timer:1500
+                        }
+                    );
+                }
             }
         });
     }

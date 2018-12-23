@@ -22,6 +22,7 @@ class c_manager extends CI_Controller
 
     public function index()
     {
+        $this->flag_ajax_reurn=true;
         if(empty($this->session->userdata('telephone')) || empty($this->session->userdata('role_id')))
         {
             echo "<script>window.location.href='../../../order/con_manager/c_manager/login';</script>";die;
@@ -58,6 +59,24 @@ class c_manager extends CI_Controller
         {
             $re = em_return::return_data(1,'用户不存在');
             $this->load_view_file($re,__LINE__);
+        }
+        switch ($user['data_info']['cms_role_id'])
+        {
+            case 1:
+                $user['data_info']['cms_role_name'] = '订单管理员';
+                break;
+            case 3:
+                $user['data_info']['cms_role_name'] = '生产商';
+                break;
+            case 4:
+                $user['data_info']['cms_role_name'] = '供应商';
+                break;
+            case 5:
+                $user['data_info']['cms_role_name'] = '样板师';
+                break;
+            case 6:
+                $user['data_info']['cms_role_name'] = '样衣师';
+                break;
         }
         $params = array(
             'user' => $user['data_info'],

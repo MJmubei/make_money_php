@@ -228,6 +228,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
             cache:false,//false是不缓存，true为缓存
             async:true,//true为异步，false为同步
             success:function(result){
+
                 alert('发送成功');
             }
         });

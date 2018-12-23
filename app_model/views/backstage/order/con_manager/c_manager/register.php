@@ -25,6 +25,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
     <link href="<?php echo VIEW_MODEL_BACKGROUD; ?>css/login.css" rel='stylesheet' type='text/css' />
     <!-- jQuery -->
     <link href='https://fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'>
+    <link href="<?php echo VIEW_MODEL_BACKGROUD; ?>hplus/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <!-- lined-icons -->
     <link rel="stylesheet" href="<?php echo VIEW_MODEL_BACKGROUD; ?>css/icon-font.min.css" type='text/css' />
     <!-- //lined-icons -->
@@ -34,6 +35,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
     <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/md5.js"></script>
     <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/city-picker.data.js"></script>
     <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/city-picker.js"></script>
+    <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>hplus/js/plugins/sweetalert/sweetalert.min.js"></script>
     <script type="text/javascript">
         $(function(){/* 文档加载，执行一个函数*/
             $('#defaultForm').bootstrapValidator({
@@ -133,14 +135,39 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                     var dataObj=eval("("+result+")");
                     if(dataObj.ret != 0)
                     {
-                        alert(dataObj.reason);
-                        $('#password').val("");
-                        location.reload();
+                        swal(
+                            {
+                                title:'注册失败',
+                                text:dataObj.reason,
+                                type:"error",
+                                showCancelButton:false,
+                                confirmButtonColor:"#DD6B55",
+                                confirmButtonText:"确定",
+                                closeOnConfirm:false
+                            },
+                            function()
+                            {
+                                $('#password').val("");
+                                $('#confirmPassword').val("");
+                                location.reload();
+                            }
+                        );
                     }
                     else
                     {
-                        alert('注册成功');
-                        window.location.href='login';
+                        swal(
+                            {
+                                title:'注册成功',
+                                text:'',
+                                type:"error",
+                                showCancelButton:false,
+                                confirmButtonColor:"#DD6B55",
+                                confirmButtonText:"确定",
+                                closeOnConfirm:false
+                            },function(){
+                                window.location.href='login';
+                            }
+                        );
                     }
                 });
             });
@@ -293,7 +320,34 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
             cache:false,//false是不缓存，true为缓存
             async:true,//true为异步，false为同步
             success:function(result){
-                alert('发送成功');
+                var dataObj=eval("("+result+")");
+                if(dataObj.ret != 0)
+                {
+                    swal(
+                        {
+                            title:'发送失败',
+                            text:dataObj.reason,
+                            type:"error",
+                            showCancelButton:false,
+                            showConfirmButton:false,
+                            timer:2000
+                        },
+                    );
+                }
+                else
+                {
+                    swal(
+                        {
+                            title:'发送成功',
+                            text:'',
+                            type:"success",
+                            showCancelButton:false,
+                            showConfirmButton:false,
+                            timer:2000
+                        }
+                    );
+                }
+
             }
         });
     });

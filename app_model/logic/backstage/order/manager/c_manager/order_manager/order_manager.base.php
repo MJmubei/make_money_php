@@ -180,6 +180,13 @@ class order_manager_base extends em_logic
                 'length' => '0-32',
                 'desc' => '邮箱',
             ),
+            'cms_head_img' => array(
+                'type' => 'varchar',
+                'default'   => '',
+                'isempty' => '',
+                'length' => '0-32',
+                'desc' => '头像',
+            ),
             'cms_token' => array(
                 'type' => 'varchar',
                 'default'   => '',
