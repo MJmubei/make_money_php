@@ -7,6 +7,7 @@
  * Time: 下午7:36
  */
 
+include_once 'logic_order_buy.base.php';
 class order_buy_logic extends logic_order_buy_base
 {
 

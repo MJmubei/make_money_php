@@ -7,6 +7,7 @@
  * Time: 下午4:50
  */
 
+include_once 'logic_wechat_accounts.base.php';
 class wechat_accounts_logic extends logic_wechat_accounts_base
 {
 

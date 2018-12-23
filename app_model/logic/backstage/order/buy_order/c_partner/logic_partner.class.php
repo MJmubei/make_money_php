@@ -7,6 +7,7 @@
  * Time: 下午4:30
  */
 
+include_once 'logic_partner.base.php';
 class partner_logic extends logic_partner_base
 {
 

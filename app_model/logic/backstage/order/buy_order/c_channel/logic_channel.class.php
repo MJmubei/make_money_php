@@ -7,6 +7,7 @@
  * Time: 下午3:30
  */
 
+include_once 'logic_channel.base.php';
 class channel_logic extends logic_channel_base
 {
 
