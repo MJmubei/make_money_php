@@ -1,8 +1,10 @@
 <?php
 /**
- * 支付宝异步通知基类
- * @author jun.he@starcor.cn
- * Date: 2016/08/19
+ * Created by PhpStorm.
+ * Use : 支付回调
+ * User: kan.yang@starcor.com
+ * Date: 18-12-22
+ * Time: 上午12:30
  */
 
 class alipay_pay_notify_callback

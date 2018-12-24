@@ -91,6 +91,9 @@
     	$('#button_query_list').click(function(){
     		url_refresh();
         });
+        $('#button_query_list_search').click(function(){
+            $(".form-horizontal_search").submit();
+        });
     });
 	$("#location_cms_page_size").change(function(){
 	  	var value = $(this).children('option:selected').val();

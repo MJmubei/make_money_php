@@ -71,15 +71,7 @@ class order_fabirc extends order_fabirc_base
      */
     public function query($arr_params)
     {
-        $arr_params_where = $this->make_em_pre(isset($arr_params['where']) ? $arr_params['where'] : null);
-        $arr_params_where = $this->_except_empty_data($arr_params_where);
-        $arr_params_where = $this->_check_query_params($this->table_define, $arr_params_where);
-        if($arr_params_where['ret'] !=0)
-        {
-            return $arr_params_where;
-        }
-        $arr_params_where = (isset($arr_params_where['data_info']['info']['out']) && is_array($arr_params_where['data_info']['info']['out']) && !empty($arr_params_where['data_info']['info']['out'])) ? $arr_params_where['data_info']['info']['out'] : null;
-        return $this->make_query_sql($arr_params_where);
+        return $this->make_query_sql($arr_params);
     }
 
     /**

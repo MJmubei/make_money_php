@@ -7,6 +7,7 @@
  * Time: 下午4:30
  */
 
+include_once 'logic_partner.base.php';
 class partner_logic extends logic_partner_base
 {
 
@@ -174,6 +175,10 @@ class partner_logic extends logic_partner_base
      */
     public function edit($arr_ids,$arr_edit_params)
     {
+        if(isset($arr_edit_params['cms_id']))
+        {
+            unset($arr_edit_params);
+        }
         //标准化入参
         $this->_init_logic($arr_edit_params);
         $str_params_where = 'cms_id in (' . $this->_handle_array_string_params($arr_ids) . ')';

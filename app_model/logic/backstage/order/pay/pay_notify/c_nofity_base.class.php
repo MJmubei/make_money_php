@@ -53,7 +53,7 @@ abstract class c_nofity_base
 
     /**
      * 支付回调业务处理核心函数
-     * @param bool  $bool_pay_status  false 失败；true 成功
+     * @param int   $int_pay_status  0成功；1失败；2处理中
      * @param array $arr_params_data  array(
             'cms_buy_order_id' => '购买订购ID',
             'cms_pay_order_id' => '支付订购ID',
@@ -61,10 +61,11 @@ abstract class c_nofity_base
      * )
      * @return bool true 成功；false 失败
      */
-    protected function logic_init($bool_pay_status,$arr_params_data)
+    protected function logic_init($int_pay_status,$arr_params_data)
     {
-        if($bool_pay_status)
-        {
+        if($int_pay_status === 0)
+        {//成功
+
             $int_business_status = 1;
             $cache_order_status = TRADE_SUCCESS;
             $arr_params_data['cms_reason'] = empty($arr_params_data['cms_reason']) ? '支付成功，业务处理成功' : $arr_params_data['cms_reason'];
@@ -126,9 +127,17 @@ abstract class c_nofity_base
             ));
             //更新Redis订单呢状态：成功
             $this->obj_cache_redis->save($this->arr_order_info['cms_uuid'],$cache_order_status,ORDER_STATUS_BUFF_TIME);
+            em_return::set_ci_flow_desc($this->str_log_path,'支付回调:【' . $arr_params_data['nns_pay_order_id'] . '】业务交易成功','message','info');
+        }
+        elseif($int_pay_status === 2)
+        {//处理中
+
+            $this->obj_cache_redis->save($this->arr_order_info['cms_uuid'],TRADE_PROCESS,ORDER_STATUS_BUFF_TIME);
+            em_return::set_ci_flow_desc($this->str_log_path,'支付回调:【' . $arr_params_data['nns_pay_order_id'] . '】业务交易处理中','message','info');
         }
         else
-        {
+        {//失败
+
             //更新订单结果
             $this->obj_order_logic->edit($this->arr_order_info['cms_uuid'],array(
                 'cms_business_state' => 2,
@@ -137,7 +146,7 @@ abstract class c_nofity_base
             ));
             //更新Redis订单呢状态：失败
             $this->obj_cache_redis->save($this->arr_order_info['cms_uuid'],TRADE_FAIL,ORDER_STATUS_BUFF_TIME);
-            em_return::set_ci_flow_desc($this->str_log_path,'支付回调:,' . $arr_params_data['cms_reason'],'message','error');
+            em_return::set_ci_flow_desc($this->str_log_path,'支付回调:【' . $arr_params_data['nns_pay_order_id'] . '】业务交易失败，' . $arr_params_data['cms_reason'],'message','error');
         }
         return true;
     }

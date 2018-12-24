@@ -15,6 +15,11 @@ class c_manager extends CI_Controller
         $this->load->library('session');
     }
 
+    public function test()
+    {
+        $this->load_view();
+    }
+
     public function index()
     {
         if(empty($this->session->userdata('telephone')) || empty($this->session->userdata('role_id')))
@@ -53,6 +58,24 @@ class c_manager extends CI_Controller
         {
             $re = em_return::return_data(1,'用户不存在');
             $this->load_view_file($re,__LINE__);
+        }
+        switch ($user['data_info']['cms_role_id'])
+        {
+            case 1:
+                $user['data_info']['cms_role_name'] = '订单管理员';
+                break;
+            case 3:
+                $user['data_info']['cms_role_name'] = '生产商';
+                break;
+            case 4:
+                $user['data_info']['cms_role_name'] = '供应商';
+                break;
+            case 5:
+                $user['data_info']['cms_role_name'] = '样板师';
+                break;
+            case 6:
+                $user['data_info']['cms_role_name'] = '样衣师';
+                break;
         }
         $params = array(
             'user' => $user['data_info'],
@@ -208,7 +231,7 @@ class c_manager extends CI_Controller
             $re = em_return::return_data(1,$arr_send_ret['reason']);
             $this->load_view_file($re,__LINE__);
         }
-
+        $addr = isset($this->arr_params['city-picker3']) ? str_replace('/','', $this->arr_params['city-picker3']) : '';
         $time = date('Y-m-d H:i:s');
         $add_params = array(
             'insert' => array(
@@ -218,8 +241,15 @@ class c_manager extends CI_Controller
                 'modify_time' => $time,
                 'user_ip' => $_SERVER['REMOTE_ADDR'],
                 'role_id' => $this->arr_params['role_id'],
-            ),
+                'sex' => $this->arr_params['sex'],
+                'username' => $this->arr_params['username'],
+                'company_name' => $this->arr_params['company_name'],
+                'country' => $this->arr_params['country'],
+                'address' => $addr
+            )
         );
+
+
         $add_user = $this->auto_load_table('order','manager', 'c_manager', 'manager', 'add', $add_params);
         if ($add_user['ret'] != 0)
         {
@@ -268,7 +298,7 @@ class c_manager extends CI_Controller
             $this->load_view_file($re,__LINE__);
         }
 
-        //email
+        //用户名
         if (!empty($this->arr_params['username']) && isset($this->arr_params['username']))
         {
             $params['set']['name'] =  $this->arr_params['username'];
@@ -277,6 +307,46 @@ class c_manager extends CI_Controller
         if (!empty($this->arr_params['email']) && isset($this->arr_params['email']))
         {
             $params['set']['email'] =  $this->arr_params['email'];
+        }
+        //国家
+        if (!empty($this->arr_params['country']) && isset($this->arr_params['country']))
+        {
+            $params['set']['country'] =  $this->arr_params['country'];
+        }
+        //地址
+        if (!empty($this->arr_params['address']) && isset($this->arr_params['address']))
+        {
+            $params['set']['address'] =  $this->arr_params['address'];
+        }
+        //成立时间
+        if (!empty($this->arr_params['establish_date']) && isset($this->arr_params['establish_date']))
+        {
+            $params['set']['establish_date'] =  date('Y-m-d',strtotime($this->arr_params['establish_date']));
+        }
+        //主营产品
+        if (!empty($this->arr_params['main_product']) && isset($this->arr_params['main_product']))
+        {
+            $params['set']['main_product'] =  $this->arr_params['main_product'];
+        }
+        //销售渠道
+        if (!empty($this->arr_params['sale_channels']) && isset($this->arr_params['sale_channels']))
+        {
+            $params['set']['sale_channels'] =  $this->arr_params['sale_channels'];
+        }
+        //对公银行账户数据信息
+        if (!empty($this->arr_params['bank_info']) && isset($this->arr_params['bank_info']))
+        {
+            $params['set']['bank_info'] =  $this->arr_params['bank_info'];
+        }
+        //递发货地址、电话、收件人
+        if (!empty($this->arr_params['courier_info']) && isset($this->arr_params['courier_info']))
+        {
+            $params['set']['courier_info'] =  $this->arr_params['courier_info'];
+        }
+        //大件发货地址、电话、收件人
+        if (!empty($this->arr_params['courier_big_info']) && isset($this->arr_params['courier_big_info']))
+        {
+            $params['set']['courier_big_info'] =  $this->arr_params['courier_big_info'];
         }
         //描述
         if (!empty($this->arr_params['desc']) && isset($this->arr_params['desc']))
@@ -364,7 +434,7 @@ class c_manager extends CI_Controller
                 ),
                 'where' => array(
                     'id' => $user['data_info']['cms_id'],
-                    'telephone' => $user['data_info']['telephone']
+                    'telephone' => $user['data_info']['cms_telephone']
                 ),
             );
             $add_user = $this->auto_load_table('order','manager', 'c_manager', 'manager', 'edit', $edit_params);
@@ -393,7 +463,7 @@ class c_manager extends CI_Controller
         //用户id
         if (empty($this->arr_params['user_id']) || !isset($this->arr_params['user_id']))
         {
-            $re = em_return::return_data(1,'手机号不能为空');
+            $re = em_return::return_data(1,'用户id不能为空');
             $this->load_view_file($re,__LINE__);
         }
         //原密码
@@ -453,6 +523,97 @@ class c_manager extends CI_Controller
         //$this->session->unset_userdata('telephone');
         //$this->session->unset_userdata('user_id');
         //$this->session->unset_userdata('role_id');
+
+        $this->load_view_file($add_user,__LINE__);
+    }
+
+    /**
+     * 后台修改手机号
+     */
+    public function edit_telephone()
+    {
+        $this->flag_ajax_reurn = true;
+        //手机号
+        if (empty($this->arr_params['old_telephone']) || !isset($this->arr_params['old_telephone']))
+        {
+            $re = em_return::return_data(1,'旧手机号不能为空');
+            $this->load_view_file($re,__LINE__);
+        }
+        //用户id
+        if (empty($this->arr_params['user_id']) || !isset($this->arr_params['user_id']))
+        {
+            $re = em_return::return_data(1,'用户id不能为空');
+            $this->load_view_file($re,__LINE__);
+        }
+        //旧手机验证码
+        if (empty($this->arr_params['num']) || !isset($this->arr_params['num']))
+        {
+            $re = em_return::return_data(1,'旧手机验证码不能为空');
+            $this->load_view_file($re,__LINE__);
+        }
+        //新手机号
+        if (empty($this->arr_params['new_telephone']) || !isset($this->arr_params['new_telephone']))
+        {
+            $re = em_return::return_data(1,'新手机号不能为空');
+            $this->load_view_file($re,__LINE__);
+        }
+        //新手机验证码
+        if (empty($this->arr_params['re_num']) || !isset($this->arr_params['re_num']))
+        {
+            $re = em_return::return_data(1,'新手机验证码不能为空');
+            $this->load_view_file($re,__LINE__);
+        }
+
+
+        //验证用户是否存在
+        $params = array(
+            'where' => array(
+                'telephone' => $this->arr_params['old_telephone'],
+                'id' => $this->arr_params['user_id'],
+            ),
+        );
+
+        //先查询是否已经存在了
+        $user = $this->auto_load_table('order','manager', 'c_manager', 'manager', 'query_only', $params);
+        if ($user['ret'] != 0 || !is_array($user['data_info']) || count($user['data_info']) < 1)
+        {
+            $re = em_return::return_data(1,'用户不存在或找回密码异常');
+            $this->load_view_file($re,__LINE__);
+        }
+
+        //调取短信验证码，并验证短信
+        include_once dirname(dirname(dirname(dirname(__DIR__)))) . '/logic/backstage/system/auto/c_smsg/system_smsg.class.php';
+        $obj_system_smsg = new system_smsg($this,'');
+        $arr_send_ret = $obj_system_smsg->check_verify_code($this->arr_params['old_telephone'], $this->arr_params['num']);
+        if ($arr_send_ret['ret'] != 0)
+        {
+            $re = em_return::return_data(1,'旧手机验证码' . $arr_send_ret['reason']);
+            $this->load_view_file($re,__LINE__);
+        }
+        $arr_send_ret = $obj_system_smsg->check_verify_code($this->arr_params['new_telephone'], $this->arr_params['re_num']);
+        if ($arr_send_ret['ret'] != 0)
+        {
+            $re = em_return::return_data(1,'新手机验证码' . $arr_send_ret['reason']);
+            $this->load_view_file($re,__LINE__);
+        }
+
+        $edit_params = array(
+            'set' => array(
+                'modify_time' => date('Y-m-d H:i:s'),
+                'telephone' => $this->arr_params['new_telephone'],
+            ),
+            'where' => array(
+                'id' => $user['data_info']['cms_id'],
+            ),
+        );
+        $add_user = $this->auto_load_table('order','manager', 'c_manager', 'manager', 'edit', $edit_params);
+        if ($add_user['ret'] != 0)
+        {
+            $re = em_return::return_data(1,'修改手机号失败');
+            $this->load_view_file($re,__LINE__);
+        }
+        //修改后将session的手机号重置
+        $this->session->set_userdata($this->arr_params['new_telephone']);
 
         $this->load_view_file($add_user,__LINE__);
     }

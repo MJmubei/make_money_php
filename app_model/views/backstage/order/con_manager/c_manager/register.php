@@ -25,6 +25,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
     <link href="<?php echo VIEW_MODEL_BACKGROUD; ?>css/login.css" rel='stylesheet' type='text/css' />
     <!-- jQuery -->
     <link href='https://fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'>
+    <link href="<?php echo VIEW_MODEL_BACKGROUD; ?>hplus/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <!-- lined-icons -->
     <link rel="stylesheet" href="<?php echo VIEW_MODEL_BACKGROUD; ?>css/icon-font.min.css" type='text/css' />
     <!-- //lined-icons -->
@@ -34,6 +35,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
     <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/md5.js"></script>
     <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/city-picker.data.js"></script>
     <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/city-picker.js"></script>
+    <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>hplus/js/plugins/sweetalert/sweetalert.min.js"></script>
     <script type="text/javascript">
         $(function(){/* 文档加载，执行一个函数*/
             $('#defaultForm').bootstrapValidator({
@@ -60,10 +62,6 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 field: 'password', //需要进行比较的input name值
                                 message: '两次密码不一致'
                             },
-                            different: {//不能和用户名相同
-                                field: 'username',//需要进行比较的input name值
-                                message: '不能和用户名相同'
-                            },
                             regexp: {
                                 regexp: /^[a-zA-Z0-9_\.]+$/,
                                 message: '用户名只能由字母、数字、点和下划线组成'
@@ -85,10 +83,6 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 field: 'password', //需要进行比较的input name值
                                 message: '两次密码不一致'
                             },
-                            different: {//不能和用户名相同
-                                field: 'username',//需要进行比较的input name值
-                                message: '不能和用户名相同'
-                            },
                             regexp: {
                                 regexp: /^[a-zA-Z0-9_\.]+$/,
                                 message: '用户名只能由字母、数字、点和下划线组成'
@@ -104,7 +98,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                             regexp: {
                                 min: 11,
                                 max: 11,
-                                regexp: /^1[3|5|8]{1}[0-9]{9}$/,
+                                regexp: /^1\d{10}$/,
                                 message: '请输入正确的手机号码'
                             }
                         }
@@ -141,14 +135,39 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                     var dataObj=eval("("+result+")");
                     if(dataObj.ret != 0)
                     {
-                        alert(dataObj.reason);
-                        $('#password').val("");
-                        location.reload();
+                        swal(
+                            {
+                                title:'注册失败',
+                                text:dataObj.reason,
+                                type:"error",
+                                showCancelButton:false,
+                                confirmButtonColor:"#DD6B55",
+                                confirmButtonText:"确定",
+                                closeOnConfirm:false
+                            },
+                            function()
+                            {
+                                $('#password').val("");
+                                $('#confirmPassword').val("");
+                                location.reload();
+                            }
+                        );
                     }
                     else
                     {
-                        alert('注册成功');
-                        window.location.href='login';
+                        swal(
+                            {
+                                title:'注册成功',
+                                text:'',
+                                type:"error",
+                                showCancelButton:false,
+                                confirmButtonColor:"#DD6B55",
+                                confirmButtonText:"确定",
+                                closeOnConfirm:false
+                            },function(){
+                                window.location.href='login';
+                            }
+                        );
                     }
                 });
             });
@@ -172,8 +191,11 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
     <header class="htmleaf-header">
         <h1>欢迎使用<span></span></h1>
     </header>
+
     <div class="demo form-bg" style="padding: 20px 0;">
+        <div style="height: 630px;float: left;width: 20%;z-index: 998;position: absolute;opacity: 0"></div>
         <div class="container">
+
             <div class="row">
                 <div class="col-md-offset-3 col-md-6">
                     <form class="form-horizontal" id="defaultForm">
@@ -237,14 +259,15 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 <label class="label-select">请选择角色</label>
                             </div>
                             <div class="form-group">
-                                <select class="form-control-select" name="area">
-                                    <option value="1" selected>中国</option>
+                                <select class="form-control-select" name="country">
+                                    <option value="中国" selected>中国</option>
                                 </select>
                                 <i class="fa fa-home"></i>
                                 <label class="label-select">国家</label>
                             </div>
                             <div class="form-group">
                                 <input id="city-picker3" class="form-control-select" readonly type="text" value="" name="city-picker3" data-toggle="city-picker">
+                                <i class="glyphicon glyphicon-map-marker"></i>
                                 <button type="button" class="label-select" id="area-reset">重置</button>
                             </div>
                             <div class="form-group">
@@ -274,18 +297,22 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
             $('.btn-gain-num').text('发送验证码('+times+'s)');
             $('.btn-gain-num').prop('disabled',false);
             $('.btn-gain-num').text('发送验证码');
-            times = 10;
+            times = 60;
             return
         }
         $('.btn-gain-num').text('发送验证码('+times+'s)');
         times--;
         setTimeout(roof,1000);
     }
+    //发送短信
     $('.btn-gain-num').on('click',function(){
         var telephone = $('#telephone').val();
         $(this).prop('disabled',true);
         roof();
-        var submitData = "cms_mobile_code=" + telephone;
+        var key = '04997110aa2db7e27991ece0749064f4';
+        var timestamp=new Date().getTime();
+        var sign = hex_md5(telephone+timestamp+key);
+        var submitData = "cms_mobile_code=" + telephone + "&sign=" + sign + "&cms_time=" + timestamp;
         $.ajax({
             url:'../../../../backstage/system/auto/c_smsg/send_msg',
             type:"POST",
@@ -293,7 +320,34 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
             cache:false,//false是不缓存，true为缓存
             async:true,//true为异步，false为同步
             success:function(result){
-                alert('发送成功');
+                var dataObj=eval("("+result+")");
+                if(dataObj.ret != 0)
+                {
+                    swal(
+                        {
+                            title:'发送失败',
+                            text:dataObj.reason,
+                            type:"error",
+                            showCancelButton:false,
+                            showConfirmButton:false,
+                            timer:2000
+                        },
+                    );
+                }
+                else
+                {
+                    swal(
+                        {
+                            title:'发送成功',
+                            text:'',
+                            type:"success",
+                            showCancelButton:false,
+                            showConfirmButton:false,
+                            timer:2000
+                        }
+                    );
+                }
+
             }
         });
     });
@@ -311,9 +365,11 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
             $('.tow-step').css({"left":"0","opacity":"1","display":"inline-block"});
         }
     });
+    //上一步
     $('.pre-btn').on('click',function(){
+
         $('.one-step').css({"left":"0","opacity":"1","display":"inline-block"});
-        $('.tow-step').css({"left":"100%","opacity":"0"});
+        $('.tow-step').css({"left":"100%","opacity":"0","display":"none"});
     });
 
     //重置地区选择
