@@ -664,11 +664,11 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
 
                                 <div class="profile-info-value">
                                     <div class="input-group date form_date" style="padding-bottom: 0!important;width: 33%" data-date="" data-date-format="yyyy-mm-dd" data-link-field="establish_date" data-link-format="yyyy-mm-dd">
-                                        <input class="form-control" type="text" value="<?PHP if (isset($user['cms_establish_date'])){echo $user['cms_establish_date'];}?>" readonly>
+                                        <input class="form-control" type="text" value="<?PHP if (isset($user['cms_establish_date']) && $user['cms_establish_date'] !== '0000-00-00'){echo $user['cms_establish_date'];}?>" readonly>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
-                                    <input type="hidden" id="establish_date" value="<?PHP if (isset($user['cms_establish_date'])){echo $user['cms_establish_date'];}?>" />
+                                    <input type="text" hidden id="establish_date" name="establish_date" value="" />
                                 </div>
                             </div>
 
@@ -805,14 +805,14 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
 
                                 <div class="profile-info-value">
                                     <input type="text" class="editable" id="num" name="num">
-                                    <button type="button" onclick="send_smsg('num1')" id="num1">获取验证码</button>
+                                    <button type="button" onclick="send_smsg('num1')" id="num1" class="btn btn-info" style="padding: 1px!important;margin: 0px!important;">获取验证码</button>
                                 </div>
                             </div>
                             <div class="profile-info-row">
                                 <div class="profile-info-name">新手机号</div>
 
                                 <div class="profile-info-value">
-                                    <input type="tel" name="new_telephone" id="old_telephone" value="">
+                                    <input type="tel" name="new_telephone" id="new_telephone" value="">
                                 </div>
                             </div>
                             <div class="profile-info-row">
@@ -820,7 +820,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
 
                                 <div class="profile-info-value">
                                     <input type="text" class="editable" id="re_num" name="re_num">
-                                    <button type="button" onclick="send_smsg('num2')" id="num2" >获取验证码</button>
+                                    <button type="button" onclick="send_smsg('num2')" id="num2" class="btn btn-info" style="padding: 1px!important;margin: 0px!important;" >获取验证码</button>
                                 </div>
                             </div>
                         </div>
@@ -834,7 +834,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
 
     </div>
 </div>
-<script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+<script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 <script type="text/javascript">
     $('.form_date').datetimepicker({
@@ -849,32 +849,48 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
         showMeridian: 1
     });
 
+
     var times = 60;
-    function roof(btn_id){
+    function roof_one(){
         if(times == 0){
-            $('#' + btn_id).text('发送验证码('+times+'s)');
-            $('#' + btn_id).prop('disabled',false);
-            $('#' + btn_id).text('发送验证码');
+            $('#num1').text('发送验证码('+times+'s)');
+            $('#num1').prop('disabled',false);
+            $('#num1').text('发送验证码');
             times = 60;
             return
         }
-        $('#' + btn_id).text('发送验证码('+times+'s)');
+        $('#num1').text('发送验证码('+times+'s)');
         times--;
-        setTimeout(roof,1000);
+        setTimeout(roof_one,1000);
     }
+    function roof_two(){
+        if(times == 0){
+            $('#num2').text('发送验证码('+times+'s)');
+            $('#num2').prop('disabled',false);
+            $('#num2').text('发送验证码');
+            times = 60;
+            return
+        }
+        $('#num2').text('发送验证码('+times+'s)');
+        times--;
+        setTimeout(roof_two,1000);
+    }
+
     //发送短信
     function send_smsg(btn_id)
     {
+        $('#'+btn_id).prop('disabled',true);
+
         if (btn_id == 'num1')
         {
             var telephone = $('#old_telephone').val();
+            roof_one();
         }
         else
         {
             var telephone = $('#new_telephone').val();
+            roof_two();
         }
-        $('#'+btn_id).prop('disabled',true);
-        roof(btn_id);
         var key = '04997110aa2db7e27991ece0749064f4';
         var timestamp=new Date().getTime();
         var sign = hex_md5(telephone+timestamp+key);

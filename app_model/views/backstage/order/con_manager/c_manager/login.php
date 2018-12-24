@@ -82,7 +82,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                     message: '请输入正确的手机号码'
                                 }
                             }
-                        },
+                        }
                     }
             }).on('success.form.bv',function(e){
                 e.preventDefault();
@@ -101,7 +101,6 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 text:dataObj.reason,
                                 type:"error",
                                 showCancelButton:false,
-                                confirmButtonColor:"#DD6B55",
                                 confirmButtonText:"确定",
                                 closeOnConfirm:false
                             },
@@ -117,8 +116,6 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 type:"success",
                                 showCancelButton:false,
                                 showConfirmButton:false,
-                                confirmButtonColor:"#DD6B55",
-                                confirmButtonText:"确定",
                                 closeOnConfirm:false,
                                 timer:1500
                             },function(){

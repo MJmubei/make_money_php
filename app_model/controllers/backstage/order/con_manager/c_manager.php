@@ -242,7 +242,7 @@ class c_manager extends CI_Controller
                 'user_ip' => $_SERVER['REMOTE_ADDR'],
                 'role_id' => $this->arr_params['role_id'],
                 'sex' => $this->arr_params['sex'],
-                'username' => $this->arr_params['username'],
+                'name' => $this->arr_params['username'],
                 'company_name' => $this->arr_params['company_name'],
                 'country' => $this->arr_params['country'],
                 'address' => $addr
