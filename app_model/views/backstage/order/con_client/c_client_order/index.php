@@ -24,11 +24,11 @@
                             <i class="fa fa-search">查询</i>
                         </button>
                     </div>
-                </div>
-                <div class="col-sm-1">
-                    <button class="btn btn-success" type="button" id="button_query_list">
-                        <i>新建订单</i>
-                    </button>
+                    <div class="col-sm-1">
+                        <button class="btn btn-success" type="button" id="button_query_list">
+                            <i class="fa">新建订单</i>
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
