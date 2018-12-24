@@ -98,7 +98,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                             regexp: {
                                 min: 11,
                                 max: 11,
-                                regexp: /^1[3|5|8]{1}[0-9]{9}$/,
+                                regexp: /^1\d{10}$/,
                                 message: '请输入正确的手机号码'
                             }
                         }

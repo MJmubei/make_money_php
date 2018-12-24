@@ -22,7 +22,6 @@ class c_manager extends CI_Controller
 
     public function index()
     {
-        $this->flag_ajax_reurn=true;
         if(empty($this->session->userdata('telephone')) || empty($this->session->userdata('role_id')))
         {
             echo "<script>window.location.href='../../../order/con_manager/c_manager/login';</script>";die;
