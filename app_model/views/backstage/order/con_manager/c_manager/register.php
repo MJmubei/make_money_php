@@ -141,7 +141,6 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 text:dataObj.reason,
                                 type:"error",
                                 showCancelButton:false,
-                                confirmButtonColor:"#DD6B55",
                                 confirmButtonText:"确定",
                                 closeOnConfirm:false
                             },
@@ -159,9 +158,8 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                             {
                                 title:'注册成功',
                                 text:'',
-                                type:"error",
+                                type:"success",
                                 showCancelButton:false,
-                                confirmButtonColor:"#DD6B55",
                                 confirmButtonText:"确定",
                                 closeOnConfirm:false
                             },function(){
