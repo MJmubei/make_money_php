@@ -98,7 +98,7 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                             regexp: {
                                 min: 11,
                                 max: 11,
-                                regexp: /^1[3|5|8]{1}[0-9]{9}$/,
+                                regexp: /^1\d{10}$/,
                                 message: '请输入正确的手机号码'
                             }
                         }
@@ -141,7 +141,6 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                                 text:dataObj.reason,
                                 type:"error",
                                 showCancelButton:false,
-                                confirmButtonColor:"#DD6B55",
                                 confirmButtonText:"确定",
                                 closeOnConfirm:false
                             },
@@ -159,9 +158,8 @@ if(!defined('VIEW_MODEL_BACKGROUD'))
                             {
                                 title:'注册成功',
                                 text:'',
-                                type:"error",
+                                type:"success",
                                 showCancelButton:false,
-                                confirmButtonColor:"#DD6B55",
                                 confirmButtonText:"确定",
                                 closeOnConfirm:false
                             },function(){

@@ -22,7 +22,6 @@ class c_manager extends CI_Controller
 
     public function index()
     {
-        $this->flag_ajax_reurn=true;
         if(empty($this->session->userdata('telephone')) || empty($this->session->userdata('role_id')))
         {
             echo "<script>window.location.href='../../../order/con_manager/c_manager/login';</script>";die;
@@ -243,7 +242,7 @@ class c_manager extends CI_Controller
                 'user_ip' => $_SERVER['REMOTE_ADDR'],
                 'role_id' => $this->arr_params['role_id'],
                 'sex' => $this->arr_params['sex'],
-                'username' => $this->arr_params['username'],
+                'name' => $this->arr_params['username'],
                 'company_name' => $this->arr_params['company_name'],
                 'country' => $this->arr_params['country'],
                 'address' => $addr

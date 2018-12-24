@@ -9,7 +9,7 @@
     switch ($project_id)
     {
         case '1':
-            $role = '';
+            $role = '订单管理员';
             break;
         case '2':
             $role = '平台管理员';
@@ -67,7 +67,7 @@
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
 									<span class="block m-t-xs"><strong class="font-bold"><?php echo $user_id;?></strong></span>
-									<?php if(!empty($role)){?><span class="text-muted text-xs block"><?php echo $role;?><b class="caret"></b></span><?php }?>
+									<?php if(!empty($role)){?><span class="text-muted text-xs block">(<?php echo $role;?>)</span><?php }?>
 							    </span>
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
@@ -231,8 +231,8 @@
         </div>
         <div class="row J_mainContent" id="content-main">
             <iframe class="J_iframe" name="iframe0" width="100%" height="100%"
-                    src="../../../system/auto/c_project/index" frameborder="0"
-                    data-id="../../../system/auto/c_project/index" seamless></iframe>
+                    src="../../../order/con_manager/c_manager/index" frameborder="0"
+                    data-id="../../../order/con_manager/c_manager/index" seamless></iframe>
         </div>
         <div class="footer">
             <div class="pull-right">
