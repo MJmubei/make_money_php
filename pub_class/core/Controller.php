@@ -348,7 +348,9 @@ class CI_Controller
             }
             else
             {
-                $data['arr_page_url']['list_url'] = VIEW_MODEL_BACKGROUD_REQUEST_URL.$str_path_info.'/'.$this->get_str_load_class().'/'.$this->get_str_load_method();
+                $list_url = VIEW_MODEL_BACKGROUD_REQUEST_URL.$str_path_info.'/'.$this->get_str_load_class().'/'.$this->get_str_load_method();
+                $list_url = !empty($this->arr_params) ? $list_url . "?" . http_build_query($this->arr_params) : $list_url;
+                $data['arr_page_url']['list_url'] = $list_url;
                 $data['arr_params'] = $this->arr_params;
                 em_return::set_ci_flow_desc($this->get_str_load_log_path(),"end---{{{控制器-接口控制器请求结束template_view界面展示正确模板}}}---end");
                 $this->write_global_info();

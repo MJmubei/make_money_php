@@ -16,6 +16,7 @@
     <div class="graph">
         <div class="form-body">
             <form class="form-horizontal_search" method="post" action="<?php echo $arr_page_url['list_url'];?>">
+<!--                <input type="hidden" name="cms_fabirc_attribute_id" value="--><?php //echo $attribute_id;?><!--" />-->
                 <div class="form-group">
                     <label for="disabledinput" class="col-sm-1 control-label">名称</label>
                     <div class="col-sm-2">
