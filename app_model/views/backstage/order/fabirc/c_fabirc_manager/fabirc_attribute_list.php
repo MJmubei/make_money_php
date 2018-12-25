@@ -34,6 +34,8 @@
                 <tr>
                     <th><input type="checkbox" id="checkAll" name="checkAll" /></th>
                     <th>属性</th>
+                    <th>创建时间</th>
+                    <th>修改时间</th>
                     <th>操作</th>
                 </tr>
                 </thead>
@@ -46,6 +48,8 @@
                         <tr class='odd selected'>
                             <td><input type="checkbox" name="checkItem" attr-key="cms_id" value="<?php echo $val['cms_id'];?>"/></td>
                             <td><?php echo $val['cms_name'];?></td>
+                            <td><?php echo $val['cms_create_time'];?></td>
+                            <td><?php echo $val['cms_modify_time'];?></td>
                             <td>
                                 <div class="dropdown">
                                     <a href="#" title="" class="btn btn-default wh-btn" data-toggle="dropdown" aria-expanded="false">

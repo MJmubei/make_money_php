@@ -15,7 +15,12 @@ class order_fabirc_attribute extends order_fabirc_attribute_base
      */
     public function add()
     {
-        return $this->make_insert_sql($this->except_useless_params($this->arr_params, $this->table_define,false),__LINE__);
+        $insert_params = array(
+            'cms_name' => $this->arr_params['cms_name'],
+            'cms_create_time' => date("Y-m-d H:i:s",time()),
+            'cms_modify_time' => date("Y-m-d H:i:s",time()),
+        );
+        return $this->make_insert_sql($this->except_useless_params($insert_params,$this->table_define));
     }
 
     /**
@@ -26,20 +31,8 @@ class order_fabirc_attribute extends order_fabirc_attribute_base
      */
     public function del()
     {
-        return $this->make_delete_sql($this->except_useless_params($this->arr_params, $this->table_define,false),__LINE__);
+        return $this->make_delete_sql($this->except_useless_params($this->arr_params,$this->table_define));
     }
-
-    /**
-     * LOGIC 真实删除 操作
-     * @return array array('ret'=>'状态码','reason'=>'原因','data_info'=>'数据','page_info'=>'分页信息','other_info'=>'扩展信息')
-     * @author pan.liang
-     * @date 2016-12-30 13:51:33
-     */
-    public function rel_del()
-    {
-        return $this->make_rel_del_sql($this->except_useless_params($this->arr_params, $this->table_define,true),__LINE__);
-    }
-
     /**
      * 修改
      * @param $arr_params
@@ -49,6 +42,7 @@ class order_fabirc_attribute extends order_fabirc_attribute_base
     {
         $arr_params_set = array(
             'cms_name' => $this->arr_params['cms_name'],
+            'cms_modify_time' => date('Y-m-d H:i:s',time()),
         );
         $arr_params_where = array(
             'cms_id' => $this->arr_params['cms_id'],

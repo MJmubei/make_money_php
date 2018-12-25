@@ -13,7 +13,14 @@ class order_fabirc_attribute_value extends order_fabirc_attribute_value_base
      */
     public function add()
     {
-        return $this->make_insert_sql($this->except_useless_params($this->arr_params, $this->table_define,false),__LINE__);
+        $insert_params = array(
+            'cms_name' => $this->arr_params['cms_name'],
+            'cms_value' => $this->arr_params['cms_value'],
+            'cms_fabirc_attribute_id' => $this->arr_params['cms_fabirc_attribute_id'],
+            'cms_create_time' => date("Y-m-d H:i:s",time()),
+            'cms_modify_time' => date("Y-m-d H:i:s",time()),
+        );
+        return $this->make_insert_sql($this->except_useless_params($insert_params,$this->table_define));
     }
 
     /**
@@ -22,18 +29,7 @@ class order_fabirc_attribute_value extends order_fabirc_attribute_value_base
      */
     public function del()
     {
-        return $this->make_delete_sql($this->except_useless_params($this->arr_params, $this->table_define,false),__LINE__);
-    }
-
-    /**
-     * LOGIC 真实删除 操作
-     * @return array array('ret'=>'状态码','reason'=>'原因','data_info'=>'数据','page_info'=>'分页信息','other_info'=>'扩展信息')
-     * @author pan.liang
-     * @date 2016-12-30 13:51:33
-     */
-    public function rel_del()
-    {
-        return $this->make_rel_del_sql($this->except_useless_params($this->arr_params, $this->table_define,true),__LINE__);
+        return $this->make_delete_sql($this->except_useless_params($this->arr_params,$this->table_define));
     }
 
     /**
@@ -46,6 +42,7 @@ class order_fabirc_attribute_value extends order_fabirc_attribute_value_base
         $arr_params_set = array(
             'cms_name' => $this->arr_params['cms_name'],
             'cms_value' => $this->arr_params['cms_value'],
+            'cms_modify_time' => date('Y-m-d H:i:s',time()),
         );
         $arr_params_where = array(
             'cms_id' => $this->arr_params['cms_id'],
@@ -69,6 +66,10 @@ class order_fabirc_attribute_value extends order_fabirc_attribute_value_base
         {
             $arr_params_where['like'] = array('cms_name' => $this->arr_params['cms_name']);
         }
+        if(isset($this->arr_params['cms_value']) && !empty($this->arr_params['cms_value']))
+        {
+            $arr_params_where['like'] = array('cms_value' => $this->arr_params['cms_value']);
+        }
 
         return $this->make_query_sql($arr_params_where);
     }
@@ -80,10 +81,5 @@ class order_fabirc_attribute_value extends order_fabirc_attribute_value_base
     public function query_only()
     {
         return $this->make_query_only_sql($this->except_useless_params($this->arr_params, $this->table_define,true),$this->str_base_table);
-    }
-
-    public function check_attribute_value()
-    {
-
     }
 }

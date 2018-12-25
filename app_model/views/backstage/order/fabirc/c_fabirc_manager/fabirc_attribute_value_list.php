@@ -16,11 +16,14 @@
     <div class="graph">
         <div class="form-body">
             <form class="form-horizontal_search" method="post" action="<?php echo $arr_page_url['list_url'];?>">
-<!--                <input type="hidden" name="cms_fabirc_attribute_id" value="--><?php //echo $attribute_id;?><!--" />-->
                 <div class="form-group">
                     <label for="disabledinput" class="col-sm-1 control-label">名称</label>
                     <div class="col-sm-2">
                         <input type="text" class="form-control1" name="cms_name" id="focusedinput" value="<?php echo isset($arr_params['cms_name']) ? $arr_params['cms_name'] : '';?>">
+                    </div>
+                    <label for="disabledinput" class="col-sm-1 control-label">值</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control1" name="cms_value" id="focusedinput" value="<?php echo isset($arr_params['cms_value']) ? $arr_params['cms_value'] : '';?>">
                     </div>
                     <div class="col-sm-1">
                         <button class="btn btn-success" type="button" id="button_query_list_search">
@@ -37,6 +40,8 @@
                     <th><input type="checkbox" id="checkAll" name="checkAll" /></th>
                     <th>属性值名称</th>
                     <th>属性值</th>
+                    <th>创建时间</th>
+                    <th>修改时间</th>
                     <th>操作</th>
                 </tr>
                 </thead>
@@ -50,6 +55,8 @@
                             <td><input type="checkbox" name="checkItem" attr-key="cms_id" value="<?php echo $val['cms_id'];?>"/></td>
                             <td><?php echo $val['cms_name'];?></td>
                             <td><?php echo $val['cms_value'];?></td>
+                            <td><?php echo $val['cms_create_time'];?></td>
+                            <td><?php echo $val['cms_modify_time'];?></td>
                             <td>
                                 <div class="dropdown">
                                     <a href="#" title="" class="btn btn-default wh-btn" data-toggle="dropdown" aria-expanded="false">

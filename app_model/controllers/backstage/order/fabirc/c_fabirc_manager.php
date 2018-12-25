@@ -78,6 +78,7 @@ class c_fabirc_manager extends CI_Controller
         //取出面辅料
         $this->load_view_file($return_arr,__LINE__);
     }
+    /********************************************面辅料属性*********************************************/
     /**
      * 面辅料属性列表
      */
@@ -165,15 +166,20 @@ class c_fabirc_manager extends CI_Controller
     public function attribute_delete()
     {
         //属性删除前判断属性下是否有属性值
-        $attribute_list = $this->auto_load_table('order','fabirc', 'c_fabirc_manager', 'order_fabirc_attribute_value', 'query',$this->arr_params['cms_id']);
-
-        $fabirc_attribute = $this->auto_load_table('order','fabirc', 'c_fabirc_manager', 'order_fabirc_attribute', 'del', $this->arr_params);
-        $return_arr = array('ret' => 0, 'reason' => '操作成功');
-        if($fabirc_attribute['ret'] != 0)
+        $attribute_list = $this->auto_load_table('order','fabirc', 'c_fabirc_manager', 'order_fabirc_attribute_value', 'query',array('cms_fabirc_attribute_id' => $this->arr_params['cms_id']));
+        if($attribute_list['ret'] == 0 && is_array($attribute_list['data_info']) && count($attribute_list['data_info']) > 0)
         {
-            $return_arr = array('ret' => 1, 'reason' => '操作失败');
+            $return_arr = array('ret' => 1, 'reason' => '操作失败，当前属性下包含属性值，请先删除属性值！');
         }
-
+        else
+        {
+            $fabirc_attribute = $this->auto_load_table('order','fabirc', 'c_fabirc_manager', 'order_fabirc_attribute', 'del', $this->arr_params);
+            $return_arr = array('ret' => 0, 'reason' => '操作成功');
+            if($fabirc_attribute['ret'] != 0)
+            {
+                $return_arr = array('ret' => 1, 'reason' => '操作失败');
+            }
+        }
         $this->load_view_file($return_arr);
     }
     /**
@@ -190,6 +196,8 @@ class c_fabirc_manager extends CI_Controller
 
         $this->load_view_file($return_arr);
     }
+    /********************************************面辅料属性*********************************************/
+
     /********************************************面辅料属性值*********************************************/
     /**
      * 面辅料属性值列表
@@ -300,4 +308,5 @@ class c_fabirc_manager extends CI_Controller
 
         $this->load_view_file($return_arr);
     }
+    /********************************************面辅料属性值*********************************************/
 }
