@@ -23,3 +23,24 @@
 /app/Config/core.php
 /app/Config/database.php
 /vendors/*
+
+./idea/.
+app_model/config/database.php
+/data_model/
+<<<<<<< HEAD
+=======
+/data_model/log/*
+>>>>>>> refs/remotes/origin/master
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
+app_model/config/database.php
+app_model/config/database.php
+=======
+.idea/vcs.xml
+.idea/workspace.xml
+app_model/config/database.php
+app_model/config/routes.php
+>>>>>>> refs/remotes/origin/master
