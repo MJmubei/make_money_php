@@ -26,15 +26,8 @@
 
 ./idea/.
 app_model/config/database.php
-<<<<<<< HEAD
 /data_model/
-=======
-/data_model/log/*
->>>>>>> refs/remotes/origin/master
-.idea/encodings.xml
-.idea/misc.xml
-.idea/modules.xml
 .idea/vcs.xml
 .idea/workspace.xml
 app_model/config/database.php
-app_model/config/database.php
+app_model/config/routes.php

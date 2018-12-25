@@ -20,8 +20,14 @@ class c_client_order extends CI_Controller
      */
     public function index()
     {
-        $arr = array();
-        $this->load_view_file($arr,__LINE__);
+
+        //先查询是否已经存在了
+        $user = $this->auto_load_table('order','con_client', 'c_client_order', 'manager', 'query_only');
+        if ($user['ret'] != 0 || !is_array($user['data_info']) || count($user['data_info']) < 1)
+        {
+            $re = em_return::return_data(1,'用户不存在或找回密码异常');
+            $this->load_view_file($re,__LINE__);
+        }
     }
 
 

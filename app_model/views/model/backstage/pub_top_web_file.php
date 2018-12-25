@@ -33,6 +33,17 @@
 <!-- Sweet Alert -->
 <link href="<?php echo VIEW_MODEL_BACKGROUD; ?>hplus/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>hplus/js/plugins/sweetalert/sweetalert.min.js"></script>
+
+
+<script type="text/javascript" src="<?php echo VIEW_MODEL_BACKGROUD; ?>public/jquery-3.3.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo VIEW_MODEL_BACKGROUD; ?>webuploader-0.1.5/webuploader.css">
+<script type="text/javascript" src="<?php echo VIEW_MODEL_BACKGROUD; ?>webuploader-0.1.5/webuploader.js"></script>
+
+<!-- 文件上传 -->
+<script src="<?php echo VIEW_MODEL_BACKGROUD; ?>bootstrap-fileinput-master/js/fileinput.js" type="text/javascript"></script>
+<script src="<?php echo VIEW_MODEL_BACKGROUD; ?>bootstrap-fileinput-master/js/locales/zh.js" type="text/javascript"></script>
+<link href="<?php echo VIEW_MODEL_BACKGROUD; ?>bootstrap-fileinput-master/css/fileinput.css" rel="stylesheet" type="text/css" />
+
 <script type="text/javascript">
     var toggle = true;
     $(".sidebar-icon").click(function() {                
@@ -250,14 +261,14 @@
 	//need_refresh  true 界面需要刷新  | false 界面不刷新
     function system_submit_data(str_class,submitData,url,need_refresh)
     {
-        var show_log=true;
+        var show_log=false;
     	//submitData是解码后的表单数据，结果同上
     	submitData+="&flag_ajax_reurn=1";
 		var temp_data = $('#'+str_class+'-form').serialize();
 		if(temp_data !== undefined && temp_data !== null){
 			submitData+='&'+temp_data;
 		}
-        alert(submitData);
+        //alert(submitData);
     	$.ajax({
         	url:url,
 			type:"POST",
@@ -434,14 +445,14 @@
     {
 		if(paramas.length >0){
 			var b = new Base64();
-			paramas = b.decode(paramas);
-    		paramas =  eval("("+paramas+")");
+			temp_paramas = b.decode(paramas);
+			temp_paramas =  eval("("+temp_paramas+")");
         	$('#'+str_class+'-form').find("input").each(function(){
         		var i_type = $(this).attr('type');
             	var i_name = $(this).attr('name');
             	if(i_type.length>0 && i_name.length>0)
                 {
-                    var temp_data = paramas[i_name];
+                    var temp_data = temp_paramas[i_name];
                     if(temp_data !== undefined && temp_data !== null)
                     {
                         if(i_type == 'text' || i_type=='password')
@@ -475,7 +486,7 @@
         		var i_name = $(this).attr('name');
             	if(i_name.length>0)
                 {
-                    var temp_data = paramas[i_name];
+                    var temp_data = temp_paramas[i_name];
                     if(temp_data !== undefined && temp_data !== null)
                     {
                     	$(this).html(temp_data);
@@ -487,15 +498,122 @@
                 }
         	});
 		}
-		
-    	$('#'+str_class+'-reset').click(function() {
-            $('#'+str_class+'-form').data('bootstrapValidator').resetForm(true);
-        });
-        
-    	$('#'+str_class+'-cancel').click(function() {
-            $('#'+str_class+'-form').data('bootstrapValidator').resetForm(true);
-        });
+		var str_function = "init_"+str_class;
+		eval(str_function+"('"+str_class+"','"+paramas+"')");
     }
+    //初始化fileinput
+    var FileInput = function () {
+        var oFile = new Object();
+        //初始化fileinput控件（第一次初始化）
+        oFile.Init = function(type,ctrlName,need_modify_id,params) {
+            var control = $('#' + ctrlName);
+            control.fileinput('destroy'); 
+            if(type == 'add')
+            {
+                //初始化上传控件的样式
+                control.fileinput({
+                    language: 'zh', //设置语言
+                    uploadUrl: '<?php echo VIEW_MODEL_BASE; ?>/app_model/libraries/em_upload.class.php', //上传的地址
+                    allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
+                    showUpload: false, //是否显示上传按钮
+                    showCaption: false,//是否显示标题
+                    showClose: false,
+                    browseClass: "btn btn-primary", //按钮样式     
+                    autoReplace:true,
+                    overwriteInitial: true,
+                    showUploadedThumbs: false,
+                    showRemove:false,
+                    initialPreviewShowDelete: false,
+                    maxFileCount: 1, //表示允许同时上传的最大文件个数
+                    validateInitialCount:true,
+                    previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+                    msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+                    uploadExtraData:function(){
+        				var data = {
+        							'input_image_key':'image_data',
+        						};
+                        return data; 
+                   },
+                }).on("fileuploaded", function (event, data, previewId, index) {
+                    if(data.response.ret !=0)
+                    {
+                    	sys_sweetalert("error",'',"上传文件失败！",data.response.reason,'','',false);
+                    }
+                    else
+                    {
+                    	sys_sweetalert("success",'',"上传文件成功！",data.response.reason,'','',false);
+                    	var html = '<input type="text" name="'+$('#'+need_modify_id).attr('post_name')+'" value="'+data.response.data_info.base_pth+'">';
+                    	$('#'+need_modify_id).html(html);
+                    }
+                }).on('filesuccessremove', function (event, previewId, extra) {
+              　　　　　　//在移除事件里取出所需数据，并执行相应的删除指令
+                	$('#'+need_modify_id).html('');
+                });
+            }
+            else if(type == 'edit')
+            {            	
+            	var temp_paramas = [];
+            	if(params.length >0){
+            		var b = new Base64();
+            		temp_paramas = b.decode(params);
+            		temp_paramas =  eval("("+temp_paramas+")");
+            	}
+            	var initialPreview_v =[];
+            	var initialPreviewConfig_v = [];
+            	if(temp_paramas[$('#'+need_modify_id).attr('post_name')] != undefined && temp_paramas[$('#'+need_modify_id).attr('post_name')] != null && temp_paramas[$('#'+need_modify_id).attr('post_name')].length>0)
+                {
+            		initialPreview_v = ["<?php echo VIEW_MODEL_BASE; ?>/data_model/upload/"+temp_paramas[$('#'+need_modify_id).attr('post_name')]];
+            		initialPreviewConfig_v = [
+                                                {
+                                                	url: "<?php echo VIEW_MODEL_BASE; ?>/app_model/libraries/em_upload.class.php?system_func=delete"
+                                                },
+              		                  		 ];
+                }
+                //初始化上传控件的样式
+                control.fileinput({
+                    language: 'zh', //设置语言
+                    uploadUrl: '<?php echo VIEW_MODEL_BASE; ?>/app_model/libraries/em_upload.class.php', //上传的地址theme: 'fas',
+                    showUpload: false,
+                    showCaption: false,
+                    showClose: false,
+                    browseClass: "btn btn-primary", //按钮样式     
+                    allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
+                    previewFileIcon: "<i class='glyphicon glyphicon-king'></i>", 
+                    autoReplace:true,
+                    overwriteInitial: true,
+                    initialPreviewAsData: true,
+                    showRemove:false,
+                    initialPreviewShowDelete: false,
+                    maxFileCount: 1, //表示允许同时上传的最大文件个数
+                    initialPreview: initialPreview_v,
+                    initialPreviewConfig: initialPreviewConfig_v,
+                    uploadExtraData:function(){
+        				var data = {
+        							'input_image_key':'image_data',
+        						};
+                        return data; 
+                   },
+                }).on("fileuploaded", function (event, data, previewId, index) {
+                    if(data.response.ret !=0)
+                    {
+                    	sys_sweetalert("error",'',"上传文件失败！",data.response.reason,'','',false);
+                    }
+                    else
+                    {
+                    	sys_sweetalert("success",'',"上传文件成功！",data.response.reason,'','',false);
+                    	var html = '<input type="text" name="'+$('#'+need_modify_id).attr('post_name')+'" value="'+data.response.data_info.base_pth+'">';
+                    	$('#'+need_modify_id).html(html);
+                    }
+                }).on('filepredelete', function(event, key, jqXHR, data) { 
+                	$('#'+need_modify_id).html('');
+                }).on('filesuccessremove', function (event, previewId, extra) {
+              　　　　　　//在移除事件里取出所需数据，并执行相应的删除指令
+                	$('#'+need_modify_id).html('');
+                });
+            }
+        }
+        return oFile;
+    };
 </script>
 <!--js -->
 <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/jquery.nicescroll.js"></script>
