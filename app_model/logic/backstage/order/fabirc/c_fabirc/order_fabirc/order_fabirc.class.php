@@ -69,9 +69,14 @@ class order_fabirc extends order_fabirc_base
      * @param $arr_params
      * @return array|multitype|NULL
      */
-    public function query($arr_params)
+    public function query()
     {
-        return $this->make_query_sql($arr_params);
+        $arr_params_where = array();
+        if(isset($this->arr_params['cms_name']) && !empty($this->arr_params['cms_name']))
+        {
+            $arr_params_where['like'] = array('cms_name' => $this->arr_params['cms_name']);
+        }
+        return $this->make_query_sql($arr_params_where);
     }
 
     /**

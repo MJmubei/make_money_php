@@ -9,8 +9,7 @@
         <div class="but_list">
             <ol class="breadcrumb">
                 <li><a href="#">产品管理</a></li>
-                <li><a href="#">面辅料管理</a></li>
-                <li class="active">面辅料列表</li>
+                <li class="active">面辅料管理</li>
             </ol>
         </div>
     <div class="graph">

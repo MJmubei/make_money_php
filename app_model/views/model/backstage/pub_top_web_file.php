@@ -330,7 +330,8 @@
            					function(){
                					if(action_type == 'success')
                					{
-               						url_refresh();
+               						//url_refresh();
+                                    window.location.reload();
                    				}
             				}
            				)
@@ -444,7 +445,7 @@
                     var temp_data = paramas[i_name];
                     if(temp_data !== undefined && temp_data !== null)
                     {
-                        if(i_type == 'text' || i_type=='password')
+                        if(i_type == 'text' || i_type == 'password' || i_type == 'hidden')
                         {
                             $(this).val(temp_data);
                         }

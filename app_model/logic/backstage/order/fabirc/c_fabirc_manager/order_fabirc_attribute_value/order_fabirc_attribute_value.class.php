@@ -5,13 +5,11 @@
  * Date: 2018/12/13
  * Time: 10:14
  */
-class order_fabirc_attribute extends order_fabirc_attribute_base
+class order_fabirc_attribute_value extends order_fabirc_attribute_value_base
 {
     /**
      * LOGIC 添加 操作
      * @return array array('ret'=>'状态码','reason'=>'原因','data_info'=>'数据','page_info'=>'分页信息','other_info'=>'扩展信息')
-     * @author pan.liang
-     * @date 2016-12-30 13:51:33
      */
     public function add()
     {
@@ -21,8 +19,6 @@ class order_fabirc_attribute extends order_fabirc_attribute_base
     /**
      * LOGIC 虚拟删除 操作
      * @return array array('ret'=>'状态码','reason'=>'原因','data_info'=>'数据','page_info'=>'分页信息','other_info'=>'扩展信息')
-     * @author pan.liang
-     * @date 2016-12-30 13:51:33
      */
     public function del()
     {
@@ -49,6 +45,7 @@ class order_fabirc_attribute extends order_fabirc_attribute_base
     {
         $arr_params_set = array(
             'cms_name' => $this->arr_params['cms_name'],
+            'cms_value' => $this->arr_params['cms_value'],
         );
         $arr_params_where = array(
             'cms_id' => $this->arr_params['cms_id'],
@@ -58,6 +55,7 @@ class order_fabirc_attribute extends order_fabirc_attribute_base
 
     /**
      * LOGIC 查询
+     * @param $arr_params
      * @return array|multitype|NULL
      */
     public function query()
@@ -78,11 +76,14 @@ class order_fabirc_attribute extends order_fabirc_attribute_base
     /**
      * LOGIC 查询唯一 操作
      * @return array array('ret'=>'状态码','reason'=>'原因','data_info'=>'数据','page_info'=>'分页信息','other_info'=>'扩展信息')
-     * @author pan.liang
-     * @date 2016-12-30 13:51:33
      */
     public function query_only()
     {
         return $this->make_query_only_sql($this->except_useless_params($this->arr_params, $this->table_define,true),$this->str_base_table);
+    }
+
+    public function check_attribute_value()
+    {
+
     }
 }

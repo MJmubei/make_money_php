@@ -1119,6 +1119,27 @@ class em_logic
                 {
                     $wh[] = "$k='$v'";
                 }
+                else if($k == 'rlike' && is_array($v) && !empty($v))
+                {
+                    foreach ($v as $i=>$item)
+                    {
+                        $wh[] = "$i like '$item%' ";
+                    }
+                }
+                else if($k == 'llike' && is_array($v) && !empty($v))
+                {
+                    foreach ($v as $i=>$item)
+                    {
+                        $wh[] = "$i like '%$item' ";
+                    }
+                }
+                else if($k == 'like' && is_array($v) && !empty($v))
+                {
+                    foreach ($v as $i=>$item)
+                    {
+                        $wh[] = "$i like '%$item%' ";
+                    }
+                }
                 else if(is_array($v))
                 {
                     if(!empty($v))
