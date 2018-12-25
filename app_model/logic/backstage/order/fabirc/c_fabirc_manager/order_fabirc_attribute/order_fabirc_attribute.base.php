@@ -18,6 +18,12 @@ class order_fabirc_attribute_base extends em_logic
             'length' => '0-32',
             'desc' => '面辅料类型名称',
         ),
+        'cms_value' => array(
+            'type' => 'varchar',
+            'isempty' => '',
+            'length' => '0-255',
+            'desc' => '面辅料属性值范围json',
+        ),
         'cms_create_time' => array(
             'type' => 'datetime',
             'isempty' => '',

@@ -15,7 +15,7 @@ class order_fabirc_attribute extends order_fabirc_attribute_base
      */
     public function add()
     {
-        return $this->make_insert_sql($this->except_useless_params($this->arr_params, $this->table_define,true),__LINE__);
+        return $this->make_insert_sql($this->except_useless_params($this->arr_params, $this->table_define,false),__LINE__);
     }
 
     /**
@@ -26,7 +26,7 @@ class order_fabirc_attribute extends order_fabirc_attribute_base
      */
     public function del()
     {
-        return $this->make_del_sql($this->except_useless_params($this->arr_params, $this->table_define,true),__LINE__);
+        return $this->make_delete_sql($this->except_useless_params($this->arr_params, $this->table_define,false),__LINE__);
     }
 
     /**

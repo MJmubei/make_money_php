@@ -41,9 +41,9 @@ class c_fabirc_manager extends CI_Controller
                 ),
             ),
             array(
-                'url'=>'system/auto/c_project/edit.php',
+                'url'=>'order/fabirc/c_fabirc_manager/add.php',
                 'class'=>'system-auto-c_project-edit',
-                'ajax'=>'system/auto/c_project/edit',
+                'ajax'=>'system/auto/c_project/add',
                 'function'=>'edit',
                 'button_data'=>array(
                     array(
@@ -81,31 +81,109 @@ class c_fabirc_manager extends CI_Controller
     /**
      * 面辅料属性列表
      */
-    public function fabirc_attrbute_list()
+    public function fabirc_attribute_list()
     {
+        $this->_init_page();
         $fabirc_attribute = $this->auto_load_table('order','fabirc', 'c_fabirc_manager', 'order_fabirc_attribute', 'query');
+        $page_info = $fabirc_attribute['page_info'];
         $attribute_list = array();
         if($fabirc_attribute['ret'] == 0 && !empty($fabirc_attribute['data_info']))
         {
             $attribute_list = $fabirc_attribute['data_info'];
         }
+        //底部选择框
+        $system_file_list = array(
+            array(
+                'url'=>'order/fabirc/c_fabirc_manager/attribute_add.php',
+                'class'=>'order-fabirc-c_fabirc_manager-attribute_add',
+                'ajax'=>'order/fabirc/c_fabirc_manager/attribute_add',
+                'function'=>'add',
+                'button_data'=>array(
+                    array(
+                        'name'=>'添加',
+                        'icon'=>'fa-plus',
+                        'params'=>'',
+                        'where'=>'',
+                    ),
+                ),
+            ),
+            array(
+                'url'=>'order/fabirc/c_fabirc_manager/attribute_edit.php',
+                'class'=>'order-fabirc-c_fabirc_manager-attribute_edit',
+                'ajax'=>'order/fabirc/c_fabirc_manager/attribute_edit',
+                'function'=>'edit',
+                'button_data'=>array(
+                    array(
+                        'name'=>'修改',
+                        'icon'=>'fa-pencil-square-o',
+                        'params'=>'',
+                        'where'=>'',
+                    ),
+                ),
+            ),
+            array(
+                'url'=>'order/fabirc/c_fabirc_manager/attribute_delete.php',
+                'class'=>'order-fabirc-c_fabirc_manager-attribute_delete',
+                'ajax'=>'order/fabirc/c_fabirc_manager/attribute_delete',
+                'function'=>'delete',
+                'button_data'=>array(
+                    array(
+                        'name'=>'删除',
+                        'icon'=>'fa-trash-o',
+                        'params'=>'',
+                        'where'=>'',
+                    ),
+                ),
+            ),
+        );
         $return_arr = array(
-            'fabirc_attribute_list' => $attribute_list,//面辅料属性列表
+            'data_info' => $attribute_list,//面辅料属性列表
+            'system_file_list' => $system_file_list,
+            'page_info'   => $page_info,
         );
         $this->load_view_file($return_arr,__LINE__);
     }
 
-    public function add_view()
+    /**
+     * 面辅料属性添加，json返回
+     */
+    public function attribute_add()
     {
-        $this->load_view_file();
+        $fabirc_attribute = $this->auto_load_table('order','fabirc', 'c_fabirc_manager', 'order_fabirc_attribute', 'add', $this->arr_params);
+        $return_arr = array('ret' => 0, 'reason' => '操作成功');
+        if($fabirc_attribute['ret'] != 0)
+        {
+            $return_arr = array('ret' => 1, 'reason' => '操作失败');
+        }
+        $this->load_view_file($return_arr);
     }
 
-    public function add()
+    /**
+     * 面辅料属性删除，json返回
+     */
+    public function attribute_delete()
     {
+        $fabirc_attribute = $this->auto_load_table('order','fabirc', 'c_fabirc_manager', 'order_fabirc_attribute', 'del', $this->arr_params);
+        $return_arr = array('ret' => 0, 'reason' => '操作成功');
+        if($fabirc_attribute['ret'] != 0)
+        {
+            $return_arr = array('ret' => 1, 'reason' => '操作失败');
+        }
 
-        $fabirc_attribute = $this->auto_load_table('order','fabirc', 'c_fabirc_manager', 'order_fabirc_attribute', 'insert', $this->arr_params);
-        $this->load_view_file();
+        $this->load_view_file($return_arr);
     }
+    /**
+     * 面辅料属性修改,json返回
+     */
+    public function attribute_edit()
+    {
+        $fabirc_attribute = $this->auto_load_table('order','fabirc', 'c_fabirc_manager', 'order_fabirc_attribute', 'edit', $this->arr_params);
+        $return_arr = array('ret' => 0, 'reason' => '操作成功');
+        if($fabirc_attribute['ret'] != 0)
+        {
+            $return_arr = array('ret' => 1, 'reason' => '操作失败');
+        }
 
-
+        $this->load_view_file($return_arr);
+    }
 }

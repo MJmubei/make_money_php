@@ -257,7 +257,7 @@
 		if(temp_data !== undefined && temp_data !== null){
 			submitData+='&'+temp_data;
 		}
-        alert(submitData);
+        //alert(submitData);
     	$.ajax({
         	url:url,
 			type:"POST",
