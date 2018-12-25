@@ -7,7 +7,7 @@
  */
 
 //system_order_type_parent
-class system_order_type_parent_base extends em_logic
+class order_order_type_base extends em_logic
 {
     /**
      * 基本表定义参数用于排除非法字段，验证字段
@@ -20,19 +20,19 @@ class system_order_type_parent_base extends em_logic
             'length' => '0-32',
             'desc' => '主键id',
         ),
-        'cms_category_parent_id' => array(
+        'cms_category_id' => array(
             'type' => 'int',
             'isempty' => '',
             'length' => '0-32',
             'desc' => '父级类型id',
         ),
-        'cms_category_id' => array(
+        'cms_type_id' => array(
             'type' => 'varchar',
             'isempty' => '',
             'length' => '0-256',
             'desc' => '基本类型id',
         ),
-        'cms_category_name' => array(
+        'cms_type_name' => array(
             'type' => 'varchar',
             'isempty' => '',
             'length' => '0-256',

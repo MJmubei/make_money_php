@@ -74,7 +74,7 @@ class CI_Controller
         $this->load =& load_class('Loader', 'core');
         $this->load->initialize();
         $this->_check_params();
-        $this->auto_check_login();//全局登陆验证
+        //$this->auto_check_login();//全局登陆验证
         if(isset($this->arr_params['cms_page_num']))
         {
             $this->arr_page_params['cms_page_num'] = (int)$this->arr_params['cms_page_num'];
