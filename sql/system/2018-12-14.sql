@@ -69,4 +69,10 @@ CREATE TABLE `order_client_order` (
   KEY `modify_create_time` (`cms_modify_time`,`cms_create_time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+-- ------------------------------------------------------------------------------------
+-- Alter table name gao
+-- ------------------------------------------------------------------------------------
+alter table system_order_type_parent RENAME order_order_type_parent;
+alter table system_order_type RENAME order_order_type;
+
 
