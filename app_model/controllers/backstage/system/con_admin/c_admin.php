@@ -62,4 +62,31 @@ class c_admin extends CI_Controller
     {
         $this->load_view_file(array('1','2'),__LINE__);
     }
+
+    /**
+     * 测试支付
+     */
+    public function pay_test()
+    {
+        //微信
+        include_once dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/pub_class/libraries/Pay/WeChat/pay.demo.php';
+        $obj_pay = new test();
+
+        //二维码
+        $str_ret = $obj_pay->scan();
+        echo var_export($str_ret,true);
+        //web页
+        //$str_ret = $obj_pay->web();
+
+        echo '\n\r<br/>';
+
+        //支付宝
+        include_once dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/pub_class/libraries/Pay/Alipay/pay.demo.php';
+        $obj_alipay_test = new alipay_test();
+
+        //二维码
+        $str_ret = $obj_alipay_test->scan();
+
+        echo var_export($str_ret,true);
+    }
 }

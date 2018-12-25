@@ -48,7 +48,7 @@ a:hover { transition: all 200ms ease-in-out; }
 }
 .left-content {
     float: right;
-        width: 87%;
+    width: 88%;
 }
 .page-container.sidebar-collapsed {
   transition: all 100ms linear;

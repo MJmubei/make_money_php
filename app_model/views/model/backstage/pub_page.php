@@ -7,7 +7,6 @@
         '25',
         '50',
         '100',
-        '200',
     );
     $int_page_size = (!isset($page_info['cms_page_size']) || !in_array($page_info['cms_page_size'], $arr_page_index)) ? $arr_page_index[0] : $page_info['cms_page_size'];
     $int_page_num = (!isset($page_info['cms_page_num']) || (int)$page_info['cms_page_num'] <1) ? 1 : (int)$page_info['cms_page_num'];
@@ -47,7 +46,9 @@
     
 ?>
 <div class="form-body">
-	<form>
+    <form class="form-horizontal" method="post" action="<?php echo $arr_page_url['list_url'];?>">
+        <input type="hidden" name="cms_page_num" id="cms_page_num" value="<?php echo isset($page_info['cms_page_num']) ? $page_info['cms_page_num'] : 1;?>">
+        <input type="hidden" name="cms_page_size" id="cms_page_size" value="<?php echo isset($page_info['cms_page_size']) ? $page_info['cms_page_size'] : 10;?>">
 		<div class="col-md-5 page_1">
 			<ul class="pagination pagination-lg">
 				<li class="disabled">分页条数:</li>
@@ -86,6 +87,14 @@
 	</form>
 </div>
 <script type="text/javascript">
+    $(function(){
+    	$('#button_query_list').click(function(){
+    		url_refresh();
+        });
+        $('#button_query_list_search').click(function(){
+            $(".form-horizontal_search").submit();
+        });
+    });
 	$("#location_cms_page_size").change(function(){
 	  	var value = $(this).children('option:selected').val();
 	  	$("#cms_page_size").val(value);

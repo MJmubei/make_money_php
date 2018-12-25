@@ -142,19 +142,31 @@ class em_return
      *            分页数据
      * @param array $other_data
      *            其他扩展数据
-     * @return array('ret'=>'状态码','reason'=>'原因','data'=>'数据')
+     * @param string $format
+     *            其他扩展数据
+     * @return array('ret'=>'状态码','reason'=>'原因','data'=>'数据')|json格式
      * @author liangpan
      *         @date 2015-09-07
      */
-    public static function return_data($ret, $reason = null, $data = null, $page_data = null, $other_data = null)
+    public static function return_data($ret, $reason = null, $data = null, $page_data = null, $other_data = null, $format = 'array')
     {
-        return array(
+        $result = array(
             'ret' => (int) $ret,
             'reason' => $reason,
             'data_info' => $data,
             'page_info' => $page_data,
             'other_info' => $other_data
         );
+
+        if ($format == 'json')
+        {
+            $last_result = json_encode($result);
+        }
+        else
+        {
+            $last_result = $result;
+        }
+        return $last_result;
     }
     
     
@@ -247,6 +259,46 @@ class em_return
         unset($str_backtracel_params);
         return;
     }
+    
+    /**
+     * 创建文件的文件夹 （文件存储在 data目录下）
+     * @param string $message_url 文件存储的 相对路径
+     * @return array('ret'=>'状态码','reason'=>'原因','data'=>'数据')
+     */
+    public static function make_dir_out_project($message_url='')
+    {
+        $message_url = trim(rtrim(rtrim($message_url,'\\'),'/'));
+        $temp_message_url = $message_url;
+        $arr_pathinfo = pathinfo($message_url);
+        if(isset($arr_pathinfo['extension']))
+        {
+            $temp_message_url = (isset($arr_pathinfo['dirname']) && $arr_pathinfo['dirname'] !='.' && $arr_pathinfo['dirname'] !='..') ? trim(rtrim(rtrim($arr_pathinfo['dirname'],'\\'),'/')) : '';
+        }
+        if(strlen($temp_message_url) <1)
+        {
+            return self::return_data(1,'文件夹为空，不创建文件夹');
+        }
+        $file_absolute_dir = $temp_message_url.'/';
+        if (!is_dir($file_absolute_dir))
+        {
+            $result = mkdir($file_absolute_dir, 0777, true);
+            if(strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN')
+            {
+                $stat = stat($file_absolute_dir);
+                $result_chown = (posix_getpwuid($stat['uid']));
+                if(!isset($result_chown['name']) || $result_chown['name'] != 'www')
+                {
+                    chown($result_chown, 'www');
+                }
+            }
+        }
+        $arr_dir = array(
+            'base_dir'=>$message_url.'/',
+            'absolute_dir'=>$message_url.'/',
+        );
+        return self::return_data(0,'创建文件路径成功',$arr_dir);
+    }
+    
     
     /**
      * 把log日志写入相应的日志文件中
