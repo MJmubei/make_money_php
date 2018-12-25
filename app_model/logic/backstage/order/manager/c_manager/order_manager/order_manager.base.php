@@ -37,14 +37,14 @@ class order_manager_base extends em_logic
                 'type' => 'int',
                 'default'   => '1',
                 'isempty' => '',
-                'length' => '',
+                'length' => '0-4',
                 'desc' => '角色uuid',
             ),
             'cms_login_count' => array(
                 'type' => 'int',
                 'default'   => 0,
                 'isempty' => '',
-                'length' => '',
+                'length' => '0-4',
                 'desc' => '登录次数',
             ),
             'cms_login_time' => array(
