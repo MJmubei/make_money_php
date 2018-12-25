@@ -53,10 +53,12 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
+	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');
 	
 	
 	$SCRIPT_NAME = isset($_SERVER['SCRIPT_NAME']) ? $_SERVER['SCRIPT_NAME'] : '/CodeIgniter/index.php';
+// 	echo "<pre>";
+// 	var_dump($_SERVER);die;
 	$SCRIPT_NAME = str_replace('\\', '/', $SCRIPT_NAME);
 	$SCRIPT_NAME = trim(trim($SCRIPT_NAME,'/'));
 	$SCRIPT_NAME = strlen($SCRIPT_NAME) > 0 ? '/'.$SCRIPT_NAME : '/';
@@ -64,7 +66,8 @@
 	$str_dirname = isset($ARR_SCRIPT_NAME['dirname']) ? $ARR_SCRIPT_NAME['dirname'] : '';
 	$str_dirname = str_replace('\\', '/', $str_dirname);
 	$str_dirname = trim(trim($str_dirname,'/'));
-	$str_dirname = strlen($str_dirname) > 0 ? '/'.$str_dirname : '';
+	$str_dirname = strlen($str_dirname) > 0 ? '/'.$str_dirname : '/';
+	define('VIEW_MODEL_BASE', "{$str_dirname}");
 	define('VIEW_MODEL_EX', "{$str_dirname}/view_model");
 	define('VIEW_MODEL_BACKGROUD', VIEW_MODEL_EX.'/backstage/');
 // 	var_dump($str_dirname,VIEW_MODEL_BACKGROUD);die;
