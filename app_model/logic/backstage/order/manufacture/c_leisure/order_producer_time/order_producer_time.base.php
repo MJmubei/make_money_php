@@ -13,23 +13,29 @@ class order_producer_time_base extends em_logic
             'length' => '0-32',
             'desc' => '主键id',
         ),
-        'cms_category_parent_id' => array(
+        'cms_manager_id' => array(
             'type' => 'int',
             'isempty' => '',
             'length' => '0-32',
-            'desc' => '父级类型id',
+            'desc' => '用户账号id',
         ),
-        'cms_category_id' => array(
-            'type' => 'varchar',
+        'cms_person_amount' => array(
+            'type' => 'int',
             'isempty' => '',
-            'length' => '0-256',
-            'desc' => '基本类型id',
+            'length' => '0-32',
+            'desc' => '工人数量',
         ),
-        'cms_category_name' => array(
-            'type' => 'varchar',
+        'cms_free_time' => array(
+            'type' => 'int',
             'isempty' => '',
-            'length' => '0-256',
-            'desc' => '类型名称',
+            'length' => '32',
+            'desc' => '工期时间',
+        ),
+        'cms_status' => array(
+            'type' => 'tinyint',
+            'isempty' => '',
+            'length' => '0-2',
+            'desc' => '空期信息状态；0有效1过期',
         ),
 
         'cms_create_time' => array(
