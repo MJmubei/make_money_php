@@ -29,6 +29,7 @@
 <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/serial.js"></script>	
 <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/light.js"></script>	
 <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/radar.js"></script>
+<script src="<?php echo VIEW_MODEL_BACKGROUD; ?>js/md5.js"></script>
 <link href="<?php echo VIEW_MODEL_BACKGROUD; ?>css/fabochart.css" rel='stylesheet' type='text/css' />
 <!-- Sweet Alert -->
 <link href="<?php echo VIEW_MODEL_BACKGROUD; ?>hplus/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
@@ -257,7 +258,7 @@
 		if(temp_data !== undefined && temp_data !== null){
 			submitData+='&'+temp_data;
 		}
-        alert(submitData);
+        //alert(submitData);
     	$.ajax({
         	url:url,
 			type:"POST",

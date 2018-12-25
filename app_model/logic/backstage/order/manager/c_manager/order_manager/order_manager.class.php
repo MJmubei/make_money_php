@@ -58,8 +58,8 @@ class order_manager extends order_manager_base
     {
         $arr_params_set = $this->make_em_pre(isset($arr_params['set']) ? $arr_params['set'] : array());
         $arr_params_where = $this->make_em_pre(isset($arr_params['where']) ? $arr_params['where'] : array());
-        $arr_params_set = $this->_check_edit_del_params($this->table_define, $arr_params_set);
-        $arr_params_where = $this->_check_edit_del_params($this->table_define, $arr_params_where);
+        $arr_params_set = $this->_check_query_params($this->table_define, $arr_params_set);
+        $arr_params_where = $this->_check_query_params($this->table_define, $arr_params_where);
         if($arr_params_set['ret'] !=0)
         {
             return $arr_params_set;

@@ -20,6 +20,9 @@ class c_manager extends CI_Controller
         $this->load_view();
     }
 
+    /**
+     * 个人中心
+     */
     public function index()
     {
         if(empty($this->session->userdata('telephone')) || empty($this->session->userdata('role_id')))
@@ -618,5 +621,213 @@ class c_manager extends CI_Controller
         $this->load_view_file($add_user,__LINE__);
     }
 
+    /**
+     * 用户管理
+     */
+    public function user_list()
+    {
+        $system_file_list = array(
+            array(
+                'url'=>'order/con_manager/c_manager/user_add.php',//右侧按钮弹框
+                'class'=>'order_con_manager_c_manager_user_add',//form表单ID
+                'ajax'=>'order/con_manager/c_manager/user_add',//form表单提交控制器
+                'function'=>'add',//行为动作
+                'button_data'=>array(
+                    array(
+                        'name'=>'添加',
+                        'icon'=>'fa-plus',//样式
+                        'params'=>'',
+                        'where'=>'',
+                    ),
+                ),
+            ),
+            array(
+                'url'=>'order/con_manager/c_manager/user_state.php',
+                'class'=>'order_con_manager_c_manager_user_state',
+                'ajax'=>'order/con_manager/c_manager/user_state',
+                'function'=>'state',
+                'button_data'=>array(
+                    array(
+                        'name'=>'启用',
+                        'icon'=>'fa-unlock',
+                        'params'=>'&cms_state=0',
+                        'where'=>array(
+                            'cms_state'=>0,
+                        ),
+                    ),
+                    array(
+                        'name'=>'禁用',
+                        'icon'=>'fa-lock',
+                        'params'=>'&cms_state=1',
+                        'where'=>array(
+                            'cms_state'=>1,
+                        ),
+                    ),
+                ),
+            ),
+            array(
+                'url'=>'order/con_manager/c_manager/user_add.php',
+                'class'=>'order_con_manager_c_manager_user_add',
+                'ajax'=>'order/con_manager/user_add',
+                'function'=>'delete',
+                'button_data'=>array(
+                    array(
+                        'name'=>'删除',
+                        'icon'=>'fa-trash-o',
+                        'params'=>'',
+                        'where'=>'',
+                    ),
+                ),
+            )
+        );
+        $this->_init_page();
+        $where_params = array('where'=>($this->arr_params));
+        $user_list = $this->auto_load_table('order','manager', 'c_manager', 'manager', 'query', $where_params);
+        $user_list['system_file_list'] = $system_file_list;
+        $this->load_view_file($user_list,__LINE__);
+    }
+
+    /**
+     * 添加平台管理员
+     */
+    public function user_add()
+    {
+        //手机号
+        if (empty($this->arr_params['telephone']) || !isset($this->arr_params['telephone']))
+        {
+            $re = em_return::return_data(1,'手机号不能为空');
+            $this->load_view_file($re,__LINE__);
+        }
+        //密码
+        if (empty($this->arr_params['password']) || !isset($this->arr_params['password']) || empty($this->arr_params['confirmPassword']) || !isset($this->arr_params['confirmPassword']))
+        {
+            $re = em_return::return_data(1,'密码不能为空');
+            $this->load_view_file($re,__LINE__);
+        }
+        if ($this->arr_params['password'] != $this->arr_params['confirmPassword'])
+        {
+            $re = em_return::return_data(1,'两次密码不一致');
+            $this->load_view_file($re,__LINE__);
+        }
+        //用户名称
+        if (empty($this->arr_params['username']) || !isset($this->arr_params['username']))
+        {
+            $re = em_return::return_data(1,'请填写用户名称');
+            $this->load_view_file($re,__LINE__);
+        }
+
+        //验证用户是否存在
+        $params = array(
+            'where' => array(
+                'telephone' => $this->arr_params['telephone'],
+            ),
+        );
+
+        //先查询是否已经存在了
+        $user = $this->auto_load_table('order','manager', 'c_manager', 'manager', 'query_only', $params);
+        if ($user['ret'] == 0 && is_array($user['data_info']) && count($user['data_info']) > 0)
+        {
+            $re = em_return::return_data(1,'用户已经存在,请直接登陆');
+            $this->load_view_file($re,__LINE__);
+        }
+        $time = date('Y-m-d H:i:s');
+        $add_params = array(
+            'insert' => array(
+                'telephone' => $this->arr_params['telephone'],
+                'password' => $this->arr_params['password'],
+                'create_time' => $time,
+                'modify_time' => $time,
+                'role_id' => 2,
+                'sex' => $this->arr_params['sex'],
+                'name' => $this->arr_params['username'],
+                'desc' => isset($this->arr_params['desc']) && strlen($this->arr_params['desc']) ? $this->arr_params['desc'] : '',
+            )
+        );
+
+        $add_user = $this->auto_load_table('order','manager', 'c_manager', 'manager', 'add', $add_params);
+        if ($add_user['ret'] != 0)
+        {
+            $re = em_return::return_data(1,'添加失败');
+            $this->load_view_file($re,__LINE__);
+        }
+        $this->load_view_file($add_user,__LINE__);
+    }
+
+    /**
+     * 修改平台管理员
+     */
+    public function user_edit()
+    {
+        if (empty($this->arr_params['cms_id']) || !isset($this->arr_params['cms_id']))
+        {
+            $re = em_return::return_data(1,'用户id无效');
+            $this->load_view_file($re,__LINE__);
+        }
+
+        //验证用户是否存在
+        $params = array(
+            'where' => array(
+                'telephone' => $this->arr_params['telephone'],
+            ),
+        );
+
+        //先查询是否已经存在了
+        $user = $this->auto_load_table('order','manager', 'c_manager', 'manager', 'query_only', $params);
+        if ($user['ret'] != 0)
+        {
+            $re = em_return::return_data(1,'查询用户失败');
+            $this->load_view_file($re,__LINE__);
+        }
+        if (isset($user['data_info']) && is_array($user['data_info']) && !empty($user['data_info']))
+        {
+            if ($user['data_info']['cms_id'] != $this->arr_params['cms_id'])
+            {
+                $re = em_return::return_data(1,'修改手机号失败，平台已经存在有相同手机号的管理员了');
+                $this->load_view_file($re,__LINE__);
+            }
+        }
+
+        $edit_params = array(
+            'set' => $this->arr_params,
+            'where' => array(
+                'id' => $this->arr_params['cms_id'],
+            ),
+        );
+        $edit_params['set']['modify_time'] = date('Y-m-d H:i:s');
+        $add_user = $this->auto_load_table('order','manager', 'c_manager', 'manager', 'edit', $edit_params);
+        if ($add_user['ret'] != 0)
+        {
+            $re = em_return::return_data(1,'修改手机号失败');
+            $this->load_view_file($re,__LINE__);
+        }
+        $this->load_view_file($add_user,__LINE__);
+    }
+
+    /**
+     * 管理员启用/禁用
+     */
+    public function user_state()
+    {
+        $cms_id = isset($this->arr_params['cms_id']) ? $this->arr_params['cms_id'] : null;
+        if(empty($cms_id) && !is_array($cms_id))
+        {
+            $this->load_view_file(em_return::return_data(1,'用户id为空'),__LINE__);
+        }
+        $cms_state = isset($this->arr_params['cms_state']) ? $this->arr_params['cms_state'] : null;
+        if(strlen($cms_state) <1)
+        {
+            $this->load_view_file(em_return::return_data(1,'状态参数为空'),__LINE__);
+        }
+        $edit_params = array(
+            'set'=>array(
+                'cms_state' => $cms_state,
+                'modify_time' => date('Y-m-d H:i:s'),
+            ),
+            'where'=>array(
+                'cms_id' => $cms_id,
+            ),
+        );
+        $this->load_view_file($this->auto_load_table('order','manager', 'c_manager', 'manager', 'edit', $edit_params),__LINE__);
+    }
 
 }
