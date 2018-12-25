@@ -64,7 +64,7 @@
 	$str_dirname = isset($ARR_SCRIPT_NAME['dirname']) ? $ARR_SCRIPT_NAME['dirname'] : '';
 	$str_dirname = str_replace('\\', '/', $str_dirname);
 	$str_dirname = trim(trim($str_dirname,'/'));
-	$str_dirname = strlen($str_dirname) > 0 ? '/'.$str_dirname : '/';
+	$str_dirname = strlen($str_dirname) > 0 ? '/'.$str_dirname : '';
 	define('VIEW_MODEL_EX', "{$str_dirname}/view_model");
 	define('VIEW_MODEL_BACKGROUD', VIEW_MODEL_EX.'/backstage/');
 // 	var_dump($str_dirname,VIEW_MODEL_BACKGROUD);die;

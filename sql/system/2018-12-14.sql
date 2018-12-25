@@ -53,5 +53,20 @@ ALTER TABLE `system_channel_mode` ADD COLUMN `nns_transport` VARCHAR(32) NOT NUL
 ALTER TABLE `system_channel` ADD COLUMN `nns_partner_id` INT(11) NOT NULL COMMENT '商户ID';
 ALTER TABLE `system_channel_mode` ADD COLUMN `nns_channel_mode_flag` TINYINT(1) NOT NULL COMMENT '支付渠道类型：0二维码；1APP；2WAP';
 
+-- ------------------------------------------------------------------------------------
+-- Table order_client_order gao
+-- ------------------------------------------------------------------------------------
+CREATE TABLE `order_client_order` (
+  `cms_id` int(11) NOT NULL,
+  `cms_order_type_id` int(11) NOT NULL COMMENT '订单类型id',
+  `cms_process_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '订单加工类型',
+  `cms_material_list` varchar(255) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '订单面辅料选择',
+  `cms_style` varchar(255) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '订单款式',
+  `cms_status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '订单状态：0订单未完成1订单审核2订单确认',
+  `cms_create_time` datetime DEFAULT NULL COMMENT '创建订单时间',
+  `cms_modify_time` datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`cms_id`),
+  KEY `modify_create_time` (`cms_modify_time`,`cms_create_time`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
