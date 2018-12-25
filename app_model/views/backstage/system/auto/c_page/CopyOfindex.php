@@ -66,7 +66,7 @@
     									<?php echo $val['cms_state'] != '0' ? "<font color='red'>禁用</font>" : "<font color='green'>启用</font>";?>
     									</td>
     									<td><?php echo $val['cms_create_time'];?></td>
-    									<td><?php echo $val['cms_modify_time'];$val['cms_image_v']='2018/12/25/5c2105c117a0e1ce987c488e60a0576f.png';?></td>
+    									<td><?php echo $val['cms_modify_time'];?></td>
     									<td>
                                             <div class="dropdown">
     											<a href="#" title="" class="btn btn-default wh-btn" data-toggle="dropdown" aria-expanded="false"> 

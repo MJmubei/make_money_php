@@ -1,6 +1,6 @@
 <?php
 include_once dirname(__FILE__) . '/em_return.class.php';
-
+include_once dirname(__FILE__) . '/em_guid.class.php';
 class em_upload extends em_return
 {
 
@@ -11,17 +11,69 @@ class em_upload extends em_return
     public function __construct($arr_params = null)
     {
         $this->arr_params = $arr_params;
-        $this->base_data_dir = dirname(dirname(__FILE__)) . '/data_model/';
+        $this->base_data_dir = dirname(dirname(dirname(__FILE__))).'/data_model/upload';
     }
 
     public function init()
     {
-        // 建立临时目录存放文件-以MD5为唯一标识
-        $temp_upload_dir = $this->base_data_dir . 'temp_upload/' . $this->arr_params['md5value'];
-        em_return::make_dir_out_project($temp_upload_dir);
-            // 移入缓存文件保存
-        $result = move_uploaded_file($_FILES["file"]["tmp_name"], $temp_upload_dir . '/' . $this->arr_params["chunk"]);
-        return $result ? em_return::return_data(0,'文件迁移OK') : em_return::return_data(1,'文件迁移失败');
+        $str_input_image_key = isset($this->arr_params['input_image_key']) ? trim($this->arr_params['input_image_key']) : '';
+        if(!isset($_FILES[$str_input_image_key]) || empty($_FILES[$str_input_image_key]) || !is_array($_FILES[$str_input_image_key]))
+        {
+            return em_return::return_data(1,'未接收到任何可上传文件');
+        }
+        $base_dir = '';
+        if(isset($this->arr_params['save_path']) && strlen($this->arr_params['save_path']) <1)
+        {
+            $this->arr_params['save_path'] = str_replace('\\', '/', $this->arr_params['save_path']);
+            $this->arr_params['save_path'] = str_replace('//', '/', $this->arr_params['save_path']);
+            $this->arr_params['save_path'] = trim(trim($this->arr_params['save_path'],'/'));
+            if(strlen($this->arr_params['save_path'])>0)
+            {
+                $base_dir=$this->arr_params['save_path']."/";
+            }
+            $base_dir.=date("Y").'/'.date("m").'/'.date("d").'/';
+        }
+        else
+        {
+            $base_dir=date("Y").'/'.date("m").'/'.date("d").'/';
+        }
+        $result_make_dir = em_return::make_dir_out_project($this->base_data_dir.'/'.$base_dir);
+        if($result_make_dir['ret'] !=0)
+        {
+            return $result_make_dir;
+        }
+        $arr_file_value = pathinfo($_FILES[$str_input_image_key]['name']);
+        $file_name_ex = isset($arr_file_value['extension']) ? trim($arr_file_value['extension']) : '';
+        if(strlen($file_name_ex) <1)
+        {
+            return em_return::return_data(1,'上传文件非法');
+        }
+        $str_guid = em_guid::em_guid_rand();
+        $file_name = $this->base_data_dir.'/'.$base_dir.$str_guid.".".$file_name_ex;
+        $result = @move_uploaded_file($_FILES[$str_input_image_key]["tmp_name"],$file_name);
+        if(!$result)
+        {
+            return em_return::return_data(1,"迁移文件失败文件名称[{$_FILES[$str_input_image_key]['name']}]");
+        }
+        $last_data = array(
+            'name'=>$_FILES[$str_input_image_key]['name'],
+            'type'=>$_FILES[$str_input_image_key]['type'],
+            'size'=>$_FILES[$str_input_image_key]['size'],
+            'absolute_path'=>$this->base_data_dir.'/'.$base_dir.$str_guid.".".$file_name_ex,
+            'base_pth'=>$base_dir.$str_guid.".".$file_name_ex,
+        );
+        return em_return::return_data(0,'文件上传成功',$last_data);
+    }
+    
+    public function delete()
+    {
+        return em_return::return_data(0,'文件删除成功');
+        $str_url = isset($this->arr_params['url']) ? trim($this->arr_params['url']) : '';
+        if(file_exists($this->base_data_dir.'/'.$str_url))
+        {
+            @unlink($str_url);
+        }
+        return em_return::return_data(0,'文件删除成功');
     }
 
     public function check()
@@ -111,11 +163,12 @@ class em_upload extends em_return
         return em_return::return_data(0,'OK',$this->arr_params);
     }
 }
-$str_func = isset($_POST['system_func']) ? $_POST['system_func'] : '';
+$str_func = isset($_POST['system_func']) ? $_POST['system_func'] : 'init';
 if (! in_array($str_func, array(
     'init',
     'check',
-    'merage'
+    'merage',
+    'delete',
 ))) {
     echo json_encode(em_return::return_data(1, '未知方法'));
     die();
