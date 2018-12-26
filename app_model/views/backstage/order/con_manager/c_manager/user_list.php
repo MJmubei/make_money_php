@@ -20,23 +20,28 @@
     </div>
     <div class="graph">
         <div class="form-body">
-            <form class="form-horizontal" method="post" action="<?php echo $arr_page_url['list_url'];?>">
+            <form class="form-horizontal_search" method="post" action="<?php echo $arr_page_url['list_url'];?>">
                 <div class="form-group">
                     <label for="disabledinput" class="col-sm-1 control-label">用户名称</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control1" name="name" id="focusedinput" value="<?php echo isset($arr_params['cms_name']) ? $arr_params['cms_name'] : '';?>">
+                        <input type="text" class="form-control1" name="cms_name" id="cms_name" value="<?php echo isset($arr_params['cms_name']) ? $arr_params['cms_name'] : '';?>">
                     </div>
                     <label for="disabledinput" class="col-sm-1 control-label">电话号码</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control1" name="telephone" id="focusedinput" value="<?php echo isset($arr_params['cms_telephone']) ? $arr_params['cms_telephone'] : '';?>">
+                        <input type="text" class="form-control1" name="cms_telephone" id="cms_telephone" value="<?php echo isset($arr_params['cms_telephone']) ? $arr_params['cms_telephone'] : '';?>">
                     </div>
                     <label for="disabledinput" class="col-sm-1 control-label">注册日期</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control1" name="create_time" id="focusedinput" value="<?php echo isset($arr_params['cms_create_time']) ? $arr_params['cms_create_time'] : '';?>">
+                        <div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="create_time" data-link-format="yyyy-mm-dd hh:ii:ss">
+                            <input class="form-control" type="text" value="<?php echo isset($arr_params['cms_create_time']) ? $arr_params['cms_create_time'] : '';?>" readonly>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                        <input type="text" hidden class="form-control1" name="create_time" id="create_time" value="<?php echo isset($arr_params['cms_create_time']) ? $arr_params['cms_create_time'] : '';?>">
                     </div>
                     <div class="col-sm-1">
-                        <button class="btn btn-success" type="button" id="button_query_list">
-                            <i class="fa fa-search">查询</i>
+                        <button class="btn btn-success" type="button" id="button_query_list_search">
+                            <i class="fa fa-search" >查询</i>
                         </button>
                     </div>
                 </div>

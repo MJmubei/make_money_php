@@ -666,9 +666,9 @@ class c_manager extends CI_Controller
                 ),
             ),
             array(
-                'url'=>'order/con_manager/c_manager/user_add.php',
-                'class'=>'order_con_manager_c_manager_user_add',
-                'ajax'=>'order/con_manager/user_add',
+                'url'=>'order/con_manager/c_manager/user_del.php',
+                'class'=>'order_con_manager_c_manager_user_del',
+                'ajax'=>'order/con_manager/c_manager/user_del',
                 'function'=>'delete',
                 'button_data'=>array(
                     array(
@@ -830,4 +830,21 @@ class c_manager extends CI_Controller
         $this->load_view_file($this->auto_load_table('order','manager', 'c_manager', 'manager', 'edit', $edit_params),__LINE__);
     }
 
+    /**
+     * 管理员删除用户
+     */
+    public function user_del()
+    {
+        $cms_id = isset($this->arr_params['cms_id']) ? $this->arr_params['cms_id'] : null;
+        if(empty($cms_id) && !is_array($cms_id))
+        {
+            $this->load_view_file(em_return::return_data(1,'删除参数条件为空'),__LINE__);
+        }
+        $delete_params = array(
+            'where'=>array(
+                'cms_id'=>$cms_id,
+            ),
+        );
+        $this->load_view_file($this->auto_load_table('order','manager', 'c_manager', 'manager', 'rel_del', $delete_params),__LINE__);
+    }
 }

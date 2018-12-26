@@ -44,7 +44,16 @@
 <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>bootstrap-fileinput-master/js/fileinput.js" type="text/javascript"></script>
 <script src="<?php echo VIEW_MODEL_BACKGROUD; ?>bootstrap-fileinput-master/js/locales/zh.js" type="text/javascript"></script>
 <link href="<?php echo VIEW_MODEL_BACKGROUD; ?>bootstrap-fileinput-master/css/fileinput.css" rel="stylesheet" type="text/css" />
-
+<style>
+    .form-horizontal_search input
+    {
+        margin-top: 5px!important;
+    }
+    .form-horizontal_search button
+    {
+        margin-top: 0px!important;
+    }
+</style>
 <script type="text/javascript">
     var toggle = true;
     $(".sidebar-icon").click(function() {                
