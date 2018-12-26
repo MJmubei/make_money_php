@@ -9,7 +9,8 @@
     <div class="but_list">
         <ol class="breadcrumb">
             <li><a href="#">产品管理</a></li>
-            <li class="active">面辅料属性管理</li>
+            <li><a href="./fabirc_attribute_list">面辅料属性管理</a></li>
+            <li class="active">面辅料属性值</li>
         </ol>
     </div>
     <div class="graph">
@@ -19,6 +20,10 @@
                     <label for="disabledinput" class="col-sm-1 control-label">名称</label>
                     <div class="col-sm-2">
                         <input type="text" class="form-control1" name="cms_name" id="focusedinput" value="<?php echo isset($arr_params['cms_name']) ? $arr_params['cms_name'] : '';?>">
+                    </div>
+                    <label for="disabledinput" class="col-sm-1 control-label">值</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control1" name="cms_value" id="focusedinput" value="<?php echo isset($arr_params['cms_value']) ? $arr_params['cms_value'] : '';?>">
                     </div>
                     <div class="col-sm-1">
                         <button class="btn btn-success" type="button" id="button_query_list_search">
@@ -33,7 +38,8 @@
                 <thead>
                 <tr>
                     <th><input type="checkbox" id="checkAll" name="checkAll" /></th>
-                    <th>属性</th>
+                    <th>属性值名称</th>
+                    <th>属性值</th>
                     <th>创建时间</th>
                     <th>修改时间</th>
                     <th>操作</th>
@@ -48,6 +54,7 @@
                         <tr class='odd selected'>
                             <td><input type="checkbox" name="checkItem" attr-key="cms_id" value="<?php echo $val['cms_id'];?>"/></td>
                             <td><?php echo $val['cms_name'];?></td>
+                            <td><?php echo $val['cms_value'];?></td>
                             <td><?php echo $val['cms_create_time'];?></td>
                             <td><?php echo $val['cms_modify_time'];?></td>
                             <td>
@@ -59,9 +66,6 @@
                                     <ul class="dropdown-menu float-right">
                                         <!--*********** 初始化必须加载 ***************** （下拉操作信息） *********** 初始化必须加载 ***************** -->
                                         <?php echo make_right_button($system_file_list, $val);?>
-                                        <li>
-                                            <a href="./fabirc_attribute_value_list?cms_fabirc_attribute_id=<?php echo $val['cms_id'];?>"><i class="fa fa-pencil-square-o icon_9"></i>属性值列表</a>
-                                        </li>
                                     </ul>
                                 </div>
                             </td>

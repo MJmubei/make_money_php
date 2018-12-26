@@ -64,6 +64,15 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">属性值</label>
+                        <div class="col-md-10">
+                            <div class="input-group input-icon right">
+                                <span class="input-group-addon"> <i class="fa fa-file-text-o"></i></span>
+                                <input id="cms_value" name="cms_value" class="form-control1 icon" type="text" value="" placeholder="">
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="clearfix"></div>
