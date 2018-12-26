@@ -74,7 +74,7 @@ class CI_Controller
         $this->load =& load_class('Loader', 'core');
         $this->load->initialize();
         $this->_check_params();
-        //$this->auto_check_login();//全局登陆验证
+        $this->auto_check_login();//全局登陆验证
         if(isset($this->arr_params['cms_page_num']))
         {
             $this->arr_page_params['cms_page_num'] = (int)$this->arr_params['cms_page_num'];
@@ -361,6 +361,49 @@ class CI_Controller
                 $this->load->view($str_path_info.'/'.$this->get_str_load_class().'/'.$this->get_str_load_method(),$data);
             }
         }
+    }
+
+    public function system_auto_make_menu($level=1,$parent_id=0)
+    {
+        $last_data=null;
+        if($level==1)
+        {
+            $this->arr_page_params['cms_page_num'] = 0;
+            $this->arr_page_params['cms_page_size'] = 0;
+        }
+        $temp_level = $level+1;
+        $menu_data = $this->auto_load_table('system','auto','c_project','system_menu', 'query',array('where'=>array('cms_level'=>$level,'cms_parent_id'=>$parent_id)));
+        $menu_data = isset($menu_data['data_info']) ? $menu_data['data_info'] :null;
+        if(!is_array($menu_data) || empty($menu_data))
+        {
+            return $last_data;
+        }
+        foreach ($menu_data as $value)
+        {
+            $last_data[$value['cms_id']]['data']=$value;
+            $data = $this->system_auto_make_menu($temp_level,$value['cms_id']);
+            if(!is_array($data) || empty($data))
+            {
+                continue;
+            }
+            $last_data[$value['cms_id']]['child_list'] = $data;
+        }
+        return $last_data;
+    }
+
+
+    public function system_auto_make_menu_arr($last_data)
+    {
+        $data = array_values($last_data);
+        foreach ($data as $key=>$value)
+        {
+            if(!isset($value['child_list']) || empty($value['child_list']))
+            {
+                continue;
+            }
+            $data[$key]['child_list'] = $this->system_auto_make_menu_arr($value['child_list']);
+        }
+        return $data;
     }
 
     /**

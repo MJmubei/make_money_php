@@ -16,6 +16,6 @@ class c_home extends CI_Controller
         {
             $data = $this->system_auto_make_menu_arr($data);
         }
-        $this->load_view_file(em_return::return_data(0,'ok',$data),__LINE__);
+        $this->load_view_file(em_return::return_data(0,'Ok',$data),__LINE__);
     }
 }

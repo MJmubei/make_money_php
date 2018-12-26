@@ -908,6 +908,11 @@ class em_logic
             return em_return::_return_error_data('sql empty:'.$sql);
         }
         $obj_query = $this->obj_controller->db->query($sql);
+        if(!$obj_query)
+        {
+            em_return::set_ci_flow_desc($this->obj_controller->get_str_load_log_path(),"行号:[".__LINE__."]:sql执行失败:[{$sql}]",'sql','error');
+            return em_return::_return_error_data('sql empty:'.$sql);
+        }
         return em_return::_return_right_data('ok',$obj_query->result_array());
     }
     
@@ -1222,10 +1227,7 @@ class em_logic
             $where = "where $where";
         }
         $limit = " limit 1";
-
-        
         $sql = "select " . $str_field . " from {$this->str_base_table} $where ".$limit;
-
         $data =  $this->_make_query_sql($sql);
         if($data['ret'] !=0)
         {
