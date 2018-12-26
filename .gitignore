@@ -27,10 +27,9 @@
 ./idea/.
 app_model/config/database.php
 /data_model/
-.idea/vcs.xml
-.idea/workspace.xml
-app_model/config/database.php
-app_model/config/routes.php
+/data_model/log/*
 .idea/encodings.xml
 .idea/misc.xml
-app_model/config/database.php
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
